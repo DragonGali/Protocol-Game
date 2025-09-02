@@ -1,6 +1,7 @@
 import React from 'react';
 import DialogueManager from './DialogeManager.jsx';
 import { useGameState } from './GameState';
+import "../Styles/StoryScreen.css"
 
 const StoryScreen = ({ onContinue }) => {
   const { dispatch } = useGameState();
@@ -15,8 +16,9 @@ const StoryScreen = ({ onContinue }) => {
   };
 
   return (
-    <div className="story-screen">
-      <DialogueManager 
+    <div className="StoryScreen">
+      <DialogueManager
+        className="dialogue-manager"
         dialogueType="story"
         startDialogueId="story_1"
         onComplete={handleStoryComplete}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "../Styles/TypeWriter.css"
 
 // Helper function to convert CSS color to filter
 const getColorFilter = (color) => {
@@ -16,7 +17,9 @@ const TypewriterText = ({
   speed = 50, 
   delayAfterComplete = 1000,
   textColor = 'var(--white)',
-  triangleColor = 'var(--white)'
+  triangleColor = 'var(--white)',
+  triangleSize = '2vw',
+  triangleMargin = '0 0 0 1vw'
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -62,11 +65,13 @@ const TypewriterText = ({
         {displayedText}
         {canAdvance && (
           <img 
-            src="/assets/triangle-indicator.png" 
+            src="./General/triangle-indicator.svg" 
             alt="Continue" 
             className="continue-triangle"
             style={{ 
-              filter: `brightness(0) saturate(100%) ${getColorFilter(triangleColor)}` 
+              filter: `brightness(0) saturate(100%) ${getColorFilter(triangleColor)}`,
+              width: triangleSize,
+              margin: triangleMargin
             }}
           />
         )}

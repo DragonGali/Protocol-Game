@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 import TitleScreen from "./Components/TitleScreen.jsx";
 import StoryScreen from "./Components/StoryScreen.jsx";
+import { GameStateProvider } from "./Components/GameState.jsx"; // ✅ import provider
 
 // Dictionary of all pages
 const pages = {
@@ -23,10 +24,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {pageComponents[currentPage]}
-    </div>
-  )
+    <GameStateProvider>
+      <div className="App">
+        {pageComponents[currentPage]}
+      </div>
+    </GameStateProvider>
+  );
 }
 
-export default App
+export default App;

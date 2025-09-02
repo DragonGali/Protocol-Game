@@ -1,8 +1,8 @@
 // DialogueManager.jsx
 import React, { useEffect } from 'react';
-import { useGameState } from './GameState';
+import { useGameState } from './GameState.jsx';
 import { dialogueData } from '../dialogueData.js';
-import TypewriterText from './TypewriterText';
+import TypeWriter from './TypeWriter.jsx';
 
 const DialogueManager = ({ 
   dialogueType, 
@@ -63,11 +63,15 @@ const DialogueManager = ({
 
   return (
     <div className="dialogue-manager">
-      <TypewriterText 
-        texts={[currentDialogue.text]}
+      <TypeWriter 
+        text={currentDialogue.text}
         onComplete={advanceDialogue}
         speed={50}
         delayAfterComplete={1000}
+        textColor='var(--orange)'
+        triangleColor='var(--orange)'
+        triangleSize='1.5vw'
+        triangleMargin='0 0 0 0.7vw'
       />
     </div>
   );
