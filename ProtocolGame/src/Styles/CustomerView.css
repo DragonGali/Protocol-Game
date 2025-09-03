@@ -1,0 +1,15 @@
+.CustomerView{
+
+    background-image: url("/Customer/CustomerViewBackground.png");
+    animation: fadeIn 2s ease-in-out;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.character-sprite {
+    width: 27vw;
+    height: 67.5vh;
+    position: fixed;
+    left: 16vw;
+    top: 5.25vh;
+}
