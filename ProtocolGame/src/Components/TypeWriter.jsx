@@ -59,7 +59,7 @@ const TypewriterText = ({
   return (
     <div className="typewriter-container" onClick={handleClick}>
       <div 
-        className="typewriter-text"
+        className="typewriter-text clickable"
         style={{ color: textColor }}
       >
         {displayedText}
