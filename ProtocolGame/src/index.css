@@ -1,0 +1,54 @@
+:root {
+
+  /* The color palette I chose for this project, some of these may not be used */
+  --white: #F2F0E5;
+  --grey-1: #B8B5B9;
+  --grey-2: #868188;
+  --grey-3: #646365;
+  --dark-grey: #45444F;
+  --black: #212123;
+  --purple-1: #3A3858;
+  --purple-2: #352B42;
+  --purple-3: #43436A;
+  --purple-4: #6A536E;
+  --purple-5: #4B4158;
+  --purple-6: #5F556A;
+  --purple-pink: #CF8ACB;
+  --bad: #7B7243;
+  --dry-earth: #B2B47E;
+  --borde: #80493A;
+  --brown: #A77B5B;
+  --red: #B45252;
+  --pink: #EDC8C4;
+  --skin: #E5CEB4;
+  --orange: #D3A068;
+  --yellow: #EDE19E;
+  --avocado: #C2D368;
+  --green: #8AB060;
+  --grass: #567B79;
+  --dark-green: #4E584A;
+  --blue: #4B80CA;
+  --light-blue: #68C2D3;
+  --light-blue: #68C2D3;
+  --cyan: #A2DCC7;
+
+  font-family: "basis33";
+  background-color: var(--black);
+
+  --cursor-default: url("./Cursors/Default.png"), auto;
+  --cursor-pointer: url("./Cursors/Pointer.png"), auto;
+  --cursor-grab: url("./Cursors/Grab.png"), auto;
+  --cursor-open: url("./Cursors/Open.png"), auto;
+
+  cursor: var(--cursor-default);
+}
+
+.clickable:hover {
+  cursor: var(--cursor-pointer);
+}
+
+@font-face {
+  font-family: "basis33";
+  src: url("../Fonts/basis33.ttf");
+}
+

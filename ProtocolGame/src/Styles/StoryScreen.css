@@ -1,0 +1,18 @@
+.StoryScreen{
+  width: 100vw;
+  height: 90vh;
+  background-image: url("/StoryScreen/post office.png");
+  animation: fadeIn 2s ease-in-out;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.dialogue-manager {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2vw;
+}
