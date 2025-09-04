@@ -1,0 +1,22 @@
+.TextBox {
+  position: fixed;
+  display: flex;
+  flex-direction: row-reverse; /* puts name on the right */
+  align-items: flex-start;     /* align name and text to the top of the box */
+  width: 46.5vw;
+  height: 19vh;
+  bottom: 2.5vh;
+  left: 1.8vw;
+  padding: 1vw;
+  gap: 1vw;
+
+  overflow: hidden;
+}
+
+.TextBox .character-name {
+  color: var(--blue);
+  font-size: 2vw;
+  margin: 0;
+  white-space: nowrap; /* prevent the name itself from breaking */
+}
+

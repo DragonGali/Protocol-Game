@@ -19,18 +19,20 @@ export const dialogueData = {
 
   // Character dialogues (examples for now)
   characters: {
-    "customer1_intro": {
-      text: "שלום! אני צריך לשלוח מכתב חשוב מאוד!",
-      emotion: "worried",
-      nextDialogue: "customer1_wait",
-      events: ["show_mailing_icon"],
+    "daniel_intro_1": {
+      text: "שלום וברוך הבא לסניף הדואר הפרוטוקולי.",
+      emotion: "happy",
+      nextDialogue: "daniel_intro_2",
+      events: [],
+      talker: "דניאל",
       autoAdvance: false
     },
-    "customer1_wait": {
-      text: "אתה יכול לעזור לי עם זה?",
-      emotion: "hopeful",
+    "daniel_intro_2": {
+      text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום,  אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
+      emotion: "neutral",
       nextDialogue: null,
       events: [],
+      talker: "דניאל",
       autoAdvance: false
     }
   }

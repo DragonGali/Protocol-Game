@@ -21,7 +21,7 @@ function App() {
   const pageComponents = {
     [pages.title]: <TitleScreen onStartGame={() => setCurrentPage(pages.story)} />,
     [pages.story]: <StoryScreen onContinue={() => setCurrentPage(pages.game)} />,
-    [pages.game]: <GameScreen />,
+    [pages.game]: <GameScreen className="game-screen"/>,
   };
 
   return (

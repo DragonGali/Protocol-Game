@@ -16,10 +16,11 @@ const TypewriterText = ({
   onComplete, 
   speed = 50, 
   delayAfterComplete = 1000,
-  textColor = 'var(--white)',
-  triangleColor = 'var(--white)',
-  triangleSize = '2vw',
-  triangleMargin = '0 0 0 1vw'
+  textColor,
+  triangleColor,
+  triangleSize,
+  triangleMargin,
+  textSize
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -60,7 +61,7 @@ const TypewriterText = ({
     <div className="typewriter-container" onClick={handleClick}>
       <div 
         className="typewriter-text clickable"
-        style={{ color: textColor }}
+        style={{ color: textColor, fontSize: textSize }}
       >
         {displayedText}
         {canAdvance && (

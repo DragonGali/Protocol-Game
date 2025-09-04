@@ -22,6 +22,11 @@ const StoryScreen = ({ onContinue }) => {
         dialogueType="story"
         startDialogueId="story_1"
         onComplete={handleStoryComplete}
+        textColor='var(--orange)'
+        triangleColor='var(--orange)'
+        triangleSize='1.5vw'
+        triangleMargin='0 0 0 0.7vw'
+        textSize='2vw'
       />
     </div>
   );

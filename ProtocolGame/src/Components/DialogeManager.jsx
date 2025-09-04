@@ -7,7 +7,12 @@ import TypeWriter from './TypeWriter.jsx';
 const DialogueManager = ({ 
   dialogueType, 
   startDialogueId, 
-  onComplete 
+  onComplete,
+  textColor,
+  triangleColor,
+  triangleSize,
+  triangleMargin,
+  textSize
 }) => {
   const { state, dispatch } = useGameState();
 
@@ -68,10 +73,11 @@ const DialogueManager = ({
         onComplete={advanceDialogue}
         speed={50}
         delayAfterComplete={1000}
-        textColor='var(--orange)'
-        triangleColor='var(--orange)'
-        triangleSize='1.5vw'
-        triangleMargin='0 0 0 0.7vw'
+        textColor={textColor}
+        triangleColor={triangleColor}
+        triangleSize={triangleSize}
+        triangleMargin={triangleMargin}
+        textSize={textSize}
       />
     </div>
   );

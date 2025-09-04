@@ -9,10 +9,9 @@
   animation: fadeIn 2s ease-in-out;
 }
 
-.dialogue-manager {
+.StoryScreen .dialogue-manager {
     position: absolute;
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2vw;
 }

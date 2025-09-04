@@ -10,3 +10,11 @@
     transform: translateY(0.7vh);
   }
 }
+
+.typewriter-text {
+    text-align: right;       /* align multiple lines to the right */
+    direction: rtl;          /* important for Hebrew text */
+    word-break: break-word;  /* break long words if needed */
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
