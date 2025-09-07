@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../Styles/TypeWriter.css"
+import { useGameState } from './GameState';
 
 // Helper function to convert CSS color to filter
 const getColorFilter = (color) => {
@@ -20,17 +21,25 @@ const TypewriterText = ({
   triangleColor,
   triangleSize,
   triangleMargin,
-  textSize
+  textSize,
+  advanceDialogue,
+  name,
+  nameColor
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [canAdvance, setCanAdvance] = useState(false);
+  const { state, dispatch } = useGameState();
 
   useEffect(() => {
     let charIndex = 0;
     setDisplayedText('');
     setIsTyping(true);
     setCanAdvance(false);
+
+    if (name !== "אני") {
+      dispatch({ type: 'SET_TALKING', value: true }); // Character starts talking
+    }
 
     const typeInterval = setInterval(() => {
       if (charIndex < text.length) {
@@ -40,6 +49,7 @@ const TypewriterText = ({
         // Text finished typing
         clearInterval(typeInterval);
         setIsTyping(false);
+        dispatch({ type: 'SET_TALKING', value: false }); // Character stops talking
         
         // Wait then allow advancing
         setTimeout(() => {
@@ -60,11 +70,11 @@ const TypewriterText = ({
   return (
     <div className="typewriter-container" onClick={handleClick}>
       <div 
-        className="typewriter-text clickable"
+        className={`typewriter-text ${advanceDialogue ? 'clickable' : ''}`}
         style={{ color: textColor, fontSize: textSize }}
       >
-        {displayedText}
-        {canAdvance && (
+        {<p><span style={{ color: nameColor }}>{name}</span>: {displayedText}</p>}
+        {(canAdvance && advanceDialogue) && (
           <img 
             src="./General/triangle-indicator.svg" 
             alt="Continue" 

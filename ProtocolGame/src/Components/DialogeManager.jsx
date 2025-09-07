@@ -12,7 +12,7 @@ const DialogueManager = ({
   triangleColor,
   triangleSize,
   triangleMargin,
-  textSize
+  textSize,
 }) => {
   const { state, dispatch } = useGameState();
 
@@ -24,7 +24,8 @@ const DialogueManager = ({
         type: 'SET_DIALOGUE',
         dialogueId: startDialogueId,
         dialogueType: dialogueType,
-        emotion: dialogue.emotion
+        emotion: dialogue.emotion,
+        character: startDialogueId.split('_')[0] // Seperating character name from starting ID
       });
     }
   }, [startDialogueId, dialogueType, dispatch]);
@@ -36,7 +37,7 @@ const DialogueManager = ({
 
   const advanceDialogue = () => {
     const currentDialogue = getCurrentDialogue();
-    if (!currentDialogue) return;
+    if (!currentDialogue || !canAdvanceNow()) return;
 
     // Trigger any events
     currentDialogue.events.forEach(eventName => {
@@ -66,18 +67,29 @@ const DialogueManager = ({
   const currentDialogue = getCurrentDialogue();
   if (!currentDialogue) return null;
 
+   // Determine if the player can advance (support function or boolean)
+  const canAdvanceNow = () => {
+    if (typeof currentDialogue.canAdvance === "function") {
+      return currentDialogue.canAdvance(state);
+    }
+    return !!currentDialogue.canAdvance;
+  };
+
   return (
     <div className="dialogue-manager">
       <TypeWriter 
         text={currentDialogue.text}
+        name={currentDialogue.name}
+        nameColor={currentDialogue.nameColor}
         onComplete={advanceDialogue}
-        speed={50}
+        speed={60}
         delayAfterComplete={1000}
         textColor={textColor}
         triangleColor={triangleColor}
         triangleSize={triangleSize}
         triangleMargin={triangleMargin}
         textSize={textSize}
+        advanceDialogue={canAdvanceNow()}
       />
     </div>
   );

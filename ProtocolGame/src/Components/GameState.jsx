@@ -8,7 +8,11 @@ const initialState = {
   // Current dialogue
   currentDialogue: null,
   dialogueType: null, // 'story' or 'characters'
-  
+
+  //Character name in english to acess his animation files
+  currentCharacter: null,
+  isTalking: false, //Property that indicates if character is talking for switching animations
+
   // Character state
   currentEmotion: null,
   
@@ -32,8 +36,16 @@ function gameStateReducer(state, action) {
         ...state,
         currentDialogue: action.dialogueId,
         dialogueType: action.dialogueType,
-        currentEmotion: action.emotion || state.currentEmotion
+        currentEmotion: action.emotion || state.currentEmotion,
+        currentCharacter: action.character || state.currentCharacter,
+        isTalking: false
       };
+
+    case 'SET_TALKING':
+    return {
+      ...state,
+      isTalking: action.value // <-- Set to true/false as needed
+    };
       
     case 'NAVIGATE_TO_PAGE':
       return {
@@ -68,12 +80,6 @@ function gameStateReducer(state, action) {
         default:
           return state;
       }
-      
-    case 'SET_EMOTION':
-      return {
-        ...state,
-        currentEmotion: action.emotion
-      };
       
     case 'TOGGLE_MANUAL':
       return {

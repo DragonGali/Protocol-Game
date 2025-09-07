@@ -24,16 +24,50 @@ export const dialogueData = {
       emotion: "happy",
       nextDialogue: "daniel_intro_2",
       events: [],
-      talker: "דניאל",
-      autoAdvance: false
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
     },
     "daniel_intro_2": {
       text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום,  אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
       emotion: "neutral",
+      nextDialogue: "daniel_intro_3",
+      events: [],
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_3": {
+      text: "גם לי נעים מאוד להכיר.",
+      emotion: "neutral",
+      nextDialogue: "daniel_intro_4",
+      events: [],
+      name: "אני",
+      nameColor: "var(--orange)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_4": {
+      text: "פה אנחנו מקבלים הודעות ארוזות — ממש כמו חבילות. אבל לא כל הודעה מגיעה במצב תקין. המטרה שלנו היא למצוא את הטעויות, ולתקן אותן לפני השליחה.",
+      emotion: "neutral",
+      nextDialogue: "daniel_intro_5",
+      events: [],
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => false
+    },
+    "daniel_intro_5": {
+      text: "כל הודעה חייבת לעמוד במבנה של הפרוטוקול שלה.בלי זה? היא פשוט לא תעבור.",
+      emotion: "neutral",
       nextDialogue: null,
       events: [],
-      talker: "דניאל",
-      autoAdvance: false
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
     }
   }
 };
