@@ -15,20 +15,39 @@ const DialogueManager = ({
 }) => {
   const { state, dispatch } = useGameState();
 
+  // Helper to set dialogue + fire its events
+  const setDialogue = (dialogueId, dialogueType) => {
+    const dialogue = dialogueData[dialogueType][dialogueId];
+    if (!dialogue) return;
+
+    // Set the dialogue in state
+    dispatch({
+      type: 'SET_DIALOGUE',
+      dialogueId,
+      dialogueType,
+      emotion: dialogue.emotion,
+      character: dialogueId.split('_')[0]
+    });
+
+    // Trigger events immediately when dialogue is entered
+    if (dialogue.events && dialogue.events.length > 0) {
+      dialogue.events.forEach(eventName => {
+        dispatch({
+          type: 'TRIGGER_EVENT',
+          eventName
+        });
+      });
+    }
+  };
+
   // Initialize dialogue when component mounts
   useEffect(() => {
     if (startDialogueId) {
-      const dialogue = dialogueData[dialogueType][startDialogueId];
-      dispatch({
-        type: 'SET_DIALOGUE',
-        dialogueId: startDialogueId,
-        dialogueType: dialogueType,
-        emotion: dialogue.emotion,
-        character: startDialogueId.split('_')[0] // Seperating character name from starting ID
-      });
+      setDialogue(startDialogueId, dialogueType);
     }
-  }, [startDialogueId, dialogueType, dispatch]);
+  }, [startDialogueId, dialogueType]);
 
+  // Gets the current line of dialogue from gameState
   const getCurrentDialogue = () => {
     if (!state.currentDialogue || !state.dialogueType) return null;
     return dialogueData[state.dialogueType][state.currentDialogue];
@@ -38,25 +57,9 @@ const DialogueManager = ({
     const currentDialogue = getCurrentDialogue();
     if (!currentDialogue || !canAdvanceNow()) return;
 
-    // Trigger any events
-    currentDialogue.events.forEach(eventName => {
-      dispatch({
-        type: 'TRIGGER_EVENT',
-        eventName: eventName
-      });
-    });
-
-    // Move to next dialogue or complete
     if (currentDialogue.nextDialogue) {
-      const nextDialogue = dialogueData[state.dialogueType][currentDialogue.nextDialogue];
-      dispatch({
-        type: 'SET_DIALOGUE',
-        dialogueId: currentDialogue.nextDialogue,
-        dialogueType: state.dialogueType,
-        emotion: nextDialogue.emotion
-      });
+      setDialogue(currentDialogue.nextDialogue, state.dialogueType);
     } else {
-      // End of dialogue sequence
       if (onComplete) {
         onComplete();
       }
@@ -66,7 +69,6 @@ const DialogueManager = ({
   const currentDialogue = getCurrentDialogue();
   if (!currentDialogue) return null;
 
-   // Determine if the player can advance (support function or boolean)
   const canAdvanceNow = () => {
     if (typeof currentDialogue.canAdvance === "function") {
       return currentDialogue.canAdvance(state);
@@ -93,5 +95,6 @@ const DialogueManager = ({
     </div>
   );
 };
+
 
 export default DialogueManager;

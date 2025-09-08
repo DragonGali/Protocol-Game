@@ -17,7 +17,7 @@ export const dialogueData = {
     }
   },
 
-  // Character dialogues (examples for now)
+  // Character dialogues
   characters: {
     "daniel_intro_1": {
       text: "שלום וברוך הבא לסניף הדואר הפרוטוקולי.",
@@ -78,10 +78,21 @@ export const dialogueData = {
       text: "[נשמע פשוט... בינתיים.]",
       textColor: "var(--grey-1)",
       emotion: "neutral",
-      nextDialogue: null,
+      nextDialogue: "daniel_intro_7",
       events: [],
       name: "אני",
       nameColor: "var(--orange)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_7": {
+      text: "רואה את הסמל הזה בצד העליון? זה המדריך שלך.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      nextDialogue: null,
+      events: ["SHOW_USER_MANUAL"],
+      name: "דניאל",
+      nameColor: "var(--blue)",
       autoAdvance: false,
       canAdvance: () => false
     }
@@ -90,6 +101,9 @@ export const dialogueData = {
 
 // Events that can be triggered
 export const gameEvents = {
+  "show_user_manual": {
+    action: "SHOW_USER_MANUAL",
+  },
   "story_complete": {
     action: "NAVIGATE_TO_GAME"
   },
@@ -99,27 +113,8 @@ export const gameEvents = {
   "unlock_stamp_tool": {
     action: "UNLOCK_TOOL",
     payload: "stamp"
-  }
+  },
 };
 
-// Emotions for character animations
-export const emotions = {
-  "worried": {
-    gif: "/characters/worried.gif",
-    animation: "fidget"
-  },
-  "hopeful": {
-    gif: "/characters/hopeful.gif", 
-    animation: "bounce"
-  },
-  "happy": {
-    gif: "/characters/happy.gif",
-    animation: "smile"
-  },
-  "confused": {
-    gif: "/characters/confused.gif",
-    animation: "scratch_head"
-  }
-};
 
 export default dialogueData;

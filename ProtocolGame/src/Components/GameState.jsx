@@ -25,6 +25,7 @@ const initialState = {
   mailingIconEnabled: false,
   
   // UI state
+  manualVisible: false,
   manualOpen: false,
   monitorOpen: false
 };
@@ -54,10 +55,15 @@ function gameStateReducer(state, action) {
       };
       
     case 'TRIGGER_EVENT':
-      const event = gameEvents[action.eventName];
-      if (!event) return state;
-      
-      switch (event.action) {
+      switch (action.eventName) {
+
+        case 'SHOW_USER_MANUAL':{
+          return {
+            ...state,
+            manualVisible: true
+          };
+        }
+
         case 'NAVIGATE_TO_GAME':
           return {
             ...state,
