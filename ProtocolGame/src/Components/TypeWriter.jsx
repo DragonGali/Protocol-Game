@@ -73,7 +73,7 @@ const TypewriterText = ({
         className={`typewriter-text ${advanceDialogue ? 'clickable' : ''}`}
         style={{ color: textColor, fontSize: textSize }}
       >
-        {<p><span style={{ color: nameColor }}>{name}</span>: {displayedText}</p>}
+        {<p><span style={{ color: nameColor }}>{name}:</span> {displayedText}</p>}
         {(canAdvance && advanceDialogue) && (
           <img 
             src="./General/triangle-indicator.svg" 

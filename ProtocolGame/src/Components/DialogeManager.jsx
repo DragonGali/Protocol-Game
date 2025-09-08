@@ -8,7 +8,6 @@ const DialogueManager = ({
   dialogueType, 
   startDialogueId, 
   onComplete,
-  textColor,
   triangleColor,
   triangleSize,
   triangleMargin,
@@ -84,7 +83,7 @@ const DialogueManager = ({
         onComplete={advanceDialogue}
         speed={60}
         delayAfterComplete={1000}
-        textColor={textColor}
+        textColor={currentDialogue.textColor}
         triangleColor={triangleColor}
         triangleSize={triangleSize}
         triangleMargin={triangleMargin}

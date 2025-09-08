@@ -11,7 +11,6 @@ function TextBox({ dialogueType, startDialogueId, onComplete}) {
         dialogueType={dialogueType}
         startDialogueId={startDialogueId}
         onComplete={onComplete}
-        textColor="var(--white)"
         triangleColor="var(--white)"
         textSize="2vw"
         triangleSize="1.5vw"
