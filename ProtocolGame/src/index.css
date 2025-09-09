@@ -45,6 +45,7 @@
 
 .clickable:hover {
   cursor: var(--cursor-pointer);
+  pointer-events: all;
 }
 
 @font-face {

@@ -26,7 +26,7 @@ const initialState = {
   
   // UI state
   manualVisible: false,
-  manualOpen: false,
+  manualUnlocked: false,
   monitorOpen: false
 };
 
@@ -61,6 +61,14 @@ function gameStateReducer(state, action) {
           return {
             ...state,
             manualVisible: true
+          };
+        }
+
+        case 'UNLOCK_USER_MANUAL':{
+          return {
+            ...state,
+            manualVisible: false,
+            manualUnlocked: true
           };
         }
 

@@ -7,13 +7,19 @@ export const dialogueData = {
       text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
       nextDialogue: "story_2",
       events: [],
-      autoAdvance: false
+      autoAdvance: false,
+      canAdvance: () => true,
+      textColor: "var(--orange)",
+      name: null,
     },
     "story_2": {
       text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
       nextDialogue: null, // End of story
       events: ["story_complete"],
-      autoAdvance: false
+      autoAdvance: false,
+      canAdvance: () => true,
+      textColor: "var(--orange)",
+      name: null,
     }
   },
 
@@ -89,8 +95,19 @@ export const dialogueData = {
       text: "רואה את הסמל הזה בצד העליון? זה המדריך שלך.",
       textColor: "var(--white)",
       emotion: "neutral",
-      nextDialogue: null,
+      nextDialogue: "daniel_intro_8",
       events: ["SHOW_USER_MANUAL"],
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_8": {
+      text: "תלחץ עליו ותקרא את ההקדמה, אפשר למצוא את הפרק דרך חיפוש הנושאים החדשים",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      nextDialogue: null,
+      events: ["UNLOCK_USER_MANUAL"],
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
@@ -104,16 +121,11 @@ export const gameEvents = {
   "show_user_manual": {
     action: "SHOW_USER_MANUAL",
   },
-  "story_complete": {
-    action: "NAVIGATE_TO_GAME"
+
+  "unlock_user_manual": {
+    action: "UNLOCK_USER_MANUAL"
   },
-  "show_mailing_icon": {
-    action: "ENABLE_MAILING_ICON"
-  },
-  "unlock_stamp_tool": {
-    action: "UNLOCK_TOOL",
-    payload: "stamp"
-  },
+
 };
 
 

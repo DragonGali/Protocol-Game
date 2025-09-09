@@ -12,12 +12,20 @@
     left: 0;
 }
 
-.CustomerView {
+.CustomerView{
     position: fixed;
     left: 1vw;
     top: 2.6vh;
     width: 50vw;
     height: 72.5vh;
+}
+
+.Manual {
+    position: fixed;
+    left: 2vw;
+    top: 3vh;
+    width: 48vw;
+    height: 70.6vh;
 }
 
 .Monitor {
@@ -32,7 +40,6 @@
     top: 2vh;
     left: 2vw;
     width: 12vw;
-    cursor: pointer;
 }
 
 .showcase{

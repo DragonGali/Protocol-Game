@@ -24,7 +24,7 @@ const StoryScreen = ({ onContinue }) => {
         onComplete={handleStoryComplete}
         triangleColor='var(--orange)'
         triangleSize='1.5vw'
-        triangleMargin='0 0 0 0.7vw'
+        triangleMargin='0 1vw 0 0'
         textSize='2vw'
       />
     </div>

@@ -3,17 +3,21 @@ import '../Styles/GameScreen.css';
 import CustomerView from './CustomerView.jsx';
 import Monitor from './Monitor.jsx';
 import TextBox from './TextBox.jsx';
+import Manual from './Manual.jsx';
 
 import { useGameState } from './GameState.jsx';
 
 const GameScreen = () => {
 
   const [isManualVisible, setManualVisible] = useState(false);
+  const [isManualUnlocked, setManualUnlocked] = useState(false);
+  const [isManualOpen, setManualOpen] = useState(false);
   const { state, dispatch } = useGameState();
 
   useEffect(() => {
     setManualVisible(state.manualVisible);
-  }, [state.manualVisible])
+    setManualUnlocked(state.manualUnlocked);
+  }, [state.manualVisible, state.manualUnlocked]);
 
 
   return (
@@ -22,13 +26,22 @@ const GameScreen = () => {
           <Monitor className="Monitor"/>
           <TextBox 
             dialogueType="characters"
-            startDialogueId="daniel_intro_6"
+            startDialogueId="daniel_intro_1"
             onComplete={() => {
                 // What happens when dialogue sequence ends
                 console.log("Dialogue finished!");
             }}
-            />
-            <img src="/Manual/user manual icon.png" className={`user-manual-icon ${isManualVisible ? "showcase" : ""}`} style={{ display: isManualVisible ? 'block' : 'none' }} />
+          /> {/* User Manual Icon Image, if the manual is shown for the first time it is glowing.
+                 If it gets unlocked you can open it and the Manual Component is shown.  */}
+          <img src="/Manual/user manual icon.png"
+            className={`user-manual-icon ${isManualVisible ? "showcase" : ""} ${isManualUnlocked ? "clickable" : ""}`}
+             style={{ display: (isManualVisible || isManualUnlocked) ? 'block' : 'none', pointerEvents: isManualUnlocked ? 'auto' : 'none' }}
+              onClick={() => {setManualOpen(true)}}
+          />
+
+          {isManualOpen && <Manual className="Manual"/>}
+
+
       </div>
   );
 }
