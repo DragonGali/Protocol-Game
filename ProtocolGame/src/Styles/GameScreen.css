@@ -37,9 +37,14 @@
 
 .user-manual-icon {
     position: fixed;
-    top: 2vh;
-    left: 2vw;
-    width: 12vw;
+    top: 4vh;
+    left: 2.5vw;
+    width: 10vw;
+    height: 12vh;
+}
+
+.user-manual-icon .new {
+  height: 14vh;
 }
 
 .showcase{

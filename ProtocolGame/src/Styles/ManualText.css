@@ -1,0 +1,64 @@
+.ManualText {
+    position: absolute;
+    width: 100%;
+    height: 91%;
+    top: 8%;
+}
+
+.ManualText .title {
+    color: var(--black);
+    font-size: var(--font-title-large);
+    text-align: center;
+    text-decoration: underline;
+    
+}
+
+.ManualText .lines {
+    margin-top: 1.5vh;
+    width: 98%;
+}
+
+.ManualText .line {
+    text-align: right;
+    margin-right: 2vw;
+    font-size: var(--font-regular);
+    color: var(--white);
+    margin-top: 4vh;
+}
+
+/* Option 1: Basic horizontal layout with spacing */
+.ManualText .arrows-container {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ManualText .pageIndex {
+    font-size: var(--font-title-large);
+}
+
+.ManualText .arrow {
+    width: 6.2vw;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.ManualText .arrow:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.ManualText .arrow.right {
+    transform: scaleX(-1); /* Flip left arrow horizontally */
+}
+
+.ManualText .arrow.right:hover {
+    transform: scaleX(-1) scale(1.1);
+}
+
+.ManualText .disabled {
+    visibility: hidden;
+}
+

@@ -8,7 +8,7 @@
 /* Might have to change the size of the character sprite later,
    since all the sprites need to be the same sizes and now theyre not */
 .character-sprite {
-    width: 45vw;
+    width: 44vw;
     height: 71vh;
     position: fixed;
 }

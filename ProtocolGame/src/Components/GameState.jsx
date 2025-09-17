@@ -6,6 +6,7 @@ const GameStateContext = createContext();
 
 const initialState = {
   // Current dialogue
+  currentChapter: 1,
   currentDialogue: null,
   dialogueType: null, // 'story' or 'characters'
 
@@ -27,6 +28,7 @@ const initialState = {
   // UI state
   manualVisible: false,
   manualUnlocked: false,
+  manualRead: false,
   monitorOpen: false
 };
 
@@ -47,6 +49,12 @@ function gameStateReducer(state, action) {
       ...state,
       isTalking: action.value // <-- Set to true/false as needed
     };
+
+    case 'UPDATE_CHAPTER': 
+    return {
+      ...state,
+      currentChapter: currentChapter + 1
+    }
       
     case 'NAVIGATE_TO_PAGE':
       return {
@@ -70,6 +78,14 @@ function gameStateReducer(state, action) {
             manualVisible: false,
             manualUnlocked: true
           };
+        }
+
+
+        case 'FINISH_READING_MANUAL':{
+          return {
+            ...state,
+            manualRead: true
+          }
         }
 
         case 'NAVIGATE_TO_GAME':

@@ -5,7 +5,7 @@
     overflow: hidden;
 }
 
-.manual-home-page-view{
+.Manual .manual-home-page-view{
     position: absolute;
     top: 5%;
     left: 2%;
@@ -15,9 +15,52 @@
     align-items: center;
 }
 
+.Manual .select-bar {
+    position: absolute;
+    top: 0.3%;
+    left: 1.747%;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    gap: 4vw;
+    align-items: center;
+}
+
+.Manual .select-bar-item {
+    width: 7vw;
+    height: 4.6vh;
+    color: var(--black);
+    font-size: 2vw;
+    z-index: 20;
+    text-align: center;
+}
+
+.Manual .selected {
+    background-color: var(--purple-pink);
+}
+
+.Manual .new:not(.selected) {
+    background-color: rgba(180, 82, 82, 0.1);
+}
+
+
+.Manual .select-bar-item:not(.selected):hover {
+    background-color: rgba(180, 82, 82, 0.1);
+}
+
+#manual-close-button {
+    position: absolute;
+    width: 2.5vw;
+    height: 4.5vh;
+    right: 2%;
+    z-index: 900;
+}
+
+/*Manual opening animation*/
 
 
   .Manual::before {
+  pointer-events: none; /* allows interaction with children */
   content: '';
   position: absolute;
   top: 0;

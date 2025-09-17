@@ -12,7 +12,7 @@ function TextBox({ dialogueType, startDialogueId, onComplete}) {
         startDialogueId={startDialogueId}
         onComplete={onComplete}
         triangleColor="var(--white)"
-        textSize="2vw"
+        textSize="var(--font-regular)"
         triangleSize="1.5vw"
         triangleMargin="0 1vw 0 0"
         canAdvance={[dialogueData[dialogueType][startDialogueId].canAdvance]}

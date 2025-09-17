@@ -34,6 +34,9 @@
 
   font-family: "basis33";
   background-color: var(--black);
+
+  --font-regular: clamp(5px, 2vw, 50px);
+  --font-title-large: clamp(5px, 3vw, 100px);
  
   --cursor-default: url("./Cursors/Test.png"), auto;
   --cursor-pointer: url("./Cursors/Pointer.png"), auto;
@@ -51,5 +54,15 @@
 @font-face {
   font-family: "basis33";
   src: url("../Fonts/basis33.ttf");
+}
+
+/*Text is from right to left because its hebrew*/
+p {
+  direction: rtl;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 

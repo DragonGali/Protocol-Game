@@ -106,6 +106,17 @@ export const dialogueData = {
       text: "תלחץ עליו ותקרא את ההקדמה, אפשר למצוא את הפרק דרך חיפוש הנושאים החדשים",
       textColor: "var(--white)",
       emotion: "neutral",
+      nextDialogue: "daniel_intro_9",
+      events: ["UNLOCK_USER_MANUAL"],
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: true,
+      canAdvance: () => false
+    },
+    "daniel_intro_9": {
+      text: "טוב, עכשיו כשאתה מכיר את הבסיס - בוא ננסה למיין הודעה.",
+      textColor: "var(--white)",
+      emotion: "neutral",
       nextDialogue: null,
       events: ["UNLOCK_USER_MANUAL"],
       name: "דניאל",
@@ -125,6 +136,10 @@ export const gameEvents = {
   "unlock_user_manual": {
     action: "UNLOCK_USER_MANUAL"
   },
+
+  "finish_reading_manual": {
+    action: "FINISH_READING_MANUAL"
+  }
 
 };
 
