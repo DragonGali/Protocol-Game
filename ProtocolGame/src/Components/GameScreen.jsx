@@ -19,7 +19,7 @@ const GameScreen = () => {
   useEffect(() => {
     setManualVisible(state.manualVisible);
     setManualUnlocked(state.manualUnlocked);
-  }, [state.manualVisible, state.manualUnlocked]);
+  }, [state.manualVisible, state.manualUnlocked, state.manualRead]);
 
 
   return (
@@ -38,10 +38,10 @@ const GameScreen = () => {
           <img src={`/Manual/user manual icon${newContent ? ' new' : ''}.png`}
             className={`user-manual-icon ${isManualVisible ? "showcase" : ""} ${isManualUnlocked ? "clickable" : ""} ${newContent ? "new" : ""}`}
              style={{ display: ((isManualVisible || isManualUnlocked) && !isManualOpen) ? 'block' : 'none', pointerEvents: isManualUnlocked ? 'auto' : 'none' }}
-              onClick={() => {setManualOpen(true)}}
+             onClick={() => {setManualOpen(true)}}
           />
 
-          {isManualOpen && <Manual className="Manual" onClose={() => {setManualOpen(false)}}/>}
+          {isManualOpen && <Manual className="Manual" onClose={() => {setManualOpen(false); if(state.manualRead) {setNewContent(false);}}}/>}
 
 
       </div>

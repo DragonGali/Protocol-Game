@@ -3,7 +3,7 @@ import '../Styles/ManualText.css';
 import { manualData } from '../ManualData';
 import { useGameState } from './GameState';
 
-const ManualText = ({chapter}) => {
+const ManualText = ({chapter, onFinish}) => {
   const { state, dispatch } = useGameState();
   const chapterKey = `chapter_${chapter}`;
   const selectedChapter = manualData.Chapters[chapterKey];
@@ -23,7 +23,7 @@ const ManualText = ({chapter}) => {
   const goNext = () => {
     if (currentPage < Object.keys(selectedChapter.pages).length) {
       if (currentPage === Object.keys(selectedChapter.pages).length - 1) {
-        dispatch({type:'TRIGGER_EVENT', eventName: "FINISH_READING_MANUAL"});//Marking new manual chapter as read
+        onFinish();//Marking last page as read
       }
       setCurrentPage(currentPage + 1);
     }
