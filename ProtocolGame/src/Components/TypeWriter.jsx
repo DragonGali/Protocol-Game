@@ -73,19 +73,21 @@ const TypewriterText = ({
         className={`typewriter-text ${advanceDialogue ? 'clickable' : ''}`}
         style={{ color: textColor, fontSize: textSize }}
       >
-        {<p><span style={{ color: nameColor }}>{name}{name != null ? ":" : ""}</span> {displayedText}</p>}
-        {(canAdvance && advanceDialogue) && (
-          <img 
-            src="./General/triangle-indicator.svg" 
-            alt="Continue" 
-            className="continue-triangle"
-            style={{ 
-              filter: `brightness(0) saturate(100%) ${getColorFilter(triangleColor)}`,
-              width: triangleSize,
-              margin: triangleMargin
-            }}
-          />
-        )}
+        <p>
+          <span style={{ color: nameColor }}>{name}{name != null ? ":" : ""}</span> {displayedText}
+          {(canAdvance && advanceDialogue) && (
+            <img 
+              src="./General/triangle-indicator.svg" 
+              alt="Continue" 
+              className="continue-triangle"
+              style={{ 
+                filter: `brightness(0) saturate(100%) ${getColorFilter(triangleColor)}`,
+                width: triangleSize,
+                margin: triangleMargin
+              }}
+            />
+          )}
+        </p>
       </div>
     </div>
   );

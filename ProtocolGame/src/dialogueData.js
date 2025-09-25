@@ -1,5 +1,3 @@
-// dialogueData.js
-
 export const dialogueData = {
   // Story dialogues
   story: {
@@ -31,6 +29,7 @@ export const dialogueData = {
       emotion: "happy",
       nextDialogue: "daniel_intro_2",
       events: [],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
@@ -42,6 +41,7 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_3",
       events: [],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
@@ -53,6 +53,7 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_4",
       events: [],
+      condition: false,
       name: "אני",
       nameColor: "var(--orange)",
       autoAdvance: false,
@@ -64,6 +65,7 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_5",
       events: [],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
@@ -75,6 +77,7 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_6",
       events: [],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
@@ -86,6 +89,7 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_7",
       events: [],
+      condition: false,
       name: "אני",
       nameColor: "var(--orange)",
       autoAdvance: false,
@@ -97,35 +101,62 @@ export const dialogueData = {
       emotion: "neutral",
       nextDialogue: "daniel_intro_8",
       events: ["SHOW_USER_MANUAL"],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
       canAdvance: () => true
     },
     "daniel_intro_8": {
-      text: "תלחץ עליו ותקרא את ההקדמה, אפשר למצוא את הפרק דרך חיפוש הנושאים החדשים",
+      text: "כל פעם שאתה נתקל במשהוא חדש או פשוט רוצה לרענן ידע קודם, תרגיש חופשי לקרוא את המדריך",
       textColor: "var(--white)",
       emotion: "neutral",
       nextDialogue: "daniel_intro_9",
+      events: ["SHOW_USER_MANUAL"],
+      condition: false,
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_9": {
+      text: "תלחץ עליו ותקרא את ההקדמה, אפשר למצוא את הפרק דרך חיפוש הנושאים החדשים",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      nextDialogue: "daniel_intro_10",
       events: ["UNLOCK_USER_MANUAL"],
+      condition: "manualRead",
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: true,
       canAdvance: () => false
     },
-    "daniel_intro_9": {
+    "daniel_intro_10": {
       text: "טוב, עכשיו כשאתה מכיר את הבסיס - בוא ננסה למיין הודעה.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      nextDialogue: "daniel_intro_11",
+      events: ["UNLOCK_USER_MANUAL"],
+      condition: false,
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
+    },
+    "daniel_intro_11": {
+      text: "זה המסך שלך. כאן תטפל בכל ההודעות. שלחתי לך עכשיו את האפליקציה לטיפול בדואר.",
       textColor: "var(--white)",
       emotion: "neutral",
       nextDialogue: null,
       events: ["UNLOCK_USER_MANUAL"],
+      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
       autoAdvance: false,
       canAdvance: () => false
-    }
   }
-};
+}
+}
 
 // Events that can be triggered
 export const gameEvents = {

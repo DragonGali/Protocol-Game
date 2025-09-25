@@ -1,5 +1,7 @@
 .continue-triangle {
   animation: bobble 1.5s infinite;
+  display: inline;
+  vertical-align: middle;
 }
 
 @keyframes bobble {

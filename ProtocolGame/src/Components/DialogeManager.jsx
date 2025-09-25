@@ -53,6 +53,66 @@ const DialogueManager = ({
     return dialogueData[state.dialogueType][state.currentDialogue];
   };
 
+  // NEW: Check if dialogue should advance based on conditions
+  const checkConditionalAdvancement = () => {
+    const currentDialogue = getCurrentDialogue();
+    if (!currentDialogue) return false;
+
+    // Check if dialogue has a condition property
+    if (currentDialogue.condition) {
+      // If condition is a string, check if that state property is true
+      if (typeof currentDialogue.condition === 'string') {
+        return !!state[currentDialogue.condition];
+      }
+      
+      // If condition is a function, call it with current state
+      if (typeof currentDialogue.condition === 'function') {
+        return currentDialogue.condition(state);
+      }
+      
+      // If condition is an object, check multiple conditions
+      if (typeof currentDialogue.condition === 'object') {
+        return Object.entries(currentDialogue.condition).every(([key, value]) => {
+          if (typeof value === 'function') {
+            return value(state[key]);
+          }
+          return state[key] === value;
+        });
+      }
+    }
+    
+    return false;
+  };
+
+  // NEW: Force advance dialogue when conditions are met
+  const forceAdvanceDialogue = () => {
+    const currentDialogue = getCurrentDialogue();
+    if (!currentDialogue) return;
+
+    if (currentDialogue.nextDialogue) {
+      setDialogue(currentDialogue.nextDialogue, state.dialogueType);
+    } else {
+      if (onComplete) {
+        onComplete();
+      }
+    }
+  };
+
+  // NEW: Effect to watch for conditional advancement
+  // You can customize which state properties to watch
+  useEffect(() => {
+    if (checkConditionalAdvancement()) {
+      forceAdvanceDialogue();
+    }
+  }, [
+    // Add the state properties you want to watch for changes
+    state.manualRead,
+    state.manualVisible, 
+    state.manualUnlocked,
+    // Add any other state properties that might trigger dialogue advancement
+    state.currentDialogue
+  ]);
+
   const advanceDialogue = () => {
     const currentDialogue = getCurrentDialogue();
     if (!currentDialogue || !canAdvanceNow()) return;
@@ -95,6 +155,5 @@ const DialogueManager = ({
     </div>
   );
 };
-
 
 export default DialogueManager;

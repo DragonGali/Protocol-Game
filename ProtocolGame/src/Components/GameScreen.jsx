@@ -11,16 +11,14 @@ const GameScreen = () => {
 
   const [isManualVisible, setManualVisible] = useState(false);
   const [isManualUnlocked, setManualUnlocked] = useState(false);
-  const [isManualOpen, setManualOpen] = useState(true);
-  const [newContent, setNewContent] = useState(true);
+  const [isManualOpen, setManualOpen] = useState(false);
 
-  const { state, dispatch } = useGameState();
+  const { state } = useGameState();
 
   useEffect(() => {
     setManualVisible(state.manualVisible);
     setManualUnlocked(state.manualUnlocked);
   }, [state.manualVisible, state.manualUnlocked, state.manualRead]);
-
 
   return (
       <div className="GameScreen">
@@ -28,22 +26,21 @@ const GameScreen = () => {
           <Monitor className="Monitor"/>
           <TextBox 
             dialogueType="characters"
-            startDialogueId="daniel_intro_8"
+            startDialogueId="daniel_intro_10"
             onComplete={() => {
                 // What happens when dialogue sequence ends
                 console.log("Dialogue finished!");
             }}
-          /> {/* User Manual Icon Image, if the manual is shown for the first time it is glowing.
-                 If it gets unlocked you can open it and the Manual Component is shown.  */}
-          <img src={`/Manual/user manual icon${newContent ? ' new' : ''}.png`}
-            className={`user-manual-icon ${isManualVisible ? "showcase" : ""} ${isManualUnlocked ? "clickable" : ""} ${newContent ? "new" : ""}`}
+          />
+          
+          {/* User Manual Icon */}
+          <img src={`/Manual/user manual icon${!state.manualRead ? ' new' : ''}.png`}
+            className={`user-manual-icon ${isManualVisible ? "showcase" : ""} ${isManualUnlocked ? "clickable" : ""} ${!state.manualRead ? "new" : ""}`}
              style={{ display: ((isManualVisible || isManualUnlocked) && !isManualOpen) ? 'block' : 'none', pointerEvents: isManualUnlocked ? 'auto' : 'none' }}
              onClick={() => {setManualOpen(true)}}
           />
 
-          {isManualOpen && <Manual className="Manual" onClose={() => {setManualOpen(false); if(state.manualRead) {setNewContent(false);}}}/>}
-
-
+          {isManualOpen && <Manual className="Manual" onClose={() => {setManualOpen(false)}}/>}
       </div>
   );
 }
