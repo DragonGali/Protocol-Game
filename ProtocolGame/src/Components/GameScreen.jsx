@@ -26,7 +26,7 @@ const GameScreen = () => {
           <Monitor className="Monitor"/>
           <TextBox 
             dialogueType="characters"
-            startDialogueId="daniel_intro_10"
+            startDialogueId="daniel_intro_12"
             onComplete={() => {
                 // What happens when dialogue sequence ends
                 console.log("Dialogue finished!");

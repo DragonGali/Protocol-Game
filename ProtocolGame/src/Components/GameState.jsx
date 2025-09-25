@@ -26,10 +26,9 @@ const initialState = {
   manualVisible: false,
   manualUnlocked: false,
   manualRead: false,
-  monitorOpen: false,
   monitorShowcase: false,
-  monitorUnlocked: false,
-  mailingIconEnabled: false,
+  monitorUnlocked: true,
+  mailingIconEnabled: true,
   newMail: true
 };
 
@@ -56,6 +55,12 @@ function gameStateReducer(state, action) {
       ...state,
       currentChapter: currentChapter + 1
     }
+
+    case 'SET_NEW_MAIL':
+      return {
+        ...state,
+        newMail: action.payload
+      };
       
     case 'NAVIGATE_TO_PAGE':
       return {

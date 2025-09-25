@@ -3,7 +3,15 @@ import { useGameState } from './GameState.jsx';
 import '../Styles/Monitor.css';
 
 function Monitor() {
-  const { state, dispatch } = useGameState();
+  const { state, dispatch } = useGameState(false);
+  const [openMail, setOpenMail] = useState(true);
+
+  const getMailingIconSrc = () => {
+    if (state.newMail) {
+      return '/Monitor/mailingIconNew.png';
+    }
+    return openMail ? '/Monitor/mailingIconOpen.gif' : '/Monitor/mailingIconClose.gif';
+  };
 
   return (
     <div 
@@ -12,10 +20,18 @@ function Monitor() {
         pointerEvents: state.monitorUnlocked ? 'auto' : 'none'
       }}
     >
-      <img src={`/Monitor/mailingIcon${state.newMail ? 'New' : ''}.png`}
-      className="mailing-icon clickable"
-      style={{ display: state.mailingIconEnabled ? 'block' : 'none' }}>
-      </img>
+      <div className='image-container'>
+        <img 
+          src={getMailingIconSrc()}
+          className={`mailing-icon clickable ${state.newMail ? 'new-mail' : ''}`}
+          onClick={() => {
+            dispatch({ type: 'SET_NEW_MAIL', payload: false });
+            setTimeout(() => setOpenMail(!openMail), 0);
+          }}
+          style={{ display: state.mailingIconEnabled ? 'block' : 'none' }}
+          alt="Mailing icon"
+        />
+      </div>
     </div>
   );
 }
