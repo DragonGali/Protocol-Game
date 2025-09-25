@@ -3,3 +3,27 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
+/* Showcase effect - similar to your manual showcase */
+.Monitor.showcase {
+  animation: showcase-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 20px var(--blue), 0 0 40px var(--blue), 0 0 60px var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.mailing-icon {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 7vw;
+    height: 15vh;
+}
+
+@keyframes showcase-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+  }
+}

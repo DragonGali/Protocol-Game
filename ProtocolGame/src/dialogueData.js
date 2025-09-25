@@ -136,7 +136,7 @@ export const dialogueData = {
       textColor: "var(--white)",
       emotion: "neutral",
       nextDialogue: "daniel_intro_11",
-      events: ["UNLOCK_USER_MANUAL"],
+      events: [],
       condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
@@ -144,11 +144,23 @@ export const dialogueData = {
       canAdvance: () => true
     },
     "daniel_intro_11": {
-      text: "זה המסך שלך. כאן תטפל בכל ההודעות. שלחתי לך עכשיו את האפליקציה לטיפול בדואר.",
+      text: "זה המסך שלך. כאן תטפל בכל ההודעות.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      nextDialogue: "daniel_intro_12",
+      events: ["SHOW_MONITOR"],
+      condition: false,
+      name: "דניאל",
+      nameColor: "var(--blue)",
+      autoAdvance: false,
+      canAdvance: () => true
+  },
+  "daniel_intro_12": {
+      text: "שלחתי לך עכשיו את האפליקציה לטיפול בדואר זה הסמל הקטן של תיבת הדואר, בצד שמאל. נסה ללחוץ עליו..",
       textColor: "var(--white)",
       emotion: "neutral",
       nextDialogue: null,
-      events: ["UNLOCK_USER_MANUAL"],
+      events: ["UNLOCK_MONITOR", "UNLOCK_MAILING_ICON"],
       condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
@@ -170,7 +182,11 @@ export const gameEvents = {
 
   "finish_reading_manual": {
     action: "FINISH_READING_MANUAL"
-  }
+  },
+
+  "show_monitor": {
+    action: "SHOW_MONITOR"
+  },
 
 };
 

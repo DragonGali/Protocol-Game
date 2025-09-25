@@ -21,15 +21,16 @@ const initialState = {
   currentPage: 'title',
   storyComplete: false,
   
-  // Tools and features
-  availableTools: [],
-  mailingIconEnabled: false,
   
   // UI state
   manualVisible: false,
   manualUnlocked: false,
   manualRead: false,
-  monitorOpen: false
+  monitorOpen: false,
+  monitorShowcase: false,
+  monitorUnlocked: false,
+  mailingIconEnabled: false,
+  newMail: true
 };
 
 function gameStateReducer(state, action) {
@@ -47,7 +48,7 @@ function gameStateReducer(state, action) {
     case 'SET_TALKING':
     return {
       ...state,
-      isTalking: action.value // <-- Set to true/false as needed
+      isTalking: action.value
     };
 
     case 'UPDATE_CHAPTER': 
@@ -80,7 +81,6 @@ function gameStateReducer(state, action) {
           };
         }
 
-
         case 'FINISH_READING_MANUAL':{
           return {
             ...state,
@@ -88,23 +88,42 @@ function gameStateReducer(state, action) {
           }
         }
 
+        case 'SHOW_MONITOR':{
+          return {
+            ...state,
+            monitorShowcase: true
+          };
+        }
+
+        case 'UNLOCK_MONITOR':{
+          return {
+            ...state,
+            monitorShowcase: false,
+            monitorUnlocked: true
+          };
+        }
+
+
+        case 'UNLOCK_MONITOR':{
+          return {
+            ...state,
+            monitorVisible: false,
+            monitorUnlocked: true
+          };
+        }
+
+        case 'UNLOCK_MAILING_ICON':{
+          return {
+            ...state,
+            mailingIconEnabled: true
+          };
+        }
+
         case 'NAVIGATE_TO_GAME':
           return {
             ...state,
             currentPage: 'game',
             storyComplete: true
-          };
-          
-        case 'ENABLE_MAILING_ICON':
-          return {
-            ...state,
-            mailingIconEnabled: true
-          };
-          
-        case 'UNLOCK_TOOL':
-          return {
-            ...state,
-            availableTools: [...state.availableTools, event.payload]
           };
           
         default:
