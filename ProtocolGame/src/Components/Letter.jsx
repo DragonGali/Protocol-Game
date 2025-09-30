@@ -11,15 +11,33 @@ const Letter = ({ onClose }) => {
   const data = monitorData[`chapter_${state.currentChapter}`];
 
   return (
-    <div className={`Letter ${openLetter ? 'open' : 'closed' }`}>
+    <div className={`Letter ${openLetter ? 'open closable' : 'closed openable' }`}
+    onClick={() => {setOpenLetter(!openLetter)}}
+    >
+      {openLetter && <div className="letter-text-container">
+            
+            <div className="header">
+                <p>{`------<HEADER>------`}</p>
+            </div>
+
+            <div className="letter-text">
+                {data.text}
+            </div>
+
+            <div className="footer">
+                <p>{`------<FOOTER>------`}</p>
+            </div>
+            
+      </div>}
+
       <div className="protocol">
         <p>{data.protocol}</p>
       </div>
       <div className="src-adress">
-        <p>מאית: {data.sourceAdress}</p>
+        <p>מאית: {data.sourceAddress}</p>
       </div>
       <div className="dest-adress">
-        <p>לכבוד: {data.destAdress}</p>
+        <p>לכבוד: {data.destinationAddress}</p>
       </div>
       <div className="port">
         <p>פורט: {data.port}</p>

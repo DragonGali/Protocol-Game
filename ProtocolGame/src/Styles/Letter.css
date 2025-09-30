@@ -2,19 +2,23 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 33vw;
-    height: 38vh;
     position: fixed;
+}
+
+.Letter.closed {
+    background-image: url("/Monitor/letter_closed.png");
+    height: 38vh;
     margin-top: 35vh;
     margin-left: 6.5vw;
     box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
 }
 
-.Letter.closed {
-    background-image: url("/Monitor/letter_closed.png");
-}
-
 .Letter.open {
     background-image: url("/Monitor/letter_open.png");
+    height: 65vh;
+    margin-top: 8.5vh;
+    margin-left: 6.5vw;
+    filter: drop-shadow(-0.5em 0.5em 0 rgba(0,0,0,0.2));
 }
 
 .Letter .protocol {
@@ -26,12 +30,22 @@
     user-select: none;
 }
 
+.Letter.open .protocol {
+    display: none;
+}
+
 .Letter .src-adress {
     font-size: var(--font-regular);
     position: absolute;
     bottom: 25%;
     right: 8%;
 }
+
+.Letter.open .src-adress {
+    bottom: 7%;
+    right: 8.5%;
+}
+
 
 .Letter .dest-adress {
     font-size: var(--font-regular);
@@ -40,9 +54,37 @@
     right: 8%;
 }
 
+.Letter.open .dest-adress {
+    bottom: 13.5%;
+    right: 8.5%;
+}
+
 .Letter .port {
     font-size: var(--font-regular);
     position: absolute;
     left: 8%;
     bottom: 13%;
+}
+
+.Letter.open .port {
+    left: 9%;
+    bottom: 7%;
+}
+
+.Letter .header {
+    position: absolute;
+    top: 2%;
+    font-size: var(--font-title-large);
+}
+
+.Letter .footer {
+    position: absolute;
+    bottom: 30%;
+    font-size: var(--font-title-large);
+}
+
+.Letter .letter-text {
+    position: absolute;
+    top: 20%;
+    font-size: var(--font-regular);
 }

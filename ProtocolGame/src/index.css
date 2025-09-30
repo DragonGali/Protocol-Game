@@ -44,6 +44,7 @@
   --cursor-pointer: url("./Cursors/Pointer.png"), auto;
   --cursor-grab: url("./Cursors/Grab.png"), auto;
   --cursor-open: url("./Cursors/Open.png"), auto;
+  --cursor-close: url("./Cursors/Close.png"), auto;
 
   cursor: var(--cursor-default);
 }
@@ -60,6 +61,18 @@
   position: absolute;
 }
 
+.openable {
+  cursor: var(--cursor-open);
+  pointer-events: all;
+}
+
+.closable {
+  cursor: var(--cursor-close);
+  pointer-events: all;
+}
+
+
+
 @font-face {
   font-family: "basis33";
   src: url("../Fonts/basis33.ttf");
@@ -68,6 +81,7 @@
 /*Text is from right to left because its hebrew*/
 p {
   direction: rtl;
+  user-select: none;
 }
 
 * {
