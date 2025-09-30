@@ -1,17 +1,14 @@
 import React from 'react';
 import '../styles/MailList.css';
 import useDragger from "../hooks/useDragger";
+import monitorData from '../monitorData.js'
+import { useGameState } from './GameState.jsx';
 
 const MailList = ({ onClose, onLetterSelect }) => {
 
   useDragger("MailList");
-
-  // For experimentation - hardcoded
-  const currentChapter = 1;
-  const testLetter = {
-    customerName: 'דניאל',
-    protocol: 'TCP'
-  };
+  const { state, dispatch } = useGameState();
+  const data = monitorData[`chapter_${state.currentChapter}`];
 
   return (
     <div className="MailList Draggable" id="MailList">
@@ -33,9 +30,9 @@ const MailList = ({ onClose, onLetterSelect }) => {
           <div className="mail-item-inner">
             <span className="mail-number">1</span>
             <div className="mail-text">
-              <span className="customer-name">{testLetter.customerName}</span>
+              <span className="customer-name">{data.customerName}</span>
               <span className="separator">:</span>
-              <span className="protocol">{testLetter.protocol}</span>
+              <span className="protocol">{data.protocol}</span>
             </div>
           </div>
         </div>

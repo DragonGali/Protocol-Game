@@ -1,0 +1,48 @@
+.Letter {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 33vw;
+    height: 38vh;
+    position: fixed;
+    margin-top: 35vh;
+    margin-left: 6.5vw;
+    box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.Letter.closed {
+    background-image: url("/Monitor/letter_closed.png");
+}
+
+.Letter.open {
+    background-image: url("/Monitor/letter_open.png");
+}
+
+.Letter .protocol {
+    font-size: var(--font-largest);
+    color: var(--text);
+    position: absolute;
+    top: 13%;
+    left: 9.5%;
+    user-select: none;
+}
+
+.Letter .src-adress {
+    font-size: var(--font-regular);
+    position: absolute;
+    bottom: 25%;
+    right: 8%;
+}
+
+.Letter .dest-adress {
+    font-size: var(--font-regular);
+    position: absolute;
+    bottom: 13%;
+    right: 8%;
+}
+
+.Letter .port {
+    font-size: var(--font-regular);
+    position: absolute;
+    left: 8%;
+    bottom: 13%;
+}

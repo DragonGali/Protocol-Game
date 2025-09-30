@@ -3,10 +3,12 @@ import { useGameState } from './GameState.jsx';
 import '../Styles/Monitor.css';
 
 import MailList from './MailList.jsx';
+import Letter from './Letter.jsx';
 
 function Monitor() {
   const { state, dispatch } = useGameState(false);
   const [openMail, setOpenMail] = useState(null);
+  const [openLetter, setOpenLetter] = useState(false)
 
   const getMailingIconSrc = () => {
     return `/Monitor/mailingIcon${openMail === null ? '.png' : openMail ? 'Open.gif' : 'Close.gif'} `;
@@ -14,6 +16,7 @@ function Monitor() {
 
   const handleMailingIconClick = () => {
     dispatch({ type: 'SET_NEW_MAIL', payload: false });
+    setOpenLetter(false);
     if (openMail === null) {
         setOpenMail(true);
     }
@@ -46,7 +49,8 @@ function Monitor() {
             />
           )}
         </div>
-        {openMail && <MailList onClose={() => {setOpenMail(false)}}></MailList>}
+        {openMail && <MailList onClose={() => {setOpenMail(false)}} onLetterSelect={() => {setOpenMail(false); setOpenLetter(true);}}></MailList>}
+        {openLetter && <Letter></Letter>}
       </div>
     </div>
   );
