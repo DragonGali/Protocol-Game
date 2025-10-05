@@ -159,13 +159,24 @@ export const dialogueData = {
       text: "שלחתי לך עכשיו את האפליקציה לטיפול בדואר זה הסמל הקטן של תיבת הדואר, בצד שמאל. נסה ללחוץ עליו..",
       textColor: "var(--white)",
       emotion: "neutral",
-      nextDialogue: null,
+      nextDialogue: "daniel_intro_13",
       events: ["UNLOCK_MONITOR", "UNLOCK_MAILING_ICON"],
-      condition: false,
+      condition: "mailListOpened",
       name: "דניאל",
       nameColor: "var(--blue)",
-      autoAdvance: false,
+      autoAdvance: true,
       canAdvance: () => false
+  },
+  "daniel_intro_13": {
+    text: "תבחר בדואר הראשון ברשימה.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    nextDialogue: null,
+    events: [],
+    name: "דניאל",
+    nameColor: "var(--blue)",
+    autoAdvance: true,
+    canAdvance: () => false
   }
 }
 }

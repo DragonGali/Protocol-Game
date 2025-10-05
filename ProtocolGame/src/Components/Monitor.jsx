@@ -12,6 +12,7 @@ function Monitor() {
   const [openLetter, setOpenLetter] = useState(false);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [popUpParams, setPopUpParams] = useState(null);
+  const [useTool, setUseTool] = useState(null);
 
   const getMailingIconSrc = () => {
     return `/Monitor/mailingIcon${openMail === null ? '.png' : openMail ? 'Open.gif' : 'Close.gif'} `;
@@ -55,6 +56,8 @@ function Monitor() {
         {openMail && <MailList onClose={() => {setOpenMail(false)}} onLetterSelect={() => {setOpenMail(false); setOpenLetter(true);}}></MailList>}
         {openLetter && <Letter openPopUp={(title, imgLink) => {setOpenPopUp(true); setPopUpParams([title, imgLink])}}></Letter>}
         {openPopUp && <PopUp title={popUpParams[0]} imgLink={popUpParams[1]} onClose={() => {setOpenPopUp(false)}}></PopUp>}
+
+        {state.unlockedTools.includes("stamp") && <img className='stamp-icon clickable' src='./Monitor/tools/stamp.png'/>}
       </div>
     </div>
   );

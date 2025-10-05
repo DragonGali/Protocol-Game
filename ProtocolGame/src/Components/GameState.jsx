@@ -1,6 +1,7 @@
 // GameState.jsx
 import React, { createContext, useContext, useReducer } from 'react';
 import { gameEvents } from '../dialogueData.js';
+import MailList from './MailList.jsx';
 
 const GameStateContext = createContext();
 
@@ -25,11 +26,18 @@ const initialState = {
   // UI state
   manualVisible: false,
   manualUnlocked: false,
-  manualRead: false,
   monitorShowcase: false,
   monitorUnlocked: true,
   mailingIconEnabled: true,
-  newMail: true
+  newMail: true,
+
+  //tools
+  stampUnlocked: false,
+
+
+  //conditions
+  manualRead: false,
+  mailListOpened: false
 };
 
 function gameStateReducer(state, action) {
@@ -74,7 +82,8 @@ function gameStateReducer(state, action) {
         case 'SHOW_USER_MANUAL':{
           return {
             ...state,
-            manualVisible: true
+            manualVisible: true,
+            manualRead: false
           };
         }
 
@@ -117,11 +126,18 @@ function gameStateReducer(state, action) {
           };
         }
 
-        case 'UNLOCK_MAILING_ICON':{
+        case 'UNLOCK_MAILING_ICON': {
           return {
             ...state,
             mailingIconEnabled: true
           };
+        }
+
+        case 'UNLOCK_STAMP': {
+          return {
+            ...state,
+            stampUnlocked: true
+          }
         }
 
         case 'NAVIGATE_TO_GAME':

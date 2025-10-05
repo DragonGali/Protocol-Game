@@ -29,12 +29,21 @@
     height: 15vh;
 }
 
-.Monitor .mailing-icon {
+.Monitor .mailing-icon{
     width: 100%;
     height: 100%;
     bottom: 0;
     position: absolute;
     user-select: none;
+}
+
+.Monitor .stamp-icon {
+  width: 15%;
+  height: 9%;
+  bottom: 6%;
+  left: 25%;
+  position: absolute;
+  user-select: none;
 }
 
 .Monitor .new-symbol {
