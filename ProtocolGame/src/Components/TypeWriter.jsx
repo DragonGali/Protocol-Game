@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import "../Styles/TypeWriter.css"
 import { useGameState } from './GameState';
 
-// Helper function to convert CSS color to filter
 const getColorFilter = (color) => {
-  // This is a simplified approach - you might want to use a more robust solution
   const colorMap = {
-    'var(--orange)': 'invert(73%) sepia(53%) saturate(464%) hue-rotate(359deg) brightness(92%) contrast(89%)'
+    'var(--orange)': 'invert(73%) sepia(53%) saturate(464%) hue-rotate(359deg) brightness(92%) contrast(89%)',
+    'var(--white)': 'invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
   };
   
   return colorMap[color] || colorMap['var(--white)'];
@@ -22,23 +21,21 @@ const TypewriterText = ({
   triangleSize,
   triangleMargin,
   textSize,
-  advanceDialogue,
   name,
   nameColor
 }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
   const [canAdvance, setCanAdvance] = useState(false);
   const { state, dispatch } = useGameState();
 
   useEffect(() => {
     let charIndex = 0;
     setDisplayedText('');
-    setIsTyping(true);
     setCanAdvance(false);
 
-    if (name !== "אני") {
-      dispatch({ type: 'SET_TALKING', value: true }); // Character starts talking
+    // Character starts talking if has name
+    if (name && name !== "אני") {
+      dispatch({ type: 'SET_TALKING', value: true });
     }
 
     const typeInterval = setInterval(() => {
@@ -46,10 +43,12 @@ const TypewriterText = ({
         setDisplayedText(text.slice(0, charIndex + 1));
         charIndex++;
       } else {
-        // Text finished typing
         clearInterval(typeInterval);
-        setIsTyping(false);
-        dispatch({ type: 'SET_TALKING', value: false }); // Character stops talking
+        
+        // Character stops talking
+        if (name && name !== "אני") {
+          dispatch({ type: 'SET_TALKING', value: false });
+        }
         
         // Wait then allow advancing
         setTimeout(() => {
@@ -58,8 +57,13 @@ const TypewriterText = ({
       }
     }, speed);
 
-    return () => clearInterval(typeInterval);
-  }, [text, speed, delayAfterComplete]);
+    return () => {
+      clearInterval(typeInterval);
+      if (name && name !== "אני") {
+        dispatch({ type: 'SET_TALKING', value: false });
+      }
+    };
+  }, [text, speed, delayAfterComplete, name]);
 
   const handleClick = () => {
     if (canAdvance && onComplete) {
@@ -70,12 +74,12 @@ const TypewriterText = ({
   return (
     <div className="typewriter-container" onClick={handleClick}>
       <div 
-        className={`typewriter-text ${advanceDialogue ? 'clickable' : ''}`}
+        className={`typewriter-text ${canAdvance ? 'clickable' : ''}`}
         style={{ color: textColor, fontSize: textSize }}
       >
         <p>
-          <span style={{ color: nameColor }}>{name}{name != null ? ":" : ""}</span> {displayedText}
-          {(canAdvance && advanceDialogue) && (
+          {name && <span style={{ color: nameColor }}>{name}:</span>} {displayedText}
+          {canAdvance && (
             <img 
               src="./General/triangle-indicator.svg" 
               alt="Continue" 

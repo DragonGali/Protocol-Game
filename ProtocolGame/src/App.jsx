@@ -15,7 +15,7 @@ const pages = {
 };
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(pages.game);
+  const [currentPage, setCurrentPage] = useState(pages.story);
 
   // Page components mapping
   const pageComponents = {

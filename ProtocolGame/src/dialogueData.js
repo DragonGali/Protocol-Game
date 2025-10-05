@@ -3,21 +3,14 @@ export const dialogueData = {
   story: {
     "story_1": {
       text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
-      nextDialogue: "story_2",
-      events: [],
-      autoAdvance: false,
-      canAdvance: () => true,
+      next: "story_2",
       textColor: "var(--orange)",
-      name: null,
     },
     "story_2": {
       text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
-      nextDialogue: null, // End of story
-      events: ["story_complete"],
-      autoAdvance: false,
-      canAdvance: () => true,
+      next: null, // End of story
+      onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
       textColor: "var(--orange)",
-      name: null,
     }
   },
 
@@ -25,99 +18,62 @@ export const dialogueData = {
   characters: {
     "daniel_intro_1": {
       text: "שלום וברוך הבא לסניף הדואר הפרוטוקולי.",
-      textColor: "var(--white)",
+      next: "daniel_intro_2",
       emotion: "happy",
-      nextDialogue: "daniel_intro_2",
-      events: [],
-      condition: false,
       name: "דניאל",
-      nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--blue)"
     },
     "daniel_intro_2": {
-      text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום,  אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
-      textColor: "var(--white)",
+      text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום, אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
+      next: "daniel_intro_3",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_3",
-      events: [],
-      condition: false,
       name: "דניאל",
-      nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--blue)"
     },
     "daniel_intro_3": {
       text: "גם לי נעים מאוד להכיר.",
-      textColor: "var(--white)",
+      next: "daniel_intro_4",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_4",
-      events: [],
-      condition: false,
       name: "אני",
-      nameColor: "var(--orange)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--orange)"
     },
     "daniel_intro_4": {
       text: "פה אנחנו מקבלים הודעות ארוזות — ממש כמו חבילות. אבל לא כל הודעה מגיעה במצב תקין. המטרה שלנו היא למצוא את הטעויות, ולתקן אותן לפני השליחה.",
-      textColor: "var(--white)",
+      next: "daniel_intro_5",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_5",
-      events: [],
-      condition: false,
       name: "דניאל",
-      nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--blue)"
     },
     "daniel_intro_5": {
-      text: "כל הודעה חייבת לעמוד במבנה של הפרוטוקול שלה.בלי זה? היא פשוט לא תעבור.",
-      textColor: "var(--white)",
+      text: "כל הודעה חייבת לעמוד במבנה של הפרוטוקול שלה. בלי זה? היא פשוט לא תעבור.",
+      next: "daniel_intro_6",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_6",
-      events: [],
-      condition: false,
       name: "דניאל",
-      nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--blue)"
     },
     "daniel_intro_6": {
       text: "[נשמע פשוט... בינתיים.]",
-      textColor: "var(--grey-1)",
+      next: "daniel_intro_7",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_7",
-      events: [],
-      condition: false,
       name: "אני",
-      nameColor: "var(--orange)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--orange)"
     },
     "daniel_intro_7": {
       text: "רואה את הסמל הזה בצד העליון? זה המדריך שלך.",
-      textColor: "var(--white)",
+      next: "daniel_intro_8",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_8",
-      events: ["SHOW_USER_MANUAL"],
-      condition: false,
       name: "דניאל",
       nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      onEnter: [
+        { type: 'SHOW', id: 'manual_icon' }
+      ]
     },
     "daniel_intro_8": {
       text: "כל פעם שאתה נתקל במשהוא חדש או פשוט רוצה לרענן ידע קודם, תרגיש חופשי לקרוא את המדריך",
-      textColor: "var(--white)",
+      next: "daniel_intro_9",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_9",
-      events: ["SHOW_USER_MANUAL"],
-      condition: false,
       name: "דניאל",
-      nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+      nameColor: "var(--blue)"
     },
     "daniel_intro_9": {
       text: "תלחץ עליו ותקרא את ההקדמה, אפשר למצוא את הפרק דרך חיפוש הנושאים החדשים",

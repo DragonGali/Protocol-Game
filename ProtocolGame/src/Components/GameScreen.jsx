@@ -23,10 +23,10 @@ const GameScreen = () => {
   return (
       <div className="GameScreen">
           <CustomerView className="CustomerView"/>
-          <Monitor className="Monitor"/>
+          {/* <Monitor className="Monitor"/> */}
           <TextBox 
             dialogueType="characters"
-            startDialogueId="daniel_intro_12"
+            startDialogueId="daniel_intro_1"
             onComplete={() => {
                 // What happens when dialogue sequence ends
                 console.log("Dialogue finished!");

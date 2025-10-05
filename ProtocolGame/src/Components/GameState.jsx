@@ -1,43 +1,20 @@
-// GameState.jsx
 import React, { createContext, useContext, useReducer } from 'react';
-import { gameEvents } from '../dialogueData.js';
-import MailList from './MailList.jsx';
 
 const GameStateContext = createContext();
 
 const initialState = {
-  // Current dialogue
-  currentChapter: 1,
+  // Core dialogue
   currentDialogue: null,
-  dialogueType: null, // 'story' or 'characters'
-
-  //Character name in english to acess his animation files
+  dialogueType: null,
   currentCharacter: null,
-  isTalking: false, //Property that indicates if character is talking for switching animations
-
-  // Character state
   currentEmotion: null,
+  isTalking: false,
   
-  // Game progress
-  currentPage: 'title',
-  storyComplete: false,
-  
-  
-  // UI state
-  manualVisible: false,
-  manualUnlocked: false,
-  monitorShowcase: false,
-  monitorUnlocked: true,
-  mailingIconEnabled: true,
-  newMail: true,
-
-  //tools
-  stampUnlocked: false,
-
-
-  //conditions
-  manualRead: false,
-  mailListOpened: false
+  // GENERIC tracking
+  completed: new Set(),        // Things player has done
+  unlocked: new Set(),         // Things player can use
+  visible: new Set(),          // Things player can see
+  flags: {},                   // Any temporary state
 };
 
 function gameStateReducer(state, action) {
@@ -53,109 +30,41 @@ function gameStateReducer(state, action) {
       };
 
     case 'SET_TALKING':
-    return {
-      ...state,
-      isTalking: action.value
-    };
+      return { ...state, isTalking: action.value };
 
-    case 'UPDATE_CHAPTER': 
-    return {
-      ...state,
-      currentChapter: currentChapter + 1
-    }
-
-    case 'SET_NEW_MAIL':
+    case 'MARK_COMPLETED':
       return {
         ...state,
-        newMail: action.payload
+        completed: new Set([...state.completed, action.id])
       };
-      
-    case 'NAVIGATE_TO_PAGE':
+
+    case 'UNLOCK':
       return {
         ...state,
-        currentPage: action.page
+        unlocked: new Set([...state.unlocked, action.id])
       };
-      
-    case 'TRIGGER_EVENT':
-      switch (action.eventName) {
 
-        case 'SHOW_USER_MANUAL':{
-          return {
-            ...state,
-            manualVisible: true,
-            manualRead: false
-          };
-        }
-
-        case 'UNLOCK_USER_MANUAL':{
-          return {
-            ...state,
-            manualVisible: false,
-            manualUnlocked: true
-          };
-        }
-
-        case 'FINISH_READING_MANUAL':{
-          return {
-            ...state,
-            manualRead: true
-          }
-        }
-
-        case 'SHOW_MONITOR':{
-          return {
-            ...state,
-            monitorShowcase: true
-          };
-        }
-
-        case 'UNLOCK_MONITOR':{
-          return {
-            ...state,
-            monitorShowcase: false,
-            monitorUnlocked: true
-          };
-        }
-
-
-        case 'UNLOCK_MONITOR':{
-          return {
-            ...state,
-            monitorVisible: false,
-            monitorUnlocked: true
-          };
-        }
-
-        case 'UNLOCK_MAILING_ICON': {
-          return {
-            ...state,
-            mailingIconEnabled: true
-          };
-        }
-
-        case 'UNLOCK_STAMP': {
-          return {
-            ...state,
-            stampUnlocked: true
-          }
-        }
-
-        case 'NAVIGATE_TO_GAME':
-          return {
-            ...state,
-            currentPage: 'game',
-            storyComplete: true
-          };
-          
-        default:
-          return state;
-      }
-      
-    case 'TOGGLE_MANUAL':
+    case 'SHOW':
       return {
         ...state,
-        manualOpen: !state.manualOpen
+        visible: new Set([...state.visible, action.id])
       };
+
+    case 'HIDE':
+      const newVisible = new Set(state.visible);
+      newVisible.delete(action.id);
+      return { ...state, visible: newVisible };
+
+    case 'SET_FLAG':
+      return {
+        ...state,
+        flags: { ...state.flags, [action.key]: action.value }
+      };
+
+    case 'CLEAR_COMPLETED':
+      const newCompleted = new Set(state.completed);
+      newCompleted.delete(action.id);
+      return { ...state, completed: newCompleted };
       
     default:
       return state;
@@ -179,3 +88,9 @@ export const useGameState = () => {
   }
   return context;
 };
+
+// Helper functions
+export const hasCompleted = (state, id) => state.completed.has(id);
+export const isUnlocked = (state, id) => state.unlocked.has(id);
+export const isVisible = (state, id) => state.visible.has(id);
+export const getFlag = (state, key) => state.flags[key];
