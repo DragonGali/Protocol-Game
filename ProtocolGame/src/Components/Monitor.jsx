@@ -4,11 +4,14 @@ import '../Styles/Monitor.css';
 
 import MailList from './MailList.jsx';
 import Letter from './Letter.jsx';
+import PopUp from './PopUp.jsx';
 
 function Monitor() {
   const { state, dispatch } = useGameState(false);
   const [openMail, setOpenMail] = useState(null);
-  const [openLetter, setOpenLetter] = useState(false)
+  const [openLetter, setOpenLetter] = useState(false);
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const [popUpParams, setPopUpParams] = useState(null);
 
   const getMailingIconSrc = () => {
     return `/Monitor/mailingIcon${openMail === null ? '.png' : openMail ? 'Open.gif' : 'Close.gif'} `;
@@ -50,7 +53,8 @@ function Monitor() {
           )}
         </div>
         {openMail && <MailList onClose={() => {setOpenMail(false)}} onLetterSelect={() => {setOpenMail(false); setOpenLetter(true);}}></MailList>}
-        {openLetter && <Letter></Letter>}
+        {openLetter && <Letter openPopUp={(title, imgLink) => {setOpenPopUp(true); setPopUpParams([title, imgLink])}}></Letter>}
+        {openPopUp && <PopUp title={popUpParams[0]} imgLink={popUpParams[1]} onClose={() => {setOpenPopUp(false)}}></PopUp>}
       </div>
     </div>
   );

@@ -71,20 +71,50 @@
     bottom: 7%;
 }
 
+.letter-text-container {
+  width: 85%;
+  height: 75%;
+  left: 7.5%;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between; /* Distribute space between items */
+}
+
 .Letter .header {
-    position: absolute;
-    top: 2%;
-    font-size: var(--font-title-large);
+  font-size: var(--font-title-large);
+  text-align: center;
 }
 
 .Letter .footer {
-    position: absolute;
-    bottom: 30%;
-    font-size: var(--font-title-large);
+  font-size: var(--font-title-large);
+  text-align: center;
 }
 
 .Letter .letter-text {
-    position: absolute;
-    top: 20%;
-    font-size: var(--font-regular);
+  font-size: var(--font-small);
+  margin-bottom: 0.5rem; /* Add gap below text */
+}
+
+.Letter .link {
+  font-size: var(--font-small);
+}
+
+.Letter .link .clickable {
+    color: var(--red);
+}
+
+.Letter .link .clickable:hover {
+    color: var(--pink);
+}
+
+.Letter .header,
+.Letter .footer,
+.Letter .letter-text,
+.Letter .link {
+  position: relative;
+  text-align: center;
+  color: var(--text);
+  width: 100%;
 }

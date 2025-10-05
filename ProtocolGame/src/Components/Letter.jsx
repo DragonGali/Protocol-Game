@@ -4,7 +4,7 @@ import "../Styles/Letter.css";
 import monitorData from "../monitorData";
 import { useGameState } from "./GameState";
 
-const Letter = ({ onClose }) => {
+const Letter = ({ onClose, openPopUp }) => {
 
   const { state, dispatch } = useGameState(false);
   const [openLetter, setOpenLetter] = useState(false);
@@ -24,8 +24,12 @@ const Letter = ({ onClose }) => {
                 {data.text}
             </div>
 
+            {data.link !== null && <div className="link">
+                <span className="clickable" onClick={(e) => {e.stopPropagation(); openPopUp(data.link, data.imgLink)}}>{data.link}</span> :קישור מצורף
+            </div>}
+
             <div className="footer">
-                <p>{`------<FOOTER>------`}</p>
+                <p>{`---<FOOTER>---`}</p>
             </div>
             
       </div>}

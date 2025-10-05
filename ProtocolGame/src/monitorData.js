@@ -7,6 +7,7 @@ export const monitorData = {
         port: "22",
         text: "שלום, וברוך הבא למרכז הדואר הפרוטוקולי. מצורפת כאן הודעה בסיסית לדוגמה. היא כוללת כותרת, גוף... ואת השאר אני אשאיר לך לגלות בעצמך. תעיין, ואם משהו נראה לך חריג – תרגיש חופשי להשתמש בחותמת. אני בטוח שתסתדר מצוין.",
         link: "example_template.msg",
+        imgLink: "./Monitor/pop_ups/letterStructure.png",
         header: true,
         footer: true
     }

@@ -1,0 +1,42 @@
+.PopUp {
+  width: 20vw;
+  height: 40vh;
+  box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 10;
+  top: 30vh;
+  left: 10vw;
+  background-color: var(--white);
+}
+
+.PopUp .close-button {
+  width: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+  position: absolute;
+  left: 1%;
+  top: 1%;
+}
+
+.PopUp .popup-header {
+    width: 100%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: var(--green);
+    font-size: var(--font-medium);
+    text-align: center;
+
+}
+
+.PopUp .popup-img {
+  width: 100%;
+  height: 90%;
+}
+
+
+
