@@ -4,44 +4,44 @@ import CustomerView from './CustomerView.jsx';
 import Monitor from './Monitor.jsx';
 import TextBox from './TextBox.jsx';
 import Manual from './Manual.jsx';
-
-import { useGameState } from './GameState.jsx';
+import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.jsx';
 
 const GameScreen = () => {
-
-  const [isManualVisible, setManualVisible] = useState(false);
-  const [isManualUnlocked, setManualUnlocked] = useState(false);
-  const [isManualOpen, setManualOpen] = useState(false);
-
   const { state } = useGameState();
-
-  useEffect(() => {
-    setManualVisible(state.manualVisible);
-    setManualUnlocked(state.manualUnlocked);
-  }, [state.manualVisible, state.manualUnlocked, state.manualRead]);
+  const [isManualOpen, setManualOpen] = useState(false);
+  
+  // Check if manual has new unread content
+  const hasNewManualContent = !hasCompleted(state, `read_manual_ch${state.flags.currentChapter}`);
 
   return (
-      <div className="GameScreen">
-          <CustomerView className="CustomerView"/>
-          {/* <Monitor className="Monitor"/> */}
-          <TextBox 
-            dialogueType="characters"
-            startDialogueId="daniel_intro_1"
-            onComplete={() => {
-                // What happens when dialogue sequence ends
-                console.log("Dialogue finished!");
-            }}
-          />
-          
-          {/* User Manual Icon */}
-          <img src={`/Manual/user manual icon${!state.manualRead ? ' new' : ''}.png`}
-            className={`user-manual-icon ${isManualVisible ? "showcase" : ""} ${isManualUnlocked ? "clickable" : ""} ${!state.manualRead ? "new" : ""}`}
-             style={{ display: ((isManualVisible || isManualUnlocked) && !isManualOpen) ? 'block' : 'none', pointerEvents: isManualUnlocked ? 'auto' : 'none' }}
-             onClick={() => {setManualOpen(true)}}
-          />
+    <div className="GameScreen">
+      <CustomerView />
+      <TextBox 
+        dialogueType="characters"
+        startDialogueId="daniel_intro_9"
+        onComplete={() => {
+          console.log("Dialogue finished!");
+        }}
+      />
+      
+      {/* User Manual Icon */}
+      {(isVisible(state, 'manual_icon') || isUnlocked(state, 'manual')) && !isManualOpen && (
+        <img 
+          src={`/Manual/user manual icon${hasNewManualContent ? ' new' : ''}.png`}
+          className={`user-manual-icon 
+            ${isVisible(state, 'manual_icon') ? 'showcase' : ''} 
+            ${isUnlocked(state, 'manual') ? 'clickable' : ''}
+            ${hasNewManualContent ? 'new' : ''}`}
+          style={{ 
+            pointerEvents: isUnlocked(state, 'manual') ? 'auto' : 'none' 
+          }}
+          onClick={() => setManualOpen(true)}
+          alt="User manual"
+        />
+      )}
 
-          {isManualOpen && <Manual className="Manual" onClose={() => {setManualOpen(false)}}/>}
-      </div>
+      {isManualOpen && <Manual onClose={() => setManualOpen(false)} />}
+    </div>
   );
 }
 

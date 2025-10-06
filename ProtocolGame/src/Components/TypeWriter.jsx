@@ -7,7 +7,6 @@ const getColorFilter = (color) => {
     'var(--orange)': 'invert(73%) sepia(53%) saturate(464%) hue-rotate(359deg) brightness(92%) contrast(89%)',
     'var(--white)': 'invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
   };
-  
   return colorMap[color] || colorMap['var(--white)'];
 };
 
@@ -22,21 +21,19 @@ const TypewriterText = ({
   triangleMargin,
   textSize,
   name,
-  nameColor
+  nameColor,
+  showTriangle = true
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [canAdvance, setCanAdvance] = useState(false);
-  const { state, dispatch } = useGameState();
+  const { dispatch } = useGameState();
 
   useEffect(() => {
     let charIndex = 0;
     setDisplayedText('');
     setCanAdvance(false);
 
-    // Character starts talking if has name
-    if (name && name !== "אני") {
-      dispatch({ type: 'SET_TALKING', value: true });
-    }
+    if (name && name !== "אני") dispatch({ type: 'SET_TALKING', value: true });
 
     const typeInterval = setInterval(() => {
       if (charIndex < text.length) {
@@ -44,42 +41,31 @@ const TypewriterText = ({
         charIndex++;
       } else {
         clearInterval(typeInterval);
-        
-        // Character stops talking
-        if (name && name !== "אני") {
-          dispatch({ type: 'SET_TALKING', value: false });
-        }
-        
-        // Wait then allow advancing
-        setTimeout(() => {
-          setCanAdvance(true);
-        }, delayAfterComplete);
+        if (name && name !== "אני") dispatch({ type: 'SET_TALKING', value: false });
+
+        setTimeout(() => setCanAdvance(true), delayAfterComplete);
       }
     }, speed);
 
     return () => {
       clearInterval(typeInterval);
-      if (name && name !== "אני") {
-        dispatch({ type: 'SET_TALKING', value: false });
-      }
+      if (name && name !== "אני") dispatch({ type: 'SET_TALKING', value: false });
     };
   }, [text, speed, delayAfterComplete, name]);
 
   const handleClick = () => {
-    if (canAdvance && onComplete) {
-      onComplete();
-    }
+    if (canAdvance && onComplete) onComplete();
   };
 
   return (
     <div className="typewriter-container" onClick={handleClick}>
       <div 
-        className={`typewriter-text ${canAdvance ? 'clickable' : ''}`}
+        className={`typewriter-text ${canAdvance && showTriangle ? 'clickable' : ''}`}
         style={{ color: textColor, fontSize: textSize }}
       >
         <p>
           {name && <span style={{ color: nameColor }}>{name}:</span>} {displayedText}
-          {canAdvance && (
+          {canAdvance && showTriangle && (
             <img 
               src="./General/triangle-indicator.svg" 
               alt="Continue" 

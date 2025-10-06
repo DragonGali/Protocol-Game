@@ -4,7 +4,6 @@ import { useGameState } from './GameState.jsx';
 
 function CustomerView() {
   const { state } = useGameState();
-  
   return (
     <div className="CustomerView">
         <img 

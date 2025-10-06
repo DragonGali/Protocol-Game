@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useGameState } from './GameState.jsx';
+import React, { useEffect, useState } from 'react';
+import { useGameState, hasCompleted } from './GameState.jsx';
 import { dialogueData } from '../dialogueData.js';
 import TypeWriter from './TypeWriter.jsx';
 
@@ -10,22 +10,22 @@ const DialogueManager = ({
   triangleColor = "var(--white)",
   triangleSize = "1.5vw",
   triangleMargin = "0 1vw 0 0",
-  textSize = "var(--font-regular)",
+  textSize = "var(--font-regular)"
 }) => {
   const { state, dispatch } = useGameState();
+  const [waitingFor, setWaitingFor] = useState(null);
 
-  // Initialize dialogue on mount
+  // Initialize dialogue
   useEffect(() => {
-    if (startDialogueId && !state.currentDialogue) {
+    if (startDialogueId && (!state.currentDialogue || state.dialogueType !== dialogueType)) {
       setDialogue(startDialogueId);
     }
-  }, [startDialogueId]);
+  }, [startDialogueId, dialogueType]);
 
   const setDialogue = (dialogueId) => {
     const dialogue = dialogueData[dialogueType][dialogueId];
     if (!dialogue) return;
 
-    // Set current dialogue
     dispatch({
       type: 'SET_DIALOGUE',
       dialogueId,
@@ -34,11 +34,16 @@ const DialogueManager = ({
       character: dialogue.character || null
     });
 
-    // Execute onEnter actions
+    // Run onEnter actions
     if (dialogue.onEnter) {
-      dialogue.onEnter.forEach(action => {
-        dispatch(action);
-      });
+      dialogue.onEnter.forEach(action => dispatch(action));
+    }
+
+    // Store wait condition if present
+    if (dialogue.waitFor?.completed) {
+      setWaitingFor(dialogue.waitFor.completed);
+    } else {
+      setWaitingFor(null);
     }
   };
 
@@ -52,17 +57,26 @@ const DialogueManager = ({
     if (!currentDialogue) return;
 
     const nextId = currentDialogue.next;
-    
     if (nextId) {
       setDialogue(nextId);
-    } else {
-      // End of dialogue
-      if (onComplete) onComplete();
+    } else if (onComplete) {
+      onComplete();
     }
   };
 
   const currentDialogue = getCurrentDialogue();
+
+  // --- Check completion for waitFor ---
+  useEffect(() => {
+    if (waitingFor && hasCompleted(state, waitingFor)) {
+      // Once completed, move forward
+      advanceDialogue();
+    }
+  }, [state.completed, waitingFor]);
+
   if (!currentDialogue) return null;
+
+  const waiting = waitingFor && !hasCompleted(state, waitingFor);
 
   return (
     <div className="dialogue-manager">
@@ -70,10 +84,11 @@ const DialogueManager = ({
         text={currentDialogue.text}
         name={currentDialogue.name || null}
         nameColor={currentDialogue.nameColor || null}
-        onComplete={advanceDialogue}
+        textColor={currentDialogue.textColor || "var(--white)"}
         speed={60}
         delayAfterComplete={1000}
-        textColor={currentDialogue.textColor || "var(--white)"}
+        onComplete={!waiting ? advanceDialogue : null}
+        showTriangle={!waiting}
         triangleColor={triangleColor}
         triangleSize={triangleSize}
         triangleMargin={triangleMargin}

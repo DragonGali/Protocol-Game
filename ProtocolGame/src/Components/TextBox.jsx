@@ -15,7 +15,6 @@ function TextBox({ dialogueType, startDialogueId, onComplete}) {
         textSize="var(--font-regular)"
         triangleSize="1.5vw"
         triangleMargin="0 1vw 0 0"
-        canAdvance={[dialogueData[dialogueType][startDialogueId].canAdvance]}
       />
     </div>
   );
