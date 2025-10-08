@@ -118,3 +118,7 @@
   color: var(--text);
   width: 100%;
 }
+
+.Letter .stamp-hover {
+    background-color: red;
+}

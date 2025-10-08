@@ -46,6 +46,7 @@
   --cursor-grab: url("./Cursors/Grab.png"), auto;
   --cursor-open: url("./Cursors/Open.png"), auto;
   --cursor-close: url("./Cursors/Close.png"), auto;
+  --cursor-stamp: url("./Cursors/Stamp.png"), auto;
 
   cursor: var(--cursor-default);
 }
@@ -72,6 +73,10 @@
   pointer-events: all;
 }
 
+.stamp-active {
+  cursor: var(--cursor-stamp);
+  pointer-events: all;
+}
 
 
 @font-face {

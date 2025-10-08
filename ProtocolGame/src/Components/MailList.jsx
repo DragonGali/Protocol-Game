@@ -2,13 +2,13 @@ import React from 'react';
 import '../styles/MailList.css';
 import useDragger from "../hooks/useDragger";
 import monitorData from '../monitorData.js'
-import { useGameState } from './GameState.jsx';
+import { useGameState, isUnlocked, isVisible, hasCompleted } from './GameState.jsx';
 
 const MailList = ({ onClose, onLetterSelect }) => {
 
   useDragger("MailList");
   const { state, dispatch } = useGameState();
-  const data = monitorData[`chapter_${state.currentChapter}`];
+  const data = monitorData[`chapter_${state.flags.currentChapter}`];
 
   return (
     <div className="MailList Draggable" id="MailList">

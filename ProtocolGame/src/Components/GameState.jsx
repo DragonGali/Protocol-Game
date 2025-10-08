@@ -12,8 +12,8 @@ const initialState = {
   
   // GENERIC tracking
   completed: new Set(),        // Things player has done
-  unlocked: new Set("manual"),         // Things player can use
-  visible: new Set("manual_icon"),          // Things player can see
+  unlocked: new Set(["manual", "monitor"]),         // Things player can use
+  visible: new Set(),          // Things player can see
   flags: {
     currentChapter: 1
   },                   // Any temporary state

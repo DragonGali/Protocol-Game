@@ -104,48 +104,78 @@ export const dialogueData = {
       text: "טוב, עכשיו כשאתה מכיר את הבסיס - בוא ננסה למיין הודעה.",
       textColor: "var(--white)",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_11",
-      events: [],
-      condition: false,
+      next: "daniel_intro_11",
       name: "דניאל",
+      character: "daniel",
       nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
     },
     "daniel_intro_11": {
       text: "זה המסך שלך. כאן תטפל בכל ההודעות.",
       textColor: "var(--white)",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_12",
-      events: ["SHOW_MONITOR"],
-      condition: false,
+      next: "daniel_intro_12",
       name: "דניאל",
+      character: "daniel",
       nameColor: "var(--blue)",
-      autoAdvance: false,
-      canAdvance: () => true
+         onEnter: [
+        { type: 'UNLOCK', id: 'monitor'},
+        { type: 'SHOW', id: 'monitor_showcase'}
+      ],
   },
   "daniel_intro_12": {
       text: "שלחתי לך עכשיו את האפליקציה לטיפול בדואר זה הסמל הקטן של תיבת הדואר, בצד שמאל. נסה ללחוץ עליו..",
       textColor: "var(--white)",
       emotion: "neutral",
-      nextDialogue: "daniel_intro_13",
-      events: ["UNLOCK_MONITOR", "UNLOCK_MAILING_ICON"],
+      next: "daniel_intro_13",
       condition: "mailListOpened",
       name: "דניאל",
+      character: "daniel",
       nameColor: "var(--blue)",
-      autoAdvance: true,
-      canAdvance: () => false
+      onEnter: [
+        { type: 'HIDE', id: 'monitor_showcase'},
+        { type: 'UNLOCK', id: 'mail_list'}
+      ],
+      waitFor : { completed: 'clicked_mail_icon'}
   },
   "daniel_intro_13": {
     text: "תבחר בדואר הראשון ברשימה.",
     textColor: "var(--white)",
     emotion: "neutral",
-    nextDialogue: null,
-    events: [],
+    next: "daniel_intro_14",
     name: "דניאל",
+    character: "daniel",
     nameColor: "var(--blue)",
-    autoAdvance: true,
-    canAdvance: () => false
+    waitFor: {completed: 'opened_letter'}
+  },
+  "daniel_intro_14":{
+    text: "ככה נראית חבילה, בחלק הקדמי רשום כתובת המקור ושל היעד, הפורט ו הפרוטוקול של ההודעה.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    next: "daniel_intro_15",
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    onEnter: [
+      {type: 'UNLOCK', id: 'stamp'}
+    ]
+  },
+  "daniel_intro_15":{
+    text: "אני כבר מילאתי את כל הפרטים אבל השארתי טעות אחת בתוך המכתב, העבודה שלך תהיה לפענח איפה הטעות הזאת.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    next: "daniel_intro_16",
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+  },
+  "daniel_intro_16":{
+    text: "בשביל לסמן טעות, צריך להשתמש בחותמת ולהעביר אותה על השורה הלא נכונה. נסה לעשות את זה.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    next: "daniel_intro_16",
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
   }
 }
 }

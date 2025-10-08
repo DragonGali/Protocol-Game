@@ -18,7 +18,7 @@ const GameScreen = () => {
       <CustomerView />
       <TextBox 
         dialogueType="characters"
-        startDialogueId="daniel_intro_9"
+        startDialogueId="daniel_intro_12"
         onComplete={() => {
           console.log("Dialogue finished!");
         }}
@@ -41,6 +41,8 @@ const GameScreen = () => {
       )}
 
       {isManualOpen && <Manual onClose={() => setManualOpen(false)} />}
+
+      <Monitor className="Monitor"/>
     </div>
   );
 }
