@@ -119,6 +119,6 @@
   width: 100%;
 }
 
-.Letter .stamp-hover {
+.Letter .stamp-hover, .Letter .stamped {
     background-color: red;
 }

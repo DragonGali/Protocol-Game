@@ -12,7 +12,6 @@ function Monitor() {
   const [openLetter, setOpenLetter] = useState(false);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [popUpParams, setPopUpParams] = useState(null);
-  const [stampActive, setStampActive] = useState(false);
   const [stampedElements, setStampedElements] = useState([]);
 
   // Mailing icon image logic
@@ -32,25 +31,17 @@ function Monitor() {
   };
 
   const handleStampClick = () => {
-    setStampActive(true);
     setOpenLetter(true);
-    dispatch({ type: 'MARK_COMPLETED', id: 'activated_stamp' });
-  };
-
-  const handleElementStamp = (elementId) => {
-    if (stampActive && !stampedElements.includes(elementId)) {
-      setStampedElements([...stampedElements, elementId]);
-      dispatch({ type: 'STAMP_ELEMENT', elementId });
-    }
+    dispatch({ type: 'SHOW', id: 'using_stamp' });
   };
 
   const deactivateStamp = () => {
-    setStampActive(false);
+    dispatch({type: 'HIDE', id: 'using_stamp'});
   };
 
-  // Add stamp-active class to body when stamp is active
+  // Add stamp-active class to body when stamp is active, to show the stamp cursor.
   useEffect(() => {
-    if (stampActive) {
+    if (isVisible(state, 'using_stamp')) {
       document.body.classList.add('stamp-active');
     } else {
       document.body.classList.remove('stamp-active');
@@ -59,7 +50,7 @@ function Monitor() {
     return () => {
       document.body.classList.remove('stamp-active');
     };
-  }, [stampActive]);
+  }, [state]);
 
   return (
     <div
@@ -104,10 +95,7 @@ function Monitor() {
               setOpenPopUp(true);
               setPopUpParams([title, imgLink]);
             }}
-            stampActive={stampActive}
-            stampedElements={stampedElements}
-            onElementStamp={handleElementStamp}
-            onLetterClick={deactivateStamp}
+            onElementStamp={deactivateStamp}
           />
         )}
 
@@ -121,7 +109,7 @@ function Monitor() {
 
         {isUnlocked(state, 'stamp') && hasCompleted(state, 'opened_letter') && (
           <div className="stamp-container">
-            {!stampActive ? (
+            {!isVisible(state, 'using_stamp') ? (
               <img
                 className="stamp-icon clickable"
                 src="./Monitor/tools/stamp.png"

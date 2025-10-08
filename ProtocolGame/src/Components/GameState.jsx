@@ -15,7 +15,7 @@ const initialState = {
   unlocked: new Set(["manual", "monitor"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {
-    currentChapter: 1
+    currentChapter: 1,
   },                   // Any temporary state
 };
 

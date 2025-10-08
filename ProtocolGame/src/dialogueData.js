@@ -1,4 +1,6 @@
-export const dialogueData = {
+import { useGameState, isUnlocked, isVisible, hasCompleted } from './Components/GameState.jsx';
+
+export const dialogueData =  {
   // Story dialogues
   story: {
     "story_1": {
@@ -172,11 +174,32 @@ export const dialogueData = {
     text: "בשביל לסמן טעות, צריך להשתמש בחותמת ולהעביר אותה על השורה הלא נכונה. נסה לעשות את זה.",
     textColor: "var(--white)",
     emotion: "neutral",
-    next: "daniel_intro_16",
+    next: (state) => state.flag?.stampedElement === 'footer' ? 'daniel_intro_17' : 'daniel_intro_mistake_1',
     name: "דניאל",
     character: "daniel",
     nameColor: "var(--blue)",
+    waitFor: {flag: 'stampedElement'}
+  },
+
+  "daniel_intro_mistake_1": {
+    text: "זה החלק הבעייתי...?",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    name: "אני",
+    next: "daniel_intro_mistake_2",
+    character: "daniel",
+    nameColor: "var(--blue)",
+  },
+
+  "daniel_intro_mistake_2": {
+    text: "לא לצערי, עולי כדאי לך לקרוא את הנוסח שוב.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    name: "אני",
+    character: "daniel",
+    nameColor: "var(--blue)",
   }
+  
 }
 }
 

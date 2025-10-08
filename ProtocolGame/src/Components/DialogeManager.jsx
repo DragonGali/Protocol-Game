@@ -57,6 +57,11 @@ const DialogueManager = ({
     if (!currentDialogue) return;
 
     const nextId = currentDialogue.next;
+
+    if (typeof nextId === 'function') {
+      nextId = nextId(state);//giving gameState to dialougueData
+    }
+
     if (nextId) {
       setDialogue(nextId);
     } else if (onComplete) {

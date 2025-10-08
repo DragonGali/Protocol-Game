@@ -1,46 +1,45 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "../Styles/Letter.css";
 
 import monitorData from "../monitorData";
-import { useGameState } from "./GameState";
+import { useGameState, isVisible } from "./GameState";
 
-const Letter = ({ onClose, openPopUp, stampActive, stampedElements, onElementStamp, onLetterClick }) => {
-
+const Letter = ({ onClose, openPopUp, onElementStamp, onLetterClick }) => {
   const { state, dispatch } = useGameState(false);
   const [openLetter, setOpenLetter] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
   const data = monitorData[`chapter_${state.flags.currentChapter}`];
 
-  // Auto-open letter when stamp becomes active
+  // The stamped element is now stored in GameState as state.stampedElement
+  const stampedElement = state.stampedElement;
+
   useEffect(() => {
-    if (stampActive) {
+    if (isVisible(state, 'using_stamp')) {
       setOpenLetter(true);
     }
-  }, [stampActive]);
+  }, [isVisible(state, 'using_stamp')]);
 
   const handleLetterClick = (e) => {
-    // Only toggle letter open/close if not in stamp mode and clicking the background
-    if (!stampActive && e.target.classList.contains('Letter')) {
+    if (!isVisible(state, 'using_stamp')) {
       setOpenLetter(!openLetter);
-    } else if (stampActive && e.target.classList.contains('Letter')) {
-      // Clicking the letter background while stamp is active deactivates it
-      onLetterClick();
     }
+
   };
 
   const handleElementClick = (e, elementId) => {
-    if (stampActive) {
+    if (isVisible(state, 'using_stamp')) {
       e.stopPropagation();
-      onElementStamp(elementId);
+      dispatch({ type: 'SET_FLAG', key: 'stampedElement', value: elementId }); // Store stamped element in GameState
+      onElementStamp();
     }
   };
 
   const getElementClassName = (elementId) => {
-    const isStamped = stampedElements.includes(elementId);
+    const isStamped = stampedElement === elementId;
     const isHovered = hoveredElement === elementId;
-    
+
     let className = '';
-    if (stampActive && isHovered && !isStamped) {
+    if (isVisible(state, 'using_stamp') && isHovered && !isStamped) {
       className += ' stamp-hover';
     }
     if (isStamped) {
@@ -50,78 +49,71 @@ const Letter = ({ onClose, openPopUp, stampActive, stampedElements, onElementSta
   };
 
   return (
-    <div 
-      className={`Letter ${openLetter ? (stampActive ? 'open' : 'open closable') : 'closed openable'}`}
+    <div
+      className={`Letter ${openLetter ? (isVisible(state, 'using_stamp') ? 'open' : 'open closable') : 'closed openable'}`}
       onClick={handleLetterClick}
     >
       {openLetter && <div className="letter-text-container">
-            
-            <div 
-              className={`header stampable-element${getElementClassName('header')}`}
-              onClick={(e) => handleElementClick(e, 'header')}
-              onMouseEnter={() => stampActive && setHoveredElement('header')}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-                <p>{`------<HEADER>------`}</p>
-            </div>
+        <div
+          className={`header stampable-element${getElementClassName('header')} ${isVisible(state, 'using_stamp') ? 'stamp-active' : ''}`}
+          onClick={(e) => handleElementClick(e, 'header')}
+          onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('header')}
+          onMouseLeave={() => setHoveredElement(null)}
+        >
+          <p>{`------<HEADER>------`}</p>
+        </div>
 
-            <div 
-              className={`letter-text stampable-element${getElementClassName('text')}`}
-              onClick={(e) => handleElementClick(e, 'text')}
-              onMouseEnter={() => stampActive && setHoveredElement('text')}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-                {data.text}
-            </div>
+        <div
+          className={`letter-text stampable-element${getElementClassName('text')}  ${isVisible(state, 'using_stamp') ? 'stamp-active' : ''}`}
+          onClick={(e) => handleElementClick(e, 'text')}
+          onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('text')}
+          onMouseLeave={() => setHoveredElement(null)}
+        >
+          {data.text}
+        </div>
 
-            {data.link !== null && <div 
-              className={`link stampable-element${getElementClassName('link')}`}
-              onClick={(e) => handleElementClick(e, 'link')}
-              onMouseEnter={() => stampActive && setHoveredElement('link')}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-                <span className="clickable" onClick={(e) => {e.stopPropagation(); openPopUp(data.link, data.imgLink)}}>{data.link}</span> :קישור מצורף
-            </div>}
+        {data.link !== null && <div
+          className={`link stampable-element${getElementClassName('link')}  ${isVisible(state, 'using_stamp') ? 'stamp-active' : ''}`}
+          onClick={(e) => handleElementClick(e, 'link')}
+          onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('link')}
+          onMouseLeave={() => setHoveredElement(null)}
+        >
+          <span className="clickable" onClick={(e) => { e.stopPropagation(); openPopUp(data.link, data.imgLink); }}>{data.link}</span> :קישור מצורף
+        </div>}
 
-            <div 
-              className={`footer stampable-element${getElementClassName('footer')}`}
-              onClick={(e) => handleElementClick(e, 'footer')}
-              onMouseEnter={() => stampActive && setHoveredElement('footer')}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-                <p>{`---<FOOTER>---`}</p>
-            </div>
-            
+        <div
+          className={`footer stampable-element${getElementClassName('footer')} ${isVisible(state, 'using_stamp') ? 'stamp-active' : ''}`}
+          onClick={(e) => handleElementClick(e, 'footer')}
+          onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('footer')}
+          onMouseLeave={() => setHoveredElement(null)}
+        >
+          <p>{`---<FOOTER>---`}</p>
+        </div>
       </div>}
 
-      <div 
-        className={`protocol stampable-element${getElementClassName('protocol')}`}
-        onClick={(e) => handleElementClick(e, 'protocol')}
-        onMouseEnter={() => stampActive && setHoveredElement('protocol')}
-        onMouseLeave={() => setHoveredElement(null)}
-      >
+      <div className={`protocol`}>
         <p>{data.protocol}</p>
       </div>
-      <div 
-        className={`src-adress stampable-element${getElementClassName('src-address')}`}
+      <div
+        className={`src-adress stampable-element${getElementClassName('src-address')} ${isVisible(state, 'using_stamp') ? 'clickable' : ''}`}
         onClick={(e) => handleElementClick(e, 'src-address')}
-        onMouseEnter={() => stampActive && setHoveredElement('src-address')}
+        onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('src-address')}
         onMouseLeave={() => setHoveredElement(null)}
       >
         <p>מאית: {data.sourceAddress}</p>
       </div>
-      <div 
-        className={`dest-adress stampable-element${getElementClassName('dest-address')}`}
+      <div
+        className={`dest-adress stampable-element${getElementClassName('dest-address')} ${isVisible(state, 'using_stamp') ? 'clickable' : ''}`}
         onClick={(e) => handleElementClick(e, 'dest-address')}
-        onMouseEnter={() => stampActive && setHoveredElement('dest-address')}
+        onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('dest-address')}
         onMouseLeave={() => setHoveredElement(null)}
       >
         <p>לכבוד: {data.destinationAddress}</p>
       </div>
-      <div 
-        className={`port stampable-element${getElementClassName('port')}`}
+      <div
+        className={`port stampable-element${getElementClassName('port')} ${isVisible(state, 'using_stamp') ? 'clickable' : ''}`}
         onClick={(e) => handleElementClick(e, 'port')}
-        onMouseEnter={() => stampActive && setHoveredElement('port')}
+        onMouseEnter={() => isVisible(state, 'using_stamp') && setHoveredElement('port')}
         onMouseLeave={() => setHoveredElement(null)}
       >
         <p>פורט: {data.port}</p>
