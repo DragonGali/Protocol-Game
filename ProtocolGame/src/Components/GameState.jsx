@@ -16,6 +16,7 @@ const initialState = {
   visible: new Set(),          // Things player can see
   flags: {
     currentChapter: 1,
+    mistake_1 : 'footer'
   },                   // Any temporary state
 };
 

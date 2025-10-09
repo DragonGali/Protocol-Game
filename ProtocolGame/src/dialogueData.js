@@ -24,7 +24,10 @@ export const dialogueData =  {
       emotion: "happy",
       name: "דניאל",
       nameColor: "var(--blue)",
-      character: "daniel"
+      character: "daniel",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_1', value: 'footer'}
+      ]
     },
     "daniel_intro_2": {
       text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום, אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
@@ -174,11 +177,34 @@ export const dialogueData =  {
     text: "בשביל לסמן טעות, צריך להשתמש בחותמת ולהעביר אותה על השורה הלא נכונה. נסה לעשות את זה.",
     textColor: "var(--white)",
     emotion: "neutral",
-    next: (state) => state.flag?.stampedElement === 'footer' ? 'daniel_intro_17' : 'daniel_intro_mistake_1',
+    next: (state) => state.flags?.stampedElement === 'footer' ? 'daniel_intro_17' : 'daniel_intro_mistake_1',
     name: "דניאל",
     character: "daniel",
     nameColor: "var(--blue)",
     waitFor: {flag: 'stampedElement'}
+  },
+  "daniel_intro_17":{
+    text: "אני חושב שבהודעה הזות חסרה סיומת.",
+    textColor: "var(--white)",
+    emotion: "neutral",
+    next: "daniel_intro_18",
+    name: "אני",
+    character: "daniel",
+    nameColor: "var(--orange)",
+    next: "daniel_intro_18"
+  },
+
+  "daniel_intro_18":{
+    text: "נכון מאוד! כל ההודעות,צריכות להסתיים עם <span style='color:var(--red)'>FOOTER</span>. כל הכבוד, עבודה טובה.",
+    textColor: "var(--white)",
+    emotion: "happy",
+    next: "daniel_intro_19",
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    onEnter: [
+      {type: 'MARK_COMPLETED', id: 'mistake_1'}
+    ]
   },
 
   "daniel_intro_mistake_1": {
@@ -188,16 +214,21 @@ export const dialogueData =  {
     name: "אני",
     next: "daniel_intro_mistake_2",
     character: "daniel",
-    nameColor: "var(--blue)",
+    nameColor: "var(--orange)",
   },
 
   "daniel_intro_mistake_2": {
     text: "לא לצערי, עולי כדאי לך לקרוא את הנוסח שוב.",
     textColor: "var(--white)",
-    emotion: "neutral",
-    name: "אני",
+    emotion: "sad",
+    name: "דניאל",
     character: "daniel",
     nameColor: "var(--blue)",
+    onEnter: [
+      {type: 'SET_FLAG', key: "stampedElement", value: null}
+    ],
+    next: (state) => state.flags?.stampedElement === 'footer' ? 'daniel_intro_17' : 'daniel_intro_mistake_1',
+    waitFor: {flag: 'stampedElement'}
   }
   
 }

@@ -119,6 +119,14 @@
   width: 100%;
 }
 
-.Letter .stamp-hover, .Letter .stamped {
+
+.Letter .stamped,
+.Letter .stamp-active:hover {
     background-color: red;
+}
+
+
+/* Completed mistake styling - green color */
+.stampable-element.completed-mistake {
+  background-color: var(--green);
 }

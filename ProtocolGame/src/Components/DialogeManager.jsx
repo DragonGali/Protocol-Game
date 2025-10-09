@@ -34,14 +34,14 @@ const DialogueManager = ({
       character: dialogue.character || null
     });
 
-    // Run onEnter actions
+    // Run onEnter actions if any
     if (dialogue.onEnter) {
       dialogue.onEnter.forEach(action => dispatch(action));
     }
 
     // Store wait condition if present
-    if (dialogue.waitFor?.completed) {
-      setWaitingFor(dialogue.waitFor.completed);
+    if (dialogue.waitFor) {
+      setWaitingFor(dialogue.waitFor);
     } else {
       setWaitingFor(null);
     }
@@ -56,10 +56,9 @@ const DialogueManager = ({
     const currentDialogue = getCurrentDialogue();
     if (!currentDialogue) return;
 
-    const nextId = currentDialogue.next;
-
+    let nextId = currentDialogue.next;
     if (typeof nextId === 'function') {
-      nextId = nextId(state);//giving gameState to dialougueData
+      nextId = nextId(state); // allow dynamic branching
     }
 
     if (nextId) {
@@ -71,17 +70,26 @@ const DialogueManager = ({
 
   const currentDialogue = getCurrentDialogue();
 
-  // --- Check completion for waitFor ---
+  // --- Check for completion or flag conditions ---
   useEffect(() => {
-    if (waitingFor && hasCompleted(state, waitingFor)) {
-      // Once completed, move forward
+    if (!waitingFor) return;
+
+    const completedOK = waitingFor.completed ? hasCompleted(state, waitingFor.completed) : true;
+    const flagOK = waitingFor.flag ? !!state.flags[waitingFor.flag] : true;
+
+    console.log(state.flags);
+
+    // advance when all wait conditions are met
+    if (completedOK && flagOK) {
       advanceDialogue();
     }
-  }, [state.completed, waitingFor]);
+  }, [state.completed, state.flags, waitingFor]);
 
   if (!currentDialogue) return null;
 
-  const waiting = waitingFor && !hasCompleted(state, waitingFor);
+  const waiting =
+    (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
+    (waitingFor?.flag && !state.flags[waitingFor.flag]);
 
   return (
     <div className="dialogue-manager">
