@@ -18,7 +18,7 @@ const GameScreen = () => {
       <CustomerView />
       <TextBox 
         dialogueType="characters"
-        startDialogueId="daniel_intro_12"
+        startDialogueId="daniel_intro_19"
         onComplete={() => {
           console.log("Dialogue finished!");
         }}

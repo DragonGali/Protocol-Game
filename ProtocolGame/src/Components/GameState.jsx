@@ -11,7 +11,7 @@ const initialState = {
   isTalking: false,
   
   // GENERIC tracking
-  completed: new Set(),        // Things player has done
+  completed: new Set("mistake_1"),        // Things player has done
   unlocked: new Set(["manual", "monitor"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {

@@ -207,6 +207,19 @@ export const dialogueData =  {
     ]
   },
 
+  "daniel_intro_19": {
+    text: "עכשיו, כל מה שנשאר זה לשלוח את המכתב, תלחץ על הכפתור ה <span style='color:var(--green)'>ירוק</span>.",
+    textColor: 'var(--white)',
+    emotion: "neutral",
+    next: "daniel_intor_20",
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    onEnter: [
+      {type: 'SHOW', id: 'submit-button'}
+    ]
+  },
+
   "daniel_intro_mistake_1": {
     text: "זה החלק הבעייתי...?",
     textColor: "var(--white)",

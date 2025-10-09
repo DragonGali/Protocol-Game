@@ -64,11 +64,17 @@ const TypewriterText = ({
     let charIndex = 0;
     const output = parsed.map((s) => ({ ...s, shown: "" }));
 
+    let isCancelled = false; // 🚫 Prevent async glitching
+
     const typeNext = () => {
+      if (isCancelled) return;
+
       if (segIndex >= parsed.length) {
         if (name && name !== "אני")
           dispatch({ type: "SET_TALKING", value: false });
-        setTimeout(() => setCanAdvance(true), delayAfterComplete);
+
+        // ✅ Only show triangle when text actually finishes
+        setCanAdvance(true);
         return;
       }
 
@@ -89,10 +95,11 @@ const TypewriterText = ({
     typeNext();
 
     return () => {
+      isCancelled = true;
       if (name && name !== "אני")
         dispatch({ type: "SET_TALKING", value: false });
     };
-  }, [text, speed, delayAfterComplete, name]);
+  }, [text, speed, name]);
 
   const handleClick = () => {
     if (canAdvance && onComplete) onComplete();

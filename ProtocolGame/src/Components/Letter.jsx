@@ -84,8 +84,13 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
             className={footer.getClassNames('footer')}
             onClick={handleStampClick(footer.handleStamp)}
           >
-            <p>{`---<FOOTER>---`}</p>
+            <p>
+              {state.flags.currentChapter === 1 && !footer.isCompleted
+                ? "------"
+                : "---<FOOTER>---"}
+            </p>
           </div>
+
         </div>
       )}
 
