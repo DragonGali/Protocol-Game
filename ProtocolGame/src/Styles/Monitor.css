@@ -21,6 +21,14 @@
   border: 2px solid var(--blue);
 }
 
+.Monitor.submit-animation {
+  background-image: url("/Monitor/submit-animation.gif");
+  background-size: 94% 94.7%;
+  right: -1%;
+  top: 2.9%;
+  position: absolute;
+}
+
 .Monitor .image-container {
     position: absolute;
     bottom: 5%;
@@ -53,6 +61,24 @@
     bottom: 45%;
     left: 0%;
     z-index: 10;
+}
+
+.Monitor .submit-button {
+  width: 12vw;
+  position: absolute;
+  left: 37.5%;
+  animation: button-slide-down 1s ease-in-out forwards;
+}
+
+
+@keyframes button-slide-down {
+  0% {
+    transform: translate(0, -10vh);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 

@@ -12,7 +12,7 @@ const initialState = {
   
   // GENERIC tracking
   completed: new Set("mistake_1"),        // Things player has done
-  unlocked: new Set(["manual", "monitor"]),         // Things player can use
+  unlocked: new Set(["manual", "monitor", "mail_list"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {
     currentChapter: 1,

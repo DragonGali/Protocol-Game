@@ -215,8 +215,48 @@ export const dialogueData =  {
     name: "דניאל",
     character: "daniel",
     nameColor: "var(--blue)",
+    next: "daniel_intro_20",
     onEnter: [
       {type: 'SHOW', id: 'submit-button'}
+    ],
+    waitFor: {completed: 'submit'}
+  },
+  "daniel_intro_20": {
+    text: "דניאל: מעולה! עכשיו כשאתה יודע מה לעשות, אני אעזוב אותך לנסות בעצמך.",
+    textColor: 'var(--white)',
+    emotion: 'neutral',
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    next: "daniel_intro_21",
+    onEnter: [
+      {type: 'HIDE', id: 'submit-button'},
+      {type: 'SHOW', id: 'submit-animation'}
+    ]
+  },
+  "daniel_intro_21": {
+    text: "אם תיתקל בקושי, תוכל ללחוץ על סמל העזרה, בשביל לקבל רמז.",
+    textColor: 'var(--white)',
+    emotion: 'neutral',
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    next: "daniel_intro_22",
+    onEnter: [
+      {type: 'UNLOCK', id: 'help-icon'},
+      {type: 'SHOW', id: 'help-icon-showcase'}
+    ]
+  },
+  "daniel_intro_22": {
+    text: "בהצלחה!",
+    textColor: 'var(--white)',
+    emotion: 'happy',
+    name: "דניאל",
+    character: "daniel",
+    nameColor: "var(--blue)",
+    next: "daniel_intro_22",
+    onEnter: [
+      {type: 'COMPLETE', id: 'chapter'},
     ]
   },
 

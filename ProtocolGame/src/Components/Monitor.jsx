@@ -13,6 +13,7 @@ function Monitor() {
   const [openPopUp, setOpenPopUp] = useState(false);
   const [popUpParams, setPopUpParams] = useState(null);
   const [stampedElements, setStampedElements] = useState([]);
+  const [playingButtonAnimation, setPlayingButtonAnimation] = useState();
 
   // Mailing icon image logic
   const getMailingIconSrc = () => {
@@ -54,7 +55,7 @@ function Monitor() {
 
   return (
     <div
-      className={`Monitor ${isVisible(state, 'monitor_showcase') ? 'showcase' : ''}`}
+      className={`Monitor ${isVisible(state, 'monitor_showcase') ? 'showcase' : ''} ${isVisible(state, 'submit-animation') ? 'submit-animation' : ''}`}
       style={{
         pointerEvents: state.monitorUnlocked ? 'auto' : 'none',
         display: isUnlocked(state, 'monitor') ? 'block' : 'none'
@@ -125,7 +126,14 @@ function Monitor() {
             )}
           </div>
         )}
+
+        {isVisible(state, 'submit-button') && <img className='submit-button clickable' src={`./Monitor/submit-button${playingButtonAnimation ? '.gif' : '.png'}`}
+        onClick={() => {setPlayingButtonAnimation(true); setTimeout(() => {
+          setPlayingButtonAnimation(false);
+          dispatch({type: "MARK_COMPLETED", id: "submit"})
+        }, 1000);}}/>}
       </div>
+
     </div>
   );
 }
