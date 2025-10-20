@@ -57,7 +57,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
             className={text.getClassNames('letter-text')}
             onClick={handleStampClick(text.handleStamp)}
           >
-            {data.text}
+            <div dangerouslySetInnerHTML={{ __html: data.text }} />
           </div>
 
           {/* Link */}

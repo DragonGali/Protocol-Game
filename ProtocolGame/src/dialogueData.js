@@ -298,7 +298,10 @@ export const dialogueData =  {
       name: "מאיה",
       character: "maya",
       nameColor: "var(--yellow)",
-      next: "maya_intro_2"
+      next: "maya_intro_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_2', value: 22}
+      ]
     },
     "maya_intro_2": {
       text: "הבוס שלי ביקש שאשלח כמה קבצים, אבל המערכת המאובטחת שאנחנו בדרך כלל משתמשים בה מתנהגת מוזר כל הבוקר.",
@@ -334,7 +337,51 @@ export const dialogueData =  {
       name: "אני",
       character: "maya",
       nameColor: "var(--orange)",
-      next: "maya_intro_6",
+      next: (state) => state.flags?.stampedElement === 'port' ? 'maya_intro_6' : 'maya_intro_mistake_1',
+      waitFor: { flag: 'stampedElement' }
+    },
+    "maya_intro_6": {
+      text: "אה, נכון! אז מה הוא צריך להיות?",
+      textColor: "var(--white)",
+      emotion: "surprised",
+      name: "מאיה",
+      character: "maya",
+      nameColor: "var(--yellow)",
+      next: "maya_intro_7"
+    },
+
+    "maya_intro_mistake_1": {
+      text: "השורה הזאתי שגויה",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      name: "אני",
+      next: "maya_intro_mistake_2",
+      character: "maya",
+      nameColor: "var(--orange)",
+    },
+
+    "maya_intro_mistake_2": {
+      text: "מה בדיוק? הכל נראה תקין",
+      textColor: "var(--white)",
+      emotion: "angry",
+      name: "מאיה",
+      character: "maya",
+      nameColor: "var(--yellow)",
+      next: "maya_intro_mistake_3"
+    },
+
+    "maya_intro_mistake_3": {
+      text: "אה...לא משנה...",
+      textColor: "var(--white)",
+      emotion: "angry",
+      name: "אני",
+      character: "maya",
+      nameColor: "var(--orange)",
+      next: (state) => state.flags?.stampedElement === 'port' ? 'maya_intro_6' : 'maya_intro_mistake_1',
+      waitFor: { flag: 'stampedElement' },
+      onEnter: [
+        {type: 'SET_FLAG', key: "stampedElement", value: null}
+      ],
     }
   }
 }
