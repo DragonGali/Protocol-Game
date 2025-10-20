@@ -15,15 +15,18 @@ const DialogueManager = ({
   const { state, dispatch } = useGameState();
   const [waitingFor, setWaitingFor] = useState(null);
 
+  // helper to get chapter key used in dialogueData
+  const chapterKey = `chapter_${state.flags.currentChapter}`;
+
   // Initialize dialogue
   useEffect(() => {
     if (startDialogueId && (!state.currentDialogue || state.dialogueType !== dialogueType)) {
       setDialogue(startDialogueId);
     }
-  }, [startDialogueId, dialogueType]);
+  }, [startDialogueId, dialogueType, state.flags.currentChapter]);
 
   const setDialogue = (dialogueId) => {
-    const dialogue = dialogueData[dialogueType][dialogueId];
+    const dialogue = dialogueData[dialogueType]?.[chapterKey]?.[dialogueId];
     if (!dialogue) return;
 
     dispatch({
@@ -49,7 +52,7 @@ const DialogueManager = ({
 
   const getCurrentDialogue = () => {
     if (!state.currentDialogue) return null;
-    return dialogueData[dialogueType]?.[state.currentDialogue];
+    return dialogueData[dialogueType]?.[chapterKey]?.[state.currentDialogue];
   };
 
   const advanceDialogue = () => {

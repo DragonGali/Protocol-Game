@@ -6,8 +6,10 @@ import TextBox from './TextBox.jsx';
 import Manual from './Manual.jsx';
 import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.jsx';
 
+import dialogueData from '../dialogueData.js';
+
 const GameScreen = () => {
-  const { state } = useGameState();
+  const { state, dispatch } = useGameState();
   const [isManualOpen, setManualOpen] = useState(false);
   
   // Check if manual has new unread content
@@ -18,9 +20,10 @@ const GameScreen = () => {
       <CustomerView />
       <TextBox 
         dialogueType="characters"
-        startDialogueId="daniel_intro_19"
+        startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[3] }
         onComplete={() => {
-          console.log("Dialogue finished!");
+          dispatch({type: 'SET_FLAG', key: 'currentChapter', value: 2});
+          dispatch({type: 'RESET_COMPLETED'});
         }}
       />
       

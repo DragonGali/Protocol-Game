@@ -62,6 +62,12 @@ function Monitor() {
       }}
     >
       <div className="monitor-container">
+        {isUnlocked(state, 'help-icon') && (
+          <div className="help-container">
+            <img src="/Monitor/help-icon.png" className={`help-icon clickable ${isVisible(state, 'help-icon-showcase') ? 'showcase' : ''}`}/>
+          </div>
+        )}
+
         <div className="image-container">
           <img
             src={getMailingIconSrc()}

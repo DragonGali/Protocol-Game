@@ -11,12 +11,11 @@ const initialState = {
   isTalking: false,
   
   // GENERIC tracking
-  completed: new Set("mistake_1"),        // Things player has done
+  completed: new Set(),        // Things player has done
   unlocked: new Set(["manual", "monitor", "mail_list"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {
-    currentChapter: 1,
-    mistake_1 : 'footer'
+    currentChapter: 2,
   },                   // Any temporary state
 };
 
@@ -68,6 +67,9 @@ function gameStateReducer(state, action) {
       const newCompleted = new Set(state.completed);
       newCompleted.delete(action.id);
       return { ...state, completed: newCompleted };
+
+    case 'RESET_COMPLETED':
+      return { ...state, completed: new Set() };
       
     default:
       return state;

@@ -29,6 +29,10 @@
   position: absolute;
 }
 
+.Monitor.submit-animation * {
+  display: none;
+}
+
 .Monitor .image-container {
     position: absolute;
     bottom: 5%;
@@ -68,6 +72,17 @@
   position: absolute;
   left: 37.5%;
   animation: button-slide-down 1s ease-in-out forwards;
+}
+
+.Monitor .help-container {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.Monitor .help-icon {
+  width: 4vw;
+  height: 8vh;
 }
 
 
