@@ -6,7 +6,6 @@ import {dialogueData} from '../dialogueData.js';
 function TextBox({ dialogueType, startDialogueId, onComplete}) {
   return (
     <div className="TextBox">
-      {/* <p className="character-name">:{dialogueData[dialogueType][startDialogueId].name}</p> */}
       <DialogueManager className="dialogue-manager"
         dialogueType={dialogueType}
         startDialogueId={startDialogueId}

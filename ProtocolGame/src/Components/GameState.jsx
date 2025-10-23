@@ -16,6 +16,7 @@ const initialState = {
   visible: new Set(),          // Things player can see
   flags: {
     currentChapter: 2,
+    mistake_2: "port"
   },                   // Any temporary state
 };
 

@@ -22,7 +22,7 @@ const GameScreen = () => {
         dialogueType="characters"
         startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[3] }
         onComplete={() => {
-          dispatch({type: 'SET_FLAG', key: 'currentChapter', value: 2});
+          dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
           dispatch({type: 'RESET_COMPLETED'});
         }}
       />

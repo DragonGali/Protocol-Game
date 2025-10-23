@@ -1,0 +1,29 @@
+.Question {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.Question .question-answer {
+    background-color: var(--purple-2);
+    color: var(--white);
+    font-family: "basis33";
+    font-size: var(--font-regular);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.Question .question-answer:hover {
+    transform: scale(1.02);
+}

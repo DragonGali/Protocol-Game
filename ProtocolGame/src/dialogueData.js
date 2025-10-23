@@ -259,7 +259,7 @@ export const dialogueData =  {
       nameColor: "var(--blue)",
       next: null,
       onEnter: [
-        {type: 'COMPLETE', id: 'chapter'},
+        {type: 'MARK_COMPLETED', id: 'chapter_1'},
         {type: 'HIDE', id: 'help-icon-showcase'}
       ]
     },
@@ -337,17 +337,77 @@ export const dialogueData =  {
       name: "אני",
       character: "maya",
       nameColor: "var(--orange)",
-      next: (state) => state.flags?.stampedElement === 'port' ? 'maya_intro_6' : 'maya_intro_mistake_1',
+      next: (state) => state.flags?.stampedElement === 'port' ? 'maya_intro_correct_1' : 'maya_intro_mistake_1',
       waitFor: { flag: 'stampedElement' }
     },
-    "maya_intro_6": {
+    "maya_intro_correct_1": {
+      text: "נראה שהפורט שציינת בהודעה לא מתאים לפרוטוקול FTP.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      name: "אני",
+      character: "maya",
+      nameColor: "var(--orange)",
+      next: "maya_intro_correct_2"
+    },
+
+    "maya_intro_correct_2": {
       text: "אה, נכון! אז מה הוא צריך להיות?",
       textColor: "var(--white)",
       emotion: "surprised",
       name: "מאיה",
       character: "maya",
       nameColor: "var(--yellow)",
-      next: "maya_intro_7"
+      next: "maya_intro_question_1"
+    },
+
+    "maya_intro_question_1": {
+      type: "question",
+      answers: [30, 81, 55, 22],
+      next: (state) => state.flags?.selectedAnswer === 22 ? 'maya_intro_6' : 'maya_intro_question_mistake_1',
+      waitFor: { flag: 'selectedAnswer' }
+    },
+
+    "maya_intro_6": {
+      text: "תודה, אני כבר אתקן את השורה הזאת.",
+      textColor: "var(--white)",
+      emotion: "happy",
+      name: "מאיה",
+      character: "maya",
+      nameColor: "var(--yellow)",
+      next: "maya_intro_7",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'mistake_2'},
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: { completed: 'submit'}
+    },
+
+    "maya_intro_7": {
+      text: "תודה רבה, אני בטוח אחזור שוב :)",
+      textColor: "var(--white)",
+      emotion: "happy",
+      name: "מאיה",
+      character: "maya",
+      nameColor: "var(--yellow)",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ],
+      next: 'maya_intro_exit'
+    },
+
+    "maya_intro_exit": {
+      text: "",
+      emotion: "neutral",
+      name: "מאיה",
+      character: "maya",
+      nameColor: "var(--yellow)",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-animation'},
+        {type: 'MARK_COMPLETED', id: 'chapter_2'}
+      ],
+      waitFor: {},
+      next: null
     },
 
     "maya_intro_mistake_1": {
@@ -382,7 +442,33 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: "stampedElement", value: null}
       ],
+    },
+
+    "maya_intro_question_mistake_1": {
+        text: "[לא?! מה אני בכלל חושב, זה לא יכול להיות המספר הזה!]",
+        textColor: "var(--grey-1)",
+        emotion: "surprised",
+        name: "אני",
+        character: "maya",
+        nameColor: "var(--orange)",
+        next: "maya_intro_correct_2",
+        onEnter: [
+          {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
+        ]
     }
+  },
+
+  "chapter_3" : {
+    "liyor_intro_1": {
+        text: "אהלן, באתי לשלוח את המשחק החדש לבן דוד שלי. אמרו לי שאתם שולחים מיילים וכאלה, כבר בחרתי אה...פרוטוקול, מספר המזל שלי.",
+        textColor: "var(--white)",
+        emotion: "happy",
+        name: "ליאור",
+        character: "liyor",
+        nameColor: "var(--green)",
+        next: "liyor_intro_2",
+        onEnter: [{type: 'SET_FLAG', key: 'mistake_3', value: 'link'}]
+    },
   }
 }
     

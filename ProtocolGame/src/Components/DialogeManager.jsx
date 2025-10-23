@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGameState, hasCompleted } from './GameState.jsx';
 import { dialogueData } from '../dialogueData.js';
 import TypeWriter from './TypeWriter.jsx';
+import Question from './Question.jsx';
 
 const DialogueManager = ({ 
   dialogueType, 
@@ -94,24 +95,29 @@ const DialogueManager = ({
     (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
     (waitingFor?.flag && !state.flags[waitingFor.flag]);
 
-  return (
-    <div className="dialogue-manager">
-      <TypeWriter 
-        text={currentDialogue.text}
-        name={currentDialogue.name || null}
-        nameColor={currentDialogue.nameColor || null}
-        textColor={currentDialogue.textColor || "var(--white)"}
-        speed={60}
-        delayAfterComplete={1000}
-        onComplete={!waiting ? advanceDialogue : null}
-        showTriangle={!waiting}
-        triangleColor={triangleColor}
-        triangleSize={triangleSize}
-        triangleMargin={triangleMargin}
-        textSize={textSize}
-      />
-    </div>
+    return ( 
+      <div className="DialogueManager">
+        {currentDialogue?.type !== 'question' && (
+        <TypeWriter 
+          text={currentDialogue.text}
+          name={currentDialogue.name || null}
+          nameColor={currentDialogue.nameColor || null}
+          textColor={currentDialogue.textColor || "var(--white)"}
+          speed={60}
+          delayAfterComplete={1000}
+          onComplete={!waiting ? advanceDialogue : null}
+          showTriangle={!waiting}
+          triangleColor={triangleColor}
+          triangleSize={triangleSize}
+          triangleMargin={triangleMargin}
+          textSize={textSize}
+        /> )}
+
+        {currentDialogue?.type === 'question' && (
+          <Question dialogue={currentDialogue} />
+        )}
+      </div>
   );
-};
+}
 
 export default DialogueManager;
