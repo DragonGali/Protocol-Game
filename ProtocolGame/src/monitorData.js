@@ -21,6 +21,16 @@ export const monitorData = {
         header: true,
         footer: true,
         link: null
+    },
+    "chapter_3": {
+        customerName : "ליאור",
+        protocol : "TFTP",
+        sourceAddress : "192.168.1.5",
+        destinationAddress : "172.20.45.9",
+        port : "69",
+        text : "מה המצב, הכנתי גרסה חדשה של המשחק שלי. תעביר את הקובץ הזה לבן דוד שלי — הוא מת על דברים כאלה.",
+        link: "Game_Beta_2024.iso (2.1GB)",
+        imgLink: "./Monitor/pop_ups/game_beta_corrupt.png"
     }
 }
 

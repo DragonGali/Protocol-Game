@@ -15,7 +15,7 @@ const initialState = {
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {
-    currentChapter: 2,
+    currentChapter: 3,
     mistake_2: "port"
   },                   // Any temporary state
 };

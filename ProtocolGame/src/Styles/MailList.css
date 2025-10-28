@@ -72,10 +72,11 @@
   filter: brightness(0.9);
 }
 
-.mail-item-old {
-  opacity: 0.7;
+.mail-item-completed {
   cursor: default;
+  opacity: 0.5;
 }
+
 
 .mail-item-inner {
   display: flex;

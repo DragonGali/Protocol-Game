@@ -469,6 +469,37 @@ export const dialogueData =  {
         next: "liyor_intro_2",
         onEnter: [{type: 'SET_FLAG', key: 'mistake_3', value: 'link'}]
     },
+    "liyor_intro_2": {
+      text: "בסדר, אני רק צריך לבדוק שהכל תקין.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      name: "אני",
+      character: "liyor",
+      nameColor: "var(--orange)",
+      next: "liyor_intro_3"
+    },
+    "liyor_intro_3": {
+      text: "[נשמע שהוא לא מבין הרבה בפרוטוקולים, כדאי לי לקרוא על הפרוטוקול שהוא משתמש.]",
+      textColor: "var(--grey-1)",
+      emotion: "neutral",
+      name: "אני",
+      character: "liyor",
+      nameColor: "var(--orange)",
+      next: (state) => state.flags?.stampedElement === 'link' ? 'liyor_intro_correct_1' : 'liyor_intro_mistake_1',
+      waitFor: { flag: 'stampedElement' }
+    },
+    "liyor_intro_correct_1" : {
+
+    },
+    "liyor_intro_mistake_1" : {
+      text: "השורה הזאתי לא נכונה",
+      textColor: "var(--white)",
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      character: "liyor",
+      next: "liyor_intro_mistake_2"
+    }
   }
 }
     

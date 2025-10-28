@@ -9,7 +9,7 @@ const PopUp = ({title, onClose, imgLink }) => {
   return (
     <div className="Draggable PopUp" id="PopUp">
       <div className="popup-header">
-        <p>{title}</p>
+        <p className='header-title'>{title}</p>
         <img
           src="./General/close-button.png"
           onClick={onClose}
