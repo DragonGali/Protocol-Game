@@ -489,8 +489,27 @@ export const dialogueData =  {
       waitFor: { flag: 'stampedElement' }
     },
     "liyor_intro_correct_1" : {
-
+      text: "הפייל הזה הוא גדול מדי בשביל הפרוטוקול הזה, אתה תצטרך לבחור בפרוטוקול אחר או לשלוח את הפייל בכמה חבילות.",
+      textColor: "var(--white)",
+      emotion: "neutral",
+      name: "אני",
+      character: "liyor",
+      nameColor: "var(--orange)",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'mistake_3'},
+      ],
+      next: "liyor_intro_correct_2"
     },
+    "liyor_intro_correct_2" : {
+      text: "אה וואלה?  לא ידעתי שיש גבול.  טוב אני אשלח פייל יותר קטן.",
+      textColor: "var(--white)",
+      emotion: "surprised",
+      name: "ליאור",
+      character: "liyor",
+      nameColor: "var(--green)",
+      next: "liyor_intro_correct_3"
+    },
+
     "liyor_intro_mistake_1" : {
       text: "השורה הזאתי לא נכונה",
       textColor: "var(--white)",
@@ -499,6 +518,29 @@ export const dialogueData =  {
       name: "אני",
       character: "liyor",
       next: "liyor_intro_mistake_2"
+    },
+
+    "liyor_intro_mistake_2" : {
+      text: "הממ... אתה לא משחק איתי, נכון?",
+      textColor: "var(--white)",
+      nameColor: "var(--green)",
+      emotion: "angry",
+      name: "ליאור",
+      character: "liyor",
+      next: "liyor_intro_mistake_3"
+    },
+
+    "liyor_intro_mistake_3" : {
+      text: "אה...לא משנה",
+      textColor: "var(--white)",
+      nameColor: "var(--orange)",
+      emotion: "angry",
+      name: "אני",
+      character: "liyor",
+      next: "liyor_intro_3",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'stampedElement', value: null}
+      ]
     }
   }
 }
