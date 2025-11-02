@@ -205,7 +205,7 @@ export const dialogueData =  {
       character: "daniel",
       nameColor: "var(--blue)",
       onEnter: [
-        {type: 'MARK_COMPLETED', id: 'mistake_1'}
+        {type: 'CORRECT_MISTAKE', id: 'mistake_1', corrections: '---FOOTER---'}
       ]
     },
 
@@ -224,7 +224,7 @@ export const dialogueData =  {
       waitFor: {completed: 'submit'}
     },
     "daniel_intro_20": {
-      text: "דניאל: מעולה! עכשיו כשאתה יודע מה לעשות, אני אעזוב אותך לנסות בעצמך.",
+      text: "מעולה! עכשיו כשאתה יודע מה לעשות, אני אעזוב אותך לנסות בעצמך.",
       textColor: 'var(--white)',
       emotion: 'neutral',
       name: "דניאל",
@@ -300,7 +300,7 @@ export const dialogueData =  {
       nameColor: "var(--yellow)",
       next: "maya_intro_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_2', value: 22}
+        { type: 'SET_FLAG', key: 'mistake_2', value: 'port' },
       ]
     },
     "maya_intro_2": {
@@ -362,8 +362,8 @@ export const dialogueData =  {
 
     "maya_intro_question_1": {
       type: "question",
-      answers: [30, 81, 55, 22],
-      next: (state) => state.flags?.selectedAnswer === 22 ? 'maya_intro_6' : 'maya_intro_question_mistake_1',
+      answers: [30, 81, 55, 21],
+      next: (state) => state.flags?.selectedAnswer === 21 ? 'maya_intro_6' : 'maya_intro_question_mistake_1',
       waitFor: { flag: 'selectedAnswer' }
     },
 
@@ -376,7 +376,7 @@ export const dialogueData =  {
       nameColor: "var(--yellow)",
       next: "maya_intro_7",
       onEnter: [
-        {type: 'MARK_COMPLETED', id: 'mistake_2'},
+        {type: 'CORRECT_MISTAKE', id: 'mistake_2', corrections: 21},
         {type: 'SHOW', id: 'submit-button'}
       ],
       waitFor: { completed: 'submit'}

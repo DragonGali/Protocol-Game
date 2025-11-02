@@ -9,7 +9,7 @@ export const monitorData = {
         link: "example_template.msg",
         imgLink: "./Monitor/pop_ups/letterStructure.png",
         header: true,
-        footer: false
+        footer: "------"
     },
     "chapter_2": {
         customerName: "מאיה",

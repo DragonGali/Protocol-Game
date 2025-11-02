@@ -15,8 +15,7 @@ const initialState = {
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {
-    currentChapter: 3,
-    mistake_2: "port"
+    currentChapter: 1,
   },                   // Any temporary state
 };
 
@@ -38,6 +37,42 @@ function gameStateReducer(state, action) {
     case 'MARK_COMPLETED':
       return {
         ...state,
+        completed: new Set([...state.completed, action.id])
+      };
+
+    case 'CORRECT_MISTAKE':
+      // Handles both single and multiple corrections
+      // action.id = mistake key (e.g., 'mistake_2')
+      // action.corrections = single value OR array of values
+      // action.fields = optional - if multiple corrections, specify which fields (e.g., ['linkName', 'linkSource'])
+      
+      const mistakeData = state.flags[action.id];
+      const currentLocation = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
+      const corrections = Array.isArray(action.corrections) ? action.corrections : [action.corrections];
+      const fields = action.fields || (corrections.length === 1 ? ['value'] : []);
+      
+      // Build corrections object
+      let correctionsObj = {};
+      if (Array.isArray(action.corrections) && action.fields) {
+        // Multiple corrections with field names
+        action.fields.forEach((field, index) => {
+          correctionsObj[field] = action.corrections[index];
+        });
+      } else {
+        // Single correction
+        correctionsObj = action.corrections;
+      }
+      
+      return {
+        ...state,
+        flags: {
+          ...state.flags,
+          [action.id]: {
+            location: currentLocation,
+            corrections: correctionsObj,
+            timestamp: Date.now()
+          }
+        },
         completed: new Set([...state.completed, action.id])
       };
 
@@ -76,6 +111,7 @@ function gameStateReducer(state, action) {
       return state;
   }
 }
+
 
 export const GameStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameStateReducer, initialState);

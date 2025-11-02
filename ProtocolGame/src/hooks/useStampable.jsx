@@ -1,32 +1,31 @@
 import { useGameState, isVisible, hasCompleted, getFlag } from '../Components/GameState.jsx';
 
-/**
- * Custom hook for managing stampable element behavior
- * @param {string} elementId - The unique identifier for this element
- * @returns {Object} - Stamping state and handlers
- */
 export const useStampable = (elementId) => {
   const { state, dispatch } = useGameState();
 
-  // Check if we're in stamp mode
   const isStampMode = isVisible(state, 'using_stamp');
   
-  // Check if this specific element is stamped
   const isStamped = getFlag(state, 'stampedElement') === elementId;
   
   // Check if this element is a completed mistake
-  // Look through all flags to find any mistake_X that matches this elementId
   let isCompleted = false;
+  let mistakeKey = null;
+  
   Object.keys(state.flags).forEach(key => {
-    if (key.startsWith('mistake_') && state.flags[key] === elementId) {
-      // This element is marked as a mistake, check if it's completed
-      if (hasCompleted(state, key)) {
-        isCompleted = true;
+    if (key.startsWith('mistake_')) {
+      const mistakeData = state.flags[key];
+      // Handle both old format (string) and new format (object)
+      const elementToCheck = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
+      
+      if (elementToCheck === elementId) {
+        mistakeKey = key;
+        if (hasCompleted(state, key)) {
+          isCompleted = true;
+        }
       }
     }
   });
 
-  // Handle stamping this element
   const handleStamp = (e) => {
     if (isStampMode) {
       e.stopPropagation();
@@ -38,7 +37,6 @@ export const useStampable = (elementId) => {
     }
   };
 
-  // Generate className string
   const getClassNames = (baseClass) => {
     return [
       baseClass,
@@ -51,15 +49,11 @@ export const useStampable = (elementId) => {
   };
 
   return {
-    // State
     isStampMode,
     isStamped,
     isCompleted,
-    
-    // Handlers
+    mistakeKey,
     handleStamp,
-    
-    // Utility
     getClassNames
   };
 };
