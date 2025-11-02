@@ -13,6 +13,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const header = useStampable('header');
   const text = useStampable('text');
   const link = useStampable('link');
+  const imgLink = useStampable('imgLink');
   const footer = useStampable('footer');
   const srcAddress = useStampable('src-address');
   const destAddress = useStampable('dest-address');
@@ -71,7 +72,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   // Get corrected values
   const displayPort = getDisplayValue('port', data.port, port.mistakeKey);
   const displayLink = getDisplayValues('link', data.link, link.mistakeKey, 'linkName');
-  const displayLinkSource = getDisplayValues('link', data.link, link.mistakeKey, 'linkSource');
+  const displayLinkSource = getDisplayValues('imgLink', data.imgLink, imgLink.mistakeKey, 'linkSource');
   const displayText = getDisplayValues('text', data.text, text.mistakeKey, 'textContent');
   const displayHeader = getDisplayValues('header', "------<HEADER>------", header.mistakeKey, 'headerContent');
   const displayFooter = state.flags.currentChapter === 1 && !footer.isCompleted
@@ -111,10 +112,10 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
                 className="clickable" 
                 onClick={(e) => { 
                   e.stopPropagation(); 
-                  openPopUp(displayLinkSource || data.link, data.imgLink); 
+                  openPopUp(displayLink, displayLinkSource);
                 }}
               >
-                {displayLink || data.link}
+                {displayLink}
               </span>
               {' '}:קישור מצורף
             </div>

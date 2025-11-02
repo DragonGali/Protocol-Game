@@ -495,9 +495,6 @@ export const dialogueData =  {
       name: "אני",
       character: "liyor",
       nameColor: "var(--orange)",
-      onEnter: [
-        {type: 'MARK_COMPLETED', id: 'mistake_3'},
-      ],
       next: "liyor_intro_correct_2"
     },
     "liyor_intro_correct_2" : {
@@ -507,7 +504,10 @@ export const dialogueData =  {
       name: "ליאור",
       character: "liyor",
       nameColor: "var(--green)",
-      next: "liyor_intro_correct_3"
+      next: "liyor_intro_correct_3",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: "mistake_3", corrections: 'Game_Beta_2024.iso (31 GB)'}
+      ]
     },
 
     "liyor_intro_mistake_1" : {
