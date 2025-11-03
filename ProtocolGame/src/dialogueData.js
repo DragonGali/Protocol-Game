@@ -205,7 +205,7 @@ export const dialogueData =  {
       character: "daniel",
       nameColor: "var(--blue)",
       onEnter: [
-        {type: 'CORRECT_MISTAKE', id: 'mistake_1', corrections: '---FOOTER---'}
+        {type: 'CORRECT_MISTAKE', id: 'mistake_1', correction: '---FOOTER---'}
       ]
     },
 
@@ -376,7 +376,7 @@ export const dialogueData =  {
       nameColor: "var(--yellow)",
       next: "maya_intro_7",
       onEnter: [
-        {type: 'CORRECT_MISTAKE', id: 'mistake_2', corrections: 21},
+        {type: 'CORRECT_MISTAKE', id: 'mistake_2', correction: 21},
         {type: 'SHOW', id: 'submit-button'}
       ],
       waitFor: { completed: 'submit'}
@@ -467,7 +467,10 @@ export const dialogueData =  {
         character: "liyor",
         nameColor: "var(--green)",
         next: "liyor_intro_2",
-        onEnter: [{type: 'SET_FLAG', key: 'mistake_3', value: 'link'}]
+        onEnter: [
+          {type: 'SET_FLAG', key: 'mistake_3a', value: 'link'},
+          {type: 'SET_FLAG', key: 'mistake_3b', value: 'imgLink'}
+        ]
     },
     "liyor_intro_2": {
       text: "בסדר, אני רק צריך לבדוק שהכל תקין.",
@@ -495,7 +498,11 @@ export const dialogueData =  {
       name: "אני",
       character: "liyor",
       nameColor: "var(--orange)",
-      next: "liyor_intro_correct_2"
+      next: "liyor_intro_correct_2",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: "mistake_3a", correction: 'Game_Beta_2024.iso (31 MB)'},
+        {type: 'CORRECT_MISTAKE', id: "mistake_3b", correction: '/Monitor/pop_ups/game_beta_working.gif'}
+      ]
     },
     "liyor_intro_correct_2" : {
       text: "אה וואלה?  לא ידעתי שיש גבול.  טוב אני אשלח פייל יותר קטן.",
@@ -504,10 +511,7 @@ export const dialogueData =  {
       name: "ליאור",
       character: "liyor",
       nameColor: "var(--green)",
-      next: "liyor_intro_correct_3",
-      onEnter: [
-        {type: 'CORRECT_MISTAKE', id: "mistake_3", corrections: 'Game_Beta_2024.iso (31 GB)'}
-      ]
+      next: "liyor_intro_correct_3"
     },
 
     "liyor_intro_mistake_1" : {

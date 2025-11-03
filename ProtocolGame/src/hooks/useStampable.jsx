@@ -14,26 +14,15 @@ export const useStampable = (elementId) => {
   Object.keys(state.flags).forEach(key => {
     if (key.startsWith('mistake_')) {
       const mistakeData = state.flags[key];
-      
-      // Handle both old format (string) and new format (object with location)
-      if (typeof mistakeData === 'string') {
-        // Old format: "mistake_1": "footer"
-        if (mistakeData === elementId) {
-          mistakeKey = key;
-          if (hasCompleted(state, key)) {
-            isCompleted = true;
-          }
-        }
-      } else if (typeof mistakeData === 'object') {
-        // New format: "mistake_3": { location: "link", corrections: {...} }
-        const elementToCheck = mistakeData.location;
-        if (elementToCheck === elementId) {
-          mistakeKey = key;
-          if (hasCompleted(state, key)) {
-            isCompleted = true;
-          }
+
+      const elementToCheck = mistakeData.location;
+      if (elementToCheck === elementId) {
+        mistakeKey = key;
+        if (hasCompleted(state, key)) {
+          isCompleted = true;
         }
       }
+
     }
   });
 

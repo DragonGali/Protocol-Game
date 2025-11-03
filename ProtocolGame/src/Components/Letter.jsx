@@ -19,32 +19,16 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const destAddress = useStampable('dest-address');
   const port = useStampable('port');
 
-  // Helper function to get the display value (either original or corrected)
+ // Helper function to get the display value (either original or corrected)
   const getDisplayValue = (elementId, originalValue, mistakeKey) => {
     if (!mistakeKey) return originalValue;
     
     const mistakeData = state.flags[mistakeKey];
     if (!mistakeData || typeof mistakeData !== 'object') return originalValue;
     
-    // For single value corrections
-    if (typeof mistakeData.corrections === 'string' || typeof mistakeData.corrections === 'number') {
-      return mistakeData.corrections;
-    }
-    
-    // For multi-field corrections, you'll need to specify which field
-    return originalValue;
-  };
-
-  // Helper function for multi-field corrections (like links)
-  const getDisplayValues = (elementId, originalValue, mistakeKey, fieldName) => {
-    if (!mistakeKey) return originalValue;
-    
-    const mistakeData = state.flags[mistakeKey];
-    if (!mistakeData || typeof mistakeData !== 'object') return originalValue;
-    
-    // If corrections is an object with field names
-    if (typeof mistakeData.corrections === 'object' && fieldName) {
-      return mistakeData.corrections[fieldName] || originalValue;
+    // Return the corrected value if it exists
+    if (mistakeData.correction !== undefined) {
+      return mistakeData.correction;
     }
     
     return originalValue;
@@ -71,10 +55,10 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
 
   // Get corrected values
   const displayPort = getDisplayValue('port', data.port, port.mistakeKey);
-  const displayLink = getDisplayValues('link', data.link, link.mistakeKey, 'linkName');
-  const displayLinkSource = getDisplayValues('imgLink', data.imgLink, imgLink.mistakeKey, 'linkSource');
-  const displayText = getDisplayValues('text', data.text, text.mistakeKey, 'textContent');
-  const displayHeader = getDisplayValues('header', "------<HEADER>------", header.mistakeKey, 'headerContent');
+  const displayLink = getDisplayValue('link', data.link, link.mistakeKey);
+  const displayLinkSource = getDisplayValue('imgLink', data.imgLink, imgLink.mistakeKey);
+  const displayText = getDisplayValue('text', data.text, text.mistakeKey);
+  const displayHeader = getDisplayValue('header', "------<HEADER>------", header.mistakeKey);
   const displayFooter = state.flags.currentChapter === 1 && !footer.isCompleted
     ? "------"
     : getDisplayValue('footer', "---<FOOTER>---", footer.mistakeKey);

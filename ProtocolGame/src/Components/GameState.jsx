@@ -40,41 +40,22 @@ function gameStateReducer(state, action) {
         completed: new Set([...state.completed, action.id])
       };
 
-    case 'CORRECT_MISTAKE':
-      // Handles both single and multiple corrections
-      // action.id = mistake key (e.g., 'mistake_2')
-      // action.corrections = single value OR array of values
-      // action.fields = optional - if multiple corrections, specify which fields (e.g., ['linkName', 'linkSource'])
-      
-      const mistakeData = state.flags[action.id];
-      const currentLocation = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
-      const corrections = Array.isArray(action.corrections) ? action.corrections : [action.corrections];
-      const fields = action.fields || (corrections.length === 1 ? ['value'] : []);
-      
-      // Build corrections object
-      let correctionsObj = {};
-      if (Array.isArray(action.corrections) && action.fields) {
-        // Multiple corrections with field names
-        action.fields.forEach((field, index) => {
-          correctionsObj[field] = action.corrections[index];
-        });
-      } else {
-        // Single correction
-        correctionsObj = action.corrections;
-      }
-      
-      return {
-        ...state,
-        flags: {
-          ...state.flags,
-          [action.id]: {
-            location: currentLocation,
-            corrections: correctionsObj,
-            timestamp: Date.now()
-          }
-        },
-        completed: new Set([...state.completed, action.id])
-      };
+    case 'CORRECT_MISTAKE': //For correcting mistakes
+    const mistakeData = state.flags[action.id];
+    const currentLocation = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
+    
+    return {
+      ...state,
+      flags: {
+        ...state.flags,
+        [action.id]: {
+          location: currentLocation,
+          correction: action.correction,
+          timestamp: Date.now()
+        }
+      },
+      completed: new Set([...state.completed, action.id])
+    };
 
     case 'UNLOCK':
       return {
