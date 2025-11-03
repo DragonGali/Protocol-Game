@@ -3,16 +3,18 @@ import { useGameState, isUnlocked, isVisible, hasCompleted } from './Components/
 export const dialogueData =  {
   // Story dialogues
   story: {
-    "story_1": {
-      text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
-      next: "story_2",
-      textColor: "var(--orange)",
-    },
-    "story_2": {
-      text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
-      next: null, // End of story
-      onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
-      textColor: "var(--orange)",
+    "chapter_0" : {
+        "story_1": {
+        text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
+        next: "story_2",
+        textColor: "var(--orange)",
+      },
+      "story_2": {
+        text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
+        next: null, // End of story
+        onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
+        textColor: "var(--orange)",
+      }
     }
   },
 
@@ -233,7 +235,8 @@ export const dialogueData =  {
       next: "daniel_intro_21",
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
-        {type: 'SHOW', id: 'submit-animation'}
+        {type: 'SHOW', id: 'submit-animation'},
+        {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ]
     },
     "daniel_intro_21": {
@@ -391,7 +394,8 @@ export const dialogueData =  {
       nameColor: "var(--yellow)",
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
-        {type: 'SHOW', id: 'submit-animation'}
+        {type: 'SHOW', id: 'submit-animation'},
+        {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ],
       next: 'maya_intro_exit'
     },
@@ -498,11 +502,7 @@ export const dialogueData =  {
       name: "אני",
       character: "liyor",
       nameColor: "var(--orange)",
-      next: "liyor_intro_correct_2",
-      onEnter: [
-        {type: 'CORRECT_MISTAKE', id: "mistake_3a", correction: 'Game_Beta_2024.iso (31 MB)'},
-        {type: 'CORRECT_MISTAKE', id: "mistake_3b", correction: '/Monitor/pop_ups/game_beta_working.gif'}
-      ]
+      next: "liyor_intro_correct_2"
     },
     "liyor_intro_correct_2" : {
       text: "אה וואלה?  לא ידעתי שיש גבול.  טוב אני אשלח פייל יותר קטן.",
@@ -511,7 +511,39 @@ export const dialogueData =  {
       name: "ליאור",
       character: "liyor",
       nameColor: "var(--green)",
-      next: "liyor_intro_correct_3"
+      next: "liyor_intro_4",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: "mistake_3a", correction: 'Game_Beta_2024.iso (31 MB)'},
+        {type: 'CORRECT_MISTAKE', id: "mistake_3b", correction: '/Monitor/pop_ups/game_beta_working.gif'},
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: { completed: 'submit'}
+    },
+
+    "liyor_intro_4" : {
+      text: "תודה אחי, נתראה.",
+      emotion: "happy",
+      name: "ליאור",
+      character: "liyor",
+      nameColor: "var(--green)",
+      next: "liyor_intro_exit",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ]
+    },
+
+    "liyor_intro_exit" : {
+      text: "",
+      emotion: "happy",
+      name: "ליאור",
+      character: "liyor",
+      nameColor: "var(--green)",
+      next: null,
+      onEnter: [
+        {type: 'HIDE', id: 'submit-animation'},
+        {type: 'MARK_COMPLETED', id: 'chapter_3'}
+      ],
     },
 
     "liyor_intro_mistake_1" : {

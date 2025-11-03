@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useGameState, hasCompleted } from './GameState.jsx';
 import { dialogueData } from '../dialogueData.js';
 import TypeWriter from './TypeWriter.jsx';
@@ -15,13 +15,19 @@ const DialogueManager = ({
 }) => {
   const { state, dispatch } = useGameState();
   const [waitingFor, setWaitingFor] = useState(null);
+  const prevChapterRef = useRef(state.flags.currentChapter);
 
   // helper to get chapter key used in dialogueData
   const chapterKey = `chapter_${state.flags.currentChapter}`;
 
-  // Initialize dialogue
+  // Initialize dialogue AND handle chapter changes
   useEffect(() => {
-    if (startDialogueId && (!state.currentDialogue || state.dialogueType !== dialogueType)) {
+    // Check if chapter actually changed
+    if (state.flags.currentChapter !== prevChapterRef.current) {
+      prevChapterRef.current = state.flags.currentChapter;
+      // Reset to start of new chapter
+      setDialogue(startDialogueId);
+    } else if (!state.currentDialogue || state.dialogueType !== dialogueType) {
       setDialogue(startDialogueId);
     }
   }, [startDialogueId, dialogueType, state.flags.currentChapter]);

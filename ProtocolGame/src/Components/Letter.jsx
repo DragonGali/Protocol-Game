@@ -38,6 +38,10 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     if (isVisible(state, 'using_stamp')) {
       setOpenLetter(true);
     }
+
+    if (isVisible(state, 'submit-animation')) {
+      setOpenLetter(false);
+    }
   }, [isVisible(state, 'using_stamp'), state]);
 
   const handleLetterClick = () => {

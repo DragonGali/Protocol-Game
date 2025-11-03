@@ -48,6 +48,11 @@ function Monitor() {
       document.body.classList.remove('stamp-active');
     }
 
+    if (isVisible(state, 'submit-animation')) {
+      setOpenMail(false);
+      setOpenLetter(false);
+    }
+
     return () => {
       document.body.classList.remove('stamp-active');
     };
@@ -68,7 +73,7 @@ function Monitor() {
           </div>
         )}
 
-        <div className="image-container">
+        {isUnlocked(state, "mail_list") && <div className="image-container">
           <img
             src={getMailingIconSrc()}
             className="mailing-icon clickable"
@@ -83,7 +88,7 @@ function Monitor() {
               alt="New mail indicator"
             />
           )}
-        </div>
+        </div>}
 
         {openMail && (
           <MailList

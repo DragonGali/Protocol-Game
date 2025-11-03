@@ -32,7 +32,7 @@ const GameScreen = () => {
         <img 
           src={`/Manual/user manual icon${hasNewManualContent ? ' new' : ''}.png`}
           className={`user-manual-icon 
-            ${isVisible(state, 'manual_icon') ? 'showcase' : ''} 
+            ${isVisible(state, 'manual_icon_showcase') ? 'showcase' : ''} 
             ${isUnlocked(state, 'manual') ? 'clickable' : ''}
             ${hasNewManualContent ? 'new' : ''}`}
           style={{ 
