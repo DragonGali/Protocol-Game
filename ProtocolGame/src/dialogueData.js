@@ -578,6 +578,48 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ]
     }
+  },
+
+  "chapter_4" : {
+    "dialogue_1" : {
+      text: " שלום, לא נפגשנו קצת זמן. אני רואה שאתה עושה עבודה טובה.",
+      nameColor: "var(--blue)",
+      emotion: "happy",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'read_manual_ch4'},
+        {type: 'UNLOCK', id: 'network'}
+      ]
+    },
+    "dialogue_2" : {
+      text: "התקנתי כלי חדש למוניטור העבודה שלך. תוכל להשתמש בו כאשר תפתח מכתב חדש. ",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_3",
+    },
+
+    "dialogue_3" : {
+      text: "הכנסתי לך מכתב בתיבת הדואר שתתנסה בו. תפתח אותו",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_4",
+      waitFor: { completed: "opened_letter" }
+    },
+
+    "dialogue_4" : {
+      text: "הכלי החדש שנשתמש בוא הוא כלי בקשרת התקשורת, הוא נראה כמו סימן אנטננה. ",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_5",
+    }
   }
 }
     

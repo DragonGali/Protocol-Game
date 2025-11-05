@@ -1,0 +1,49 @@
+.NetworkWindow {
+  width: 35vw;
+  height: 45vh;
+  box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 10;
+  top: 30vh;
+  left: 5vw;
+  background-color: var(--purple-2);
+}
+
+
+.NetworkWindow .close-button {
+  width: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+  position: absolute;
+  left: 1%;
+  top: 1%;
+}
+
+.NetworkWindow .header {
+    width: 100%;
+    height: 12%;
+    background-color: var(--green);
+    font-size: var(--font-small);
+    text-align: right;
+
+}
+
+.NetworkWindow .main-body {
+    height: 100%;
+    width: 100%;
+    background-image: url("/Monitor/network-animation.gif");
+    background-size: 100% 100%;
+}
+
+.NetworkWindow .source {
+    color: var(--grey-1);
+    font-size: var(--font-regular);
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}

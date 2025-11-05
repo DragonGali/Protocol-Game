@@ -58,6 +58,15 @@
   user-select: none;
 }
 
+.Monitor .network-icon {
+  width: 12%;
+  height: 13%;
+  bottom: 5%;
+  left : 50%;
+  position: absolute;
+  user-select: none;
+}
+
 .Monitor .new-symbol {
     position: absolute;
     width: 30%;

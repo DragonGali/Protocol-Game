@@ -5,6 +5,7 @@ import '../Styles/Monitor.css';
 import MailList from './MailList.jsx';
 import Letter from './Letter.jsx';
 import PopUp from './PopUp.jsx';
+import NetworkWindow from './NetworkWindow.jsx';
 
 function Monitor() {
   const { state, dispatch } = useGameState();
@@ -119,7 +120,7 @@ function Monitor() {
           />
         )}
 
-        {isUnlocked(state, 'stamp') && hasCompleted(state, 'opened_letter') && (
+        {isUnlocked(state, 'stamp') && openLetter && (
           <div className="stamp-container">
             {!isVisible(state, 'using_stamp') ? (
               <img
@@ -137,6 +138,18 @@ function Monitor() {
             )}
           </div>
         )}
+
+        {isUnlocked(state, 'network') && openLetter && 
+            !isVisible(state, 'using_network') && (
+              <img
+                src="./Monitor/tools/networkIcon.png"
+                className='network-icon clickable'
+              />
+        )}
+
+        <NetworkWindow/>
+
+
 
         {isVisible(state, 'submit-button') && <img className='submit-button clickable' src={`./Monitor/submit-button${playingButtonAnimation ? '.gif' : '.png'}`}
         onClick={() => {setPlayingButtonAnimation(true); setTimeout(() => {

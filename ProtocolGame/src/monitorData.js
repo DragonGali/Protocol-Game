@@ -31,6 +31,15 @@ export const monitorData = {
         text : "מה המצב, הכנתי גרסה חדשה של המשחק שלי. תעביר את הקובץ הזה לבן דוד שלי — הוא מת על דברים כאלה.",
         link: "Game_Beta_2024.iso (2.1GB)",
         imgLink: "./Monitor/pop_ups/game_beta_corrupt.png"
+    },
+    'chapter_4' : {
+        customerName: "דניאל",
+        protocol: "TCP",
+        sourceAddress: "10.0.0.1",
+        destinationAddress: "192.168.0.23",
+        port: "22",
+        text: "",
+        link: null
     }
 }
 

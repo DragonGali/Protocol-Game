@@ -55,6 +55,15 @@ export const manualData = {
                     "line_2" : `הקבצים לא יכולים להיות בגודל של יותר מ-32 מגה בייט.`
                 }
             }
+        },
+
+        "chapter_4" : {
+            title: "",
+            pages: {
+                "page_1" : {
+                    
+                }
+            }
         }
     }
 };
