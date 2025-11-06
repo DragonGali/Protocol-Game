@@ -590,7 +590,9 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'read_manual_ch4'},
-        {type: 'UNLOCK', id: 'network'}
+        {type: 'UNLOCK', id: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_4', value: 'network'},
+        { type: 'SET_FLAG', key: 'mistake_4_code', value: 200 }
       ]
     },
     "dialogue_2" : {
@@ -619,6 +621,96 @@ export const dialogueData =  {
       name: "דניאל",
       character: "daniel",
       next: "dialogue_5",
+    },
+
+    "dialogue_5" : {
+      text: "תלחץ על הסימן שלו",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_6",
+      waitFor: { completed: "networkChecked"}
+    },
+
+    "dialogue_6" : {
+      text: "ההודעה עברה בהצלחה, אבל זה לא יקרה ככה תמיד. ",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_7",
+    },
+
+    "dialogue_7" : {
+      text: "מעכשיו, אתה תצתרך לא רק לראות שהחבילה כתובה בלי שגיות אבל גם שהיא מחוברת.",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_8",
+    },
+
+    "dialogue_8" : {
+      text: "תשים לב להודעות שכשורות לפרוטוקול TCP, אלו משתמשים בקומוניקציות בינייהם, וחייב לבדוק אותם.",
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_9",
+      onEnter: [
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: { completed: 'submit'}
+    },
+
+    "dialogue_9" : {
+      text: "בהצלחה!",
+      nameColor: "var(--blue)",
+      emotion: "happy",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_exit",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ],
+    },
+
+    "dialogue_exit" : {
+      text: "",
+      next: null,
+      onEnter: [
+        {type: 'HIDE', id: 'submit-animation'},
+        {type: 'MARK_COMPLETED', id: 'chapter_4'}
+      ],
+    }
+  },
+
+  "chapter_5" : {
+    "dialogue_1" : {
+      text: "...",
+      nameColor: "var(--purple-pink)",
+      emotion: "hiding",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_2"
+    },
+    "dialogue_2" : {
+      text: "סליחה העם אמרת משהוא?",
+      nameColor: "var(--orange)",
+      emotion: "hiding",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: "...",
+      nameColor: "var(--purple-pink)",
+      emotion: "reveal",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_3"
     }
   }
 }

@@ -49,6 +49,7 @@
   --cursor-stamp: url("./Cursors/Stamp.png"), auto;
 
   cursor: var(--cursor-default);
+  user-select: none;
 }
 
 .clickable {

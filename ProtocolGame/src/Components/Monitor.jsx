@@ -15,6 +15,7 @@ function Monitor() {
   const [popUpParams, setPopUpParams] = useState(null);
   const [stampedElements, setStampedElements] = useState([]);
   const [playingButtonAnimation, setPlayingButtonAnimation] = useState();
+  const [toolInUse, setToolInUse] = useState();
 
   // Mailing icon image logic
   const getMailingIconSrc = () => {
@@ -140,14 +141,19 @@ function Monitor() {
         )}
 
         {isUnlocked(state, 'network') && openLetter && 
-            !isVisible(state, 'using_network') && (
               <img
                 src="./Monitor/tools/networkIcon.png"
                 className='network-icon clickable'
+                onClick={() => {
+                  dispatch({type: 'SHOW', id: 'using_network'})
+                  setToolInUse(toolInUse === 'network' ?  null : 'network')
+                }}
               />
-        )}
+        }
 
-        <NetworkWindow/>
+        {toolInUse === 'network' && 
+          <NetworkWindow onClose={() => {dispatch({type: 'HIDE', id: 'using_network'}); setToolInUse(null)}}/>
+        }
 
 
 

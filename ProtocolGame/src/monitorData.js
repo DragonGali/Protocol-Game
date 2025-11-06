@@ -38,7 +38,7 @@ export const monitorData = {
         sourceAddress: "10.0.0.1",
         destinationAddress: "192.168.0.23",
         port: "22",
-        text: "",
+        text: `"איכות היא לא פעולה - היא הרגל."`,
         link: null
     }
 }

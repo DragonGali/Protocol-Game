@@ -9,7 +9,6 @@
   background-color: var(--purple-2);
 }
 
-
 .NetworkWindow .close-button {
   width: 6%;
   display: flex;
@@ -25,25 +24,106 @@
 }
 
 .NetworkWindow .header {
-    width: 100%;
-    height: 12%;
-    background-color: var(--green);
-    font-size: var(--font-small);
-    text-align: right;
+  width: 100%;
+  height: 12%;
+  background-color: var(--green);
+  font-size: var(--font-small);
+  text-align: right;
+}
 
+.NetworkWindow .header-title {
+  color: var(--white);
+  margin: 0;
+  padding-right: 2%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .NetworkWindow .main-body {
-    height: 100%;
-    width: 100%;
-    background-image: url("/Monitor/network-animation.gif");
-    background-size: 100% 100%;
+  height: 100%;
+  width: 100%;
+  background-image: url("/Monitor/network-animation.gif");
+  background-size: 100% 100%;
+}
+
+.NetworkWindow .source,
+.NetworkWindow .dest {
+  color: var(--grey-1);
+  font-size: var(--font-regular);
+  position: absolute;
+  bottom: 10%;
+  margin: 0;
 }
 
 .NetworkWindow .source {
-    color: var(--grey-1);
-    font-size: var(--font-regular);
-    position: absolute;
-    bottom: 10%;
-    left: 10%;
+  left: 8%;
+}
+
+.NetworkWindow .dest {
+  left: 64%;
+}
+
+/* Network Response Styles */
+
+.NetworkWindow .network-response {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 5;
+}
+
+.NetworkWindow .waiting-text {
+  color: var(--orange);
+  font-size: var(--font-regular);
+  margin: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.NetworkWindow .response-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+}
+
+.NetworkWindow .status-icon {
+  width: 5vw;
+  height: 15vh;
+  animation: pop 0.5s ease-out;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.NetworkWindow .response-code {
+  font-size: var(--font-regular);
+  font-weight: bold;
+  margin: 0;
 }
