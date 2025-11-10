@@ -40,6 +40,16 @@ export const monitorData = {
         port: "22",
         text: `"איכות היא לא פעולה - היא הרגל."`,
         link: null
+    },
+    'chapter_5' : {
+        customerName: "מל",
+        protocol: "TFTP",
+        sourceAddress: "192.168.1.5",
+        destinationAddress: "172.20.45.9",
+        port: "80",
+        text: "אני לא יכולה לחכות להופעה של ניאון אקו הלילה... כבר הכנתי את הפוסטר הזה - עבדתי עליו הרבה זמן.",
+        link: "Requesting connection (12mb)",
+        imgLink: "./Monitor/pop_ups/requestingConnection.png"
     }
 }
 

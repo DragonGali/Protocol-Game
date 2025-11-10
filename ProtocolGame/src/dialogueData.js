@@ -504,7 +504,6 @@ export const dialogueData =  {
     },
     "liyor_intro_correct_1" : {
       text: "הפייל הזה הוא גדול מדי בשביל הפרוטוקול הזה, אתה תצטרך לבחור בפרוטוקול אחר או לשלוח את הפייל בכמה חבילות.",
-      textColor: "var(--white)",
       emotion: "neutral",
       name: "אני",
       character: "liyor",
@@ -513,7 +512,6 @@ export const dialogueData =  {
     },
     "liyor_intro_correct_2" : {
       text: "אה וואלה?  לא ידעתי שיש גבול.  טוב אני אשלח פייל יותר קטן.",
-      textColor: "var(--white)",
       emotion: "surprised",
       name: "ליאור",
       character: "liyor",
@@ -702,7 +700,11 @@ export const dialogueData =  {
       name: "מל",
       character: "mel",
       next: "dialogue_2",
-      speed: 1000
+      speed: 1000,
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_5', value: 'network'},
+        { type: 'SET_FLAG', key: 'mistake_5_code', value: 500 }
+      ]
     },
     "dialogue_2" : {
       text: "סליחה העם אמרת משהוא?",
@@ -737,31 +739,41 @@ export const dialogueData =  {
       name: "אני",
       character: "mel",
       next: "dialogue_6",
+    },
+    "dialogue_6" : {
+      text: `...`,
+      nameColor: "var(--purple-pink)",
+      emotion: "silent",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_7",
+      speed: 1000
+    },
+    "dialogue_7" : {
+      text: `[כנראה שאני אצטרך להסתדר בעצמי] `,
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      emotion: "silent",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_8",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: { completed: "networkChecked"}
+    },
+    "dialogue_8" : {
+      text: `...אה... זה לא אמור לקרות...`,
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_9",
     }
   }
 }
     
 }
 
-// Events that can be triggered
-export const gameEvents = {
-  "show_user_manual": {
-    action: "SHOW_USER_MANUAL",
-  },
 
-  "unlock_user_manual": {
-    action: "UNLOCK_USER_MANUAL"
-  },
-
-  "finish_reading_manual": {
-    action: "FINISH_READING_MANUAL"
-  },
-
-  "show_monitor": {
-    action: "SHOW_MONITOR"
-  },
-
-};
 
 
 export default dialogueData;

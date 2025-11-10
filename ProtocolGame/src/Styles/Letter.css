@@ -26,7 +26,8 @@
     color: var(--text);
     position: absolute;
     top: 13%;
-    left: 9.5%;
+    left: 8.1%;
+    text-align: center;
     user-select: none;
 }
 
