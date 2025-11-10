@@ -48,6 +48,7 @@ const TypewriterText = ({
   name,
   nameColor,
   showTriangle = true,
+  autoAdvance = false,
 }) => {
   const [typedSegments, setTypedSegments] = useState([]);
   const [canAdvance, setCanAdvance] = useState(false);
@@ -101,6 +102,17 @@ const TypewriterText = ({
         dispatch({ type: "SET_TALKING", value: false });
     };
   }, [text, speed, name]);
+
+  // Auto-advance effect
+  useEffect(() => {
+    if (!canAdvance || !autoAdvance || !onComplete) return;
+
+    const timer = setTimeout(() => {
+      onComplete();
+    }, delayAfterComplete);
+    
+    return () => clearTimeout(timer);
+  }, [canAdvance, autoAdvance, onComplete, delayAfterComplete]);
 
   const handleClick = () => {
     if (canAdvance && onComplete) onComplete();

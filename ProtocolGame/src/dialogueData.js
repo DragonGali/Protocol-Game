@@ -767,7 +767,142 @@ export const dialogueData =  {
       name: "מל",
       character: "mel",
       next: "dialogue_9",
+    },
+    "dialogue_9" : {
+      text: `זה חמש מאות. כלומר, הבקשה נשלחה כמו שצריך, אבל משהו השתבש בתוך השרת. אולי סקריפט שבור, בעיה בזיכרון, או שה-backend פשוט לא יודע איך להתמודד`,
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_10",
+      speed: 40,
+    },
+    "dialogue_10" : {
+      text: `עם זה... זו לא אשמתך - השרת פשוט קרס.`,
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_11",
+    },
+    "dialogue_11" : {
+      text: `...מרשים, כמה גרוע זה נכשל.`,
+      nameColor: "var(--purple-pink)",
+      emotion: "neutral",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_12",
+    },
+    "dialogue_12" : {
+      text: `וואו, את מבינה כל כך הרבה בפרוטוקולים.`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_13",
+    },
+    "dialogue_13" : {
+      text: `קצת...`,
+      nameColor: "var(--purple-pink)",
+      emotion: "shy",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_14",
+    },
+    "dialogue_14" : {
+      text: `עם השרת לא מגיב עולי תוכלי להשתמש בכתובת של שרת אחר?`,
+      nameColor: "var(--orange)",
+      emotion: "shy",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_15",
+    },
+    "dialogue_15" : {
+      text: `כן, אני יכולה.`,
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_16",
+    },
+    "dialogue_16" : {
+      text: `אתה יכול לסמן לי את כתובת המקור בשביל שאני אשנה אותה?`,
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_5_stamp', value: 'src-address'}
+      ],
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_17",
+      waitFor: {flag: 'stampedElement'},
+      next: (state) => state.flags?.stampedElement === 'src-address' ? 'dialogue_17' : 'dialogue_mistake_1',
+    },
+    "dialogue_17" : {
+      text: `הנא, תיקנתי את הכתובת.`,
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: "mistake_5_stamp", correction: '172.16.0.0'},
+        {type: 'SHOW', id: 'submit-button'}],
+      nameColor: "var(--purple-pink)",
+      emotion: "shy",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_18",
+      waitFor: { completed: 'submit'}
+    },
+
+    "dialogue_18" : {
+      text: "...תודה.",
+      nameColor: "var(--purple-pink)",
+      emotion: "shy",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_exit",
+      speed: 100,
+      fontSize: `var(--font-small)`,
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ],
+      waitFor: {completed: 'submit'}
+    },
+
+    "dialogue_exit" : {
+      text: "",
+      next: null,
+      onEnter: [
+        {type: 'HIDE', id: 'submit-animation'},
+        {type: 'MARK_COMPLETED', id: 'chapter_4'}
+      ],
+    },
+    
+    "dialogue_mistake_1" : {
+      text: `החלק הזה כתוב לא נכון.`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_mistake_2",
+    },
+    "dialogue_mistake_2" : {
+      text: `...לא`,
+      nameColor: "var(--purple-pink)",
+      emotion: "shy",
+      name: "מל",
+      character: "mel",
+      next: "dialogue_mistake_3"
+    },
+    "dialogue_mistake_3" : {
+      text: `[היא אפילו לא מסתכלת עליי.]`,
+      nameColor: "var(--orange)",
+      emotion: "shy",
+      name: "אני",
+      character: "mel",
+      textColor: `var(--grey-1)`,
+      next: "dialogue_16",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
     }
+
   }
 }
     
