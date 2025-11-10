@@ -13,7 +13,7 @@ const GameScreen = () => {
   const [isManualOpen, setManualOpen] = useState(false);
   
   // Check if manual has new unread content
-  const hasNewManualContent = !hasCompleted(state, `read_manual_ch${state.flags.currentChapter}`);
+  const hasNewManualContent = !hasCompleted(state, `read_manual_ch${state.flags.currentChapter}`) && hasCompleted(state, 'update_manual');
 
   return (
     <div className="GameScreen">

@@ -11,7 +11,8 @@ const DialogueManager = ({
   triangleColor = "var(--white)",
   triangleSize = "1.5vw",
   triangleMargin = "0 1vw 0 0",
-  textSize = "var(--font-regular)"
+  textSize = "var(--font-regular)",
+  defaultSpeed = 60
 }) => {
   const { state, dispatch } = useGameState();
   const [waitingFor, setWaitingFor] = useState(null);
@@ -101,28 +102,32 @@ const DialogueManager = ({
     (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
     (waitingFor?.flag && !state.flags[waitingFor.flag]);
 
-    return ( 
-      <div className="DialogueManager">
-        {currentDialogue?.type !== 'question' && (
-        <TypeWriter 
-          text={currentDialogue.text}
-          name={currentDialogue.name || null}
-          nameColor={currentDialogue.nameColor || null}
-          textColor={currentDialogue.textColor || "var(--white)"}
-          speed={60}
-          delayAfterComplete={1000}
-          onComplete={!waiting ? advanceDialogue : null}
-          showTriangle={!waiting}
-          triangleColor={triangleColor}
-          triangleSize={triangleSize}
-          triangleMargin={triangleMargin}
-          textSize={textSize}
-        /> )}
+  // Use dialogue-specific speed if provided, otherwise use default
+  const textSpeed = currentDialogue.speed || defaultSpeed;
 
-        {currentDialogue?.type === 'question' && (
-          <Question dialogue={currentDialogue} />
-        )}
-      </div>
+  return ( 
+    <div className="DialogueManager">
+      {currentDialogue?.type !== 'question' && (
+      <TypeWriter 
+        text={currentDialogue.text}
+        name={currentDialogue.name || null}
+        nameColor={currentDialogue.nameColor || null}
+        textColor={currentDialogue.textColor || "var(--white)"}
+        speed={textSpeed}
+        delayAfterComplete={1000}
+        onComplete={!waiting ? advanceDialogue : null}
+        showTriangle={!waiting}
+        triangleColor={triangleColor}
+        triangleSize={triangleSize}
+        triangleMargin={triangleMargin}
+        textSize={textSize}
+        fontSize={currentDialogue.fontSize || null}
+      /> )}
+
+      {currentDialogue?.type === 'question' && (
+        <Question dialogue={currentDialogue} />
+      )}
+    </div>
   );
 }
 

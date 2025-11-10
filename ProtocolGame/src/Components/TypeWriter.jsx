@@ -44,6 +44,7 @@ const TypewriterText = ({
   triangleSize,
   triangleMargin,
   textSize,
+  fontSize,
   name,
   nameColor,
   showTriangle = true,
@@ -111,10 +112,10 @@ const TypewriterText = ({
         className={`typewriter-text ${
           canAdvance && showTriangle ? "clickable" : ""
         }`}
-        style={{ color: textColor, fontSize: textSize }}
+        style={{ color: textColor, fontSize: fontSize || textSize }}
       >
         <p>
-          {name && <span style={{ color: nameColor }}>{name}:</span>}{" "}
+          {name && <span style={{ color: nameColor, fontSize: textSize }}>{name}:</span>}{" "}
           {typedSegments.map((part, i) => (
             <span key={i} style={part.color ? { color: part.color } : {}}>
               {part.shown}

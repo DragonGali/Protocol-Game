@@ -82,7 +82,8 @@ export const dialogueData =  {
         nameColor: "var(--blue)",
         onEnter: [
           { type: 'SHOW', id: 'manual_icon' },
-          { type: 'SHOW', id: 'manual_icon_showcase' }
+          { type: 'SHOW', id: 'manual_icon_showcase' },
+          { type: 'MARK_COMPLETED', id: 'update_manual'}
         ]
       },
       "daniel_intro_8": {
@@ -332,6 +333,9 @@ export const dialogueData =  {
       character: "maya",
       nameColor: "var(--orange)",
       next: "maya_intro_5",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'update_manual'}
+      ]
     },
     "maya_intro_5": {
       text: "בטח אני כבר אסתכל.",
@@ -493,7 +497,10 @@ export const dialogueData =  {
       character: "liyor",
       nameColor: "var(--orange)",
       next: (state) => state.flags?.stampedElement === 'link' ? 'liyor_intro_correct_1' : 'liyor_intro_mistake_1',
-      waitFor: { flag: 'stampedElement' }
+      waitFor: { flag: 'stampedElement' },
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'update_manual'}
+      ]
     },
     "liyor_intro_correct_1" : {
       text: "הפייל הזה הוא גדול מדי בשביל הפרוטוקול הזה, אתה תצטרך לבחור בפרוטוקול אחר או לשלוח את הפייל בכמה חבילות.",
@@ -694,7 +701,8 @@ export const dialogueData =  {
       emotion: "hiding",
       name: "מל",
       character: "mel",
-      next: "dialogue_2"
+      next: "dialogue_2",
+      speed: 1000
     },
     "dialogue_2" : {
       text: "סליחה העם אמרת משהוא?",
@@ -702,7 +710,7 @@ export const dialogueData =  {
       emotion: "hiding",
       name: "אני",
       character: "mel",
-      next: "dialogue_3"
+      next: "dialogue_3",
     },
     "dialogue_3" : {
       text: "...",
@@ -710,7 +718,25 @@ export const dialogueData =  {
       emotion: "reveal",
       name: "מל",
       character: "mel",
-      next: "dialogue_3"
+      next: "dialogue_4",
+    },
+    "dialogue_4" : {
+      text: `...המכתב שלי...לא נשלח...`,
+      nameColor: "var(--purple-pink)",
+      emotion: "neutral",
+      name: "מל",
+      character: "mel",
+      fontSize: "var(--font-small)",
+      next: "dialogue_5",
+      speed: 100
+    },
+    "dialogue_5" : {
+      text: `מה? תדברי יותר חזק בבקשה.`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_6",
     }
   }
 }

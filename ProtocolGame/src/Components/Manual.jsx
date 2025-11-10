@@ -34,7 +34,7 @@ const Manual = ({ onClose }) => {
     }
   }, [chapterCompleted, shouldClose]);
 
-  const hasNewContent = !hasCompleted(state, `read_manual_ch${selectedChapter}`);
+  const hasNewContent = !hasCompleted(state, `read_manual_ch${selectedChapter}`) && hasCompleted(state, `update_manual`);
 
   return (
     <div className="Manual">
@@ -68,7 +68,7 @@ const Manual = ({ onClose }) => {
       {selectedCategory == null && <img src="/Manual/manual home page view.png" className='manual-home-page-view' alt="Manual home" />}
       {selectedCategory === 'new' && (
         <ManualText 
-          chapter={selectedChapter} 
+          chapter={hasCompleted(state, 'update_manual') ? selectedChapter : (state.flags.currentChapter + (state.flags.currentChapter === 1 ? 0 : -1))  } 
           onFinish={() => setFinishedReading(true)}
         />
       )}
