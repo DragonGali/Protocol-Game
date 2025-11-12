@@ -923,7 +923,23 @@ export const dialogueData =  {
       emotion: "happy",
       name: "סבתא ליוויה",
       next: "dialogue_2"
-    }
+    },
+    "dialogue_2" : {
+      text: `בטח! באיזה פרוטוקול את רוצה להשתמש?`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      character: "granny",
+      next: "dialogue_3",
+    },
+    "dialogue_3" : {
+      text: `פרו-מה? אני רק רוצה שהן יגיעו חמות ולא פרוצות כמו בפעם הקודמת!`,
+      nameColor: "var(--dry-earth)",
+      character: "granny",
+      emotion: "neutral",
+      name: "סבתא ליוויה",
+      next: "dialogue_2"
+    },
   }
 }
     
