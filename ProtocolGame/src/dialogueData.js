@@ -913,6 +913,17 @@ export const dialogueData =  {
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
     }
 
+  },
+
+  "chapter_6" : {
+    "dialogue_1" : {
+      text: `או שלום, חמודי! בדיוק אפיתי עוגיות ואני רוצה לשלוח אותן לנכד שלי בחיפה. אתה יכול לעזור לי לשלוח אותן באינטרנט?`,
+      nameColor: "var(--dry-earth)",
+      character: "granny",
+      emotion: "happy",
+      name: "סבתא ליוויה",
+      next: "dialogue_2"
+    }
   }
 }
     

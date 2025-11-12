@@ -82,6 +82,21 @@ export const manualData = {
             }
         },
 
+        "chapter_6" : {
+            title: "HTTPS - Hypertext Transfer Protocol Secure",
+            pages: {
+                "page_1" : {
+                    "line_1" : `HTTPS הוא פרוטוקול זהה ל HTTP רק שתעבורת המידע באמצעות הפרוטוקול היא מוצפנת באמצעות הצפנת SSL.`,
+                    "line_2" : `יתרון - תקשורת שרת - לקוח מאובטחת`,
+                    "line_3" : `חיסרון - מסובך, יש לסמוך על רשת אישורים מרכזית.`
+                },
+                "page_2" : {
+                    "line_1" : `* פרוטוקול תקשורת נפוץ במיוחד לאבטחת מידע ברשתות מחשבים, ומיושם במיוחד באינטרהט`,
+                    "line_2" : `* משתמש בפורט 443.`
+                }
+            }
+        },
+
         "chapter_10" : {
             title: "SSH - Secure Shell",
             pages: {

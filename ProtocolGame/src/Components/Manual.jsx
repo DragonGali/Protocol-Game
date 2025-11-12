@@ -49,7 +49,7 @@ const Manual = ({ onClose }) => {
           className={`select-bar-item ${hasNewContent ? 'new' : ''} clickable ${selectedCategory === 'new' ? 'selected' : ''}`} 
           onClick={() => setSelectedCategory('new')}
         >
-          <span style={{ color: "var(--red)" }}>!</span>חדש
+          {hasNewContent && <span style={{ color: "var(--red)" }}>!</span>}חדש
         </div>
         <div 
           className={`select-bar-item clickable ${selectedCategory === 'name' ? 'selected' : ''}`} 
