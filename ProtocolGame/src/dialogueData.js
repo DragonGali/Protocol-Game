@@ -857,23 +857,33 @@ export const dialogueData =  {
       emotion: "shy",
       name: "מל",
       character: "mel",
-      next: "dialogue_exit",
+      next: "dialogue_19",
       speed: 100,
       fontSize: `var(--font-small)`,
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
         {type: 'SHOW', id: 'submit-animation'}
       ],
-      waitFor: {completed: 'submit'}
     },
-
+    "dialogue_19" : {
+      text: `מה אמרת?`,
+      nameColor: "var(--orange)",
+      emotion: "shy",
+      name: "אני",
+      character: "mel",
+      next: "dialogue_exit",
+    },
     "dialogue_exit" : {
-      text: "",
+      text: "...",
+      name: "אני",
+      nameColor: "var(--orange)",
       next: null,
       onEnter: [
         {type: 'HIDE', id: 'submit-animation'},
-        {type: 'MARK_COMPLETED', id: 'chapter_4'}
+        {type: 'MARK_COMPLETED', id: 'chapter_5'}
       ],
+      emotion: "missing",
+      speed: 1000
     },
     
     "dialogue_mistake_1" : {
