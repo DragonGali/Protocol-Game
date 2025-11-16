@@ -922,7 +922,10 @@ export const dialogueData =  {
       character: "granny",
       emotion: "happy",
       name: "סבתא ליוויה",
-      next: "dialogue_2"
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_6', value: 'letter'}
+      ]
     },
     "dialogue_2" : {
       text: `בטח! באיזה פרוטוקול את רוצה להשתמש?`,
@@ -936,10 +939,22 @@ export const dialogueData =  {
       text: `פרו-מה? אני רק רוצה שהן יגיעו חמות ולא פרוצות כמו בפעם הקודמת!`,
       nameColor: "var(--dry-earth)",
       character: "granny",
-      emotion: "neutral",
+      emotion: "grumpy",
       name: "סבתא ליוויה",
-      next: "dialogue_2"
+      next: "dialogue_4"
     },
+    "dialogue_4" : {
+      text: `[נראה שהמדריך שלי התעדכן, עולי היא משתמשת בפרוטוקול ההוא]`,
+      nameColor: "var(--orange)",
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dilogue_5",
+      textColor: "var(--grey-1)",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'update_manual'},
+      ]
+    }
   }
 }
     

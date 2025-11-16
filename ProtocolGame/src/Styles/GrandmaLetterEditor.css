@@ -1,0 +1,20 @@
+.GrandmaLetterEditor {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 33vw;
+  position: fixed;
+  background-image: url('./Monitor/crappyLetter_closed.png');
+}
+
+.GrandmaLetterEditor.closed {
+    background-image: url('./Monitor/crappyLetter_closed.png');
+    height: 38vh;
+    margin-top: 35vh;
+    margin-left: 6.5vw;
+    box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.GrandmaLetterEditor.open {
+    background-image: url('./Monitor/crappyLetter_open.png');
+}
+

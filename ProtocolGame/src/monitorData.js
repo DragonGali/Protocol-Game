@@ -50,6 +50,15 @@ export const monitorData = {
         text: "אני לא יכולה לחכות להופעה של ניאון אקו הלילה... כבר הכנתי את הפוסטר הזה - עבדתי עליו הרבה זמן.",
         link: "Requesting connection (12mb)",
         imgLink: "./Monitor/pop_ups/requestingConnection.png"
+    },
+    'chapter_6' : {
+        customerName: "סבתא",
+        protocol: "HTTPS",
+        sourceAddress: "192.168.3.5",
+        destinationAddress: "172.20.45.9",
+        port: 80,
+        link: "cookies.gif",
+        imgLink: "./Monitor/pop_ups/cookies.gif"
     }
 }
 

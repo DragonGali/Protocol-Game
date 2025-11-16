@@ -6,6 +6,7 @@ import MailList from './MailList.jsx';
 import Letter from './Letter.jsx';
 import PopUp from './PopUp.jsx';
 import NetworkWindow from './NetworkWindow.jsx';
+import GrandmaLetterEditor from './GrandmaLetterEditor.jsx';
 
 function Monitor() {
   const { state, dispatch } = useGameState();
@@ -103,12 +104,18 @@ function Monitor() {
           />
         )}
 
-        {openLetter && (
+        {openLetter && !state.flags['mistake_6'] === 'letter' && (
           <Letter
             openPopUp={(title, imgLink) => {
               setOpenPopUp(true);
               setPopUpParams([title, imgLink]);
             }}
+            onElementStamp={deactivateStamp}
+          />
+        )}
+
+        {openLetter && state.flags['mistake_6'] === 'letter' && (
+          <GrandmaLetterEditor
             onElementStamp={deactivateStamp}
           />
         )}
