@@ -22,7 +22,7 @@
 }
 
 .Letter .protocol {
-    font-size: var(--font-largest);
+    font-size: clamp(1rem, 5vw, var(--font-largest));
     color: var(--text);
     position: absolute;
     top: 13%;
@@ -31,43 +31,43 @@
     user-select: none;
 }
 
-.Letter.open .protocol {
+.Letter .open .protocol {
     display: none;
 }
 
-.Letter .src-adress {
+.src-adress {
     font-size: var(--font-regular);
     position: absolute;
     bottom: 25%;
     right: 8%;
 }
 
-.Letter.open .src-adress {
+.open .src-adress {
     bottom: 7%;
     right: 8.5%;
 }
 
 
-.Letter .dest-adress {
+.dest-adress {
     font-size: var(--font-regular);
     position: absolute;
     bottom: 13%;
     right: 8%;
 }
 
-.Letter.open .dest-adress {
+.open .dest-adress {
     bottom: 13.5%;
     right: 8.5%;
 }
 
-.Letter .port {
+.port {
     font-size: var(--font-regular);
     position: absolute;
     left: 8%;
     bottom: 13%;
 }
 
-.Letter.open .port {
+.open .port {
     left: 9%;
     bottom: 7%;
 }

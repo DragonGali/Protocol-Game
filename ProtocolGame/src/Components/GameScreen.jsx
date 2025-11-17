@@ -20,7 +20,7 @@ const GameScreen = () => {
       <CustomerView />
       <TextBox 
         dialogueType="characters"
-        startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[0] }
+        startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[6] }
         onComplete={() => {
           dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
           dispatch({type: 'RESET_COMPLETED'});

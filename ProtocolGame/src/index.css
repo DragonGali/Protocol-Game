@@ -38,7 +38,7 @@
   --font-regular: clamp(5px, 2vw, 50px);
   --font-title-large: clamp(5px, 2.5vw, 100px);
   --font-small: clamp(3px, 1.5vw, 50px);
-  --font-largest: clamp(20px, 4vw, 200px);
+  --font-largest: clamp(10px, 3vw, 150px);
   --font-medium: clamp(5px, 1.7vw, 50px);
  
   --cursor-default: url("./Cursors/Test.png"), auto;

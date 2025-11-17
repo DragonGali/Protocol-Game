@@ -14,9 +14,12 @@ const initialState = {
   completed: new Set(),        // Things player has done
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network"]),         // Things player can use
   visible: new Set(),          // Things player can see
-  flags: {
+  flags: {// indicators and such
     currentChapter: 6,
-  },                   // Any temporary state
+    mistake_6 : "letter",
+    letter_state: "new",
+    showcaseLetterField: "protocol"
+  },                   
 };
 
 function gameStateReducer(state, action) {

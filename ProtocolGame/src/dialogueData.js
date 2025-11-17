@@ -924,7 +924,8 @@ export const dialogueData =  {
       name: "סבתא ליוויה",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_6', value: 'letter'}
+        {type: 'SET_FLAG', key: 'mistake_6', value: 'letter'},
+        {type: 'SET_FLAG', key: 'letter_state', value: 'crappy'}
       ]
     },
     "dialogue_2" : {
@@ -949,11 +950,66 @@ export const dialogueData =  {
       character: "granny",
       emotion: "neutral",
       name: "אני",
-      next: "dilogue_5",
+      next: "dialogue_5",
       textColor: "var(--grey-1)",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'update_manual'},
-      ]
+      ],
+      waitFor: {completed: 'opened_letter'}
+    },
+    "dialogue_5" : {
+      text: `["מה זה?! הכול פה לא נכון… זה נראה כמו קשקוש של ילד!]`,
+      nameColor: "var(--orange)",
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_6",
+      textColor: "var(--grey-1)",
+    },
+    "dialogue_6" : {
+      text: `[אני חייב לסמן הכל עם החותמת!]`,
+      nameColor: "var(--orange)",
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_7",
+      textColor: "var(--grey-1)",
+      waitFor: {flag: 'stampedElement'}
+    },
+    "dialogue_7" : {
+      text: `סליחה, אני לא יכול לשלוח מכתב במצב כזה.`,
+      nameColor: "var(--orange)",
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_8",
+    },
+    "dialogue_8" : {
+      text: `נו באמת, למה אתם הצעירים עושים מזה כזה עניין? פעם היינו שולחים מכתבים עם יונים וזה תמיד עבד!`,
+      nameColor: "var(--dry-earth)",
+      character: "granny",
+      emotion: "grumpy",
+      name: "סבתא ליוויה",
+      next: "dialogue_9"
+    },
+    "dialogue_9" : {
+      text: `[אוף! טוב, אני פשוט אכין אחד חדש]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_10",
+    },
+    "dialogue_10" : {
+      text: `[אוקיי, הפרוטוקול שאני אשתמש בוא הוא HTTPS]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_11",
+      onEnter: [{type: 'SET_FLAG', key: 'letter_state', value: 'new'}]
     }
   }
 }
