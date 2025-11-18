@@ -1009,7 +1009,58 @@ export const dialogueData =  {
       emotion: "neutral",
       name: "אני",
       next: "dialogue_11",
-      onEnter: [{type: 'SET_FLAG', key: 'letter_state', value: 'new'}]
+      onEnter: [
+        {type: 'SET_FLAG', key: 'letter_state', value: 'new'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'protocol'}
+      ]
+    },
+    "dialogue_11" : {
+      text: `[הכתובת מקור תהיה לוקאלית, באיזה אני יכול לבחור?]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_12",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'fixProtocol'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'sourceAdress'}
+      ]
+    },
+    "dialogue_12" : {
+      type: 'question',
+      answers: ['300.300.300', '10.500.1.1', '255.255.255.255', '127.0.0.1'],
+      next: (state) => state.flags?.selectedAnswer === '127.0.0.1' ? 'dialogue_13' : 'question-1-mistake',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_13" : {
+      text: `[עכשיו כתובת יעד, צריך לבחור במשהו תקין.]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_14",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'fixSrcAdress'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'destAdress'}
+      ]
+    },
+    "dialogue_14" : {
+      type: 'question',
+      answers: ['172.20.112.34', '256.256.256.256', '127.0.0.1', '999.999.999.999'],
+      next: (state) => state.flags?.selectedAnswer === '127.0.0.1' ? 'question-2-mistake-1' : state.flags?.selectedAnswer ? '172.20.112.34' : 'question-2-mistake-2',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "question-1-mistake" : {
+      text: `[זו כתובת לא חוקית]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_11",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
     }
   }
 }

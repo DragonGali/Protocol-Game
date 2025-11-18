@@ -37,6 +37,7 @@
     filter: drop-shadow(-0.5em 0.5em 0 rgba(0,0,0,0.2));
 }
 
+/* styles for protocol */
 .GrandmaLetterEditor .protocol {
     font-size: var(--font-largest);
     color: var(--text);
@@ -50,6 +51,24 @@
     height: 6vh;
 }
 
+.GrandmaLetterEditor.open .protocol {
+    display: none;
+}
+
+/* styles for scr-adress */
+.GrandmaLetterEditor .field_showcase.src-adress, .GrandmaLetterEditor .field_showcase.dest-adress {
+    width: 15.5vw;
+    position: absolute;
+}
+
+.GrandmaLetterEditor .field_showcase #src-adress-txt, .GrandmaLetterEditor .field_showcase #dest-adress-txt {
+    position: absolute;
+    right: 1%;
+    top: 0;
+}
+
+
+/* styling the box and the cursor when asking what the field should be */
 .GrandmaLetterEditor .field_showcase {
     background-color: var(--grey-1);
     border: var(--blue) 0.08em solid;
@@ -59,9 +78,10 @@
   animation: blink 1s infinite;
   color: var(--text);
   text-align: left;
+
 }
 
-
+/* animation for line cursor */
 @keyframes blink {
   0%, 49% {
     opacity: 1;
@@ -71,9 +91,6 @@
   }
 }
 
-.GrandmaLetterEditor.open .protocol {
-    display: none;
-}
 
 /* Turn red when stamped or hovered - include the original shadow */
 .GrandmaLetterEditor.closed.crappy.stampable-element.stamped,

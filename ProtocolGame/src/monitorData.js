@@ -54,7 +54,7 @@ export const monitorData = {
     'chapter_6' : {
         customerName: "סבתא",
         protocol: "HTTPS",
-        sourceAddress: "192.168.3.5",
+        sourceAddress: "127.0.0.1",
         destinationAddress: "172.20.45.9",
         port: 80,
         link: "cookies.gif",

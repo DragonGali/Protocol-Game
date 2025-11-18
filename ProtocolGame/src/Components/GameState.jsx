@@ -18,7 +18,7 @@ const initialState = {
     currentChapter: 6,
     mistake_6 : "letter",
     letter_state: "new",
-    showcaseLetterField: "protocol"
+    // showcaseLetterField: "protocol"
   },                   
 };
 

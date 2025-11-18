@@ -69,21 +69,19 @@ const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
           {/* Protocol */}
       <div className={`protocol ${state.flags.showcaseLetterField === 'protocol' ? 'field_showcase' : ''}`}>
         {state.flags.showcaseLetterField === 'protocol' && <p className='line-cursor'>|</p>}
-        <p>{hasCompleted(state, 'fixPort') ? data.port : ''}</p>
+        <p>{hasCompleted(state, 'fixProtocol') ? data.protocol : ''}</p>
       </div>
 
       {/* Source Address */}
-      <div
-        className='src-adress'
-      >
-        <p>מאית: {data.sourceAddress}</p>
+      <div className={`src-adress ${state.flags.showcaseLetterField === 'sourceAdress' ? 'field_showcase' : ''}`}>
+        {state.flags.showcaseLetterField === 'sourceAdress' && <p className='line-cursor'>|</p>}
+        <p id="src-adress-txt">מאית: {hasCompleted(state, 'fixSrcAdress') ? data.sourceAddress : ''}</p>
       </div>
 
       {/* Destination Address */}
-      <div
-        className='dest-adress'
-      >
-        <p>לכבוד: {data.destinationAddress}</p>
+      <div className={`dest-adress ${state.flags.showcaseLetterField === 'destAdress' ? 'field_showcase' : ''}`}>
+        {state.flags.showcaseLetterField === 'destAdress' && <p className='line-cursor'>|</p>}
+        <p id="dest-adress-txt">לכבוד: {hasCompleted(state, 'fixDestAdress') ? data.destinationAddress : ''}</p>
       </div>
 
       {/* Port */}
