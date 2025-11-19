@@ -58,7 +58,8 @@ export const monitorData = {
         destinationAddress: "172.20.45.9",
         port: 80,
         link: "cookies.gif",
-        imgLink: "./Monitor/pop_ups/cookies.gif"
+        imgLink: "./Monitor/pop_ups/cookies.gif",
+        text: 'שולחת לך את האוגיות שהכנתי הבוקר.'
     }
 }
 

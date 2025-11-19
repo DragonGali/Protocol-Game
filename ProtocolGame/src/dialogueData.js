@@ -1024,7 +1024,8 @@ export const dialogueData =  {
       next: "dialogue_12",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'fixProtocol'},
-        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'sourceAdress'}
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'sourceAdress'},
+        {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
       ]
     },
     "dialogue_12" : {
@@ -1043,14 +1044,82 @@ export const dialogueData =  {
       next: "dialogue_14",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'fixSrcAdress'},
-        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'destAdress'}
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'destAdress'},
+        {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
       ]
     },
     "dialogue_14" : {
       type: 'question',
       answers: ['172.20.112.34', '256.256.256.256', '127.0.0.1', '999.999.999.999'],
-      next: (state) => state.flags?.selectedAnswer === '127.0.0.1' ? 'question-2-mistake-1' : state.flags?.selectedAnswer ? '172.20.112.34' : 'question-2-mistake-2',
+      next: (state) => state.flags?.selectedAnswer === '127.0.0.1' ? 'question-2-mistake-1' : state.flags?.selectedAnswer ===  '172.20.112.34' ? 'dialogue_15' : 'question-2-mistake-2',
       waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_15" : {
+      text: `[איזה פורט צריך לבחור לפרוטוקול HTTPS?]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_16",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'fixDestAdress'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'port'},
+        {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
+      ]
+    },
+    "dialogue_16" : {
+      type: 'question',
+      answers: [21, 80, 443, 666],
+      next: (state) => state.flags?.selectedAnswer === 80 ? 'dialogue_17' : 'question-3-mistake',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_17" : {
+      text: `[והכי חשוב - מה אסור לי לשכוח?]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_18",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'fixPort'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: 'page'},
+        {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
+      ]
+    },
+    "dialogue_18" : {
+      type: 'question',
+      answers: ['עוגיות', 'בדיקת אינטרנט', 'HEADER + FOOTER', 'לסגור את המכתב'],
+      next: (state) => state.flags?.selectedAnswer === 'עוגיות' ? 'question-4-mistake-1' : state.flags?.selectedAnswer === 'בדיקת אינטרנט' ? 'question-4-mistake-2' : state.flags?.selectedAnswer === 'HEADER + FOOTER' ? 'dialogue_19' : 'question-4-mistake-3',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_19" : {
+      text: `[המכתב נראה תקין, אני אוסיף את הטקסט בפנים.]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_20",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'fixPage'},
+        {type: 'SET_FLAG', key: 'showcaseLetterField', value: null},
+        {type: 'SET_FLAG', key: 'selectedAnswer', value: null}
+      ]
+    },
+    "dialogue_20" : {
+      text: `[כל מה שנשאר זה לשלוח אותו]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_21",
+      onEnter: [
+        {type: 'SHOW', id: 'submit-button'},
+        {type: 'MARK_COMPLETED', id: 'fixText'}
+      ]
     },
     "question-1-mistake" : {
       text: `[זו כתובת לא חוקית]`,
@@ -1060,6 +1129,70 @@ export const dialogueData =  {
       emotion: "neutral",
       name: "אני",
       next: "dialogue_11",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-2-mistake-1" : {
+      text: `[זו הכתובת שלי... לא היעד]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_13",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-2-mistake-2" : {
+      text: `[זו כתובת לא חוקית]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_13",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-3-mistake" : {
+      text: `[לא, זה לא הפורט הנכון לפרוטוקול הזה.]`,
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_15",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-4-mistake-1" : {
+      text: `[איך זה קשור עכשיו?!]`,
+      textColor: "var(--grey-1)",
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_17",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-4-mistake-2" : {
+      text: `[אה, נכון! אבל יש לי הרגשה שאני מפספס משהוא עוד יותר חשוב]`,
+      textColor: "var(--grey-1)",
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_17",
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "question-4-mistake-3" : {
+      text: `[...המכתב תמיד נסגר.]`,
+      textColor: "var(--grey-1)",
+      textColor: "var(--grey-1)",
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_17",
+      speed: 30,
       onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
     }
   }

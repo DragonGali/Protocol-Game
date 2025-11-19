@@ -13,8 +13,11 @@ const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
   const data = monitorData.chapter_6;
 
   useEffect(() => {
-    console.log(state.flags);
     setLetterState(state.flags.letter_state);
+
+    if(state.flags.showcaseLetterField === 'page') {
+        setOpenLetter(true);
+    }
   }, [state.flags])
 
   // Create stampable hooks for each letter version
@@ -63,6 +66,9 @@ const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
         >
           {openLetter && (
             <div className="letter-text-container">
+                <div className='header'>{hasCompleted(state, 'fixPage') && '------<HEADER>------'}</div>
+                {hasCompleted(state, 'fixText') && <div dangerouslySetInnerHTML={data.text} className='letter-txt'/>}
+                <div className='footer'>{hasCompleted(state, 'fixPage') && '---<FOOTER>---'}</div>
             </div>
           )}
 
@@ -85,10 +91,9 @@ const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
       </div>
 
       {/* Port */}
-      <div
-        className='port'
-      >
-        <p>פורט: {data.displayPort}</p>
+      <div className={`port ${state.flags.showcaseLetterField === 'port' ? 'field_showcase' : ''}`}>
+        {state.flags.showcaseLetterField === 'port' && <p className='line-cursor'>|</p>}
+        <p id="port-txt">פורט: {hasCompleted(state, 'fixPort') ? data.port : ''}</p>
       </div>
         </div>
       )}

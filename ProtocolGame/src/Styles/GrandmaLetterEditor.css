@@ -58,15 +58,27 @@
 /* styles for scr-adress */
 .GrandmaLetterEditor .field_showcase.src-adress, .GrandmaLetterEditor .field_showcase.dest-adress {
     width: 15.5vw;
+    height: 4vh;
     position: absolute;
 }
 
-.GrandmaLetterEditor .field_showcase #src-adress-txt, .GrandmaLetterEditor .field_showcase #dest-adress-txt {
+.GrandmaLetterEditor .field_showcase #src-adress-txt, .GrandmaLetterEditor .field_showcase #dest-adress-txt, .GrandmaLetterEditor #port-txt {
     position: absolute;
     right: 1%;
     top: 0;
 }
 
+/*styles for port*/
+.GrandmaLetterEditor .port {
+    width: 10vw;
+    height: 4vh;
+}
+
+/*styles for header and footer*/
+.GrandmaLetterEditor .header, .GrandmaLetterEditor .footer {
+    font-size: var(--font-title-large);
+    
+}
 
 /* styling the box and the cursor when asking what the field should be */
 .GrandmaLetterEditor .field_showcase {
@@ -78,7 +90,7 @@
   animation: blink 1s infinite;
   color: var(--text);
   text-align: left;
-
+  position: absolute;
 }
 
 /* animation for line cursor */
