@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../Styles/Letter.css";
 import monitorData from "../monitorData";
 import { useStampable } from "../hooks/useStampable.jsx";
-import { useGameState, isVisible } from "./GameState.jsx"
+import { useGameState, isVisible, hasCompleted } from "./GameState.jsx"
 
 const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const { state } = useGameState();
@@ -35,7 +35,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   };
 
   useEffect(() => {
-    if (isVisible(state, 'using_stamp')) {
+    if (isVisible(state, 'using_stamp') || hasCompleted(state, 'mistake_6')) {
       setOpenLetter(true);
     }
 

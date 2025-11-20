@@ -14,19 +14,18 @@ const DialogueManager = ({
   textSize = "var(--font-regular)",
   defaultSpeed = 60
 }) => {
+
   const { state, dispatch } = useGameState();
   const [waitingFor, setWaitingFor] = useState(null);
+  const [textDone, setTextDone] = useState(false);
   const prevChapterRef = useRef(state.flags.currentChapter);
 
-  // helper to get chapter key used in dialogueData
   const chapterKey = `chapter_${state.flags.currentChapter}`;
 
-  // Initialize dialogue AND handle chapter changes
+  // Initialize dialogue + handle chapter changes
   useEffect(() => {
-    // Check if chapter actually changed
     if (state.flags.currentChapter !== prevChapterRef.current) {
       prevChapterRef.current = state.flags.currentChapter;
-      // Reset to start of new chapter
       setDialogue(startDialogueId);
     } else if (!state.currentDialogue || state.dialogueType !== dialogueType) {
       setDialogue(startDialogueId);
@@ -45,17 +44,17 @@ const DialogueManager = ({
       character: dialogue.character || null
     });
 
-    // Run onEnter actions if any
     if (dialogue.onEnter) {
       dialogue.onEnter.forEach(action => dispatch(action));
     }
 
-    // Store wait condition if present
     if (dialogue.waitFor) {
       setWaitingFor(dialogue.waitFor);
     } else {
       setWaitingFor(null);
     }
+
+    setTextDone(false);
   };
 
   const getCurrentDialogue = () => {
@@ -68,9 +67,7 @@ const DialogueManager = ({
     if (!currentDialogue) return;
 
     let nextId = currentDialogue.next;
-    if (typeof nextId === 'function') {
-      nextId = nextId(state); // allow dynamic branching
-    }
+    if (typeof nextId === 'function') nextId = nextId(state);
 
     if (nextId) {
       setDialogue(nextId);
@@ -81,20 +78,17 @@ const DialogueManager = ({
 
   const currentDialogue = getCurrentDialogue();
 
-  // --- Check for completion or flag conditions ---
+  // --- AUTO-ADVANCE WAIT-FOR LOGIC ---
   useEffect(() => {
-    if (!waitingFor) return;
+    if (!waitingFor || !textDone) return;
 
     const completedOK = waitingFor.completed ? hasCompleted(state, waitingFor.completed) : true;
     const flagOK = waitingFor.flag ? !!state.flags[waitingFor.flag] : true;
 
-    console.log(state.flags);
-
-    // advance when all wait conditions are met
     if (completedOK && flagOK) {
       advanceDialogue();
     }
-  }, [state.completed, state.flags, waitingFor]);
+  }, [waitingFor, textDone, state.completed, state.flags]);
 
   if (!currentDialogue) return null;
 
@@ -102,27 +96,33 @@ const DialogueManager = ({
     (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
     (waitingFor?.flag && !state.flags[waitingFor.flag]);
 
-  // Use dialogue-specific speed if provided, otherwise use default
   const textSpeed = currentDialogue.speed || defaultSpeed;
 
-  return ( 
+  return (
     <div className="DialogueManager">
+
       {currentDialogue?.type !== 'question' && (
-      <TypeWriter 
-        text={currentDialogue.text}
-        name={currentDialogue.name || null}
-        nameColor={currentDialogue.nameColor || null}
-        textColor={currentDialogue.textColor || "var(--white)"}
-        speed={textSpeed}
-        delayAfterComplete={1000}
-        onComplete={!waiting ? advanceDialogue : null}
-        showTriangle={!waiting}
-        triangleColor={triangleColor}
-        triangleSize={triangleSize}
-        triangleMargin={triangleMargin}
-        textSize={textSize}
-        fontSize={currentDialogue.fontSize || null}
-      /> )}
+        <TypeWriter
+          text={currentDialogue.text}
+          name={currentDialogue.name || null}
+          nameColor={currentDialogue.nameColor || null}
+          textColor={currentDialogue.textColor || "var(--white)"}
+          speed={textSpeed}
+
+          onTypingComplete={() => setTimeout(() => setTextDone(true), 2000)}
+
+          autoAdvance={waitingFor && !waiting}
+          showTriangle={!waiting}
+
+          triangleColor={triangleColor}
+          triangleSize={triangleSize}
+          triangleMargin={triangleMargin}
+          textSize={textSize}
+          fontSize={currentDialogue.fontSize || null}
+
+          onComplete={!waiting ? advanceDialogue : null}
+        />
+      )}
 
       {currentDialogue?.type === 'question' && (
         <Question dialogue={currentDialogue} />

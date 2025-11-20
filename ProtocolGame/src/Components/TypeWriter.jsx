@@ -12,7 +12,7 @@ const getColorFilter = (color) => {
   return colorMap[color] || colorMap["var(--white)"];
 };
 
-// Parse spans like <span style='color:var(--red)'>TEXT</span>
+// Span parser for colored text
 const parseTextWithSpans = (text) => {
   const regex = /<span style=['"]color:([^'"]+)['"]>(.*?)<\/span>/g;
   let match;
@@ -37,6 +37,7 @@ const parseTextWithSpans = (text) => {
 const TypewriterText = ({
   text,
   onComplete,
+  onTypingComplete,
   speed = 50,
   delayAfterComplete = 1000,
   textColor,
@@ -50,6 +51,7 @@ const TypewriterText = ({
   showTriangle = true,
   autoAdvance = false,
 }) => {
+
   const [typedSegments, setTypedSegments] = useState([]);
   const [canAdvance, setCanAdvance] = useState(false);
   const { dispatch } = useGameState();
@@ -65,8 +67,7 @@ const TypewriterText = ({
     let segIndex = 0;
     let charIndex = 0;
     const output = parsed.map((s) => ({ ...s, shown: "" }));
-
-    let isCancelled = false; // 🚫 Prevent async glitching
+    let isCancelled = false;
 
     const typeNext = () => {
       if (isCancelled) return;
@@ -75,8 +76,10 @@ const TypewriterText = ({
         if (name && name !== "אני")
           dispatch({ type: "SET_TALKING", value: false });
 
-        // ✅ Only show triangle when text actually finishes
         setCanAdvance(true);
+
+        if (onTypingComplete) onTypingComplete();   // CALL NEW HOOK HERE
+
         return;
       }
 
@@ -103,14 +106,14 @@ const TypewriterText = ({
     };
   }, [text, speed, name]);
 
-  // Auto-advance effect
+  // AUTO ADVANCE only after typing finished AND allowed
   useEffect(() => {
     if (!canAdvance || !autoAdvance || !onComplete) return;
 
     const timer = setTimeout(() => {
       onComplete();
     }, delayAfterComplete);
-    
+
     return () => clearTimeout(timer);
   }, [canAdvance, autoAdvance, onComplete, delayAfterComplete]);
 
@@ -121,18 +124,21 @@ const TypewriterText = ({
   return (
     <div className="typewriter-container" onClick={handleClick}>
       <div
-        className={`typewriter-text ${
-          canAdvance && showTriangle ? "clickable" : ""
-        }`}
+        className={`typewriter-text ${canAdvance && showTriangle ? "clickable" : ""}`}
         style={{ color: textColor, fontSize: fontSize || textSize }}
       >
         <p>
-          {name && <span style={{ color: nameColor, fontSize: textSize }}>{name}:</span>}{" "}
+          {name && (
+            <span style={{ color: nameColor, fontSize: textSize }}>
+              {name}:
+            </span>
+          )}{" "}
           {typedSegments.map((part, i) => (
             <span key={i} style={part.color ? { color: part.color } : {}}>
               {part.shown}
             </span>
           ))}
+
           {canAdvance && showTriangle && (
             <img
               src="./General/triangle-indicator.svg"

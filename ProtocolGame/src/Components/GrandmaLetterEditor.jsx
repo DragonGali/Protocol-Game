@@ -67,7 +67,7 @@ const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
           {openLetter && (
             <div className="letter-text-container">
                 <div className='header'>{hasCompleted(state, 'fixPage') && '------<HEADER>------'}</div>
-                {hasCompleted(state, 'fixText') && <div dangerouslySetInnerHTML={data.text} className='letter-txt'/>}
+                {hasCompleted(state, 'fixText') && <div dangerouslySetInnerHTML={{__html : data.text}} className='letter-txt'/>}
                 <div className='footer'>{hasCompleted(state, 'fixPage') && '---<FOOTER>---'}</div>
             </div>
           )}

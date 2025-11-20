@@ -1118,9 +1118,32 @@ export const dialogueData =  {
       next: "dialogue_21",
       onEnter: [
         {type: 'SHOW', id: 'submit-button'},
-        {type: 'MARK_COMPLETED', id: 'fixText'}
-      ]
+        {type: 'MARK_COMPLETED', id: 'mistake_6'}
+      ],
+      waitFor: { completed: 'submit'}
     },
+    "dialogue_21" : {
+      text: `המכתב נשלח בהצלחה, אבל בבקשה בפעם הבאה תמלאי את כל הנתונים כמו שצריך.`,
+      nameColor: `var(--orange)`,
+      character: "granny",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_exit",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}]
+    },
+
+    "dialogue_exit" : {
+      text: `אוהוהו, בסדר חביב. סליחה על כל הסיבוך שייצרתי.`,
+      nameColor: "var(--dry-earth)",
+      character: "granny",
+      emotion: "happy",
+      name: "סבתא ליוויה",
+      next: null,
+      onEnter: [{type: 'HIDE', id: 'submit-animation'}]
+    },
+
     "question-1-mistake" : {
       text: `[זו כתובת לא חוקית]`,
       textColor: "var(--grey-1)",

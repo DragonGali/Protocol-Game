@@ -25,10 +25,12 @@
     font-size: clamp(1rem, 5vw, var(--font-largest));
     color: var(--text);
     position: absolute;
-    top: 13%;
+    top: 15%;
     left: 8.1%;
     text-align: center;
     user-select: none;
+    width: 7vw;
+    height: 6vh;
 }
 
 .open .protocol {

@@ -121,3 +121,23 @@
 .draggable {
   user-select: none; /* prevent accidental text highlight */
 }
+
+/* Scroll bar styles */
+
+/* Custom Scrollbar for Mail List Content */
+.mail-list-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mail-list-content::-webkit-scrollbar-track {
+  background-color: var(--grey-1);
+}
+
+.mail-list-content::-webkit-scrollbar-thumb {
+  background-color: var(--purple-6);
+}
+
+.mail-list-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--purple-5);
+}
+

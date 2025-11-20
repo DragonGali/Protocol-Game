@@ -15,10 +15,7 @@ const initialState = {
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {// indicators and such
-    currentChapter: 6,
-    mistake_6 : "letter",
-    letter_state: "new",
-    // showcaseLetterField: "protocol"
+    currentChapter: 1,
   },                   
 };
 
@@ -90,6 +87,9 @@ function gameStateReducer(state, action) {
 
     case 'RESET_COMPLETED':
       return { ...state, completed: new Set() };
+
+    case 'RESET_FLAGS':
+      return { ...state, flags: {} };
       
     default:
       return state;

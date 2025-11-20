@@ -104,7 +104,7 @@ function Monitor() {
           />
         )}
 
-        {openLetter && !state.flags['mistake_6'] === 'letter' && (
+        {openLetter && (!state.flags['mistake_6'] || hasCompleted(state, 'mistake_6')) && (
           <Letter
             openPopUp={(title, imgLink) => {
               setOpenPopUp(true);
@@ -114,7 +114,7 @@ function Monitor() {
           />
         )}
 
-        {openLetter && state.flags['mistake_6'] === 'letter' && (
+        {openLetter && state.flags['mistake_6'] && !hasCompleted(state, 'mistake_6') && (
           <GrandmaLetterEditor
             onElementStamp={deactivateStamp}
           />
