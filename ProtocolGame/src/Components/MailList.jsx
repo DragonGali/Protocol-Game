@@ -9,11 +9,17 @@ const MailList = ({ onClose, onLetterSelect }) => {
   const { state } = useGameState();
   const currentChapter = state.flags.currentChapter;
 
-  // Generate all mail items from current to chapter 1 (reverse order)
+  // show current chapter only if update_mail completed
+  const showCurrent = hasCompleted(state, 'update_mail');
+  const highestChapter = showCurrent ? currentChapter : currentChapter - 1;
+
+  // Generate all mail items from highestChapter to chapter 1 (reverse order)
   const mailItems = [];
-  for (let chapter = currentChapter; chapter >= 1; chapter--) {
+  for (let chapter = highestChapter; chapter >= 1; chapter--) {
     const data = monitorData[`chapter_${chapter}`];
-    const isCurrentChapter = chapter === currentChapter;
+    if (!data) continue;
+
+    const isCurrentChapter = showCurrent && chapter === currentChapter;
     
     mailItems.push(
       <div 

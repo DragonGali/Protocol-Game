@@ -143,7 +143,8 @@ export const dialogueData =  {
         nameColor: "var(--blue)",
         onEnter: [
           { type: 'HIDE', id: 'monitor_showcase'},
-          { type: 'UNLOCK', id: 'mail_list'}
+          { type: 'UNLOCK', id: 'mail_list'},
+          { type: 'MARK_COMPLETED', id: 'update_mail'}
         ],
         waitFor : { completed: 'clicked_mail_icon'}
     },
@@ -334,7 +335,8 @@ export const dialogueData =  {
       nameColor: "var(--orange)",
       next: "maya_intro_5",
       onEnter: [
-        {type: 'MARK_COMPLETED', id: 'update_manual'}
+        {type: 'MARK_COMPLETED', id: 'update_manual'},
+        { type: 'MARK_COMPLETED', id: 'update_mail'}
       ]
     },
     "maya_intro_5": {
@@ -499,7 +501,8 @@ export const dialogueData =  {
       next: (state) => state.flags?.stampedElement === 'link' ? 'liyor_intro_correct_1' : 'liyor_intro_mistake_1',
       waitFor: { flag: 'stampedElement' },
       onEnter: [
-        {type: 'MARK_COMPLETED', id: 'update_manual'}
+        {type: 'MARK_COMPLETED', id: 'update_manual'},
+        { type: 'MARK_COMPLETED', id: 'update_mail'}
       ]
     },
     "liyor_intro_correct_1" : {
@@ -757,7 +760,7 @@ export const dialogueData =  {
       name: "אני",
       character: "mel",
       next: "dialogue_8",
-      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}, { type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: { completed: "networkChecked"}
     },
     "dialogue_8" : {
@@ -954,6 +957,7 @@ export const dialogueData =  {
       textColor: "var(--grey-1)",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'update_manual'},
+        { type: 'MARK_COMPLETED', id: 'update_mail'}
       ],
       waitFor: {completed: 'opened_letter'}
     },
@@ -1187,7 +1191,6 @@ export const dialogueData =  {
     "question-4-mistake-1" : {
       text: `[איך זה קשור עכשיו?!]`,
       textColor: "var(--grey-1)",
-      textColor: "var(--grey-1)",
       nameColor: `var(--orange)`,
       character: "granny",
       emotion: "neutral",
@@ -1197,7 +1200,6 @@ export const dialogueData =  {
     },
     "question-4-mistake-2" : {
       text: `[אה, נכון! אבל יש לי הרגשה שאני מפספס משהוא עוד יותר חשוב]`,
-      textColor: "var(--grey-1)",
       textColor: "var(--grey-1)",
       nameColor: `var(--orange)`,
       character: "granny",
@@ -1209,7 +1211,6 @@ export const dialogueData =  {
     "question-4-mistake-3" : {
       text: `[...המכתב תמיד נסגר.]`,
       textColor: "var(--grey-1)",
-      textColor: "var(--grey-1)",
       nameColor: `var(--orange)`,
       character: "granny",
       emotion: "neutral",
@@ -1217,6 +1218,40 @@ export const dialogueData =  {
       next: "dialogue_17",
       speed: 30,
       onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    }
+  },
+
+  "chapter_7" : {
+    "dialogue_1": {
+      text: `שלום, הנא אני שוב.`,
+      nameColor: "var(--blue)",
+      emotion: "happy",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_7', value: 'terminal'}
+      ]
+    },
+    "dialogue_2": {
+      text: `התקנתי לך עוד כלי חדש שתצטרך להשתמש בו.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_3",
+    },
+    "dialogue_3": {
+      text: `תפתח את המכתב ששלחתי לך בשביל להתנסות בו.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_4",
+      onEnter: [
+        {type: 'MARK_COMPLETED', id: 'update_mail'},
+        {type: 'UNLOCK', id: 'terminal'}
+      ]
     }
   }
 }

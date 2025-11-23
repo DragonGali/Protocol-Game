@@ -60,6 +60,15 @@ export const monitorData = {
         link: "cookie.gif",
         imgLink: "./Monitor/pop_ups/cookie.gif",
         text: 'שולחת לך את האוגיות שהכנתי הבוקר.'
+    },
+    'chapter_7' : {
+        customerName: "דניאל",
+        protocol: 'POP3',
+        sourceAddress: '10.0.0.1',
+        destinationAddress: '192.168.0.23',
+        port: 13,
+        text: '[...מחכה לפקודה]',
+        link: null
     }
 }
 

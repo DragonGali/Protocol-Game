@@ -7,6 +7,7 @@ import Letter from './Letter.jsx';
 import PopUp from './PopUp.jsx';
 import NetworkWindow from './NetworkWindow.jsx';
 import GrandmaLetterEditor from './GrandmaLetterEditor.jsx';
+import Terminal from './Terminal.jsx';
 
 function Monitor() {
   const { state, dispatch } = useGameState();
@@ -24,7 +25,9 @@ function Monitor() {
   };
 
   const handleMailingIconClick = () => {
-    dispatch({ type: 'MARK_COMPLETED', id: 'clicked_mail_icon'});
+    if(hasCompleted(state, 'update_mail')) {
+      dispatch({ type: 'MARK_COMPLETED', id: 'clicked_mail_icon'});
+    }
     setOpenLetter(false);
 
     if (openMail === null) {
@@ -84,7 +87,7 @@ function Monitor() {
             style={{ display: isUnlocked(state, 'mail_list') ? 'block' : 'none' }}
             alt="Mailing icon"
           />
-          {!hasCompleted(state, 'clicked_mail_icon') && (
+          {!hasCompleted(state, 'clicked_mail_icon') && hasCompleted(state, 'update_mail') && (
             <img
               src="./General/NewSymbol.png"
               className="new-symbol"
@@ -162,6 +165,20 @@ function Monitor() {
           <NetworkWindow onClose={() => {dispatch({type: 'HIDE', id: 'using_network'}); setToolInUse(null)}}/>
         }
 
+        {isUnlocked(state, 'terminal') && openLetter && 
+              <img
+                src="./Monitor/tools/terminalIcon.png"
+                className='terminal-icon clickable'
+                onClick={() => {
+                  dispatch({type: 'SHOW', id: 'using_terminal'})
+                  setToolInUse(toolInUse === 'terminal' ?  null : 'terminal')
+                }}
+              />
+        }
+
+        {toolInUse === 'terminal' && 
+          <Terminal onClose={() => {dispatch({type: 'HIDE', id: 'using_terminal'}); setToolInUse(null)}}/>
+        }
 
 
         {isVisible(state, 'submit-button') && <img className='submit-button clickable' src={`./Monitor/submit-button${playingButtonAnimation ? '.gif' : '.png'}`}

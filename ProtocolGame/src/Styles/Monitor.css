@@ -67,6 +67,15 @@
   user-select: none;
 }
 
+.Monitor .terminal-icon {
+  width: 17%;
+  height: 12%;
+  bottom: 5%;
+  left : 70%;
+  position: absolute;
+  user-select: none;
+}
+
 .Monitor .new-symbol {
     position: absolute;
     width: 30%;
