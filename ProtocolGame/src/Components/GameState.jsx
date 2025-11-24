@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
 const GameStateContext = createContext();
 
@@ -99,6 +99,7 @@ function gameStateReducer(state, action) {
 
 export const GameStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameStateReducer, initialState);
+  console.log("GameState Updated:", state);
   
   return (
     <GameStateContext.Provider value={{ state, dispatch }}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useGameState, hasCompleted } from './GameState.jsx';
+import { useGameState, hasCompleted, isVisible } from './GameState.jsx';
 import { dialogueData } from '../dialogueData.js';
 import TypeWriter from './TypeWriter.jsx';
 import Question from './Question.jsx';
@@ -84,17 +84,21 @@ const DialogueManager = ({
 
     const completedOK = waitingFor.completed ? hasCompleted(state, waitingFor.completed) : true;
     const flagOK = waitingFor.flag ? !!state.flags[waitingFor.flag] : true;
+    const visibleOK = waitingFor.visible ? isVisible(state, waitingFor.visible) : true;
 
-    if (completedOK && flagOK) {
+    console.log("check");
+
+    if (completedOK && flagOK && visibleOK) {
       advanceDialogue();
     }
-  }, [waitingFor, textDone, state.completed, state.flags]);
+  }, [waitingFor, textDone, state.completed, state.flags, state.visible]);
 
   if (!currentDialogue) return null;
 
   const waiting =
     (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
-    (waitingFor?.flag && !state.flags[waitingFor.flag]);
+    (waitingFor?.flag && !state.flags[waitingFor.flag]) ||
+    (waitingFor?.visible && !isVisible(state, waitingFor.visible));
 
   const textSpeed = currentDialogue.speed || defaultSpeed;
 

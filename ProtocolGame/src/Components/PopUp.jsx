@@ -4,7 +4,6 @@ import "../styles/PopUp.css";
 
 const PopUp = ({title, onClose, imgLink }) => {
   useDragger("PopUp");
-  console.log(imgLink);
 
   return (
     <div className="Draggable PopUp" id="PopUp">

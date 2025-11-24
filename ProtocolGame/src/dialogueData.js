@@ -1251,7 +1251,32 @@ export const dialogueData =  {
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'update_mail'},
         {type: 'UNLOCK', id: 'terminal'}
-      ]
+      ],
+      waitFor: { completed: "opened_letter"}
+    },
+    "dialogue_4": {
+      text: `היום אנחנו עובדים עם פרוטוקול <span style='color:var(--red)'>POP3</span>, שמיועד למשוך הודעות דוא״ל מהשרת אל המחשב המקומי.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_5",
+    },
+    "dialogue_5" : {
+      text: `אתה רואה את האייקון החדש שנראה כמו מסך שחור? זה כלי הטרמינל שלך. לחץ עליו.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      waitFor: { visible: 'using_terminal' },
+      next: "dialogue_6",
+    },
+    "dialogue_6" : {
+      text: `הכלי הזה מבצע פקודות, ומוסיף את המידע החדש למכתב, אבל רק עם הפקודות נכתבו נכון.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
     }
   }
 }
