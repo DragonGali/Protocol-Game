@@ -86,8 +86,6 @@ const DialogueManager = ({
     const flagOK = waitingFor.flag ? !!state.flags[waitingFor.flag] : true;
     const visibleOK = waitingFor.visible ? isVisible(state, waitingFor.visible) : true;
 
-    console.log("check");
-
     if (completedOK && flagOK && visibleOK) {
       advanceDialogue();
     }

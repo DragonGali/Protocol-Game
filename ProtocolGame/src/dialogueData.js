@@ -1230,7 +1230,8 @@ export const dialogueData =  {
       character: "daniel",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_7', value: 'terminal'}
+        {type: 'SET_FLAG', key: 'mistake_7', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_7_command', value: 'LIST'}
       ]
     },
     "dialogue_2": {
@@ -1277,6 +1278,35 @@ export const dialogueData =  {
       emotion: "neutral",
       name: "דניאל",
       character: "daniel",
+      next: "dialogue_7"
+    },
+
+    "dialogue_7" : {
+      text: `הפקודה שאני רוצה שתשתמש בה עכשיו היא: <span style='color:var(--orange)'>LIST</span>.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_8",
+    },
+
+    "dialogue_8" : {
+      text: `פקודת <span style='color:var(--orange)'>LIST</span> משמשת לקבלת רשימה של כל ההודעות שבתיבת הדואר. היא מחזירה לכל הודעה את מספרה ואת הגודל שלה, בלי להראות את התוכן.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_9",
+    },
+
+    "dialogue_9" : {
+      text: `תנסה לרשום <span style='color:var(--orange)'>LIST</span> בטרמינל בשביל להפעיל אותה`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_10",
+      waitFor: {}
     }
   }
 }

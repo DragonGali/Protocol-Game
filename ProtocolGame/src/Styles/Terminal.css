@@ -76,6 +76,29 @@
     font-size: var(--font-regular);
 }
 
+.Terminal .terminal-outcome-text {
+    color: var(--grey-1);
+    font-size: var(--font-small);
+    margin-top: 2vh;
+}
+
+.Terminal .outcome-symbol {
+    width: 10vw;
+    height: 22vh;
+    margin-left: 35%;
+    margin-top: 5%;
+    animation: spinZ 2s linear;
+}
+
+/* Spinning animation in Z direction */
+@keyframes spinZ {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
 
 
 /* Blinking when focused / waiting for input */

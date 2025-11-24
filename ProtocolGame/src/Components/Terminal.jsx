@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useDragger from "../hooks/useDragger";
 import "../styles/Terminal.css";
-import monitorData from '../monitorData';
+import terminalData from '../terminalData.js';
 import { useGameState } from "./GameState.jsx";
 
 const Terminal = ({ onClose }) => {
@@ -10,6 +10,10 @@ const Terminal = ({ onClose }) => {
 
   useDragger("Terminal");
 
+  // To check if the terminal is relvent for this chapter
+  const mistakeKey = `mistake_${currentChapter}`;
+  const mistakeValue = state.flags[mistakeKey];
+
   // always "focused" so caret blinks and keyboard input is captured
   const [focused] = useState(true);
   const terminalRef = useRef(null);
@@ -17,6 +21,9 @@ const Terminal = ({ onClose }) => {
   // simple input echo
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
+
+  const [outcome, setOutcome] = useState(null);
+  const data = terminalData[`chapter_${currentChapter}`];
 
   useEffect(() => {
     // ensure the terminal element is focused so accessibility/focus works
@@ -38,6 +45,7 @@ const Terminal = ({ onClose }) => {
         e.preventDefault();
         setHistory((h) => [...h, input]);
         setInput('');
+        checkCommand(input);
         return;
       }
 
@@ -49,6 +57,14 @@ const Terminal = ({ onClose }) => {
         setInput((s) => s + e.key);
       }
     };
+
+    const checkCommand = (input) => {
+      if (mistakeValue !== 'terminal') { return; }
+
+      if (input === state.flags[`${mistakeKey}_command`]) { 
+        setOutcome('success');
+      }
+    }
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -79,12 +95,24 @@ const Terminal = ({ onClose }) => {
           </div>
         ))}
 
-        <div className="terminal-line" aria-live="polite">
+      {outcome && <img src='/General/Checkmark.png' className='outcome-symbol'/>}
+      {outcome && 
+        <div className='terminal-outcome-text'>
+          {Object.values(data).map((line, idx) => (
+            <div key={idx}>{line}</div>
+          ))}
+        </div>
+      }
+
+        
+
+        {!outcome && <div className="terminal-line" aria-live="polite">
           <span className='prompt'>C:\Users\Admin&gt;</span>
           <span className="terminal-text">{input}</span>
           {/* caret: white square that blinks (always active) */}
           <span className={`caret blink`} />
-        </div>
+        </div>}
+
       </div>
     </div>
   );
