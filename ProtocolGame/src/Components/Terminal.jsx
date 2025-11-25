@@ -63,6 +63,10 @@ const Terminal = ({ onClose }) => {
 
       if (input === state.flags[`${mistakeKey}_command`]) { 
         setOutcome('success');
+        dispatch({
+          type: 'MARK_COMPLETED',
+          id: mistakeKey,
+        });
       }
     }
 

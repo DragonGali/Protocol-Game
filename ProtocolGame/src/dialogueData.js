@@ -1306,8 +1306,69 @@ export const dialogueData =  {
       name: "דניאל",
       character: "daniel",
       next: "dialogue_10",
-      waitFor: {}
+      waitFor: {completed: 'mistake_7'}
+    },
+    "dialogue_10" : {
+        text: `זה הכל אתה יכול להגיש את המכתב.`,
+        nameColor: "var(--blue)",
+        emotion: "happy",
+        name: "דניאל",
+        character: "daniel",
+        next: "dialogue_11",
+        onEnter: [
+          {type: 'SHOW', id: 'submit-button'}
+        ],
+        waitFor: { completed: 'submit'}
+    },
+    "dialogue_11" : {
+      text: `זכור, יש פרוטוקולים שדורשים פקודות ספציפיות כדי לתקשר איתם. תמיד תמצא את הפקודות האלה בעמוד המדריך של הפרוטוקול.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_12",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ],
+    },
+    "dialogue_12" : {
+      text: `חשוב לזכור, פרוטוקולים שונים לא משתמשים באותם פקודות.`,
+      nameColor: "var(--blue)",
+      emotion: "neutral",
+      name: "דניאל",
+      character: "daniel",
+      next: "dialogue_exit",
+    },
+    "dialogue_exit" : {
+      text: `מקווה שזה עזר לעשות סדר. תמשיך הלאה!`,
+      nameColor: "var(--blue)",
+      emotion: "happy",
+      name: "דניאל",
+      character: "daniel",
+      next: null,
+      onEnter: [{type: 'HIDE', id: 'submit-animation'}]
     }
+  },
+  "chapter_8" : {
+      "dialogue_1" : {
+        text: `שלום, שמעתי שסניף הדואר הזה יכול להפעיל פקודות עכשיו.`,
+        nameColor: "var(--yellow)",
+        emotion: "neutral",
+        name: "שמעון",
+        character: "shimon",
+        next: "dialogue_2",
+      },
+      "dialogue_2" : {
+        text: `אני צריך שתבצע פקודת בדיקת סטטוס המערכת.`,
+        emotion: "neutral",
+        name: "שמעון",
+        character: "shimon",
+        next: "dialogue_3",
+      },
+      "dialogue_3" : {
+        text: ``
+      }
   }
 }
     

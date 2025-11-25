@@ -15,7 +15,7 @@ const initialState = {
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network"]),         // Things player can use
   visible: new Set(),          // Things player can see
   flags: {// indicators and such
-    currentChapter: 7,
+    currentChapter: 8,
   },                   
 };
 

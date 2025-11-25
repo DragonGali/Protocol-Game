@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import "../Styles/Letter.css";
 import monitorData from "../monitorData";
 import { useStampable } from "../hooks/useStampable.jsx";
@@ -18,6 +18,9 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const srcAddress = useStampable('src-address');
   const destAddress = useStampable('dest-address');
   const port = useStampable('port');
+
+  //for changing text if command needs to be done first
+  const [hasCompletedTerminalMistake, setHasCompletedTerminalMistake] = useState(null);
 
  // Helper function to get the display value (either original or corrected)
   const getDisplayValue = (elementId, originalValue, mistakeKey) => {
@@ -57,6 +60,12 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     }
   };
 
+  useEffect(() => {
+    const mistakeKey = `mistake_${state.flags.currentChapter}`;
+    const mistakeValue = state.flags[mistakeKey];
+    setHasCompletedTerminalMistake(mistakeValue === 'terminal' ? hasCompleted(state, mistakeKey) : true);
+  }, [state.completed, state.flags]);
+
   // Get corrected values
   const displayPort = getDisplayValue('port', data.port, port.mistakeKey);
   const displayLink = getDisplayValue('link', data.link, link.mistakeKey);
@@ -87,7 +96,8 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
             className={text.getClassNames('letter-text')}
             onClick={handleStampClick(text.handleStamp)}
           >
-            <div dangerouslySetInnerHTML={{ __html: displayText || data.text }} />
+            {hasCompletedTerminalMistake && <div dangerouslySetInnerHTML={{ __html: displayText || data.text }} />}
+            {!hasCompletedTerminalMistake && <p>[מחכה לפקודה]...</p>}
           </div>
 
           {/* Link */}

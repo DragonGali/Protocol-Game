@@ -82,6 +82,7 @@
   text-align: center;
   display: flex;
   flex-flow: column;
+  direction: rtl;
   justify-content: space-between; /* Distribute space between items */
 }
 

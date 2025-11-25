@@ -67,7 +67,7 @@ export const monitorData = {
         sourceAddress: '10.0.0.1',
         destinationAddress: '192.168.0.23',
         port: 13,
-        text: '[...מחכה לפקודה]',
+        text: '<span style="direction:rtl;display:block;text-align:right">פקודה: <span style="color:var(--red)">LIST</span><br>נמצאו שני הודעות חדשות בתיבה:<br><br><span style="font-size:var(--font-small);color:var(--grey-3)">1 1200 בייט – "מבצע ענק! קנה 1 קבל 3"<br>2 2500 בייט – "הודעה אישית מדניאל: אל תמחק את זה"</span></span>',
         link: null
     }
 }
