@@ -11,11 +11,11 @@ const initialState = {
   isTalking: false,
   
   // GENERIC tracking
-  completed: new Set(),        // Things player has done
-  unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network"]),         // Things player can use
-  visible: new Set(),          // Things player can see
+  completed: new Set(),// Things player has done
+  unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network", "terminal"]),// Things player can use
+  visible: new Set(),// Things player can see
   flags: {// indicators and such
-    currentChapter: 8,
+    currentChapter: 9,
   },                   
 };
 

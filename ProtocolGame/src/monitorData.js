@@ -69,6 +69,24 @@ export const monitorData = {
         port: 13,
         text: '<span style="direction:rtl;display:block;text-align:right">פקודה: <span style="color:var(--red)">LIST</span><br>נמצאו שני הודעות חדשות בתיבה:<br><br><span style="font-size:var(--font-small);color:var(--grey-3)">1 1200 בייט – "מבצע ענק! קנה 1 קבל 3"<br>2 2500 בייט – "הודעה אישית מדניאל: אל תמחק את זה"</span></span>',
         link: null
+    },
+    'chapter_8' : {
+        customerName: "שמעון",
+        protocol: '<span style="font-size:0.85em">TELNET</span>',
+        mailProtocol: 'TELNET',
+        sourceAddress: '10.0.0.1',
+        destinationAddress: '192.168.0.23',
+        port: 13,
+        text: '<span style="direction:rtl;display:block;text-align:left">פקודה: <span style="color:var(--red)">st</span><br><br>System Status: All systems operational<br>Uptime: 3 days, 4 hours, 12 minutes<br>CPU Load: 15%<br>Memory Usage: 48%<br><span style="color:var(--red)">Port 13: Connection timeout - unable to reach destination</span></span>',
+        link: null
+    },
+    'chapter_9' : {
+        customerName: "מאיה",
+        protocol: 'SSL',
+        sourceAddress: '198.51.100.10',
+        destinationAddress: `203.0.113.25`,
+        port: 443,
+        text: `<span style='font-size:var(--font-title-large)'>גרף שבועי:</span>`
     }
 }
 

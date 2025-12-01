@@ -103,7 +103,7 @@ const Terminal = ({ onClose }) => {
       {outcome && 
         <div className='terminal-outcome-text'>
           {Object.values(data).map((line, idx) => (
-            <div key={idx}>{line}</div>
+            <div key={idx}>{<div dangerouslySetInnerHTML={{__html: line}}></div>}</div>
           ))}
         </div>
       }

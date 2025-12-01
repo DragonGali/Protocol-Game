@@ -1358,6 +1358,11 @@ export const dialogueData =  {
         name: "שמעון",
         character: "shimon",
         next: "dialogue_2",
+        onEnter: [
+          {type: 'SET_FLAG', key: 'mistake_8', value: 'terminal'},
+          {type: 'SET_FLAG', key: 'mistake_8_command', value: 'st'},
+          {type: 'SET_FLAG', key: 'mistake_8_stamp', value: 'port'}
+        ]
       },
       "dialogue_2" : {
         text: `אני צריך שתבצע פקודת בדיקת סטטוס המערכת.`,
@@ -1365,10 +1370,225 @@ export const dialogueData =  {
         name: "שמעון",
         character: "shimon",
         next: "dialogue_3",
+        nameColor: "var(--yellow)",
       },
       "dialogue_3" : {
-        text: ``
+        text: `ותבדוק שאין שום שגיות...זה כבר קרה לפני.`,
+        emotion: "angry",
+        name: "שמעון",
+        character: "shimon",
+        next: "dialogue_4",
+        nameColor: "var(--yellow)",
+      },
+      "dialogue_4" : {
+        text: `כן...בטח.`,
+        emotion: "angry",
+        name: "אני",
+        character: "shimon",
+        next: "dialogue_5",
+        nameColor: "var(--orange)",
+      },
+      "dialogue_5" : {
+        text: `[הוא אמר להשתמש בפקודה... היא כנראה תהיה כתובה לי במדריך]`,
+        textColor: "var(--grey-1)",
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        next: "dialogue_6",
+        nameColor: "var(--orange)",
+        onEnter: [
+          {type: 'MARK_COMPLETED', id: 'update_manual'},
+        ],
+        waitFor: { completed: 'read_manual_ch8' }
+      },
+      "dialogue_6" : {
+        text: `[אוקיי, אני חושב שהבנתי...אני צריך להשתמש בפקודה הזאת...נראה שהמכתב נשלח לתיבת הדואר שלי]`,
+        textColor: "var(--grey-1)",
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        next: "dialogue_7",
+        nameColor: "var(--orange)",
+        onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+        waitFor: { completed: 'mistake_8'}
+      },
+      "dialogue_7" : {
+        text: `[אוקיי, סיימתי! אבל...]`,
+        textColor: "var(--grey-1)",
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        nameColor: "var(--orange)",
+        next: "dialogue_8",
+      },
+      "dialogue_8" : {
+        text: `[משהוא היה לא בסדר עם תוצאת הפקודה...העם יש איזו שהיא בעיה במכתב?]`,
+        textColor: "var(--grey-1)" ,
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        nameColor: "var(--orange)",
+        next: (state) => state.flags?.stampedElement === 'port' ? 'dialogue_9' : 'dialogue_mistake_1_1',
+        waitFor: { flag: 'stampedElement' }
+      },
+      "dialogue_9" : {
+        text: `הפורט הזה הוא שגוי.`,
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        nameColor: "var(--orange)",
+        next: 'dialogue_10'
+      },
+      "dialogue_10" : {
+        text: `כן? כנראה שאחד מהעובדים שלי לא מילא את המכתב כשמבוקש, שוב.`,
+        emotion: "angry",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        next: 'dialogue_11'
+      },
+      "dialogue_11" : {
+        text: `אז מה הוא אמור להיות?`,
+        emotion: "curious",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        next: 'dialogue_12'
+      },
+      "dialogue_12" : {
+        type: 'question',
+        answers: [12, 55, 45, 23],
+        next: (state) => state.flags?.selectedAnswer === 23 ? 'dialogue_13' : 'dialogue_mistake_2',
+        waitFor: {flag: 'selectedAnswer'}
+      },
+      "dialogue_13" : {
+        text: `אני מבין...המכתב יתוקן על-ידי.`,
+        emotion: "sad",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        onEnter: [
+          {type: 'SET_FLAG', key: 'selectedAnswer', value: null},
+          {type: 'CORRECT_MISTAKE', id: "mistake_8_stamp", correction: 23},
+          {type: 'SHOW', id: 'submit-button'}],
+        next: 'dialogue_exit',
+        waitFor: { completed: 'submit'}
+      },
+      "dialogue_exit" : {
+        text: `תודה על העזרה.`,
+        emotion: "happy",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+        next: null
+      },
+      'dialogue_mistake_1_1' : {
+        text: `יש שגיאה בשורה הזאתי.`,
+        emotion: "neutral",
+        name: "אני",
+        character: "shimon",
+        nameColor: "var(--orange)",
+        next: 'dialogue_mistake_1_2'
+      },
+      'dialogue_mistake_1_2' : {
+        text: `אין פה שום שגיאות, על תבזבז את הזמן שלי.`,
+        emotion: "angry",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        next: 'dialogue_mistake_1_3'
+      },
+      "dialogue_mistake_1_3" : {
+        text: `...אני מצטער.`,
+        emotion: "angry",
+        name: "שמעון",
+        character: "shimon",
+        nameColor: "var(--yellow)",
+        next: 'dialogue_7',
+        onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+      },
+      "dialogue_mistake_2" : {
+        text: `[לא?! מה אני בכלל חושב, זה לא יכול להיות המספר הזה!]`,
+        textColor: "var(--grey-1)" ,
+        emotion: "curious",
+        name: "אני",
+        character: "shimon",
+        nameColor: "var(--orange)",
+        next: 'dialogue_11',
+        onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
       }
+  },
+  "chapter_9" : {
+    "dialogue_1" : {
+      text: `אה, היי שוב!`,
+      character: "maya",
+      nameColor: "var(--yellow)",
+      emotion: "happy",
+      name: "מאיה",
+      next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: `אתה בטח עדיין מתאושש משמעון, נכון? הוא שונא לבוא לכאן`,
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_3",
+    },
+    "dialogue_3" : {
+      text: `הוא הגיע בפעם הקודמת רק כי פישלתי במכתב.`,
+      character: "maya",
+      emotion: "sad",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_4",
+    },
+    "dialogue_4" : {
+      text: `בכל מקרה, הבוס שלי אמר שאני חייבת לבדוק אם המכתב יגיע כמו שצריך - אתה יודע, כי אנחנו משתמשים בפרוטוקול SSL.`,
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_5",
+    },
+    "dialogue_5" : {
+      text: `תוכל לבדוק לי את החיבור?`,
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_6",
+    },
+    "dialogue_6" : {
+      text: `כן בטח, אני על זה.`,
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--orange)",
+      name: "אני",
+      next: "dialogue_7",
+    },
+    "dialogue_7" : {
+      text: `[כדאי לי לקרוא את המדריך לגבי הפרוטוקול "SSL", לפני שאני מוריד את המכתב לתיבת הדואר שלי...זה יכול לעזור.]`,
+      textColor: "var(--grey-1)",
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--orange)",
+      name: "אני",
+      next: "dialogue_8",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: { completed: 'read_manual_ch9'}
+    },
+    "dialogue_8" : {
+      text: `[מעניין, אז יכולים להיווצר שגיאות בחיבור אפילו עם הנתונים נכונים, טוב אני אתחיל לעבור על המכתב]`,
+      textColor: "var(--grey-1)",
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--orange)",
+      name: "אני",
+      next: "dialogue_9",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+    }
   }
 }
     

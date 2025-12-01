@@ -133,7 +133,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
 
       {/* Protocol */}
       <div className="protocol">
-        <p>{data.protocol}</p>
+        <div dangerouslySetInnerHTML={{ __html: data.protocol }} />
       </div>
 
       {/* Source Address */}

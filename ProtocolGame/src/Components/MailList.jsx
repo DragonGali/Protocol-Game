@@ -33,7 +33,7 @@ const MailList = ({ onClose, onLetterSelect }) => {
           <div className="mail-text">
             <span className="customer-name">{data.customerName}</span>
             <span className="separator">:</span>
-            <span className="protocol">{data.protocol}</span>
+            <span className="protocol">{data['mailProtocol'] || data.protocol}</span>
           </div>
         </div>
       </div>

@@ -25,6 +25,8 @@ const GameScreen = () => {
           dispatch({type: 'RESET_FLAGS'});
           dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
           dispatch({type: 'RESET_COMPLETED'});
+          dispatch({type: 'HIDE', id: 'submit-animation'});
+          dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
         }}
       />
       

@@ -1,8 +1,9 @@
 .ManualText {
     position: absolute;
-    width: 95%;
+    width: 93.5%;
     height: 91%;
     top: 8%;
+    right: 3%;
 }
 
 .ManualText .title {
@@ -14,7 +15,7 @@
 
 .ManualText .lines {
     margin-top: 1.5vh;
-    width: 98%;
+    width: 100%;
 }
 
 .ManualText .line {
