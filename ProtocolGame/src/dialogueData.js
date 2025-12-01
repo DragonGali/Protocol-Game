@@ -1527,6 +1527,10 @@ export const dialogueData =  {
       emotion: "happy",
       name: "מאיה",
       next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_9', value: 'network'},
+        { type: 'SET_FLAG', key: 'mistake_9_code', value: 525 }
+      ]
     },
     "dialogue_2" : {
       text: `אתה בטח עדיין מתאושש משמעון, נכון? הוא שונא לבוא לכאן`,
@@ -1587,7 +1591,93 @@ export const dialogueData =  {
       nameColor: "var(--orange)",
       name: "אני",
       next: "dialogue_9",
-      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'networkChecked'}
+    },
+    "dialogue_9" : {
+      text: `נראה שיש בעיה, עם השרת המכתב לא נשלח.`,
+      character: "maya",
+      emotion: "neutral",
+      nameColor: "var(--orange)",
+      name: "אני",
+      next: "dialogue_10",
+    },
+    "dialogue_10" : {
+      text: `אוי לא... שוב עשיתי טעות! בטח כתבתי את הפורט לא נכון`,
+      character: "maya",
+      emotion: "surprised",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_11",
+    },
+    "dialogue_11" : {
+      text: `זה תמיד קורה לי. אני בטוחה שיום אחד יפתרו אותי ככה`,
+      character: "maya",
+      emotion: "sad",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_12",
+    },
+    "dialogue_12" : {
+      text: `רגע, זה ממש לא אשמתך. החיבור נכשל בגלל שגיאת <span style='color:var(--blue)'>Handshake</span> ,לא בגלל שכתבת משהו לא נכון.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_13"
+    },
+    "dialogue_13" : {
+      text: `כן? אז מה בעצם אני אמורה לשנות?`,
+      emotion: "confused",
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      next: "dialogue_14"
+    },
+    "dialogue_14" : {
+      type: 'question',
+      answers: ['כתובת מקור', 'כתובת יעד', 'פורט', 'פרוטוקול'],
+      next: (state) => state.flags?.selectedAnswer === 'כתובת מקור' ? 'dialogue_15' : 'dialogue_mistake_1_1',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_15" : {
+      text: `צריך לעדכן את קובץ ההגדרות, להחליף את כתובת ה-IP לכתובת החלופית ולשמור. זה מאלץ את השרת לבצע שוב את ה-Handshake כראוי.`,
+      name: 'אני',
+      nameColor: 'var(--orange)',
+      next: "dialogue_16"
+    },
+    "dialogue_16" : {
+      text: `עם אתה אומר שזה יכול לעזור...יש לי עוד כתובת שאני יכולה להשתמש בה.`,
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      emotion: "neutral",
+      next: "dialogue_17"
+    },
+    "dialogue_17" : {
+      text: `תוכל לסמן לי את כתובת המקור בשביל שאני אשנה אותה?`,
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      emotion: "neutral",
+      next: "dialogue_18",
+    },
+    "dialogue_mistake_1_1" : {
+      text: `צריך לשנות את החלק הזה`,
+      nameColor: "var(--yellow)",
+      name: 'אני',
+      nameColor: 'var(--orange)',
+      next: "dialogue_mistake_1_2",
+      onEnter:[{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "dialogue_mistake_1_2" : {
+      text: `למה?`,
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      emotion: "confused",
+      next: "dialogue_mistake_1_3"
+    },
+    "dialogue_mistake_1_3" : {
+      text: `אממ....את יכולה לשאולי אותי שוב?`,
+      emotion: "angry",
+      name: 'אני',
+      nameColor: 'var(--orange)',
+      next: "dialogue_13"
     }
   }
 }
