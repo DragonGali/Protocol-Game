@@ -10,6 +10,7 @@ const NetworkWindow = ({title, onClose}) => {
   const [networkState, setNetworkState] = useState('waiting'); // 'waiting' | 'response'
   const [responseCode, setResponseCode] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [gifKey, setGifKey] = useState(0);
 
   useDragger("NetworkWindow");
 
@@ -17,6 +18,8 @@ const NetworkWindow = ({title, onClose}) => {
   const mistakeKey = `mistake_${currentChapter}`;
   const mistakeValue = state.flags[mistakeKey];
   const hasNetworkMistake = mistakeValue === 'network';
+
+  const [gifCache] = useState(Math.random());
 
   // Simulate network request
   useEffect(() => {
@@ -68,7 +71,13 @@ const NetworkWindow = ({title, onClose}) => {
         />
         <p className='header-title'>{title}</p>
       </div>
-      <div className='main-body'>
+      <div 
+        className='main-body'
+        style={{
+          backgroundImage: `url("/Monitor/network-animation.gif?cache=${gifCache}")`,
+          backgroundSize: '100% 100%'
+        }}
+      >
         <p className='source'>{monitorData[`chapter_${currentChapter}`].sourceAddress}</p>
         <p className='dest'>{monitorData[`chapter_${currentChapter}`].destinationAddress}</p>
 

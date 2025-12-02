@@ -1655,7 +1655,45 @@ export const dialogueData =  {
       nameColor: "var(--yellow)",
       name: "מאיה",
       emotion: "neutral",
-      next: "dialogue_18",
+      next: (state) => state.flags.stampedElement === 'src-address' ? "dialogue_18" : "dialogue_mistake_2_1",
+      waitFor: {flag: "stampedElement"},
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_9_stamp', value: 'src-address'}]
+    },
+    "dialogue_18" : {
+      text: `הנה, העם תוכל לבדוק עוד פעם את החיבור?`,
+      nameColor: "var(--yellow)",
+      name: "מאיה",
+      emotion: "neutral",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: 'mistake_9_stamp', correction: '192.168.12.45'},
+        {type: 'SET_FLAG', key: 'mistake_9_code', value: 200},
+        {type: 'CLEAR_COMPLETED', id: 'networkChecked'}
+      ],
+      waitFor: {completed: 'networkChecked'},
+      next: "dialogue_19"
+    },
+    "dialogue_19" : {
+      text: `[נראה שהכתובת החדשה עבדה]`,
+      name: 'אני',
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_20",
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_20" : {
+      text: `המכתב נשלח כמו שצריך.`,
+      name: 'אני',
+      nameColor: 'var(--orange)',
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+      next: "dialogue_exit"
+    },
+    "dialogue_exit" : {
+      text: `וואו! זה באמת עבד, תודה רבה!`,
+      emotion: "happy",
+      name: "מאיה",
+      nameColor: "var(--yellow)",
+      next: null
     },
     "dialogue_mistake_1_1" : {
       text: `צריך לשנות את החלק הזה`,
@@ -1678,6 +1716,21 @@ export const dialogueData =  {
       name: 'אני',
       nameColor: 'var(--orange)',
       next: "dialogue_13"
+    },
+    "dialogue_mistake_2_1" : {
+      text: `אני חושבת שסימנתה משהוא אחר...`,
+      emotion: "angry",
+      name: "מאיה",
+      nameColor: 'var(--yellow)',
+      next: "dialogue_mistake_2_2"
+    },
+    "dialogue_mistake_2_2" : {
+      text: `אה! סליחה אני אנסה שוב`,
+      emotion: "angry",
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_17",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
     }
   }
 }

@@ -76,6 +76,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     ? "------"
     : getDisplayValue('footer', "---<FOOTER>---", footer.mistakeKey);
 
+  const displaySourceAddress = getDisplayValue('src-address', data.sourceAddress, srcAddress.mistakeKey)
   return (
     <div
       className={`Letter ${openLetter ? (isVisible(state, 'using_stamp') ? 'open' : 'open closable') : 'closed openable'}`}
@@ -141,7 +142,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
         className={srcAddress.getClassNames('src-adress')}
         onClick={handleStampClick(srcAddress.handleStamp)}
       >
-        <p>מאית: {data.sourceAddress}</p>
+        <p>מאית: {displaySourceAddress}</p>
       </div>
 
       {/* Destination Address */}
