@@ -68,7 +68,8 @@ export const monitorData = {
         destinationAddress: '192.168.0.23',
         port: 13,
         text: '<span style="direction:rtl;display:block;text-align:right">פקודה: <span style="color:var(--red)">LIST</span><br>נמצאו שני הודעות חדשות בתיבה:<br><br><span style="font-size:var(--font-small);color:var(--grey-3)">1 1200 בייט – "מבצע ענק! קנה 1 קבל 3"<br>2 2500 בייט – "הודעה אישית מדניאל: אל תמחק את זה"</span></span>',
-        link: null
+        link: null,
+        commandWaitingText: "[מחכה לפקודה]..."
     },
     'chapter_8' : {
         customerName: "שמעון",
@@ -78,7 +79,8 @@ export const monitorData = {
         destinationAddress: '192.168.0.23',
         port: 13,
         text: '<span style="direction:rtl;display:block;text-align:left">פקודה: <span style="color:var(--red)">st</span><br><br>System Status: All systems operational<br>Uptime: 3 days, 4 hours, 12 minutes<br>CPU Load: 15%<br>Memory Usage: 48%<br><span style="color:var(--red)">Port 13: Connection timeout - unable to reach destination</span></span>',
-        link: null
+        link: null,
+        commandWaitingText: "[מחכה לפקודה]..."
     },
     'chapter_9' : {
         customerName: "מאיה",
@@ -86,7 +88,19 @@ export const monitorData = {
         sourceAddress: '198.51.100.10',
         destinationAddress: `203.0.113.25`,
         port: 443,
-        text: `<span style='font-size:var(--font-title-large)'>גרף שבועי:</span>`
+        text: `<span style='font-size:var(--font-title-large)'>גרף שבועי:</span>`,
+        link: "Money Graph.png[50 kb]",
+        imgLink: "./Monitor/pop_ups/moneyGraph.png"
+    },
+    'chapter_10' : {
+        customerName: "מל",
+        protocol: "SSH",
+        sourceAddress: "10.0.0.1",
+        destinationAddress: "172.20.45.9",
+        port: 22,
+        text: '<span style="direction:rtl; color:var(--black); font-size:var(--font-title-large)">פרק 12 – "הרוח והאש":</span><br><span style="color:var(--grey-3);font-size:var(--font-regular)"> ווילסון הביט עמוק לתוך עיניו של מקסוול. הרוח שרקה סביבם, אבל הלב שלו פעם חזק יותר מכל סופה.\'אל תעזוב אותי שוב,\'לחש, קולו רועד בין תקווה לייאוש.מקסוול חייך חיוך קטן...</span></span>',
+        link: null,
+        commandWaitingText: "<span style='color:var(--grey-3)'>NDYWGDY^&@*OODUB^*&f687GCVEGCYG^*&G&E*(G7(*G&H*&E(GCYUSHByG*&VCT756fgyxzfUGG&C^(*&CGF^GYCF^gc8GF^GcvysghcbG^F&ICGYVDS%C^T&GYCF^&SCGYVuVC^SI&GCF^CGFCUSCF^*&G^*&F^&G^FUVCSYTVEGCYG^*&G&E*(G7(*G&H*&E(GCYUSHByG*&VCT756fgyCJCFVCFCSYVGcftyugvgf6gyfCF^&SCYFF^*T&F^YTCYVCS^YV568gyc7f6ghHAXGVTAIXUGC%&S^TUIv</span>"
     }
 }
 

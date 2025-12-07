@@ -40,7 +40,7 @@
   --font-small: clamp(3px, 1.5vw, 50px);
   --font-largest: clamp(10px, 3vw, 150px);
   --font-medium: clamp(5px, 1.7vw, 50px);
- 
+
   --cursor-default: url("./Cursors/Test.png"), auto;
   --cursor-pointer: url("./Cursors/Pointer.png"), auto;
   --cursor-grab: url("./Cursors/Grab.png"), auto;

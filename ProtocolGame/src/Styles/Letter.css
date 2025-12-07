@@ -99,10 +99,20 @@
 .Letter .letter-text {
   font-size: var(--font-small);
   margin-bottom: 0.5rem; /* Add gap below text */
+
+  /* Fix long unbroken strings and prevent overflow */
+  white-space: normal;
+  overflow-wrap: anywhere;      /* modern browsers */
+  word-break: break-word;       /* fallback */
+  hyphens: auto;
+
+  /* keep text inside the letter and allow scrolling if needed */
+  max-height: calc(75% - 4rem);
 }
 
 .Letter .link {
   font-size: var(--font-small);
+  direction: ltr;
 }
 
 .Letter .link .clickable {

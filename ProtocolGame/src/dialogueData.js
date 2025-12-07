@@ -1732,6 +1732,187 @@ export const dialogueData =  {
       next: "dialogue_17",
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
     }
+  },
+
+  "chapter_10" : {
+    "dialogue_1" : {
+      text: `היי... אמ... אני צריכה לשלוח הודעה פרטית דרך הפרוטוקול SSH.`,
+      character: "mel",
+      name: "מל",
+      emotion: "shy",
+      nameColor: "var(--purple-pink)",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_10', value: 'terminal'},
+        {type: `SET_FLAG`, key: 'mistake_10_command', value: 'ssh mel@10.0.0.1'}]
+    },
+    "dialogue_2" : {
+      text: `...בבקשה רק...אל תקרא את המכתב`,
+      emotion: "neutral",
+      name: "מל",
+      nameColor: "var(--purple-pink)",
+      speed: 120,
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: `[זה רק הופר אותי ליותר מעוניין]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `[טוב בוא נקרא מה כתוב במדריך שלי]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch10'},
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `[נראה שאני אצטרך להתחבר דרך פקודה בשביל לשלוח את המכתב]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {visible: 'using_terminal'},
+      next: "dialogue_6"
+    },
+    "dialogue_6" : {
+      text: `אתה צריך להתחבר בשביל לבצע את השליחה, הנה הקוד שלי.`,
+      name: "מל",
+      nameColor: "var(--purple-pink)",
+      emotion: "confident",
+      next: "dialogue_7"
+    },
+    "dialogue_7" : {
+      text: `שם המשתמש שלי הוא “mel”, והכתובת שלי היא: “10.0.0.1”.`,
+      name: "מל",
+      nameColor: "var(--purple-pink)",
+      next: "dialogue_8",
+      waitFor: {completed: 'mistake_10'}
+    },
+    "dialogue_8" : {
+      text: `זה הכל, אתה יכול לשלוח את המכתב עכשיו.`,
+      emotion: "shy",
+      name: "מל",
+      nameColor: "var(--purple-pink)",
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      next: (state) => state.flags.letter_state ? 'dialogue_special_1' : 'dialogue_9',
+      waitFor: { completedAny: [{completed : 'submit'}, {flag: 'letter_state'}] }
+    },
+    "dialogue_9" : {
+      text: `תודה`,
+      emotion: "shy",
+      name: "מל",
+      next: "dialogue_10",
+      nameColor: "var(--purple-pink)",
+      onEnter: [{type: 'SHOW', id: 'submit-animation'}, {type: 'HIDE', id: 'submit-button'}]
+    },
+    "dialogue_10" : {
+      text: `אין בעד מ-`,
+      emotion: 'missing',
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_11"
+    },
+    "dialogue_11" : {
+      text: `[אולי בפעם הבאה]`,
+      emotion: "missing",
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_exit"
+    },
+    "dialogue_exit" : {
+      text: `[מזה? היא שחכה משהוא פה?]`,
+      emotion: "missing",
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)" // Maybe show the item
+    },
+    "dialogue_special_1" : {
+      text: `...`,
+      speed: 1000,
+      name: "מל",
+      nameColor: "var(--purple-pink)",
+      emotion: "emberassed",
+      next: "dialogue_9",
+      waitFor: {completed: 'submit'}
+    },
+  },
+  "chapter_11" : {
+    "dialogue_1" : {
+      text: `היי, אחי! מה קורה? תנחש למה באתי היום?`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "happy",
+      next: "dialogue_2"
+    },
+    "dialogue_2" : {
+      text: `בשביל לשלוח מכתב?`,
+      character: "liyor",
+      name: "אני",
+      nameColor: "var(--orange)",
+      emotion: "happy",
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: `בשביל לשחק <span style='color:var(--green)'>VineCraft</span>, ברור!`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "neutral",
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `אתה מתכוון Minecraft, נכון?`,
+      character: "liyor",
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `ששש! שלא ישמעו האנשים של זכויות היוצרים.`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "happy",
+      next: "dialogue_6"
+    },
+    "dialogue_6" : {
+      text: `בכל מקרה, אני צריך לשלוח קצת מידע לאתר של VineCraft כדי שאוכל לשחק.`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "neutral",
+      next: "dialogue_7"
+    },
+    "dialogue_7" : {
+      text: `בסדר, אני רק צריך לבדוק מידע על הפרוטוקול שאתה משתמש בוא.`,
+      character: "liyor",
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_8",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: { completed: 'read_manual_ch11'}
+    },
+    "dialogue_8" : {
+      text: `[פרוקול שיכול להחליף כתובת יעד בשם...נשמע ממש שימושי לאתר]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_9"
+    },
+    "dialogue_9" : {
+      text: `בסדר, תעביר אותו עליי.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_10",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+    }
   }
 }
     

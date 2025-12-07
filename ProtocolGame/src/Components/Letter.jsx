@@ -5,7 +5,7 @@ import { useStampable } from "../hooks/useStampable.jsx";
 import { useGameState, isVisible, hasCompleted } from "./GameState.jsx"
 
 const Letter = ({ onClose, openPopUp, onElementStamp }) => {
-  const { state } = useGameState();
+  const { state, dispatch } = useGameState();
   const [openLetter, setOpenLetter] = useState(false);
   const data = monitorData[`chapter_${state.flags.currentChapter}`];
 
@@ -50,6 +50,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const handleLetterClick = () => {
     if (!isVisible(state, 'using_stamp')) {
       setOpenLetter(!openLetter);
+      dispatch({type: 'SET_FLAG', key: 'letter_state', value: !openLetter});
     }
   };
 
@@ -98,7 +99,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
             onClick={handleStampClick(text.handleStamp)}
           >
             {hasCompletedTerminalMistake && <div dangerouslySetInnerHTML={{ __html: displayText || data.text }} />}
-            {!hasCompletedTerminalMistake && <p>[מחכה לפקודה]...</p>}
+            {!hasCompletedTerminalMistake && <div dangerouslySetInnerHTML={{ __html:data.commandWaitingText}} />}
           </div>
 
           {/* Link */}

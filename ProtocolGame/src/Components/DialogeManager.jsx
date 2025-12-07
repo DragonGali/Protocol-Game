@@ -22,7 +22,19 @@ const DialogueManager = ({
 
   const chapterKey = `chapter_${state.flags.currentChapter}`;
 
-  // Initialize dialogue + handle chapter changes
+  const checkCondition = (cond) => {
+    if (cond.completed && !hasCompleted(state, cond.completed)) return false;
+    if (cond.flag && !state.flags[cond.flag]) return false;
+    if (cond.visible && !isVisible(state, cond.visible)) return false;
+    return true;
+  };
+
+  const evaluateWaitFor = (wait) => {
+    if (!wait) return true;
+    if (wait.completedAny) return wait.completedAny.some(cond => checkCondition(cond));
+    return checkCondition(wait);
+  };
+
   useEffect(() => {
     if (state.flags.currentChapter !== prevChapterRef.current) {
       prevChapterRef.current = state.flags.currentChapter;
@@ -78,26 +90,16 @@ const DialogueManager = ({
 
   const currentDialogue = getCurrentDialogue();
 
-  // --- AUTO-ADVANCE WAIT-FOR LOGIC ---
   useEffect(() => {
     if (!waitingFor || !textDone) return;
-
-    const completedOK = waitingFor.completed ? hasCompleted(state, waitingFor.completed) : true;
-    const flagOK = waitingFor.flag ? !!state.flags[waitingFor.flag] : true;
-    const visibleOK = waitingFor.visible ? isVisible(state, waitingFor.visible) : true;
-
-    if (completedOK && flagOK && visibleOK) {
+    if (evaluateWaitFor(waitingFor)) {
       advanceDialogue();
     }
   }, [waitingFor, textDone, state.completed, state.flags, state.visible]);
 
   if (!currentDialogue) return null;
 
-  const waiting =
-    (waitingFor?.completed && !hasCompleted(state, waitingFor.completed)) ||
-    (waitingFor?.flag && !state.flags[waitingFor.flag]) ||
-    (waitingFor?.visible && !isVisible(state, waitingFor.visible));
-
+  const waiting = !evaluateWaitFor(waitingFor);
   const textSpeed = currentDialogue.speed || defaultSpeed;
 
   return (
