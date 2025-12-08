@@ -111,6 +111,17 @@ export const monitorData = {
         text: `בני, אתה משחק עכשיו? תסתכל איזו חרב מגניבה יצרתי:`,
         link: 'screenshot.png [12mb]',
         imgLink: './Monitor/pop_ups/vineCraft.png'
+    },
+    'chapter_12' : {
+        customerName: 'סבתא',
+        protocol: 'DHCP',
+        sourceAddress: '192.168.0.105',
+        destinationAddress: '255.255.255.255',
+        port: 67,
+        text: `עוגיות טריות מהתנור בדרך לכל הנכדים!`,
+        commandWaitingText: `מחכה לפקודה...`,
+        link: 'Cookies.png',
+        imgLink: './Monitor/pop_ups/cookie.gif'
     }
 }
 

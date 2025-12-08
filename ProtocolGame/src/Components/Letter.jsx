@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import "../Styles/Letter.css";
 import monitorData from "../monitorData";
 import { useStampable } from "../hooks/useStampable.jsx";
@@ -7,6 +7,7 @@ import { useGameState, isVisible, hasCompleted } from "./GameState.jsx"
 const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const { state, dispatch } = useGameState();
   const [openLetter, setOpenLetter] = useState(false);
+  const [spamPopups, setSpamPopups] = useState([]);
   const data = monitorData[`chapter_${state.flags.currentChapter}`];
 
   // Create stampable hooks for each element
@@ -35,6 +36,43 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     }
     
     return originalValue;
+  };
+
+  const triggerPopupSpam = (title, imgLink) => {
+    const popupCount = 40;
+    const popups = [];
+
+    // Spawn popups one after another with 50ms delay
+    for (let i = 0; i < popupCount; i++) {
+      setTimeout(() => {
+        const id = `spam-${Date.now()}-${i}`;
+        const randomTop = Math.random() * 40 + 'vh';
+        const randomLeft = Math.random() * 20 + 'vw';
+        
+        setSpamPopups(prev => [...prev, {
+          id,
+          title,
+          imgLink,
+          top: randomTop,
+          left: randomLeft
+        }]);
+      }, i * 50);
+    }
+
+    // Delete all popups after 2 seconds
+    setTimeout(() => {
+      setSpamPopups([]);
+    }, 2000);
+  };
+
+  const handleLinkClick = (displayLink, displayLinkSource) => {
+    // Check if chapter 12 AND terminal mistake is solved
+    if (state.flags.currentChapter === 12 && hasCompletedTerminalMistake) {
+      triggerPopupSpam(displayLink, displayLinkSource);
+    } else {
+      // Normal behavior
+      openPopUp(displayLink, displayLinkSource);
+    }
   };
 
   useEffect(() => {
@@ -77,7 +115,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     ? "------"
     : getDisplayValue('footer', "---<FOOTER>---", footer.mistakeKey);
 
-  const displaySourceAddress = getDisplayValue('src-address', data.sourceAddress, srcAddress.mistakeKey)
+  const displaySourceAddress = getDisplayValue('src-address', data.sourceAddress, srcAddress.mistakeKey) 
   return (
     <div
       className={`Letter ${openLetter ? (isVisible(state, 'using_stamp') ? 'open' : 'open closable') : 'closed openable'}`}
@@ -112,7 +150,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
                 className="clickable" 
                 onClick={(e) => { 
                   e.stopPropagation(); 
-                  openPopUp(displayLink, displayLinkSource);
+                  handleLinkClick(displayLink, displayLinkSource);
                 }}
               >
                 {displayLink}
@@ -161,6 +199,26 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
       >
         <p>פורט: {displayPort}</p>
       </div>
+
+      {/* Spam Popups */}
+      {spamPopups.map(popup => (
+        <div
+          key={popup.id}
+          className="spam-popup"
+          style={{
+            top: popup.top,
+            left: popup.left
+          }}
+        >
+          <div className="spam-popup-header">
+            {popup.title}
+          </div>
+          <img 
+            src={popup.imgLink} 
+            alt="popup"
+          />
+        </div>
+      ))}
     </div>
   );
 };

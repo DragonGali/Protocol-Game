@@ -1996,6 +1996,7 @@ export const dialogueData =  {
       emotion: "happy",
       name: "סבתא ליוויה",
       next: "dialogue_2",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_12', value: 'terminal'}]
     },
     "dialogue_2" : {
       text: `אבל לכתוב כל כתובת בנפרד זה כזה כאב ראש. אתה יכול למצוא דרך לטפל בזה בשבילי?`,
@@ -2027,11 +2028,28 @@ export const dialogueData =  {
       waitFor: {completed: 'read_manual_ch12'}
     },
     "dialogue_6" : {
-      text: `[טוב, זה היה הרבה מידע]`,
+      text: `[זה באמת מה שאני צריך! אבל אני אצתרך להריץ פקודה בשביל לתפעל אותו]`,
       name: "אני",
       nameColor: "var(--orange)",
       textColor: 'var(--grey-1)',
       next: "dialogue_7"
+    },
+    "dialogue_7" : {
+      text: `יש לי רעיון מה לעשות, את יכולה לשלוח לי את המכתב`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_8"
+    },
+    "dialogue_8" : {
+      text: `כן, אין צורך לזרז אותי, יש לי הרבה זמן`,
+      nameColor: "var(--dry-earth)",
+      emotion: "neutral",
+      name: "סבתא ליוויה",
+      next: "dialogue_9",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'mistake_12'}
+    },
+    "dialogue_9" : {
     }
     
   }
