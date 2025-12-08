@@ -101,6 +101,16 @@ export const monitorData = {
         text: '<span style="direction:rtl; color:var(--black); font-size:var(--font-title-large)">פרק 12 – "הרוח והאש":</span><br><span style="color:var(--grey-3);font-size:var(--font-regular)"> ווילסון הביט עמוק לתוך עיניו של מקסוול. הרוח שרקה סביבם, אבל הלב שלו פעם חזק יותר מכל סופה.\'אל תעזוב אותי שוב,\'לחש, קולו רועד בין תקווה לייאוש.מקסוול חייך חיוך קטן...</span></span>',
         link: null,
         commandWaitingText: "<span style='color:var(--grey-3)'>NDYWGDY^&@*OODUB^*&f687GCVEGCYG^*&G&E*(G7(*G&H*&E(GCYUSHByG*&VCT756fgyxzfUGG&C^(*&CGF^GYCF^gc8GF^GcvysghcbG^F&ICGYVDS%C^T&GYCF^&SCGYVuVC^SI&GCF^CGFCUSCF^*&G^*&F^&G^FUVCSYTVEGCYG^*&G&E*(G7(*G&H*&E(GCYUSHByG*&VCT756fgyCJCFVCFCSYVGcftyugvgf6gyfCF^&SCYFF^*T&F^YTCYVCS^YV568gyc7f6ghHAXGVTAIXUGC%&S^TUIv</span>"
+    },
+    'chapter_11' : {
+        customerName: 'ליאור',
+        protocol: 'DNS',
+        sourceAddress: "10.0.0.1",
+        destinationAddress: "256.100.42.900",
+        port: 53,
+        text: `בני, אתה משחק עכשיו? תסתכל איזו חרב מגניבה יצרתי:`,
+        link: 'screenshot.png [12mb]',
+        imgLink: './Monitor/pop_ups/vineCraft.png'
     }
 }
 

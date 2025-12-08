@@ -5,10 +5,34 @@
     background-repeat: no-repeat;
 }
 
-/* Might have to change the size of the character sprite later,
-   since all the sprites need to be the same sizes and now theyre not */
 .character-sprite {
     width: 44vw;
     height: 71vh;
     position: fixed;
+}
+
+.character-sprite.entering {
+    animation: customerSlide 2s ease-in-out forwards, customerBrighten 2s ease-out forwards;
+}
+
+@keyframes customerSlide {
+    0% {
+        left: -50vw;
+        filter: brightness(0);
+    }
+    
+    100% {
+        left: 1vw;
+        filter: brightness(0);
+    }
+}
+
+@keyframes customerBrighten {
+    0% {
+        filter: brightness(0);
+    }
+    
+    100% {
+        filter: brightness(1);
+    }
 }

@@ -403,23 +403,8 @@ export const dialogueData =  {
         {type: 'SHOW', id: 'submit-animation'},
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ],
-      next: 'maya_intro_exit'
-    },
-
-    "maya_intro_exit": {
-      text: "",
-      emotion: "neutral",
-      name: "מאיה",
-      character: "maya",
-      nameColor: "var(--yellow)",
-      onEnter: [
-        {type: 'HIDE', id: 'submit-animation'},
-        {type: 'MARK_COMPLETED', id: 'chapter_2'}
-      ],
-      waitFor: {},
       next: null
     },
-
     "maya_intro_mistake_1": {
       text: "השורה הזאתי שגויה",
       textColor: "var(--white)",
@@ -534,24 +519,11 @@ export const dialogueData =  {
       name: "ליאור",
       character: "liyor",
       nameColor: "var(--green)",
-      next: "liyor_intro_exit",
+      next: null,
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
         {type: 'SHOW', id: 'submit-animation'}
       ]
-    },
-
-    "liyor_intro_exit" : {
-      text: "",
-      emotion: "happy",
-      name: "ליאור",
-      character: "liyor",
-      nameColor: "var(--green)",
-      next: null,
-      onEnter: [
-        {type: 'HIDE', id: 'submit-animation'},
-        {type: 'MARK_COMPLETED', id: 'chapter_3'}
-      ],
     },
 
     "liyor_intro_mistake_1" : {
@@ -619,11 +591,12 @@ export const dialogueData =  {
       name: "דניאל",
       character: "daniel",
       next: "dialogue_4",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: { completed: "opened_letter" }
     },
 
     "dialogue_4" : {
-      text: "הכלי החדש שנשתמש בוא הוא כלי בקשרת התקשורת, הוא נראה כמו סימן אנטננה. ",
+      text: "הכלי החדש שנשתמש בוא הוא כלי בקרת התקשורת, הוא נראה כמו סימן אנטננה. ",
       nameColor: "var(--blue)",
       emotion: "neutral",
       name: "דניאל",
@@ -660,37 +633,28 @@ export const dialogueData =  {
     },
 
     "dialogue_8" : {
-      text: "תשים לב להודעות שכשורות לפרוטוקול TCP, אלו משתמשים בקומוניקציות בינייהם, וחייב לבדוק אותם.",
+      text: "תשים לב להודעות שקשורות לפרוטוקול TCP, אלו משתמשים בקומוניקציות בינייהם, וחייב לבדוק אותם.",
       nameColor: "var(--blue)",
       emotion: "neutral",
       name: "דניאל",
       character: "daniel",
-      next: "dialogue_9",
+      next: "dialogue_exit",
       onEnter: [
         {type: 'SHOW', id: 'submit-button'}
       ],
       waitFor: { completed: 'submit'}
     },
 
-    "dialogue_9" : {
+    "dialogue_exit" : {
       text: "בהצלחה!",
       nameColor: "var(--blue)",
       emotion: "happy",
       name: "דניאל",
       character: "daniel",
-      next: "dialogue_exit",
+      next: null,
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
         {type: 'SHOW', id: 'submit-animation'}
-      ],
-    },
-
-    "dialogue_exit" : {
-      text: "",
-      next: null,
-      onEnter: [
-        {type: 'HIDE', id: 'submit-animation'},
-        {type: 'MARK_COMPLETED', id: 'chapter_4'}
       ],
     }
   },
@@ -1849,7 +1813,11 @@ export const dialogueData =  {
       name: "ליאור",
       nameColor: "var(--green)",
       emotion: "happy",
-      next: "dialogue_2"
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_11', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_11_code', value: '100'}
+      ]
     },
     "dialogue_2" : {
       text: `בשביל לשלוח מכתב?`,
@@ -1911,8 +1879,161 @@ export const dialogueData =  {
       name: "אני",
       nameColor: "var(--orange)",
       next: "dialogue_10",
-      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'networkChecked'}
+    },
+    "dialogue_10" : {
+      text: `[זה מוזר...זאת לא שגיאה מהצד של השרת...]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_11"
+    },
+    "dialogue_11" : {
+      text: `[אני צריך לסמן משהוא עם החותמש אבל מה בדיוק?...]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: (state) => state.flags.stampedElement === 'dest-address' ? "dialogue_12" : 'dialogue_mistake_1_1',
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_11_stamp', value: 'dest-address'},
+        {type: 'SET_FLAG', key: 'stampedElement', value: null}
+      ],
+      waitFor: {flag: 'stampedElement'}
+    },
+    "dialogue_12" : {
+      text: `לירון, אתה בטוח שזאת הכתובת הנכונה?`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_13"
+    },
+    "dialogue_13" : {
+      text: `אה...אני לא זוכר יותר, כל מה שאני יודע זה שם האתר.`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "surprised",
+      next: "dialogue_14",
+    },
+    "dialogue_14" : {
+      text : `זה טוב שבחרתה ב DNS אז, אתה לא צריך לזכור את הכתובת של השרת רק את שם ה DOMAIN שלו.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_15"
+    },
+    "dialogue_15" : {
+      text: `תכניס את שם האתר, והפרוטוקול ימצא את הכתובת בשבילך.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_16"
+    },
+    "dialogue_16" : {
+      text: `נשמע פשוט.`,
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      emotion: "neutral",
+      next: "dialogue_17",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: 'mistake_11_stamp', correction: 'vinecraft.com'},
+        {type: 'SET_FLAG', key: 'mistake_11_code', value: 200},
+        {type: 'SHOW', id: 'submit-button'}
+      ]
+    },
+    "dialogue_17" : {
+      text: `תודה על העזרה, אה ו-`,
+      emotion: "happy",
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      onEnter: [
+        {type: 'SHOW', id: 'submit-animation'},
+        {type: 'HIDE', id: 'submit-button'}
+      ],
+      next: "dialogue_18"
+    },
+    "dialogue_18" : {
+      text: `ראיתי בחורה בחוץ עם אוזניות, היא ברחה ישר אחרי ששאלתי למה שהיא מקשיבה, מה הקטע שלה? `,
+      emotion: "neutral",
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+      next: 'dialogue_19'
+    },
+    "dialogue_19" : {
+      text: "[אנחנו באימת גרים בעולם קטן]",
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_20"
+    },
+    "dialogue_20" : {
+      text: `פעם הבאה שתראה אותה, תגיד לה שהיא שכחה את התיק שלה פה.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_exit"
+    },
+    "dialogue_exit" : {
+      text: `כן, אתה יכול לסמוך עליי, אחי.`,
+      emotion: "happy",
+      character: "liyor",
+      name: "ליאור",
+      nameColor: "var(--green)",
+    },
+    "dialogue_mistake_1_1" : {
+      text: `[מה לגבי החלק הזה? לא! אני מפספס משהוא פה, כדאי לי לקרוא את המדריך שלי שוב.]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: "var(--grey-1)",
+      next: "dialogue_11"
     }
+  },
+  "chapter_12" : {
+    "dialogue_1" : {
+      text: `שלום חמודי, בדיוק אפיתי עגלה חדשה של עוגיות ואני רוצה לשלוח אותן לכל הנכדים שלי.`,
+      character: "granny",
+      nameColor: "var(--dry-earth)",
+      emotion: "happy",
+      name: "סבתא ליוויה",
+      next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: `אבל לכתוב כל כתובת בנפרד זה כזה כאב ראש. אתה יכול למצוא דרך לטפל בזה בשבילי?`,
+      nameColor: "var(--dry-earth)",
+      emotion: "neutral",
+      name: "סבתא ליוויה",
+      next: "dialogue_3",
+    },
+    "dialogue_3" : {
+      text: `כן, אני אבדוק מה אפשר לעשות.`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `[פרוטוקול שיכול לשלוח את אותה הודעה להרבה אנשים בבת אחת? העם דבר כזה קיים?]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: 'var(--grey-1)',
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `[אה! נראה שהמדריך שלי עודכן עכשיו. אולי הוא יעזור לי]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: 'var(--grey-1)',
+      next: "dialogue_6",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch12'}
+    },
+    "dialogue_6" : {
+      text: `[טוב, זה היה הרבה מידע]`,
+      name: "אני",
+      nameColor: "var(--orange)",
+      textColor: 'var(--grey-1)',
+      next: "dialogue_7"
+    }
+    
   }
 }
     
