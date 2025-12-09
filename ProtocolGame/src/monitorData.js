@@ -124,6 +124,7 @@ export const monitorData = {
         imgLink: './Monitor/pop_ups/cookie.gif'
     },
     'chapter_13' : {
+        customerName: 'שמעון',
         protocol: 'SNMP',
         sourceAddress: '10.0.0.1',
         destinationAddress: '192.168.0.23',

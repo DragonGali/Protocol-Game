@@ -2098,7 +2098,7 @@ export const dialogueData =  {
       character: "shimon",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_13', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_13_command', value: 'snmpget -v2c -c public 10.0.0.1 sysStatus.0'}
+        {type: 'SET_FLAG', key: 'mistake_13_command', value: 'snmpget'}
       ]
     },
     "dialogue_2" : {
@@ -2159,6 +2159,54 @@ export const dialogueData =  {
       next: "dialogue_10",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'mistake_13'}
+    },
+    "dialogue_10" : {
+      text: `[שמעון ביקש ממני לבדוק שהכל תקין, בואו נראה עם יש פה עוד בעיות]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: "var(--grey-1)",
+      next: (state) => state.flags.stampedElement ? 'dialogue_special_1' : 'dialogue_11',
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      waitFor: {completedAny: [{completed: 'networkChecked'}, {flag: 'stampedElement'}]}
+    },
+
+
+    "dialogue_11" : {
+      text: `[הכל מסודר כמו שצריך. נראה שמאיה באמת השקיעה כדי לוודא שאין טעויות.]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_12"
+    },
+    "dialogue_12" : {
+
+    },
+    "dialogue_special_1" : {
+      text: `השורה הזאתי שגויה.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_special_2"
+    },
+    "dialogue_special_2" : {
+      text: ` כמו שציפיתי...נו, מה בדיוק שגוי בשורה?`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      emotion: "happy",
+      next: "dialogue_special_3",
+    },
+    "dialogue_special_3" : {
+      text: `אה... סליחה טעות שלי, השורה הזאתי בסדר גמור.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_special_4"
+    },
+    "dialogue_special_4" : {
+      text: `[על מה אני חושב בכלל?! אני אביא צרות למאיה בגלל זה]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      emotion: "sad",
+      textColor: 'var(--grey-1)',
+      next: "dialogue_10"
     }
   },
 }
