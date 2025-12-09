@@ -26,7 +26,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_2": {
             title: "FTP-File Transfer Protocol",
             pages: {
@@ -41,7 +40,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_3": {
             title: "TFTP - Trivial File Transfer Protocol",
             pages: {
@@ -56,7 +54,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_4" : {
             title: "",
             pages: {
@@ -65,7 +62,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_5" : {
             title: "HTML - Hypertext Transfer Protocol",
             pages: {
@@ -81,7 +77,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_6" : {
             title: "HTTPS - Hypertext Transfer Protocol Secure",
             pages: {
@@ -109,7 +104,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_9" : {
             title: `SSL - Secure Socket Layer`,
             pages: {
@@ -134,7 +128,6 @@ export const manualData = {
                 }
             }
         },
-
         "chapter_10" : {
             title: "SSH - Secure Shell",
             pages: {
@@ -190,6 +183,39 @@ export const manualData = {
                 "page_5" : {
                     "line_1" : `DHCP משתמש בפרוטוקול UDP ועובד בפורטים 67 (שרת) ו-68 (לקוח).`,
                     "line_2" : `כאשר מחשב מבקש כתובת IP באמצעות DHCP, הוא לא יודע עדיין למי לשלוח את הבקשה. לכן, ההודעה הראשונה (DHCP Discover) נשלחת לכתובת שידור (Broadcast) – 255.255.255.255.`
+                }
+            }
+        },
+        "chapter_13" : {
+            title: `SNMP - Simple Network Management Protocol`,
+            pages: {
+                "page_1" : {
+                    "line_1" : `רוטוקול SNMP משמש לניהול ובקרה מרחוק של רכיבי רשת כמו נתבים, מדפסות, שרתים ועוד. בפרוטוקול יש שני צדדים:`,
+                    "line_2" : `- צד מנהל (Manager): שולח פקודות לניהול ומעקב.`,
+                    "line_3" : `- צד מנוהל (Managed Device): מגיב לפקודות ומוסר מידע על המערכת.`,
+                },
+                "page_2" : {
+                    "line_1" : `הפרוטוקול פועל על גבי UDP בשכבה הרביעית (Transport Layer) ומשתמש בפורטים 161 (שליחה) ו-162 (קבלה).`,
+                    "line_2" : `באמצעותו ניתן לקבל מידע כמו:`,
+                    "line_3" : `* מצב המערכת`,
+                    "line_4" : `* סטטיסטיקות`,
+                },
+                "page_3" : {
+                    "line_1" : `* קונפיגורציות`,
+                    "line_2" : `* מידע על ממשקים`,
+                    "line_3" : `ישנם 5 סוגי הודעות PDU שהן הודעות שנשלחות כאשר יש מצב של ניהול רכיב מרחוק עם פרוטוקול SNMP.`,
+                    "line_4" : `<span style='color:var(--red)'>1. GET REQUEST</span> - המנהל שולח בקשה לרכיב המנוהל על מנת לקבל מידע.`
+                },
+                "page_4" : {
+                    "line_1" : `<span style='color:var(--red)'>2. SET REQUEST</span> - המנהל קובע ערך מסוים ברכיב המנוהל.`,
+                    "line_2" : `<span style='color:var(--red)'>3. GET NEXT REQUEST</span> - המנהל שולח בקשה לרכיב המנוהל לקבל מידע לגבי האובייקט הבא ברשימה.`,
+                    "line_3" : `<span style='color:var(--red)'>4. RESPONSE</span> - תשובה שהרכיב המנוהל שולח לרכיב המנהל.`,
+                    "line_4" : `<span style='color:var(--red)'>5. TRAP</span> - התראות אשר שולח הרכיב המנוהל לעבר המנהל. `
+                },
+                "page_5" : {
+                    "line_1" : `המידע נשלח בקבצי  MIB(Management Information Base).`,
+                    "line_2" : `כדי לבדוק אם רכיב מגיב, ניתן להשתמש בפקודת <span style='color:var(--red)'>GET REQUEST</span> לדוגמה:`,
+                    "line_3" : ` sysStatus.0 [<span style='color: var(--blue)'>כתובת IP</span>] snmpget -v2c -c public `
                 }
             }
         }

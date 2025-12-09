@@ -1996,7 +1996,10 @@ export const dialogueData =  {
       emotion: "happy",
       name: "סבתא ליוויה",
       next: "dialogue_2",
-      onEnter: [{type: 'SET_FLAG', key: 'mistake_12', value: 'terminal'}]
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_12', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_12_command', value: 'ipconfig /renew'}
+      ]
     },
     "dialogue_2" : {
       text: `אבל לכתוב כל כתובת בנפרד זה כזה כאב ראש. אתה יכול למצוא דרך לטפל בזה בשבילי?`,
@@ -2050,9 +2053,114 @@ export const dialogueData =  {
       waitFor: {completed: 'mistake_12'}
     },
     "dialogue_9" : {
+      text: `[צריך לעשות עוד משהוא]`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      textColor: 'var(--grey-1)',
+      name: "אני",
+      next: "dialogue_10",
+      waitFor: {completed: 'networkChecked'}
+    },
+    "dialogue_10" : {
+      text: `[כן...אני חושב שזה הכל, מעניין לי כמה נכדים יקבלו עוגיות בסוף.]`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      textColor: 'var(--grey-1)',
+      name: "אני",
+      next: "dialogue_11",
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_11" : {
+      text: `זהו, המכתב יגיע לכל האנשים ברשת המקומית`,
+      nameColor: "var(--orange)",
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_exit",
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+    },
+    "dialogue_exit" : {
+      text: `תודה רבה, יקירי! עכשיו כל אחד יקבל עוגיות חמות ישר מהתנור.`,
+      emotion: "happy",
+      nameColor: "var(--dry-earth)",
+      name: "סבתא ליוויה",
+      next: null
     }
     
-  }
+  },
+  "chapter_13" : {
+    "dialogue_1" : {
+      text: `שלום. העובדת שלי, מאיה, ביקשה ממני לוודא שהמכתב הזה תקין.`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      emotion: "neutral",
+      next: "dialogue_2",
+      character: "shimon",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_13', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_13_command', value: 'snmpget -v2c -c public 10.0.0.1 sysStatus.0'}
+      ]
+    },
+    "dialogue_2" : {
+      text: `אם אני אהיה כנה? כל פעם שהיא שולחת משהו, יש בעיות, אז החלטתי לבדוק בעצמי.`,
+      emotion: "angry",
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: `המכתב הזה משתמש בפרוטוקול <span style='color:var(--red)'>SNMP</span>. אני צריך שתריץ את הפקודה הנכונה ותבדוק שבכל תקין.`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      emotion: "neutral",
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `כן,בגלל שאני חדש פה, אני צריך לקרוא על הפרוטוקול שאתה מדבר עליו.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `טוב, אבל אין לי את כל היום.`,
+      emotion: "angry",
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      next: "dialogue_6"
+    },
+    "dialogue_6" : {
+      text: `[בסדר, מיסטר רציני...]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: "var(--grey-1)",
+      emotion: "neutral",
+      next: "dialogue_7",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch13'}
+    },
+    "dialogue_7" : {
+      text: `[זאתי פקודה ממש ארוכה, כדאי לי להיזהר עם הניקוד]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: "var(--grey-1)",
+      next: "dialogue_8"
+    },
+    "dialogue_8" : {
+      text: `סיימתה?, שלחתי לך את המכתב.`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      next: "dialogue_9",
+    },
+    "dialogue_9" : {
+      text: `[טוב, לעבודה]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: "var(--grey-1)",
+      next: "dialogue_10",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'mistake_13'}
+    }
+  },
 }
     
 }

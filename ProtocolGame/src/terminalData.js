@@ -18,6 +18,16 @@ export const terminalData = {
         line_4: `Authentication successful`,
         line_5: `Secure session active.`,
         line_6: `Decrypting letter...`
+    },
+    chapter_12 : {
+        line_1: `[DHCP Discover] ‏משדר לרשת: 255.255.255.255`,
+        line_2: `[DHCP Offer] ‏השרת 192.168.0.1 מציע כתובת IP: 192.168.0.105`,
+        line_3: `[DHCP Request] ‏מבקש את הכתובת 192.168.0.105 מהשרת 192.168.0.1`,
+        line_4: `[DHCP ACK] ‏השרת אישר. כתובת ה-IP הוקצתה: 192.168.0.105`,
+        line_5: `<span style='color:var(--red)'>⚠ הערה: יש להריץ בדיקת רשת כדי לאשר ACK.‏</span>`
+    },
+    chapter_13 : {
+        line_1 : `sysStatus.0 = up`,
     }
 }
 
