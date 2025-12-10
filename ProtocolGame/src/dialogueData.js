@@ -2139,7 +2139,7 @@ export const dialogueData =  {
       waitFor: {completed: 'read_manual_ch13'}
     },
     "dialogue_7" : {
-      text: `[זאתי פקודה ממש ארוכה, כדאי לי להיזהר עם הניקוד]`,
+      text: `[יש הרבה פקודות לפרוטוקול הזה, אבל היחידה שאני יכול להשתמש בוא במערכת הזאתי מסומנת בכחול]`,
       name: "אני",
       nameColor: 'var(--orange)',
       textColor: "var(--grey-1)",
@@ -2169,8 +2169,6 @@ export const dialogueData =  {
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
       waitFor: {completedAny: [{completed: 'networkChecked'}, {flag: 'stampedElement'}]}
     },
-
-
     "dialogue_11" : {
       text: `[הכל מסודר כמו שצריך. נראה שמאיה באמת השקיעה כדי לוודא שאין טעויות.]`,
       name: "אני",
@@ -2179,7 +2177,39 @@ export const dialogueData =  {
       next: "dialogue_12"
     },
     "dialogue_12" : {
-
+      text: `נו, מצאתה משהוא?`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      next: 'dialogue_13'
+    },
+    "dialogue_13" : {
+      text: `הכל תקין, אין טעויות בשום מקום.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: 'dialogue_14'
+    },
+    'dialogue_14' : {
+      text: `אה... אז היא באמת מילאה אותו כמו שצריך?`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      emotion: "curious",
+      next: 'dialogue_15'
+    },
+    'dialogue_15' : {
+      text: `אולי הייתי קשוח מדיי עלייה...`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      emotion: "sad",
+      next: 'dialogue_16',
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    'dialogue_16' : {
+      text: `...תודה`,
+      name: "שמעון",
+      nameColor: 'var(--yellow)',
+      next: null,
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
     },
     "dialogue_special_1" : {
       text: `השורה הזאתי שגויה.`,
@@ -2209,6 +2239,9 @@ export const dialogueData =  {
       next: "dialogue_10"
     }
   },
+  "chapter_14" : {
+    
+  }
 }
     
 }

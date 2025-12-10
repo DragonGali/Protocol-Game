@@ -216,7 +216,7 @@ export const manualData = {
                     "line_1" : `המידע נשלח בקבצי  MIB(Management Information Base).`,
                     "line_2" : `כדי לבדוק אם רכיב מגיב, ניתן להשתמש בפקודת <span style='color:var(--red)'>GET REQUEST</span> לדוגמה:`,
                     "line_3" : ` sysStatus.0 [10.0.0.1] snmpget -v2c -c public `,
-                    "line_4" : `אבל באינטרפריטתור של המערכת שלנו יבין את הפקודה עם פשוט תרשמו: <span style='color:var(--blue)'>snmpget</span>`
+                    "line_4" : `אבל אינטרפריטתור של המערכת שלנו יבין את הפקודה עם פשוט תרשמו: <span style='color:var(--blue)'>snmpget</span>`
                 }
             }
         }
