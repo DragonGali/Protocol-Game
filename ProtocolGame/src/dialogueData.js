@@ -2240,7 +2240,53 @@ export const dialogueData =  {
     }
   },
   "chapter_14" : {
-    
+    "dialogue_1" : {
+      text: `היי, שכחת את התיק שלך פה בפעם הקודמת.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      emotion: "shy",
+      character: "mel",
+      next: "dialogue_2"
+    },
+    "dialogue_2" : {
+      text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: 'dialogue_3'
+    },
+    "dialogue_3" : {
+      text: `כיוון שכבר הגעתי... רציתי לשלוח את זה, אבל... זה מכתב מיוחד. חייבים לוודא שהמערכת תקינה לפני ששולחים אותו, אחרת הוא לא יגיע ליעד.`,
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      emotion: 'neutral',
+      next: 'dialogue_4',
+    },
+    "dialogue_4" : {
+      text: `[מכתב מיוחד...נשמע מעניין]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `[אוקיי, בואו נקרא עליו]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_6",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch14'}
+    },
+    "dialogue_6" : {
+      text: `[אוקיי...זה היה הרבה מידע]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_7",
+    },
+    "dialogue_7" : {
+      text: `אין לי מושג מה לעשות...`,
+    }
   }
 }
     

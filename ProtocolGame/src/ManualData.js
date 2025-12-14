@@ -219,6 +219,47 @@ export const manualData = {
                     "line_4" : `אבל אינטרפריטתור של המערכת שלנו יבין את הפקודה עם פשוט תרשמו: <span style='color:var(--blue)'>snmpget</span>`
                 }
             }
+        },
+        "chapter_14" : {
+            title: 'פרוטוקולי שירות',
+            pages: {
+                "page_1" : {
+                    "line_1" : `פרוטוקולי שירות הם פרוטוקולים שנועדו לסייע לטכנאים ולמנהלי רשתות לנהל ולנטר את הרשת בצורה קלה יותר. הם אינם מיועדים לשימוש ישיר של לקוחות, אלא מספקים כלים לפתרון בעיות ולבקרה.`,
+                    "line_2" : `שני פרוטוקולים חשובים בתחום זה הם Terminal Monitor ו- Debug, המאפשרים לנטר הודעות ופעולות בזמן אמת.`
+                },
+                "page_2" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large)'>Terminal Monitor</span>`,
+                    "line_2" : `במהלך העבודה, רכיבים ברשת (כמו נתבים ומתגים) עשויים לשלוח לעצמם הודעות לוג (LOG) — לדוגמה, בעת שגיאה או אירוע חשוב, המכשיר רושם לעצמו את מה שקרה ואת הזמן המדויק.`,
+                    "line_3" : `באמצעות הפקודה <span style='color:var(--blue)'>terminal monitor</span>, ניתן לצפות בהודעות אלו בזמן אמת בחלון ה-Line אליו אנו מחוברים`
+                },
+                "page_3" : {
+                    "line_1" : `כדי להפסיק את הצגת ההודעות, יש להשתמש בפקודה:<span style='color:var(--blue)'>no terminal monitor</span>.`,
+                    "line_2" : 'דוגמה לשימוש(במחשב אמיתי):',
+                    "line_3" : 'SW-1-150-R# terminal monitor',
+                    "line_4" : 'SW-1-150-R# no terminal monitor'
+                },
+                "page_4" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large)'>Debug</span>`,
+                    "line_2" : `הפקודה debug מיועדת לנטר פעולות ברשת בצורה מפורטת יותר מה- Terminal Monitor. באמצעותה ניתן לעקוב אחרי פרוטוקולים, ממשקים וקשרים בזמן אמת.`,
+                    "line_3" : `הפעלת הניטור:`,
+                    "line_4" : `<span style='direction:ltr; display:block'>debug &lt;restraint list&gt;</span>`
+                },
+                "page_5" : {
+                    "line_1" : `דוגמאות ל- restraint list:`,
+                    "line_2" : `debug ip packet, debug ip rip, debug interface serial 0/1`,
+                    "line_3" : 'כיבוי ניטור ספציפי: <span style="display:block;direction:ltr;">undebug &lt;restraint list&gt;</span>',
+                    "line_4" : 'כיבוי כל הניטורים: undebug all'
+                },
+                "page_6" : {
+                    "line_1" : `דוגמה בסיסית:<span style="display:block;direction:ltr;">rl-notz# debug ip packet,rl-notz# undebug all</span>`,
+                    "line_2" : `<span style='font-size:var(--font-title-large)'>אפשרויות DEBUG</span>`,
+                    "line_3" : `לאחר הקלדת הפקודה debug ולאחריה סימן השאלה (?) ניתן לראות רשימה של אפשרויות ניטור זמינות:`,
+                    "line_4" : `<span data-event="SHOW:manual_command_table" class="manual-event clickable">לחצו פה לפתיחת הטבלא</span>`
+                },
+                "page_7" : {
+                    "line_1" : `באמצעות הפקודה הזו ניתן לנטר קשרי שכנות, ARP, פרוטוקולים כמו BGP, RIP, ועוד. איננו ניכנס לעומק של כל האפשרויות, אך חשוב להכיר את הפקודה ולהבין שניתן להתאים אותה למצבים שונים.`
+                }
+            }
         }
     }
 };

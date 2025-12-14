@@ -33,7 +33,18 @@ const ManualText = ({chapter, onFinish}) => {
     <div className="ManualText">
       <p className="title">{selectedChapter.title}</p>
 
-      <div className="lines">
+      <div
+        className="lines"
+        onClick={(e) => {
+          const eventString = e.target.dataset.event; // read data-event
+          if (!eventString) return;
+
+          const [type, id] = eventString.split(":"); // parse it
+          if (type === "SHOW") {
+            dispatch({ type, id }); // dispatch the action
+          }
+        }}
+      >
         {Object.keys(page).map((lineKey) => (
           <p
             key={lineKey}
@@ -42,6 +53,7 @@ const ManualText = ({chapter, onFinish}) => {
           />
         ))}
       </div>
+
 
       <div className="arrows-container">
         <img

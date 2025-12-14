@@ -47,9 +47,26 @@
   height: 14vh;
 }
 
-.showcase{
+.showcase {
     animation: glow 2s ease-in-out infinite;
-} 
+}
+
+.manual-command-table {
+  width: 96.5vw;
+  height: 95.7vh;
+  margin-top: 2.3vh;
+  margin-left: 1.7vw;
+  position: fixed;
+  background-image: url('/manual_command_table.png');
+  background-size: 100% 100%;
+}
+
+.manual-command-table .close-button {
+  width: 5VW;
+  height: 10vh;
+  position: absolute;
+  right: 0;
+}
 
 @keyframes glow {
   0%, 100% {

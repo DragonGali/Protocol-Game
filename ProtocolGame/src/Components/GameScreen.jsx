@@ -49,6 +49,8 @@ const GameScreen = () => {
       {isManualOpen && <Manual onClose={() => setManualOpen(false)} />}
 
       <Monitor className="Monitor"/>
+
+      {isVisible(state, 'manual_command_table') && <div className='manual-command-table'><img src='./General/close-button.png' className='close-button clickable' onClick={() => {dispatch({type: 'HIDE', id: 'manual_command_table'})}}/></div>}
     </div>
   );
 }

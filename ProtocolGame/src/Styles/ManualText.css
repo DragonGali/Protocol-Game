@@ -62,3 +62,11 @@
     visibility: hidden;
 }
 
+.ManualText .manual-event {
+    color: var(--red);
+}
+
+.ManualText .manual-event:hover {
+    color: var(--pink);
+}
+
