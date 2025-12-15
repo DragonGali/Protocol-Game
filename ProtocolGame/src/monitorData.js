@@ -131,6 +131,16 @@ export const monitorData = {
         port: 161,
         commandWaitingText: ``,
         text: `<span style='color:var(--grey-3);direction:rtl;text-align:right;display:block'>שם ההתקן: Switch-23<br>סטטוס: פעיל (UP)<br>ממשקים: 12 פעילים, 0 לא פעילים עומס מעבד 15%: <br> תעבורת רשת: 220MB נשלח, 180MB התקבל <br> גרסת קונפיגורציה: עדכנית, אין שינויים בהמתנה</span>`
+    },
+    'chapter_14' : {
+        customerName: 'מל',
+        protocol: 'TELNET',
+        sourceAddress: '192.168.1.5',
+        destinationAddress: '172.20.45.9',
+        port: 13,
+        text: `אתמול פגשתי משהוא ממש נחמד, קוראים  לו לירון. הוא אהב את קבוצת הרוק שאני מקשיבה עליה, ועזר להחזיר לי את התיק שלי...הנא תמונה שלקחתי. `,
+        link: 'אני ולירון.png',
+        imgLink: '/Monitor/pop_ups/melAndLiron.png'
     }
 }
 

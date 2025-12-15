@@ -2246,7 +2246,11 @@ export const dialogueData =  {
       nameColor: 'var(--orange)',
       emotion: "shy",
       character: "mel",
-      next: "dialogue_2"
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_14', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_14_command', value: 'terminal monitor'}
+      ]
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
@@ -2285,8 +2289,95 @@ export const dialogueData =  {
       next: "dialogue_7",
     },
     "dialogue_7" : {
-      text: `אין לי מושג מה לעשות...`,
+      text: `[אין לי מושג מה לעשות...]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_8",
+    },
+    "dialogue_8" : {
+      text: `מל... אני יכול להשתמש בעזרה שלך?`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_9",
+    },
+    "dialogue_9" : {
+      text: `מה?! אתה רוצה את העזרה שלי?`,
+      emotion: "surprised",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_10"
+    },
+    "dialogue_10" : {
+      text: `אבל אני...`,
+      emotion: "shy",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_11"
+    },
+    "dialogue_11" : {
+      text: `מל, יש לך כישרון ממש גדול, ואני עדיין חדש בתחום הזה, עם אני צריך ללמוד ממשהו זה ממך.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_12"
+    },
+    "dialogue_12" : {
+      text: `אה... טוב... אני מניחה שאוכל להסביר.`,
+      emotion: "confident",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_13"
+    },
+    "dialogue_13" : {
+      text: `קודם כל, צריך לבדוק את הודעות הלוג של המערכת. בשביל זה משתמשים ברכיב Terminal Monitor.`,
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_14"
+    },
+    "dialogue_14" : {
+      text: `הוא מציג בזמן אמת הודעות מהמערכת, כדי שנדע אם משהו השתבש.`,
+      emotion: "confident",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_15"
+    },
+    "dialogue_15" : {
+      text: `צריך להיות רשום איפה שהוא אצליך, איך מריצים את פקודת Terminal monitor`,
+      emotion: "confident",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_16"
+    },
+    "dialogue_16" : {
+      text: `אני לא זוכרת איך מקלידים את הפקודה, אז אתה תצתרך לעשות את זה בעצמך.`,
+      emotion: "shy",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_17",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+    },
+    "dialogue_17" : {
+      text: `[אוקיי...אני מחפש פקודת Terminal monitor כדי להדפיס הודעות מערכת.]`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      textColor: 'var(--grey-1)',
+      next: "dialogue_18",
+      waitFor: {completed: 'mistake_14'}
+    },
+    "dialogue_18" : {
+      text: `טוב... אני רואה את ההודעות. לא נראה שיש פה בעיות.`,
+      name: "אני",
+      nameColor: 'var(--orange)',
+      next: "dialogue_19"
+    },
+    "dialogue_19" : {
+      text: `זה לא מספיק, לפעמים ההודעות האלו לא חושפות הכול. צריך לבדוק לעומק מה קורה עם החבילות עצמן.`,
+      emotion: "confident",
+      name: "מל",
+      nameColor: 'var(--purple-pink)',
+      next: "dialogue_20"
     }
+
   }
 }
     

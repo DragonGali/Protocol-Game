@@ -27,7 +27,15 @@ export const terminalData = {
         line_5: `<span style='color:var(--red)'>⚠ הערה: יש להריץ בדיקת רשת כדי לאשר ACK.‏</span>`
     },
     chapter_13 : {
-        line_1 : `sysStatus.0 = up`,
+        line_1: `sysStatus.0 = up`,
+    },
+    chapter_14 : {
+        line_1: `*Mar  1 00:01:04.123: %LINK-3-UPDOWN:`,
+        line_2: `Interface GigabitEthernet1/0/1`,
+        line_3: `changed state to up`,
+        line_4: `*Mar  1 00:01:05.456: %LINEPROTO-5-`,
+        line_5: `UPDOWN: Line protocol on Interface`,
+        line_6: `GigabitEthernet1/0/1, changed state to down`
     }
 }
 
