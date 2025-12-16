@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 const GameStateContext = createContext();
 
 const initialState = {
-  // Core dialogue
+  //dialogue
   currentDialogue: null,
   dialogueType: null,
   currentCharacter: null,

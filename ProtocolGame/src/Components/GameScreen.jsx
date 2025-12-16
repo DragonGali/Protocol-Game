@@ -6,7 +6,7 @@ import TextBox from './TextBox.jsx';
 import Manual from './Manual.jsx';
 import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.jsx';
 
-import dialogueData from '../dialogueData.js';
+import dialogueData from '../data_files/dialogueData.js';
 
 const GameScreen = () => {
   const { state, dispatch } = useGameState();

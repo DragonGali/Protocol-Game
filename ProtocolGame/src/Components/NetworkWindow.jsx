@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useDragger from "../hooks/useDragger";
 import "../styles/NetworkWindow.css";
-import monitorData from '../monitorData';
+import monitorData from '../data_files/monitorData';
 import { useGameState } from "./GameState.jsx"
 
 const NetworkWindow = ({title, onClose}) => {

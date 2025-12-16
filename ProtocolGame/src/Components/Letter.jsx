@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../Styles/Letter.css";
-import monitorData from "../monitorData";
+import monitorData from "../data_files/monitorData";
 import { useStampable } from "../hooks/useStampable.jsx";
 import { useGameState, isVisible, hasCompleted } from "./GameState.jsx"
 

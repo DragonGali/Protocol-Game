@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../Styles/ManualText.css';
-import { manualData } from '../ManualData';
+import { manualData } from '../data_files/ManualData';
 import { useGameState } from './GameState';
 
 const ManualText = ({chapter, onFinish}) => {

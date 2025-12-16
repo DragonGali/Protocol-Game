@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useGameState, hasCompleted, isVisible } from './GameState.jsx';
-import { dialogueData } from '../dialogueData.js';
+import { dialogueData } from '../data_files/dialogueData.js';
+import { characterConfig } from '../data_files/characterConfig.js' 
 import TypeWriter from './TypeWriter.jsx';
 import Question from './Question.jsx';
 
@@ -108,9 +109,9 @@ const DialogueManager = ({
       {currentDialogue?.type !== 'question' && (
         <TypeWriter
           text={currentDialogue.text}
-          name={currentDialogue.name || null}
-          nameColor={currentDialogue.nameColor || null}
-          textColor={currentDialogue.textColor || "var(--white)"}
+          name={currentDialogue.name || characterConfig[state.currentCharacter].name}
+          nameColor={currentDialogue.nameColor || currentDialogue.name === 'אני' ? characterConfig.player.nameColor : characterConfig[state.currentCharacter].nameColor}
+          textColor={currentDialogue.textColor || currentDialogue.name === 'אני' && /^\[.*\]$/.test(currentDialogue.text) ? characterConfig.player.thinkingText : "var(--white)"}
           speed={textSpeed}
 
           onTypingComplete={() => setTimeout(() => setTextDone(true), 2000)}

@@ -1,7 +1,7 @@
 import React from 'react';
 import DialogueManager from './DialogeManager';
 import '../Styles/TextBox.css';
-import {dialogueData} from '../dialogueData.js';
+import {dialogueData} from '../data_files/dialogueData.js';
 
 function TextBox({ dialogueType, startDialogueId, onComplete}) {
   return (

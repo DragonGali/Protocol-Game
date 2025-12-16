@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGameState, isVisible, getFlag, hasCompleted } from './GameState.jsx';
 import { useStampable } from '../hooks/useStampable.jsx';
-import monitorData from '../monitorData';
+import monitorData from '../data_files/monitorData';
 import '../Styles/GrandmaLetterEditor.css';
 
 const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useDragger from "../hooks/useDragger";
 import "../styles/Terminal.css";
-import terminalData from '../terminalData.js';
+import terminalData from '../data_files/terminalData.js';
 import { useGameState } from "./GameState.jsx";
 
 const Terminal = ({ onClose }) => {

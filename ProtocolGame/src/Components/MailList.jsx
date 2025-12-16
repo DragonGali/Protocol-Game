@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/MailList.css';
 import useDragger from "../hooks/useDragger";
-import monitorData from '../monitorData.js'
+import monitorData from '../data_files/monitorData.js'
 import { useGameState, isUnlocked, isVisible, hasCompleted } from './GameState.jsx';
 
 const MailList = ({ onClose, onLetterSelect }) => {
