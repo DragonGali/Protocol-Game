@@ -186,6 +186,8 @@ function Monitor() {
           setPlayingButtonAnimation(false);
           dispatch({type: "MARK_COMPLETED", id: "submit"})
         }, 1000);}}/>}
+
+        {state.flags["aquired_item"] && <img className='aquired-item' src={`/Monitor/pop_ups/AquiredItems/aquired_${state.flags.aquired_item}.png`}/>}
       </div>
 
     </div>

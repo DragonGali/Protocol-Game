@@ -107,61 +107,67 @@ export const dialogueData =  {
     "dialogue_14":{
       text: "ככה נראית חבילה, בחלק הקדמי רשום כתובת המקור ושל היעד, הפורט ו הפרוטוקול של ההודעה.",
       next: "dialogue_15",
-      onEnter: [
-        {type: 'UNLOCK', id: 'stamp'}
-      ]
     },
     "dialogue_15":{
       text: "אני כבר מילאתי את כל הפרטים אבל השארתי טעות אחת בתוך המכתב, העבודה שלך תהיה לפענח איפה הטעות הזאת.",
       next: "dialogue_16",
     },
-    "dialogue_16":{
-      text: "בשביל לסמן טעות, צריך להשתמש בחותמת ולהעביר אותה על השורה הלא נכונה. נסה לעשות את זה.",
-      next: (state) => state.flags?.stampedElement === 'footer' ? 'dialogue_17' : 'dialogue_mistake_1_1',
-      waitFor: {flag: 'stampedElement'}
+    "dialogue_16" : {
+      text: "שלחתי לך את הכלי הראשון שלך, החותמת.",
+      next: "dialogue_17",
+      onEnter: [
+        {type: 'UNLOCK', id: 'stamp'},
+        {type: 'SET_FLAG', key: 'aquired_item', value: 'stamp'}
+      ]
     },
     "dialogue_17":{
-      text: "אני חושב שבהודעה הזות חסרה סיומת.",
-      next: "dialogue_18",
-      name: "אני",
+      text: "בשביל לסמן טעות, צריך להשתמש בחותמת ולהעביר אותה על השורה הלא נכונה. נסה לעשות את זה.",
+      next: (state) => state.flags?.stampedElement === 'footer' ? 'dialogue_18' : 'dialogue_mistake_1_1',
+      onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: null}],
+      waitFor: {flag: 'stampedElement'}
     },
     "dialogue_18":{
+      text: "אני חושב שבהודעה הזות חסרה סיומת.",
+      next: "dialogue_19",
+      name: "אני",
+    },
+    "dialogue_19":{
       text: "נכון מאוד! כל ההודעות,צריכות להסתיים עם <span style='color:var(--red)'>FOOTER</span>. כל הכבוד, עבודה טובה.",
       emotion: "happy",
-      next: "dialogue_19",
+      next: "dialogue_20",
       onEnter: [
         {type: 'CORRECT_MISTAKE', id: 'mistake_1_1', correction: '---FOOTER---'}
       ]
     },
 
-    "dialogue_19": {
+    "dialogue_20": {
       text: "עכשיו, כל מה שנשאר זה לשלוח את המכתב, תלחץ על הכפתור ה <span style='color:var(--green)'>ירוק</span>.",
       emotion: "neutral",
-      next: "dialogue_20",
+      next: "dialogue_21",
       onEnter: [
         {type: 'SHOW', id: 'submit-button'}
       ],
       waitFor: {completed: 'submit'}
     },
-    "dialogue_20": {
+    "dialogue_21": {
       text: "מעולה! עכשיו כשאתה יודע מה לעשות, אני אעזוב אותך לנסות בעצמך.",
-      next: "dialogue_21",
+      next: "dialogue_22",
       onEnter: [
         {type: 'HIDE', id: 'submit-button'},
         {type: 'SHOW', id: 'submit-animation'},
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ]
     },
-    "dialogue_21": {
+    "dialogue_22": {
       text: "אם תיתקל בקושי, תוכל ללחוץ על סמל העזרה, בשביל לקבל רמז.",
-      next: "dialogue_22",
+      next: "dialogue_23",
       onEnter: [
         {type: 'UNLOCK', id: 'help-icon'},
         {type: 'SHOW', id: 'help-icon-showcase'},
         {type: 'HIDE', id: 'submit-animation'}
       ]
     },
-    "dialogue_22": {
+    "dialogue_23": {
       text: "בהצלחה!",
       emotion: 'happy',
       next: null,
@@ -1171,8 +1177,8 @@ export const dialogueData =  {
       emotion: "shy",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_10', value: 'terminal'},
-        {type: `SET_FLAG`, key: 'mistake_1_10_command', value: 'ssh mel@10.0.0.1'}]
+        {type: 'SET_FLAG', key: 'mistake_10', value: 'terminal'},
+        {type: `SET_FLAG`, key: 'mistake_10_command', value: 'ssh mel@10.0.0.1'}]
     },
     "dialogue_2" : {
       text: `...בבקשה רק...אל תקרא את המכתב`,
@@ -1207,7 +1213,7 @@ export const dialogueData =  {
     "dialogue_7" : {
       text: `שם המשתמש שלי הוא “mel”, והכתובת שלי היא: “10.0.0.1”.`,
       next: "dialogue_8",
-      waitFor: {completed: 'mistake_1_10'}
+      waitFor: {completed: 'mistake_10'}
     },
     "dialogue_8" : {
       text: `זה הכל, אתה יכול לשלוח את המכתב עכשיו.`,
@@ -1233,12 +1239,13 @@ export const dialogueData =  {
       text: `[אולי בפעם הבאה]`,
       emotion: "missing",
       name: "אני",
-      next: "dialogue_exit"
+      next: "dialogue_exit",
     },
     "dialogue_exit" : {
       text: `[מזה? היא שחכה משהוא פה?]`,
       name: "אני",
-      textColor: "var(--grey-1)" // Maybe show the item
+      textColor: "var(--grey-1)",
+      onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: 'mel_bag'}]
     },
     "dialogue_special_1" : {//make this one of the events that can trigger anywhere
       text: `...`,
@@ -1255,14 +1262,15 @@ export const dialogueData =  {
       emotion: "happy",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_11', value: 'network'},
-        {type: 'SET_FLAG', key: 'mistake_1_11_code', value: '100'}
+        {type: 'SET_FLAG', key: 'mistake_11', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_11_code', value: '100'}
       ]
     },
     "dialogue_2" : {
       text: `בשביל לשלוח מכתב?`,
       name: "אני",
-      next: "dialogue_3"
+      next: "dialogue_3",
+      onEnter: [{type: 'SET_FLAG', key: 'aquired-item', value: null}]
     },
     "dialogue_3" : {
       text: `בשביל לשחק <span style='color:var(--green)'>VineCraft</span>, ברור!`,
@@ -1314,7 +1322,7 @@ export const dialogueData =  {
       name: "אני",
       next: (state) => state.flags.stampedElement === 'dest-address' ? "dialogue_12" : 'dialogue_mistake_1_1',
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_11_stamp', value: 'dest-address'},
+        {type: 'SET_FLAG', key: 'mistake_11_stamp', value: 'dest-address'},
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ],
       waitFor: {flag: 'stampedElement'}
@@ -1344,8 +1352,8 @@ export const dialogueData =  {
       emotion: "neutral",
       next: "dialogue_17",
       onEnter: [
-        {type: 'CORRECT_MISTAKE', id: 'mistake_1_11_stamp', correction: 'vinecraft.com'},
-        {type: 'SET_FLAG', key: 'mistake_1_11_code', value: 200},
+        {type: 'CORRECT_MISTAKE', id: 'mistake_11_stamp', correction: 'vinecraft.com'},
+        {type: 'SET_FLAG', key: 'mistake_11_code', value: 200},
         {type: 'SHOW', id: 'submit-button'}
       ]
     },
