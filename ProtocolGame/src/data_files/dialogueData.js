@@ -392,7 +392,6 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'read_manual_ch4'},
-        {type: 'UNLOCK', id: 'network'},
         {type: 'SET_FLAG', key: 'mistake_4', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_4_code', value: 200 }
       ]
@@ -413,11 +412,16 @@ export const dialogueData =  {
     "dialogue_4" : {
       text: "הכלי החדש שנשתמש בוא הוא כלי בקרת התקשורת, הוא נראה כמו סימן אנטננה. ",
       next: "dialogue_5",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'aquired_item', value: 'network'},
+        {type: 'UNLOCK', id: 'network'},
+      ]
     },
 
     "dialogue_5" : {
       text: "תלחץ על הסימן שלו",
       next: "dialogue_6",
+      onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: null}],
       waitFor: { completed: "networkChecked"}
     },
 
@@ -840,10 +844,7 @@ export const dialogueData =  {
     "dialogue_3": {
       text: `תפתח את המכתב ששלחתי לך בשביל להתנסות בו.`,
       next: "dialogue_4",
-      onEnter: [
-        {type: 'MARK_COMPLETED', id: 'update_mail'},
-        {type: 'UNLOCK', id: 'terminal'}
-      ],
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: { completed: "opened_letter"}
     },
     "dialogue_4": {
@@ -853,12 +854,17 @@ export const dialogueData =  {
     "dialogue_5" : {
       text: `אתה רואה את האייקון החדש שנראה כמו מסך שחור? זה כלי הטרמינל שלך. לחץ עליו.`,
       character: "daniel",
-      waitFor: { visible: 'using_terminal' },
       next: "dialogue_6",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'aquired_item', value: 'terminal'},
+        {type: 'UNLOCK', id: 'terminal'}
+      ],
+      waitFor: { visible: 'using_terminal' },
     },
     "dialogue_6" : {
       text: `הכלי הזה מבצע פקודות, ומוסיף את המידע החדש למכתב, אבל רק עם הפקודות נכתבו נכון.`,
-      next: "dialogue_7"
+      next: "dialogue_7",
+      onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: null}]
     },
 
     "dialogue_7" : {
@@ -1178,7 +1184,9 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_10', value: 'terminal'},
-        {type: `SET_FLAG`, key: 'mistake_10_command', value: 'ssh mel@10.0.0.1'}]
+        {type: `SET_FLAG`, key: 'mistake_10_command', value: 'ssh mel@10.0.0.1'}
+      ],
+      globalWait: {id: 'shy_letter', from: 'dialogue_8', to: 'dialogue_9', condition: {flag: 'letter_state'}, destination: "dialogue_special_1"}
     },
     "dialogue_2" : {
       text: `...בבקשה רק...אל תקרא את המכתב`,
@@ -1219,8 +1227,8 @@ export const dialogueData =  {
       text: `זה הכל, אתה יכול לשלוח את המכתב עכשיו.`,
       emotion: "shy",
       onEnter: [{type: 'SHOW', id: 'submit-button'}],
-      next: (state) => state.flags.letter_state ? 'dialogue_special_1' : 'dialogue_9',
-      waitFor: { completedAny: [{completed : 'submit'}, {flag: 'letter_state'}] }
+      next: 'dialogue_9',
+      waitFor: {completed : 'submit'},
     },
     "dialogue_9" : {
       text: `תודה`,
@@ -1592,7 +1600,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_1_14', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_1_14_command', value: 'terminal monitor'}
-      ]
+      ],
+      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_20', conditon: {visible: 'pop_up'}, destination: 'dialogue_special_1'}
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,

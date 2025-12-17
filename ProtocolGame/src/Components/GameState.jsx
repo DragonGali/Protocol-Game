@@ -15,8 +15,9 @@ const initialState = {
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network", "terminal"]),// Things player can use
   visible: new Set(),// Things player can see
   flags: {// indicators and such
-    currentChapter: 1,
-  },                   
+    currentChapter: 10,
+  },
+  globalWaits: []             
 };
 
 function gameStateReducer(state, action) {
@@ -90,6 +91,21 @@ function gameStateReducer(state, action) {
 
     case 'RESET_FLAGS':
       return { ...state, flags: {} };
+
+    case 'ADD_GLOBAL_WAIT':
+      return {
+        ...state,
+        globalWaits: [...state.globalWaits, action.wait]
+    };
+
+    case 'REMOVE_GLOBAL_WAIT':
+      const updatedWaits = (state.flags.activeGlobalWaits || []).filter(
+        gWait => gWait.id !== action.id
+      );
+      return {
+        ...state,
+        flags: { ...state.flags, activeGlobalWaits: updatedWaits }
+      };
       
     default:
       return state;
