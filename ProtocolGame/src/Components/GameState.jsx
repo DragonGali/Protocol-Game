@@ -9,13 +9,17 @@ const initialState = {
   currentCharacter: null,
   currentEmotion: null,
   isTalking: false,
+
+  //for globalWait
+  prevDialogue: null,
   
   // GENERIC tracking
   completed: new Set(),// Things player has done
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network", "terminal"]),// Things player can use
   visible: new Set(),// Things player can see
   flags: {// indicators and such
-    currentChapter: 10,
+    currentChapter: 14,
+    link_state: false
   },
   globalWaits: []             
 };
@@ -26,6 +30,7 @@ function gameStateReducer(state, action) {
       return {
         ...state,
         currentDialogue: action.dialogueId,
+        prevDialogue: action.prevDialogue || state.currentDialogue,
         dialogueType: action.dialogueType,
         currentEmotion: action.emotion || state.currentEmotion,
         currentCharacter: action.character || state.currentCharacter,
@@ -92,11 +97,26 @@ function gameStateReducer(state, action) {
     case 'RESET_FLAGS':
       return { ...state, flags: {} };
 
-    case 'ADD_GLOBAL_WAIT':
-      return {
-        ...state,
-        globalWaits: [...state.globalWaits, action.wait]
+  case 'ADD_GLOBAL_WAIT': {
+    const wait = action.wait;
+
+    // Hard requirement: every globalWait MUST have an id
+    if (!wait?.id) {
+      console.error('GlobalWait missing id:', wait);
+      return state;
+    }
+
+    // Prevent duplicates
+    if (state.globalWaits.some(w => w.id === wait.id)) {
+      return state;
+    }
+
+    return {
+      ...state,
+      globalWaits: [...state.globalWaits, wait]
     };
+  }
+
 
     case 'REMOVE_GLOBAL_WAIT':
       const updatedWaits = (state.flags.activeGlobalWaits || []).filter(

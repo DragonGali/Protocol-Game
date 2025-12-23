@@ -1601,7 +1601,7 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_1_14', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_1_14_command', value: 'terminal monitor'}
       ],
-      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_20', conditon: {visible: 'pop_up'}, destination: 'dialogue_special_1'}
+      globalWait: {id: 'personal_photo', from: 'dialogue_2', to: 'dialogue_20', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
@@ -1694,6 +1694,12 @@ export const dialogueData =  {
       text: `זה לא מספיק, לפעמים ההודעות האלו לא חושפות הכול. צריך לבדוק לעומק מה קורה עם החבילות עצמן.`,
       emotion: "confident",
       next: "dialogue_20"
+    },
+    "dialogue_special_1" : {
+      text: `...`,
+      emotion: "emberassed",
+      next: (state) =>  state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'link_state', value: null}]
     }
 
   }

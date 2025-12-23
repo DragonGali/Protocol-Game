@@ -17,14 +17,15 @@ const DialogueManager = ({
 }) => {
 
   const { state, dispatch } = useGameState();
-  const [waitingFor, setWaitingFor] = useState(null);
-  const [textDone, setTextDone] = useState(false);
-  const prevChapterRef = useRef(state.flags.currentChapter);
+  const [waitingFor, setWaitingFor] = useState(null); // What condition is this dialogue waiting for?
+  const [textDone, setTextDone] = useState(false); // Has the typewriter finished?
+  const prevChapterRef = useRef(state.flags.currentChapter); // Track chapter changes
 
   const chapterKey = `chapter_${state.flags.currentChapter}`;
 
   /* -------------------- CONDITIONS -------------------- */
 
+  // Check if a single condition is met (completed, flag, or visible)
   const checkCondition = (cond) => {
     if (cond.completed && !hasCompleted(state, cond.completed)) return false;
     if (cond.flag && !state.flags[cond.flag]) return false;
@@ -32,8 +33,9 @@ const DialogueManager = ({
     return true;
   };
 
+  // Evaluate waitFor - returns null (no wait), true (condition met), or false (condition not met)
   const evaluateWaitFor = (wait) => {
-    if (!wait) return true;
+    if (!wait) return null; // No condition = proceed immediately
     if (wait.completedAny) {
       return wait.completedAny.some(cond => checkCondition(cond));
     }
@@ -42,6 +44,8 @@ const DialogueManager = ({
 
   /* -------------------- GLOBAL WAIT -------------------- */
 
+  // Check if any global wait is active and its condition is met
+  // Global waits can interrupt dialogue flow at any point in a range
   const checkGlobalWait = () => {
     if (!state.currentDialogue) return null;
 
@@ -56,9 +60,11 @@ const DialogueManager = ({
       const fromNum = Number(gw.from.split("_")[1]);
       const toNum = Number(gw.to.split("_")[1]);
 
+      // Check if we're in the range and condition is met
       if (currentNum >= fromNum && currentNum <= toNum) {
-        if (evaluateWaitFor(gw.condition)) {
-          return gw;
+        const conditionMet = evaluateWaitFor(gw.condition);
+        if (conditionMet === true) {
+          return gw; // Found an active global wait
         }
       }
     }
@@ -68,6 +74,7 @@ const DialogueManager = ({
 
   /* -------------------- DIALOGUE SETUP -------------------- */
 
+  // Reset dialogue when chapter changes or type changes
   useEffect(() => {
     if (state.flags.currentChapter !== prevChapterRef.current) {
       prevChapterRef.current = state.flags.currentChapter;
@@ -77,6 +84,7 @@ const DialogueManager = ({
     }
   }, [startDialogueId, dialogueType, state.flags.currentChapter]);
 
+  // Load a dialogue and run its setup (onEnter actions, waitFor, globalWait)
   const setDialogue = (dialogueId) => {
     const dialogue = dialogueData[dialogueType]?.[chapterKey]?.[dialogueId];
     if (!dialogue) return;
@@ -89,10 +97,12 @@ const DialogueManager = ({
       character: dialogue.character || null
     });
 
+    // Run setup actions (show/hide, set flags, etc.)
     if (dialogue.onEnter) {
       dialogue.onEnter.forEach(action => dispatch(action));
     }
 
+    // Register global waits for this dialogue
     if (dialogue.globalWait) {
       dispatch({
         type: 'ADD_GLOBAL_WAIT',
@@ -111,7 +121,9 @@ const DialogueManager = ({
 
   /* -------------------- ADVANCE -------------------- */
 
+  // Move to next dialogue (checks global waits first, then evaluates next)
   const advanceDialogue = () => {
+    // Check global waits FIRST - they have highest priority
     const globalWait = checkGlobalWait();
     if (globalWait) {
       setDialogue(globalWait.destination);
@@ -132,33 +144,42 @@ const DialogueManager = ({
     }
   };
 
-  /* -------------------- WAIT EFFECT -------------------- */
-
+  /* -------------------- ADVANCEMENT LOGIC -------------------- */
+  
+  // Single effect handling all dialogue advancement
+  // This runs when text finishes typing or any state changes
   useEffect(() => {
-    if (!waitingFor || !textDone) return;
-    if (evaluateWaitFor(waitingFor)) {
-      advanceDialogue();
-    }
-  }, [waitingFor, textDone, state.completed, state.flags, state.visible]);
+    if (!textDone) return; // Don't advance until text is done
 
-  /* -------------------- GLOBAL WAIT EFFECT -------------------- */
+    const currentDialogue = getCurrentDialogue();
+    if (!currentDialogue) return;
 
-  useEffect(() => {
-    if (!textDone) return;
-
+    // Check for global wait override (highest priority)
     const globalWait = checkGlobalWait();
     if (globalWait) {
       setDialogue(globalWait.destination);
       dispatch({ type: 'REMOVE_GLOBAL_WAIT', id: globalWait.id });
+      return;
     }
-  }, [textDone, state.completed, state.flags, state.visible]);
+
+    // Evaluate this dialogue's waitFor condition
+    const waitConditionStatus = evaluateWaitFor(waitingFor);
+
+    // Auto-advance only if there's a waitFor AND its condition is met
+    if (waitingFor && waitConditionStatus === true) {
+      advanceDialogue();
+    }
+    // Otherwise, stay on screen for player to click
+  }, [textDone, waitingFor, state.completed, state.flags, state.visible, state.globalWaits]);
 
   /* -------------------- RENDER -------------------- */
 
   const currentDialogue = getCurrentDialogue();
   if (!currentDialogue) return null;
 
-  const waiting = !evaluateWaitFor(waitingFor);
+  const waitConditionStatus = evaluateWaitFor(waitingFor);
+  // Block UI only if waitFor exists but condition is FALSE
+  const isBlocked = waitingFor && waitConditionStatus === false;
   const textSpeed = currentDialogue.speed || defaultSpeed;
 
   return (
@@ -182,14 +203,14 @@ const DialogueManager = ({
           }
           speed={textSpeed}
           onTypingComplete={() => setTimeout(() => setTextDone(true), 2000)}
-          autoAdvance={waitingFor && !waiting}
-          showTriangle={!waiting}
+          autoAdvance={false}
+          showTriangle={!isBlocked} // Hide triangle if blocked by unmet condition
           triangleColor={triangleColor}
           triangleSize={triangleSize}
           triangleMargin={triangleMargin}
           textSize={textSize}
           fontSize={currentDialogue.fontSize || null}
-          onComplete={!waiting ? advanceDialogue : null}
+          onComplete={!isBlocked ? advanceDialogue : null} // Only allow clicks if not blocked
         />
       )}
 

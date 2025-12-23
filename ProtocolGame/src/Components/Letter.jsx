@@ -72,6 +72,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     } else {
       // Normal behavior
       openPopUp(displayLink, displayLinkSource);
+      dispatch({type: 'SET_FLAG', key: 'link_state', value: true});
     }
   };
 
