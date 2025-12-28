@@ -29,14 +29,22 @@ export const terminalData = {
     chapter_13 : {
         line_1: `sysStatus.0 = up`,
     },
-    chapter_14 : {
+    chapter_14_1 : {
         line_1: `*Mar  1 00:01:04.123: %LINK-3-UPDOWN:`,
         line_2: `Interface GigabitEthernet1/0/1`,
         line_3: `changed state to up`,
         line_4: `*Mar  1 00:01:05.456: %LINEPROTO-5-`,
         line_5: `UPDOWN: Line protocol on Interface`,
         line_6: `GigabitEthernet1/0/1, changed state to down`
-    }
+    },
+    chapter_14_2 : {
+        line_1: `[DEBUG] מעקב אחרי חבילות IP...`,
+        line_2: `חבילה 1: תקינה`,
+        line_3: `חבילה 2: תקינה`,
+        line_4: `<span style='color:var(--red)'>חבילה 3: שגיאה — שדה HEADER חסר</span>`,
+        line_5: `חבילה 4: תקינה`,
+        line_6: `נדרש תיקון לפני המשך שליחה.`
+        }
 }
 
 export default terminalData;

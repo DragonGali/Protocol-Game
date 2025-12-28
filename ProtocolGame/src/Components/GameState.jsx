@@ -97,35 +97,32 @@ function gameStateReducer(state, action) {
     case 'RESET_FLAGS':
       return { ...state, flags: {} };
 
-  case 'ADD_GLOBAL_WAIT': {
-    const wait = action.wait;
+    case 'ADD_GLOBAL_WAIT': {
+      const wait = action.wait;
 
-    // Hard requirement: every globalWait MUST have an id
-    if (!wait?.id) {
-      console.error('GlobalWait missing id:', wait);
-      return state;
+      // Hard requirement: every globalWait MUST have an id
+      if (!wait?.id) {
+        console.error('GlobalWait missing id:', wait);
+        return state;
+      }
+
+      // Prevent duplicates
+      if (state.globalWaits.some(w => w.id === wait.id)) {
+        return state;
+      }
+
+      return {
+        ...state,
+        globalWaits: [...state.globalWaits, wait]
+      };
     }
-
-    // Prevent duplicates
-    if (state.globalWaits.some(w => w.id === wait.id)) {
-      return state;
-    }
-
-    return {
-      ...state,
-      globalWaits: [...state.globalWaits, wait]
-    };
-  }
 
 
     case 'REMOVE_GLOBAL_WAIT':
-      const updatedWaits = (state.flags.activeGlobalWaits || []).filter(
-        gWait => gWait.id !== action.id
-      );
       return {
         ...state,
-        flags: { ...state.flags, activeGlobalWaits: updatedWaits }
-      };
+        globalWaits: state.globalWaits.filter(gWait => gWait.id !== action.id)
+    };
       
     default:
       return state;

@@ -93,6 +93,7 @@ const DialogueManager = ({
       type: 'SET_DIALOGUE',
       dialogueId,
       dialogueType,
+      prevDialogue: dialogueData[dialogueType][chapterKey][state.currentDialogue]?.noPrev ? state.prevDialogue : state.currentDialogue,
       emotion: dialogue.emotion || null,
       character: dialogue.character || null
     });

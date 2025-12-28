@@ -10,14 +10,24 @@ const Terminal = ({ onClose }) => {
 
   useDragger("Terminal");
 
-  // always "focused" so caret blinks and keyboard input is captured
-  const [focused] = useState(true);
+  // terminal focus
   const terminalRef = useRef(null);
 
+  // input & history
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
-  const [outcome, setOutcome] = useState(null);
-  const data = terminalData[`chapter_${currentChapter}`];
+
+  // track WHICH mistake was solved
+  const [solvedMistake, setSolvedMistake] = useState(null);
+
+  // derive terminal text key from solved mistake
+  const terminalChapterKey = solvedMistake
+    ? solvedMistake.replace('mistake_', 'chapter_')
+    : null;
+
+  const data = terminalChapterKey
+    ? terminalData[terminalChapterKey]
+    : null;
 
   useEffect(() => {
     terminalRef.current?.focus();
@@ -46,22 +56,25 @@ const Terminal = ({ onClose }) => {
     };
 
     const checkCommand = (input) => {
-      // Loop through all possible mistakes for this chapter
-      const mistakes = Object.keys(state.flags).filter(
+      // find active terminal mistakes for this chapter
+      const activeMistakes = Object.keys(state.flags).filter(
         (key) =>
           key.startsWith(`mistake_${currentChapter}_`) &&
           state.flags[key] === 'terminal'
       );
 
-      for (let mistakeKey of mistakes) {
+      for (const mistakeKey of activeMistakes) {
         const expectedCommand = state.flags[`${mistakeKey}_command`];
+
         if (input === expectedCommand) {
-          setOutcome('success');
+          setSolvedMistake(mistakeKey);
+
           dispatch({
             type: 'MARK_COMPLETED',
             id: mistakeKey,
           });
-          break; // stop after first match
+
+          break;
         }
       }
     };
@@ -77,6 +90,7 @@ const Terminal = ({ onClose }) => {
           src="./General/close-button.png"
           onClick={onClose}
           className="close-button clickable"
+          alt="Close"
         />
       </div>
 
@@ -89,27 +103,37 @@ const Terminal = ({ onClose }) => {
       >
         {history.map((line, i) => (
           <div className="terminal-line" key={`h-${i}`}>
-            <span className='prompt'>C:\Users\Admin&gt;</span>
+            <span className="prompt">C:\Users\Admin&gt;</span>
             <span className="terminal-text">{line}</span>
           </div>
         ))}
 
-        {outcome && <img src='/General/Checkmark.png' className='outcome-symbol'/>}
-        {outcome &&
-          <div className='terminal-outcome-text'>
+        {solvedMistake && (
+          <img
+            src="/General/Checkmark.png"
+            className="outcome-symbol"
+            alt="Success"
+          />
+        )}
+
+        {solvedMistake && data && (
+          <div className="terminal-outcome-text">
             {Object.values(data).map((line, idx) => (
-              <div key={idx}><div dangerouslySetInnerHTML={{__html: line}} /></div>
+              <div
+                key={idx}
+                dangerouslySetInnerHTML={{ __html: line }}
+              />
             ))}
           </div>
-        }
+        )}
 
-        {!outcome &&
+        {!solvedMistake && (
           <div className="terminal-line" aria-live="polite">
-            <span className='prompt'>C:\Users\Admin&gt;</span>
+            <span className="prompt">C:\Users\Admin&gt;</span>
             <span className="terminal-text">{input}</span>
-            <span className={`caret blink`} />
+            <span className="caret blink" />
           </div>
-        }
+        )}
       </div>
     </div>
   );

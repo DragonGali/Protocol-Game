@@ -140,7 +140,8 @@ export const monitorData = {
         port: 13,
         text: `אתמול פגשתי משהוא ממש נחמד, קוראים  לו לירון. הוא אהב את קבוצת הרוק שאני מקשיבה עליה, ועזר להחזיר לי את התיק שלי...הנא תמונה שלקחתי. `,
         link: 'אני ולירון.png',
-        imgLink: '/Monitor/pop_ups/melAndLiron.png'
+        imgLink: '/Monitor/pop_ups/melAndLiron.png',
+        header: "------"
     }
 }
 

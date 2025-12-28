@@ -1599,13 +1599,15 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_14_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_14_1_command', value: 'terminal monitor'}
+        {type: 'SET_FLAG', key: 'mistake_14_1_command', value: 'terminal monitor'},
+        {type: 'SET_FLAG', key: 'mistake_14_stamp', value: 'header'}
       ],
-      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_20', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
+      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_21', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
-      next: 'dialogue_3'
+      next: 'dialogue_3',
+      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_25', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'}
     },
     "dialogue_3" : {
       text: `כיוון שכבר הגעתי... רציתי לשלוח את זה, אבל... זה מכתב מיוחד. חייבים לוודא שהמערכת תקינה לפני ששולחים אותו, אחרת הוא לא יגיע ליעד.`,
@@ -1615,7 +1617,7 @@ export const dialogueData =  {
     "dialogue_4" : {
       text: `[מכתב מיוחד...נשמע מעניין]`,
       name: "אני",
-      next: "dialogue_5"
+      next: "dialogue_5",
     },
     "dialogue_5" : {
       text: `[אוקיי, בואו נקרא עליו]`,
@@ -1710,19 +1712,105 @@ export const dialogueData =  {
     "dialogue_21" : {
       text: `הממ... נראה שיש חבילה עם שדה חסר.`,
       name: "אני",
-      next: "dialogue_22"
+      emotion: "confident",
+      next: (state) => state.completed['mistake_14_stamp'] ? "dialogue_alt_1" : "dialogue_22" 
+    },
+    "dialogue_22" : {
+      text: `זה כנראה בתוך המכתב עצמו, תנסה למצוא את השגיאה.`,
+      next: (state) => state.flags['stampedElement'] === 'header' ? "dialogue_23" : "dialogue_mistake_1_1",
+      emotion: "confident",
+      waitFor: {flag: 'stampedElement'}
+    },
+    "dialogue_23" : {
+      text: `אני רואה מה חסר פו עכשיו, אין HEADER במכתב הזה.`,
+      name: "אני",
+      emotion: "confident",
+      next: "dialogue_24"
+    },
+    "dialogue_24" : {
+      text: `כן, אני אתקן את זה.`,
+      next: "dialogue_25",
+      emotion: "confident",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: 'mistake_14_stamp', correction: '------HEADER------'},
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_25" : {
+      text: ' וואו, הצלחנו לפתור את זה ביחד, את עזרת לי ממש, תודה.',
+      name: "אני",
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+      next: "dialogue_26"
+    },
+    "dialogue_26" : {
+      text: `ב-בשמחה...`,
+      emotion: "happy",
+      next: null
     },
     "dialogue_special_1" : {
       text: `...`,
       emotion: "emberassed",
       next: (state) =>  state.prevDialogue,
       onEnter: [{type: 'SET_FLAG', key: 'link_state', value: null}]
+    },
+    "dialogue_mistake_1_1" : {
+      text: `אני חושבת שסימנתה משהוא אחר...`,
+      emotion: "shy",
+      next: "dialogue_mistake_1_2"
+    },
+    "dialogue_mistake_1_2" : {
+      text: `אה! סליחה אני אנסה שוב`,
+      name: "אני",
+      next: "dialogue_22",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+    },
+    "early_stamp_1" : {
+      text: `[יש לי הרגשה שמשהוא לא נכון בשורה הזאתי...]`,
+      name: "אני",
+      next: (state) => state.flags['stampedElement'] === 'header' ? 'early_stamp_2' : "early_stamp_mistake_1_1",
+      noPrev: true
+    },
+    "early_stamp_2" : {
+      text: `מצאתי שבמכתב הזה חסר HEADER`,
+      name: "אני",
+      next: "early_stamp_3",
+      noPrev: true
+    },
+    "early_stamp_3" : {
+      text: `אה...באימת? אפילו לא סיימנו להריץ את כל הפקודות וכבר מצאתה את הטעות.`,
+      emotion: "surprised",
+      next: "early_stamp_4",
+      noPrev: true
+    },
+    "early_stamp_4" : {
+      text: `אני אתקן את הטעות אחר כך, בואו נחזור למה שעשינו`,
+      emotion: "neutral",
+      next: (state) => state.prevDialogue,
+      noPrev: true
+    },
+    "early_stamp_mistake_1_1" : {
+      text: `יש שגיאה בשורה הזאתי`,
+      name: "אני",
+      next: "early_stamp_mistake_1_2",
+      noPrev: true
+    },
+    "early_stamp_mistake_1_2" : {
+      text: `כן? מצאתה משהוא?`,
+      emotion: "surprised",
+      next: "early_stamp_mistake_1_3",
+      noPrev: true
+    },
+    "early_stamp_mistake_1_3" : {
+      text: 'אממ...לא את צודקת כדאי לנו לסיים להריץ את הפקודות בהתחלה.',
+      name: "אני",
+      emotion: "neutral",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      next: (state) => state.prevDialogue,
+      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_22', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'},
+      noPrev: true
     }
-  },
-  "chapter_15" : {
-
-  }
-}
+}}
     
 }
 

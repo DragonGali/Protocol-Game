@@ -111,10 +111,8 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const displayLink = getDisplayValue('link', data.link, link.mistakeKey);
   const displayLinkSource = getDisplayValue('imgLink', data.imgLink, imgLink.mistakeKey);
   const displayText = getDisplayValue('text', data.text, text.mistakeKey);
-  const displayHeader = getDisplayValue('header', "------<HEADER>------", header.mistakeKey);
-  const displayFooter = state.flags.currentChapter === 1 && !footer.isCompleted
-    ? "------"
-    : getDisplayValue('footer', "---<FOOTER>---", footer.mistakeKey);
+  const displayHeader = data.header ? getDisplayValue('header', data.header, header.mistakeKey) : '------HEADER------';
+  const displayFooter = data.footer ? getDisplayValue('footer', data.footer, footer.mistakeKey) : '---FOOTER---';
 
   const displaySourceAddress = getDisplayValue('src-address', data.sourceAddress, srcAddress.mistakeKey) 
   return (
