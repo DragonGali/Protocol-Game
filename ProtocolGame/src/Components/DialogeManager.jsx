@@ -13,7 +13,7 @@ const DialogueManager = ({
   triangleSize = "1.5vw",
   triangleMargin = "0 1vw 0 0",
   textSize = "var(--font-regular)",
-  defaultSpeed = 60
+  defaultSpeed = 10 //60
 }) => {
 
   const { state, dispatch } = useGameState();

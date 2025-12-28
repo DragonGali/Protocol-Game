@@ -1598,10 +1598,10 @@ export const dialogueData =  {
       character: "mel",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_14', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_1_14_command', value: 'terminal monitor'}
+        {type: 'SET_FLAG', key: 'mistake_14_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_14_1_command', value: 'terminal monitor'}
       ],
-      globalWait: {id: 'personal_photo', from: 'dialogue_2', to: 'dialogue_20', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
+      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_20', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
@@ -1682,12 +1682,14 @@ export const dialogueData =  {
     "dialogue_17" : {
       text: `[אוקיי...אני מחפש פקודת Terminal monitor כדי להדפיס הודעות מערכת.]`,
       name: "אני",
+      emotion: "shy",
       next: "dialogue_18",
-      waitFor: {completed: 'mistake_1_14'}
+      waitFor: {completed: 'mistake_14_1'}
     },
     "dialogue_18" : {
       text: `טוב... אני רואה את ההודעות. לא נראה שיש פה בעיות.`,
       name: "אני",
+      emotion: "shy",
       next: "dialogue_19"
     },
     "dialogue_19" : {
@@ -1695,12 +1697,29 @@ export const dialogueData =  {
       emotion: "confident",
       next: "dialogue_20"
     },
+    "dialogue_20" : {
+      text: `אנחנו מחפשים פקודה שתיתן נו ראות שגיעות בתעבורה, היא מתחילה במילה <span style='color:var(--blue)'>debug</span>`,
+      emotion: "confident",
+      next: "dialogue_21",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_14_2_command', value: 'debug ip packet'},
+        {type: 'SET_FLAG', key: 'mistake_14_2', value: 'terminal'}
+      ],
+      waitFor: {completed: 'mistake_14_2'}
+    },
+    "dialogue_21" : {
+      text: `הממ... נראה שיש חבילה עם שדה חסר.`,
+      name: "אני",
+      next: "dialogue_22"
+    },
     "dialogue_special_1" : {
       text: `...`,
       emotion: "emberassed",
       next: (state) =>  state.prevDialogue,
       onEnter: [{type: 'SET_FLAG', key: 'link_state', value: null}]
     }
+  },
+  "chapter_15" : {
 
   }
 }

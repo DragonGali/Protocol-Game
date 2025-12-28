@@ -38,7 +38,7 @@ const TypewriterText = ({
   text,
   onComplete,
   onTypingComplete,
-  speed = 50,
+  speed = 60,
   delayAfterComplete = 1000,
   textColor,
   triangleColor,

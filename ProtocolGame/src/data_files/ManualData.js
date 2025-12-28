@@ -220,46 +220,72 @@ export const manualData = {
                 }
             }
         },
-        "chapter_14" : {
+       "chapter_14" : {
             title: 'פרוטוקולי שירות',
             pages: {
                 "page_1" : {
-                    "line_1" : `פרוטוקולי שירות הם פרוטוקולים שנועדו לסייע לטכנאים ולמנהלי רשתות לנהל ולנטר את הרשת בצורה קלה יותר. הם אינם מיועדים לשימוש ישיר של לקוחות, אלא מספקים כלים לפתרון בעיות ולבקרה.`,
-                    "line_2" : `שני פרוטוקולים חשובים בתחום זה הם Terminal Monitor ו- Debug, המאפשרים לנטר הודעות ופעולות בזמן אמת.`
+                "line_1" : `פרוטוקולי שירות הם פרוטוקולים שנועדו לסייע לטכנאים ולמנהלי רשתות לנהל, לנטר ולפתור בעיות ברשת.`,
+                "line_2" : `פרוטוקולים אלו אינם מיועדים לשימוש רגיל של משתמשים, אלא מספקים כלים לזיהוי תקלות ובקרה.`,
+                "line_3" : `בפרק זה נלמד כיצד לצפות בהודעות מערכת וכיצד לבדוק לעומק את התעבורה עצמה. לשם כך נשתמש ב- Terminal Monitor ובפקודות Debug.`,
                 },
+
                 "page_2" : {
-                    "line_1" : `<span style='font-size:var(--font-title-large)'>Terminal Monitor</span>`,
-                    "line_2" : `במהלך העבודה, רכיבים ברשת (כמו נתבים ומתגים) עשויים לשלוח לעצמם הודעות לוג (LOG) — לדוגמה, בעת שגיאה או אירוע חשוב, המכשיר רושם לעצמו את מה שקרה ואת הזמן המדויק.`,
-                    "line_3" : `באמצעות הפקודה <span style='color:var(--blue)'>terminal monitor</span>, ניתן לצפות בהודעות אלו בזמן אמת בחלון ה-Line אליו אנו מחוברים`
+                "line_1" : `<span style='font-size:var(--font-title-large)'>Terminal Monitor</span>`,
+                "line_2" : `רכיבי רשת כמו נתבים ומתגים רושמים לעצמם הודעות מערכת (LOG) בעת אירועים חשובים או שגיאות.`,
+                "line_3" : `הודעות אלו אינן מוצגות אוטומטית למסך.`,
+                "line_4" : `באמצעות הפקודה <span style='color:var(--blue)'>terminal monitor</span> ניתן לצפות בהן בזמן אמת.`
                 },
+
                 "page_3" : {
-                    "line_1" : `כדי להפסיק את הצגת ההודעות, יש להשתמש בפקודה:<span style='color:var(--blue)'>no terminal monitor</span>.`,
-                    "line_2" : 'דוגמה לשימוש(במחשב אמיתי):',
-                    "line_3" : 'SW-1-150-R# terminal monitor',
-                    "line_4" : 'SW-1-150-R# no terminal monitor'
+                "line_1" : `לאחר הפעלת Terminal Monitor, הודעות מערכת יוצגו מיד כאשר מתרחש אירוע.`,
+                "line_2" : `הפקודה שימושית לזיהוי תקלות כלליות, ניתוקים ואירועים חריגים.`,
+                "line_3" : `כדי להפסיק את הצגת ההודעות יש להשתמש בפקודה:`,
+                "line_4" : `<span style='color:var(--blue)'>no terminal monitor</span>`
                 },
+
                 "page_4" : {
-                    "line_1" : `<span style='font-size:var(--font-title-large)'>Debug</span>`,
-                    "line_2" : `הפקודה debug מיועדת לנטר פעולות ברשת בצורה מפורטת יותר מה- Terminal Monitor. באמצעותה ניתן לעקוב אחרי פרוטוקולים, ממשקים וקשרים בזמן אמת.`,
-                    "line_3" : `הפעלת הניטור:`,
-                    "line_4" : `<span style='direction:ltr; display:block'>debug &lt;restraint list&gt;</span>`
+                "line_1" : `<span style='font-size:var(--font-title-large)'>Debug</span>`,
+                "line_2" : `לעיתים הודעות LOG אינן מציגות את מקור הבעיה.`,
+                "line_3" : `פקודת Debug מאפשרת לנטר את פעולת הרשת ברמה נמוכה ומפורטת יותר.`,
+                "line_4" : `באמצעות Debug ניתן לראות מה קורה בפועל בזמן אמת.`
                 },
+
                 "page_5" : {
-                    "line_1" : `דוגמאות ל- restraint list:`,
-                    "line_2" : `debug ip packet, debug ip rip, debug interface serial 0/1`,
-                    "line_3" : 'כיבוי ניטור ספציפי: <span style="display:block;direction:ltr;">undebug &lt;restraint list&gt;</span>',
-                    "line_4" : 'כיבוי כל הניטורים: undebug all'
+                "line_1" : `הפעלת Debug מתבצעת באמצעות פקודה כללית ולאחריה תחום הניטור הרצוי:`,
+                "line_2" : `<span style='direction:ltr; display:block'>debug &lt;restraint list&gt;</span>`,
+                "line_3" : `כל restraint list מגדיר איזה חלק במערכת ינוטר.`,
+                "line_4" : `יש לבחור את הרשימה המתאימה לסוג התקלה.`
                 },
+
                 "page_6" : {
-                    "line_1" : `דוגמה בסיסית:<span style="display:block;direction:ltr;">rl-notz# debug ip packet,rl-notz# undebug all</span>`,
-                    "line_2" : `<span style='font-size:var(--font-title-large)'>אפשרויות DEBUG</span>`,
-                    "line_3" : `לאחר הקלדת הפקודה debug ולאחריה סימן השאלה (?) ניתן לראות רשימה של אפשרויות ניטור זמינות:`,
-                    "line_4" : `<span data-event="SHOW:manual_command_table" class="manual-event clickable">לחצו פה לפתיחת הטבלא</span>`
+                "line_1" : `<span style='font-size:var(--font-title-large);color:var(--blue)'>debug ip packet</span>`,
+                "line_2" : `פקודה זו מציגה כל חבילת IP שנשלחת או מתקבלת במערכת.`,
+                "line_3" : `באמצעותה ניתן לראות שגיאות בתעבורה שלא נרשמות בלוגים רגילים.`,
+                "line_4" : `הפקודה שימושית כאשר המערכת נראית תקינה אך ההודעה אינה מגיעה ליעד.`
                 },
+
                 "page_7" : {
-                    "line_1" : `באמצעות הפקודה הזו ניתן לנטר קשרי שכנות, ARP, פרוטוקולים כמו BGP, RIP, ועוד. איננו ניכנס לעומק של כל האפשרויות, אך חשוב להכיר את הפקודה ולהבין שניתן להתאים אותה למצבים שונים.`
+                "line_1" : `<span style='font-size:var(--font-title-large)'>דוגמאות נוספות ל- Debug</span>`,
+                "line_2" : `debug ip rip — לניטור הודעות ועדכונים של פרוטוקול ניתוב RIP.`,
+                "line_3" : `debug interface serial 0/1 — לניטור פעילות ושגיאות בממשק פיזי מסוים.`,
+                "line_4" : `פקודות אלו משמשות לזיהוי בעיות ממוקדות יותר.`
+                },
+
+                "page_8" : {
+                "line_1" : `<span style='font-size:var(--font-title-large)'>כיבוי Debug</span>`,
+                "line_2" : `Debug מייצר כמות גדולה של מידע ועלול להציף את המסך.`,
+                "line_3" : `כיבוי ניטור ספציפי מתבצע באמצעות: <span style='color:var(--blue);direction:ltr;display:block'>undebug &lt;restraint list&gt;</span>.`,
+                "line_4" : `כיבוי כל הניטורים הפעילים: <span style='color:var(--blue)'>undebug all</span>.`
+                },
+
+                "page_9" : {
+                "line_1" : `דוגמה בסיסית לשימוש ב- Debug(במחשב אמיתי):`,
+                "line_2" : `<span style='direction:ltr; display:block'>rl-notz# debug ip packet</span>`,
+                "line_3" : `<span style='direction:ltr; display:block'>rl-notz# undebug all</span>`,
+                "line_4" : `יש להפעיל Debug רק כאשר יש צורך ברור בניטור מעמיק.`
                 }
+
             }
-        }
+            }
     }
 };
