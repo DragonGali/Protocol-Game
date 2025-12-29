@@ -48,7 +48,12 @@ export const terminalData = {
     chapter_15_1 : {
         line_1: `traceroute to 192.168.30.10 (192.168.30.10), 30 hops max, 60 byte packets`,
         line_2: ` 1  192.168.0.1        1.012 ms   0.932 ms   0.889 ms`,
-        line_3: ` 2  192.168.1.1        2.245 ms   2.013 ms   2.091 ms`
+        line_3: ` 2  192.168.1.1        2.245 ms   2.013 ms   2.091 ms`,
+        line_4: ` 3  10.0.5.1           3.723 ms   3.651 ms   3.691 ms`,
+        line_5: ` 4  *                 *          *         `,
+        line_6: ` 5  10.0.8.1           7.564 ms   7.423 ms   7.610 ms`,
+        line_7: ` 6  10.0.12.4          8.891 ms   8.779 ms   8.935 ms`,
+        line_8: ` 7  192.168.30.10      9.221 ms   9.187 ms   9.140 ms`
     }
 }
 

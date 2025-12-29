@@ -145,11 +145,18 @@ export const monitorData = {
         header: "------",
     },
     "chapter_15" : {
+        text: `שלום שמעון, מקווה שהכול בסדר. רציתי לשתף כמה רעיונות לטעמי קפה שיכולים להתאים למכונת הקפה שלנו, למקרה שאנחנו מתכננים להזמין מלאי חדש או לנסות משהו שונה.<br><br>אשמח לבדוק גם מחירים או מותגים אם תרצה.`,
         customerName: "מאיה",
         protocol: "FTP",
         sourceAddress: "198.51.100.10",
         destinationAddress: "203.0.113.25",
-        port: 110
+        port: 110,
+        link: "Coffee.gif [30 mgb]",
+        imgLink: "/Monitor/pop_ups/coffee.gif"
+    },
+    "chapter_16" : {
+        text: ``,
+        protocol: 'DHCP',
     }
 }
 

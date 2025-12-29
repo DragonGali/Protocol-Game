@@ -1878,7 +1878,30 @@ export const dialogueData =  {
     "dialogue_12" : {
       text: `בשביל להריץ אותה צריך לרשום:\n "<span style="color: var(--blue)">[כתובת יעד IP]</span> traceroute" בתוך הורמינל.`,
       next: "dialogue_13",
-      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'mistake_15_1'}
+    },
+    "dialogue_13" : {
+      text: `כן אני רואה את הבעיה.`,
+      name: "אני",
+      next: "dialogue_14",
+      emotion: "confused",
+    },
+    "dialogue_14" : {
+      text: `[טוב שיניתי "משהוא" בוא נראה עם המכתב נשלח]`,
+      name: "אני",
+      next: "dialogue_15",
+      emotion: "neutral",
+      onEnter: [
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_15" : {
+      text: `תודה! אני חושבת שזה הפעם האחרונה שניפגש, בזכותך אני עושה הרבה יותר פחות בעיות, אני מעוד מעריכה את זה.`,
+      emotion: "happy",
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+      next: null
     },
     "dialogue_mistake_1_1" : {
       text: `[לא! אני לא רוצה להיראות טיפשי שוב. צריכה להיות פה תשובה אחרת.]`,
@@ -1886,9 +1909,46 @@ export const dialogueData =  {
       next: "dialogue_9",
       emotion: "confused",
     }
-  }
+  },
+  "chapter_16" : {
+    "dialogue_1" : {
+      text: `היי, התגעגעת עליי?`,
+      character: "liyor",
+      emotion: "happy",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_16', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_16_code', value: 103}
+      ]
+    },
+    "dialogue_2" : {
+      text: `תגיד, קניתי ראוטר חדש בשביל הסניף הזה, אבל נראה שאין אינטרנט. המחשב פה כאילו מנסה להתחבר... אבל כלום. אתה יכול לבדוק לי את זה?`,
+      emotion: "neutral",
+      next: "dialogue_3",
+    },
+    "dialogue_3" : {
+      text: `כן בטח, נשמע פשוט.`,
+      name: "אני",
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `[מוזר...המדריך שלי לא התעדכן]`,
+      name: "אני",
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `[טוב, אני לפחות יכול לבדוק את החיבור]`,
+      name: "אני",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'networkChecked'}
+    },
+    "dialogue_6" : {
+      text: `כן, כמו שאני רואה החבילה לא מגיעה לשרת.`,
+      name: "אני",
+      next: "dialogue_7"
+    }
   }    
-}
+}}
 
 
 
