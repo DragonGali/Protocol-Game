@@ -1607,7 +1607,7 @@ export const dialogueData =  {
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
       next: 'dialogue_3',
-      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_25', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'}
+      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_21', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'}
     },
     "dialogue_3" : {
       text: `כיוון שכבר הגעתי... רציתי לשלוח את זה, אבל... זה מכתב מיוחד. חייבים לוודא שהמערכת תקינה לפני ששולחים אותו, אחרת הוא לא יגיע ליעד.`,
@@ -1807,11 +1807,87 @@ export const dialogueData =  {
       emotion: "neutral",
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
       next: (state) => state.prevDialogue,
-      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_22', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'},
+      globalWait: {id: 'early_stamp', from: 'dialogue_16', to: 'dialogue_21', condition: {flag: 'stampedElement'}, destination: 'early_stamp_1'},
       noPrev: true
     }
-}}
-    
+  },
+  "chapter_15" : {
+    "dialogue_1" : {
+      text: `שלום, תודה שעזרתה לי בפעם שעברה.`,
+      character: "maya",
+      emotion: "happy",
+      next: "dialogue_2",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_15_1', value: 'terminal'},
+                {type: 'SET_FLAG', key: 'mistake_15_1_command', value: 'traceroute'}
+      ]
+    },
+    "dialogue_2" : {
+      text: `יש לי תקשורת איטית עם שרת מסוים. הוא עדיין מגיב, אבל הכל מרגיש איטי.`,
+      emotion: "neutral",
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: `הבוס שלי בקש ממני להשתמש בפקודת איתור בעיות, אבל...`,
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `אני לא בטוחה באיזו פקודת להשתמש.`,
+      emotion: "sad",
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text: `איזה סוג של איתור את צריכה לעשות?`,
+      name: "אני",
+      next: "dialogue_6",
+      emotion: "neutral"
+    },
+    "dialogue_6" : {
+      text: `הממ...הייתי רוצה להבין מאיפה התחילה התקלה, באיזה שלב החבילה התחילה להאט. `,
+      emotion: "confused",
+      next: "dialogue_7"
+    },
+    "dialogue_7" : {
+      text: `[אוקיי, פקודה שעוזרת למצוא את המקור של התקלה...כדאי לי לבדוק במדריך]`,
+      name: "אני",
+      next: "dialogue_8",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch15'}
+    },
+    "dialogue_8" : {
+      text: `קראתי את המדריך, ויש 4 פקודות אפשריות.`,
+      name: "אני",
+      next: "dialogue_9"
+    },
+    "dialogue_9" : {
+      text: `מצויין! ובאיזו אנחנו נשתמש?`,
+      emotion: "happy",
+      next: "dialogue_10"
+    },
+    "dialogue_10" : {
+      type: "question",
+      answers: ["Ping","Traceroute","Show Interface","Clear Counters"],
+      next: (state) => state.flags.selectedAnswer === 'Traceroute' ? "dialogue_11" : "dialogue_mistake_1_1",
+      waitFor: {flag: 'selectedAnswer'},
+      onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
+    },
+    "dialogue_11" : {
+      text: `אה! אני מכירה את הפקודה הזאתי. היא יכולה להדפיס את כל המסלול שעברה החבילה, זה יהיה שימושי.`,
+      emotion: "neutral",
+      next: "dialogue_12"
+    },
+    "dialogue_12" : {
+      text: `בשביל להריץ אותה צריך לרשום:\n "<span style="color: var(--blue)">[כתובת יעד IP]</span> traceroute" בתוך הורמינל.`,
+      next: "dialogue_13",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
+    },
+    "dialogue_mistake_1_1" : {
+      text: `[לא! אני לא רוצה להיראות טיפשי שוב. צריכה להיות פה תשובה אחרת.]`,
+      name: "אני",
+      next: "dialogue_9",
+      emotion: "confused",
+    }
+  }
+  }    
 }
 
 

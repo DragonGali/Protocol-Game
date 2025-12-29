@@ -44,7 +44,12 @@ export const terminalData = {
         line_4: `<span style='color:var(--red)'>חבילה 3: שגיאה — שדה HEADER חסר</span>`,
         line_5: `חבילה 4: תקינה`,
         line_6: `נדרש תיקון לפני המשך שליחה.`
-        }
+    },
+    chapter_15_1 : {
+        line_1: `traceroute to 192.168.30.10 (192.168.30.10), 30 hops max, 60 byte packets`,
+        line_2: ` 1  192.168.0.1        1.012 ms   0.932 ms   0.889 ms`,
+        line_3: ` 2  192.168.1.1        2.245 ms   2.013 ms   2.091 ms`
+    }
 }
 
 export default terminalData;

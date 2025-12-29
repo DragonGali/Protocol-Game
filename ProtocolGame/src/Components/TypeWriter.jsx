@@ -135,7 +135,12 @@ const TypewriterText = ({
           )}{" "}
           {typedSegments.map((part, i) => (
             <span key={i} style={part.color ? { color: part.color } : {}}>
-              {part.shown}
+              {part.shown.split('\n').map((line, j) => (
+                <React.Fragment key={j}>
+                  {line}
+                  {j < part.shown.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
             </span>
           ))}
 

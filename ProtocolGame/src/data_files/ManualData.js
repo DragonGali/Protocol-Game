@@ -286,6 +286,33 @@ export const manualData = {
                 }
 
             }
+        },
+        "chapter_15" : {
+            title: 'דרכים נוספים לאיתור בעיות',
+            pages: {
+                "page_1" : {
+                    "line_1" : `מלבד שימוש בפרוטוקולי השירות Terminal Monitor ו-Debug, קיימות פקודות נוספות שבעזרתן ניתן לנטר את תעבורת הרשת ואת מצב הרכיבים.`,
+                    "line_2" : `פקודות אלו שימושיות במיוחד לטכנאים לצורך איתור תקלות ובדיקת ביצועים.`
+                },
+                "page_2" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large);color:var(--blue)'>Ping</span>`,
+                    "line_2" : `הפקודה Ping מאפשרת לבדוק אם ניתן ליצור קשר עם יעד מסוים ברשת.`,
+                    "line_3" : ` ניתן להריץ פקודות Ping ישירות מהנתב, כדי לוודא שהמכשיר שאליו רוצים להתחבר זמין ועונה.`
+                },
+                "page_3" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large);color:var(--blue)'>Traceroute</span>`,
+                    "line_2" : `הפקודה Traceroute משמשת כדי לאתר את המסלול המדויק שעוברת התקשורת מהרשת שלך ועד לכתובת היעד.`,
+                    "line_3" : `היא מסייעת לזהות היכן יש עיכוב או נתק בקו התקשורת.`
+                },
+                "page_4" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large);color:var(--blue)'>Show Interface</span>`,
+                    "line_2" : `הפקודה show interface מאפשרת להציג סטטיסטיקות ונתונים מפורטים על כל פורט במכשיר, כגון כמות התעבורה, שגיאות, ומהירות חיבור.`,
+                },
+                "page_5" : {
+                    "line_1" : `<span style='font-size:var(--font-title-large);color:var(--blue)'>Clear Counters</span>`,
+                    "line_2" : `הפקודה clear counters מאפסת את כל הסטטיסטיקות של הממשקים (Interfaces). לאחר איפוס, ניתן להתחיל לנטר מחדש ולזהות תקלות חדשות בצורה מדויקת יותר.`
+                }
             }
+        }
     }
 };

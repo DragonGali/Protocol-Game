@@ -172,7 +172,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
 
       {/* Protocol */}
       <div className="protocol">
-        <div dangerouslySetInnerHTML={{ __html: data.protocol }} />
+        <div style={{fontSize: data.protocolFontSize || 'clamp(1rem, 5vw, var(--font-largest))'}} dangerouslySetInnerHTML={{ __html: data.protocol }} />
       </div>
 
       {/* Source Address */}

@@ -22,7 +22,6 @@
 }
 
 .Letter .protocol {
-    font-size: clamp(1rem, 5vw, var(--font-largest));
     color: var(--text);
     position: absolute;
     top: 15%;

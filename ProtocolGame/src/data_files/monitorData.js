@@ -135,13 +135,21 @@ export const monitorData = {
     'chapter_14' : {
         customerName: 'מל',
         protocol: 'TELNET',
+        protocolFontSize: 'var(--font-title-large)',
         sourceAddress: '192.168.1.5',
         destinationAddress: '172.20.45.9',
         port: 13,
         text: `אתמול פגשתי משהוא ממש נחמד, קוראים  לו לירון. הוא אהב את קבוצת הרוק שאני מקשיבה עליה, ועזר להחזיר לי את התיק שלי...הנא תמונה שלקחתי. `,
         link: 'אני ולירון.png',
         imgLink: '/Monitor/pop_ups/melAndLiron.png',
-        header: "------"
+        header: "------",
+    },
+    "chapter_15" : {
+        customerName: "מאיה",
+        protocol: "FTP",
+        sourceAddress: "198.51.100.10",
+        destinationAddress: "203.0.113.25",
+        port: 110
     }
 }
 
