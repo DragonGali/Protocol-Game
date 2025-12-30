@@ -156,7 +156,12 @@ export const monitorData = {
     },
     "chapter_16" : {
         text: ``,
+        name: 'ליאור',
         protocol: 'DHCP',
+        sourceAddress: `10.0.0.1`,
+        destinationAddress: `172.20.45.9`,
+        port: 67,
+
     }
 }
 

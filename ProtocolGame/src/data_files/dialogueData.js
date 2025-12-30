@@ -831,8 +831,8 @@ export const dialogueData =  {
       character: "daniel",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_7', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_7_command', value: 'LIST'}
+        {type: 'SET_FLAG', key: 'mistake_7_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_7_1_command', value: 'LIST'}
       ]
     },
     "dialogue_2": {
@@ -880,7 +880,7 @@ export const dialogueData =  {
     "dialogue_9" : {
       text: `תנסה לרשום <span style='color:var(--orange)'>LIST</span> בטרמינל בשביל להפעיל אותה`,
       next: "dialogue_10",
-      waitFor: {completed: 'mistake_7'}
+      waitFor: {completed: 'mistake_7_1'}
     },
     "dialogue_10" : {
         text: `זה הכל אתה יכול להגיש את המכתב.`,
@@ -917,9 +917,9 @@ export const dialogueData =  {
         character: "shimon",
         next: "dialogue_2",
         onEnter: [
-          {type: 'SET_FLAG', key: 'mistake_8', value: 'terminal'},
-          {type: 'SET_FLAG', key: 'mistake_8_command', value: 'st'},
-          {type: 'SET_FLAG', key: 'mistake_8_stamp', value: 'port'}
+          {type: 'SET_FLAG', key: 'mistake_8_1', value: 'terminal'},
+          {type: 'SET_FLAG', key: 'mistake_8_1_command', value: 'st'},
+          {type: 'SET_FLAG', key: 'mistake_8_1_stamp', value: 'port'}
         ]
       },
       "dialogue_2" : {
@@ -951,7 +951,7 @@ export const dialogueData =  {
         name: "אני",
         next: "dialogue_7",
         onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
-        waitFor: { completed: 'mistake_8'}
+        waitFor: { completed: 'mistake_8_1'}
       },
       "dialogue_7" : {
         text: `[אוקיי, סיימתי! אבל...]`,
@@ -991,7 +991,7 @@ export const dialogueData =  {
         emotion: "sad",
         onEnter: [
           {type: 'SET_FLAG', key: 'selectedAnswer', value: null},
-          {type: 'CORRECT_MISTAKE', id: "mistake_8_stamp", correction: 23},
+          {type: 'CORRECT_MISTAKE', id: "mistake_8_1_stamp", correction: 23},
           {type: 'SHOW', id: 'submit-button'}],
         next: 'dialogue_exit',
         waitFor: { completed: 'submit'}
@@ -1183,8 +1183,8 @@ export const dialogueData =  {
       emotion: "shy",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_10', value: 'terminal'},
-        {type: `SET_FLAG`, key: 'mistake_10_command', value: 'ssh mel@10.0.0.1'}
+        {type: 'SET_FLAG', key: 'mistake_10_1', value: 'terminal'},
+        {type: `SET_FLAG`, key: 'mistake_10_1_command', value: 'ssh mel@10.0.0.1'}
       ],
       globalWait: {id: 'shy_letter', from: 'dialogue_8', to: 'dialogue_9', condition: {flag: 'letter_state'}, destination: "dialogue_special_1"}
     },
@@ -1221,7 +1221,7 @@ export const dialogueData =  {
     "dialogue_7" : {
       text: `שם המשתמש שלי הוא “mel”, והכתובת שלי היא: “10.0.0.1”.`,
       next: "dialogue_8",
-      waitFor: {completed: 'mistake_10'}
+      waitFor: {completed: 'mistake_10_1'}
     },
     "dialogue_8" : {
       text: `זה הכל, אתה יכול לשלוח את המכתב עכשיו.`,
@@ -1918,7 +1918,9 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_16', value: 'network'},
-        {type: 'SET_FLAG', key: 'mistake_16_code', value: 103}
+        {type: 'SET_FLAG', key: 'mistake_16_code', value: '103'},
+        {type: 'SET_FLAG', key: 'mistake_16_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_16_1_command', value: 'ip helper-adress 172.20.45.9'}
       ]
     },
     "dialogue_2" : {
@@ -1940,12 +1942,38 @@ export const dialogueData =  {
       text: `[טוב, אני לפחות יכול לבדוק את החיבור]`,
       name: "אני",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      next: "dialogue_6",
       waitFor: {completed: 'networkChecked'}
     },
     "dialogue_6" : {
       text: `כן, כמו שאני רואה החבילה לא מגיעה לשרת.`,
       name: "אני",
       next: "dialogue_7"
+    },
+    "dialogue_7" : {
+      text: `זה מוזר נכון? אני כל הזמן מקבל את ההודעה הזאת: “לא ניתן להעביר את בקשת ה-DHCP לשרת המרוחק מכיוון שהפקודה ip helper-address לא מוגדרת בנתב.”`,
+      emotion: "surprised",
+      next: "dialogue_8"
+    },
+    "dialogue_8" : {
+      text: `טוב, אין לי מושג מה זה אומר.`,
+      emotion: "happy",
+      next: "dialogue_9"
+    },
+    "dialogue_9" : {
+      text: `[אני יכול לומר את אותו הדבר]`,
+      name: "אני",
+      next: "dialogue_10"
+    },
+    "dialogue_10" : {
+      text: `[אה! המדריך שלי התעדכן, סוף סוף מידע חדש.]`,
+      name: "אני",
+      emotion: "neutral",
+      next: "dialogue_11",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+    },
+    "dialogue_11" : {
+      text: `[עכ]`
     }
   }    
 }}

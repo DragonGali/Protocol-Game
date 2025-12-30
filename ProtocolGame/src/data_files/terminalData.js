@@ -1,17 +1,17 @@
 export const terminalData = {
-    chapter_7 : {
+    chapter_7_1 : {
         line_1 : "+OK 2 messages on the server:",
         line_2 : "1 1200 bytes",
         line_3 : "2 2500 bytes"
     },
-    chapter_8 : {
+    chapter_8_1 : {
         line_1: `System Status: All systems operational.`,
         line_2: `Uptime: 3 days, 4 hours, 12 minutes.`,
         line_3: `CPU Load: 15%`,
         line_4: `Memory Usage: 48%`,
         line_5: `<span style="color:var(--red)">⚠ Port 13: Connection timeout - unable to reach destination</span>`
     },
-    chapter_10 : {
+    chapter_10_1 : {
         line_1: `Connecting to 10.0.0.1...`,
         line_2: `Connection established.`,
         line_3: `Authenticating user 'mel'...`,
@@ -19,14 +19,14 @@ export const terminalData = {
         line_5: `Secure session active.`,
         line_6: `Decrypting letter...`
     },
-    chapter_12 : {
+    chapter_12_1 : {
         line_1: `[DHCP Discover] ‏משדר לרשת: 255.255.255.255`,
         line_2: `[DHCP Offer] ‏השרת 192.168.0.1 מציע כתובת IP: 192.168.0.105`,
         line_3: `[DHCP Request] ‏מבקש את הכתובת 192.168.0.105 מהשרת 192.168.0.1`,
         line_4: `[DHCP ACK] ‏השרת אישר. כתובת ה-IP הוקצתה: 192.168.0.105`,
         line_5: `<span style='color:var(--red)'>⚠ הערה: יש להריץ בדיקת רשת כדי לאשר ACK.‏</span>`
     },
-    chapter_13 : {
+    chapter_13_1 : {
         line_1: `sysStatus.0 = up`,
     },
     chapter_14_1 : {
@@ -54,6 +54,18 @@ export const terminalData = {
         line_6: ` 5  10.0.8.1           7.564 ms   7.423 ms   7.610 ms`,
         line_7: ` 6  10.0.12.4          8.891 ms   8.779 ms   8.935 ms`,
         line_8: ` 7  192.168.30.10      9.221 ms   9.187 ms   9.140 ms`
+    },
+    chapter_16_1 : {
+        line_1: `Router(config-if)# ip helper-address 10.0.0.5`,
+        line_2: `Router(config-if)# end`,
+        line_3: `Router# write memory`,
+        line_4: `Building configuration...`,
+        line_5: `[OK]`,
+        line_6: ``,
+        line_7: `<span style='color:var(--red)'>*Mar 01 10:42:17.184: DHCPD: Relay forwarding DHCPDISCOVER from 0.0.0.0 (Gi0/1) to 10.0.0.5</span>`,
+        line_8: `<span style='color:var(--red)'>*Mar 01 10:42:20.192: DHCPD: No DHCPOFFER received from 10.0.0.5</span>`,
+        line_9: `<span style='color:var(--red)'>*Mar 01 10:42:20.193: DHCPD: Relay timeout on interface GigabitEthernet0/1</span>`,
+        line_10: `<span style='color:var(--red)'>*Mar 01 10:42:20.193: DHCPD: Error <span style='color:var(--white)'>103</span></span>`
     }
 }
 
