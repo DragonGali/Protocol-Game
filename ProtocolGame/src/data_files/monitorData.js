@@ -155,13 +155,24 @@ export const monitorData = {
         imgLink: "/Monitor/pop_ups/coffee.gif"
     },
     "chapter_16" : {
-        text: ``,
-        name: 'ליאור',
+        text: `רק רציתי להגיד תודה לסבתא ליביה על העוגיות! אני לא יודע מה היא שמה בפנים, אבל אני נשבע שאכלתי חמש בלי לשים לב. אם היא שואלת – תגידו שהן היו “טעימות בצורה סבירה”... אני לא רוצה שהיא תחשוב שהתלהבתי או משהו.`,
+        customerName: 'ליאור',
         protocol: 'DHCP',
         sourceAddress: `10.0.0.1`,
         destinationAddress: `172.20.45.9`,
         port: 67,
-
+        link: 'cookie selfie.png',
+        imgLink: './Monitor/pop_ups/cookieSelfie.png'
+    },
+    "chapter_17" : {
+        text: `שלום יקירים,<br> אפיתי עוגיות חדשות עם אגוזים ורציתי לשלוח אותן לכולם בשכונה הרחוקה. מקווה שהן יגיעו בשלום, ושתגידו לי איך יצא!<br> תיהנו, סבתא ליביה.`,
+        customerName: 'סבתא ליביה',
+        protocol: 'DHCP',
+        sourceAddress: `198.51.100.10`,
+        destinationAddress: `203.0.113.25`,
+        port : 110,
+        link: 'Nut Cookies.png',
+        imgLink: './Monitor/pop_ups/nutCookies.png'
     }
 }
 

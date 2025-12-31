@@ -1407,8 +1407,8 @@ export const dialogueData =  {
       emotion: "happy",
       next: "dialogue_2",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_12', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_1_12_command', value: 'ipconfig /renew'}
+        {type: 'SET_FLAG', key: 'mistake_12_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_12_1_command', value: 'ipconfig /renew'}
       ]
     },
     "dialogue_2" : {
@@ -1447,7 +1447,7 @@ export const dialogueData =  {
       text: `כן, אין צורך לזרז אותי, יש לי הרבה זמן`,
       next: "dialogue_9",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
-      waitFor: {completed: 'mistake_1_12'}
+      waitFor: {completed: 'mistake_12_1'}
     },
     "dialogue_9" : {
       text: `[צריך לעשות עוד משהוא]`,
@@ -1921,7 +1921,8 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_16_code', value: '103'},
         {type: 'SET_FLAG', key: 'mistake_16_1', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_16_1_command', value: 'ip helper-adress 172.20.45.9'}
-      ]
+      ],
+      globalWait: {id: 'stamp_mistake', from: 'dialogue_5', to: 'dialogue_12', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
     "dialogue_2" : {
       text: `תגיד, קניתי ראוטר חדש בשביל הסניף הזה, אבל נראה שאין אינטרנט. המחשב פה כאילו מנסה להתחבר... אבל כלום. אתה יכול לבדוק לי את זה?`,
@@ -1943,11 +1944,13 @@ export const dialogueData =  {
       name: "אני",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       next: "dialogue_6",
+      emotion: "neutral",
       waitFor: {completed: 'networkChecked'}
     },
     "dialogue_6" : {
       text: `כן, כמו שאני רואה החבילה לא מגיעה לשרת.`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_7"
     },
     "dialogue_7" : {
@@ -1963,6 +1966,7 @@ export const dialogueData =  {
     "dialogue_9" : {
       text: `[אני יכול לומר את אותו הדבר]`,
       name: "אני",
+      emotion: "happy",
       next: "dialogue_10"
     },
     "dialogue_10" : {
@@ -1971,12 +1975,152 @@ export const dialogueData =  {
       emotion: "neutral",
       next: "dialogue_11",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch16'}
     },
     "dialogue_11" : {
-      text: `[עכ]`
+      text: `[כדאי לי להריץ את הפקודה בשביל לראות איזה בעיה נוצרת]`,
+      name: "אני",
+      emotion: "neutral",
+      next: "dialogue_12",
+      waitFor: {completed: 'mistake_16_1'}
+    },
+    "dialogue_12" : {
+      text: `[הפקודה רצה... אבל זה לא השרת הנכון]`,
+      name: "אני",
+      emotion: "neutral",
+      next: "dialogue_13"
+    },
+    "dialogue_13" : {
+      text: `[אני צריך לסמן משהוא...אבל מה?]`,
+      name: "אני",
+      next: (state) => state.flags.stampedElement === 'dest-address' ? "dialogue_14" : 'dialogue_mistake_1_1',
+      waitFor: {flag: 'stampedElement'}
+    },
+    "dialogue_14" : {
+      text: `הפקודה עצמה עבדה, אבל היא שלחה את בקשת ה-DHCP לכתובת שלא מפעילה שרת DHCP. שגיאה 103 אומרת שהנתב העביר את הבקשה – אבל לא קיבל תשובה חזרה. לכן צריך לשנות את כתובת היעד לשרת DHCP האמיתי.`,
+      name: "אני",
+      next: "dialogue_15"
+    },
+    "dialogue_15" : {
+      text: `מה?! עוד פעם!`,
+      emotion: "surprised",
+      next: "dialogue_16"
+    },
+    "dialogue_16" : {
+      text: `אני אנסה לסים לב בפעם הבאה`,
+      emotion: "happy",
+      next: "dialogue_17",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: 'mistake_16_1', correction: 'ip helper-address'},
+        {type : 'CORRECT_MISTAKE', id: 'mistake_16', correction: 200},
+        {type: 'SHOW', id: 'submit-button'}
+      ],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_17" : {
+      text: `מגניב, זה עובד עכשיו! תודה.`,
+      name: "אני",
+      onEnter: [
+        {type: 'SHOW', id: 'submit-animation'},
+        {type: 'HIDE', id: 'submit-button'}
+      ],
+      next: "dialogue_18",
+      emotion: "happy",
+    },
+    "dialogue_18" : {
+      text: `אני מקווה שעוד מתי שהוא ניפגש`,
+      next: null
+    },
+    "dialogue_mistake_1_1" : {
+      text: `השורה הזאתי שגויה`,
+      name: "אני",
+      next: "dialogue_mistake_1_2",
+      noPrev: true,
+    },
+    "dialogue_mistake_1_2" : {
+      text: `על מה אתה מדבר?`,
+      emotion: "angry",
+      next: "dialogue_mistake_1_3",
+      noPrev: true
+    },
+    "dialogue_mistake_1_3" : {
+      text: `אה... סליחה טעות שלי, השורה הזאתי בסדר גמור.`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      noPrev: true
     }
-  }    
-}}
+  },
+  "chapter_17" : {
+    "dialogue_1" : {
+      text: `או, שלום חמוד שלי! תמיד כיף לראות אותך.`,
+      emotion: "happy",
+      character: "granny",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_17', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_17_code', value: '302'},
+        {type: 'SET_FLAG', key: 'mistake_17_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_17_1_command', value: 'ip directed broadcast'}
+      ]
+    },
+    "dialogue_2" : {
+      text: `הרגע אפיתי עגלה חדשה של העוגיות המפתיעות המיוחדות שלי! הן מיועדות לנכדים שלי בשכונה הרחוקה ההיא.`,
+      emotion: "neutral",
+      next: "dialogue_3"
+    },
+    "dialogue_3" : {
+      text: `חכם מצידי, לא? אבל משום מה, אף אחד לא קיבל כלום. אתה יכול לבדוק מה השתבש?`,
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `[זה כבר הפעם השלישית היום...היא כנראה ממש אוהבת לאפות עוגיות]`,
+      name: 'אני',
+      next: "dialogue_5"
+    },
+    "dialogue_5" : {
+      text:  `טוב, בוא נראה איך אני אוכל לעזור.`,
+      name: 'אני',
+      next: "dialogue_6",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'networkChecked'}
+    },
+    "dialogue_6" : {
+      text: `[עוד שגיאה שאני לא מקיר...אה! קיבלתי אינפורמציה חדשה במדריך]`,
+      name: "אני",
+      next: "dialogue_7",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch17'}
+    },
+    "dialogue_7" : {
+      text: `[נראה שהייתה שגיאה בגלל שפעולת ה -Broadcast לא נעשתה, כדאי לי להפעיל אותה. ]`,
+      name: "אני",
+      next: "dialogue_8",
+      waitFor: {completed: 'mistake_17_1'}
+    },
+    "dialogue_8" : {
+      text: `הנא, המכתב נשלח לכל האנשים בכתובת היעד.`,
+      name: "אני",
+      next: "dialogue_9",
+    },
+    "dialogue_9" : {
+      text: `אה, נפלא! אתה פשוט מציל חיים. אני כבר יכולה לדמיין את הקטנים שלי פותחים את החבילות. זה משמח אותי לדעת שכולם קיבלו טעימה!`,
+      emotion: "happy",
+      next: "dialogue_10"
+    },
+    "dialogue_10" : {
+      text: `אה! נזכרתי...`,
+      emotion: "sad",
+      next: "dialogue_11"
+    },
+    "dialogue_11" : {
+      text: `...אוי ואבוי. נראה שקצת נסחפתי. העוגיות האלה... הן מאוד מיוחדות. שמתי בהן אגוזים הפעם, ו... אוי לא, אורי הקטן אלרגי לאגוזים!`,
+      emotion: "sad",
+      next: "dialogue_12"
+    }
+  }
+ }  
+}
 
 
 

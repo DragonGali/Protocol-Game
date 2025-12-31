@@ -66,6 +66,10 @@ export const terminalData = {
         line_8: `<span style='color:var(--red)'>*Mar 01 10:42:20.192: DHCPD: No DHCPOFFER received from 10.0.0.5</span>`,
         line_9: `<span style='color:var(--red)'>*Mar 01 10:42:20.193: DHCPD: Relay timeout on interface GigabitEthernet0/1</span>`,
         line_10: `<span style='color:var(--red)'>*Mar 01 10:42:20.193: DHCPD: Error <span style='color:var(--white)'>103</span></span>`
+    },
+    chapter_17_1 : {
+        line_1: `Router(config-if)# ip directed-broadcast`,
+        line_2: `% IP directed broadcast enabled on interface GigabitEthernet0/1`,
     }
 }
 

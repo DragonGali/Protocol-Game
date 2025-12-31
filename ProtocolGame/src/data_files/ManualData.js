@@ -334,6 +334,20 @@ export const manualData = {
                     "line_2" : `<span style='color:var(--red)'>חשוב:</span> כתובת ה-ip helper-address חייבת להיות כתובת של שרת DHCP פעיל. אם הכתובת שגויה או מצביעה על רכיב שאינו שרת DHCP – הבקשה תישלח אך לא תיענה.`
                 }
             }
+        },
+    "chapter_17" : {
+        title: "IP Directed Broadcast",
+        pages: {
+            "page_1" : {
+                "line_1" : `פקודת <span style='color:var(--blue)'>ip directed broadcast</span> מאפשרת לשלוח הודעות אל אזור ה-Broadcast של רשת מרוחקת.`,
+                "line_2" : `אם הפקודה פעילה, וכאשר תשלחו הודעה אל הכתובת האחרונה של תת-הרשת המרוחקת, הנתב יפנה אותה אל כתובת ה-Broadcast של אותה רשת.`,
+                "line_3" : `אם הפקודה אינה פעילה, בקשות מסוג Broadcast לרשת מרוחקת לא יועברו.`,
+            },
+            "page_2" : {
+                "line_1" : `שגיאה 302 מצביעה על כך שהנתב חסם את ההעברה ויש להפעיל את הפקודה כדי להמשיך.`,
+                "line_2" : `השירות הזה פעיל כברירת מחדל בנתבים. באמצעותו ניתן להגיע לכתובת ה-Broadcast ברשת מרוחקת.`,
+                "line_3" : `ניתן לבטל את הפקודה באמצעות: <span style='color:var(--blue)'>no ip directed-broadcast</span>.`
+            }
         }
-    }
+    }}
 };

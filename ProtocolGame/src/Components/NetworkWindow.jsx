@@ -17,7 +17,7 @@ const NetworkWindow = ({title, onClose}) => {
   // Check if there's a network mistake in the current chapter
   const mistakeKey = `mistake_${currentChapter}`;
   const mistakeValue = state.flags[mistakeKey];
-  const hasNetworkMistake = mistakeValue === 'network';
+  const hasNetworkMistake = mistakeValue === 'network' && state.flags[mistakeKey].correction == null;
 
   const [gifCache] = useState(Math.random());
 
