@@ -2061,8 +2061,11 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_17', value: 'network'},
         {type: 'SET_FLAG', key: 'mistake_17_code', value: '302'},
         {type: 'SET_FLAG', key: 'mistake_17_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_17_1_command', value: 'ip directed broadcast'}
-      ]
+        {type: 'SET_FLAG', key: 'mistake_17_1_command', value: 'ip directed broadcast'},
+        {type: 'SET_FLAG', key: 'mistake_17_2', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_17_2_command', value: 'no ip directed broadcast'}
+      ],
+      globalWait: {id: 'stamp mistake', from: 'dialogue_5', to: 'dialogue_15', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
     "dialogue_2" : {
       text: `הרגע אפיתי עגלה חדשה של העוגיות המפתיעות המיוחדות שלי! הן מיועדות לנכדים שלי בשכונה הרחוקה ההיא.`,
@@ -2082,6 +2085,7 @@ export const dialogueData =  {
       text:  `טוב, בוא נראה איך אני אוכל לעזור.`,
       name: 'אני',
       next: "dialogue_6",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'networkChecked'}
     },
@@ -2089,6 +2093,7 @@ export const dialogueData =  {
       text: `[עוד שגיאה שאני לא מקיר...אה! קיבלתי אינפורמציה חדשה במדריך]`,
       name: "אני",
       next: "dialogue_7",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
       waitFor: {completed: 'read_manual_ch17'}
     },
@@ -2096,11 +2101,13 @@ export const dialogueData =  {
       text: `[נראה שהייתה שגיאה בגלל שפעולת ה -Broadcast לא נעשתה, כדאי לי להפעיל אותה. ]`,
       name: "אני",
       next: "dialogue_8",
+      emotion: "neutral",
       waitFor: {completed: 'mistake_17_1'}
     },
     "dialogue_8" : {
       text: `הנא, המכתב נשלח לכל האנשים בכתובת היעד.`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_9",
     },
     "dialogue_9" : {
@@ -2117,6 +2124,111 @@ export const dialogueData =  {
       text: `...אוי ואבוי. נראה שקצת נסחפתי. העוגיות האלה... הן מאוד מיוחדות. שמתי בהן אגוזים הפעם, ו... אוי לא, אורי הקטן אלרגי לאגוזים!`,
       emotion: "sad",
       next: "dialogue_12"
+    },
+    "dialogue_12" : {
+      text: `אני לא יכולה להרשות לעצמי שאני אשלח לכולם בטעות שוב. תוכל, אממ... לבטל את זה עכשיו? ליתר ביטחון?`,
+      emotion: "sad",
+      next: "dialogue_13"
+    },
+    "dialogue_13" : {
+      text: `[צריך לבטל את השליחה, איך אני אמור לעשות את זה?]`,
+      name: "אני",
+      emotion: "sad",
+      next: "dialogue_14",
+      waitFor: {completed: 'mistake_17_2'}
+    },
+    "dialogue_14" :{
+      text: `הנה, זה בוצע. המכתב לא יישלח לשום אחד.`,
+      name: "אני",
+      emotion: "sad",
+      next: "dialogue_15"
+    },
+    "dialogue_15" : {
+      text: `תודה, העם תוכל לסמן לי את האוגייה שאני אשלח אחרת?`,
+      emotion: "happy",
+      next: (state) => state.flags.stampedElement === 'link' ? "dialogue_16" : "dialogue_mistake_2_1",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_17_3_1', value: 'link'},
+                {type: 'SET_FLAG', key: 'mistake_17_3_2', value: 'imgLink'}
+      ],
+      waitFor: {flag: 'stampedElement'},
+    },
+    "dialogue_16" : {
+      text: `הנא! אף אחד לא אלרגי לשוקולד, נכון?`,
+      next: "dialogue_17",
+      onEnter: [
+        {type: 'CORRECT_MISTAKE', id: 'mistake_17_3_1', correction: 'Chocklate Cookies.png'},
+        {type: 'CORRECT_MISTAKE', id: 'mistake_17_3_2', correction: './Monitor/pop_ups/cookie.gif'},
+        {type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_17" : {
+      text: `תודה רבה, אתה באמת ילד חביב, מקווה שניפגש עוד שוב`,
+      emotion: "happy",
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+      next: null
+    },
+    "dialogue_mistake_1_1" : {
+      text: `השורה הזאתי שגויה`,
+      name: "אני",
+      next: "dialogue_mistake_1_2",
+      noPrev: true,
+    },
+    "dialogue_mistake_1_2" : {
+      text: `על מה אתה מדבר?`,
+      emotion: "grumpy",
+      noPrev: true,
+      next: "dialogue_mistake_1_3"
+    },
+    "dialogue_mistake_1_3" : {
+      text: `אה... סליחה טעות שלי, השורה הזאתי בסדר גמור.`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+    },
+    "dialogue_mistake_2_1" : {
+      text: `ילד...זאת לא עוגיה`,
+      emotion: "grumpy",
+      next: "dialogue_mistake_2_2"
+    },
+    "dialogue_mistake_2_2" : {
+      text: `אה! סליחה אני אנסה שוב`,
+      name: "אני",
+      next: "dialogue_15",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+    }
+  },
+  "chapter_18" : {
+    "dialogue_1" : {
+      text: `בוקר טוב, אני צריך לשלוח הודעה למשרד מרוחק ברשת. הבעיה שהמחשב שלי לא מצליח להגיע אליו ואין תגובת ARP.`,
+      character: "shimon",
+      emotion: "neutral",
+      next: "dialogue_2",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_18_1', value: 'terminal'},
+                {type: 'SET_FLAG', key: 'mistake_18_1_command', value: 'ip proxy-arp'}
+      ]
+    },
+    "dialogue_2" : {
+      text: `נטפל בזה עם Proxy ARP. תריץ את הפקודה ותסדר את זה.`,
+      next: "dialogue_3",
+    },
+    "dialogue_3" : {
+      text: `אל תדאג יש לי כבר הרבה ניסיון עם להריץ פקודות.`,
+      name: "אני",
+      next: "dialogue_4",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      waitFor: {completed: 'read_manual_ch18'}
+    },
+    "dialogue_4" : {
+      text: `[טוב, בואו נתחיל]`,
+      name: "אני",
+      next: "dialogue_5",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'mistake_18_1'}
+    },
+    "dialogue_5" : {
+      text: `טוב, זה מה שרציתי לראות. יעיל, מסודר, בלי שטויות.`,
+      emotion: "happy",
+      next: "dialogue_6"
     }
   }
  }  

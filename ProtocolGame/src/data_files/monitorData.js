@@ -173,6 +173,13 @@ export const monitorData = {
         port : 110,
         link: 'Nut Cookies.png',
         imgLink: './Monitor/pop_ups/nutCookies.png'
+    },
+    "chapter_18" : {
+        customerName: "שמעון",
+        protocol: "DHCP",
+        sourceAddress: "192.168.20.10",
+        destinationAddress: "192.168.50.10",
+        port: 67
     }
 }
 

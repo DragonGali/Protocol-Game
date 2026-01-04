@@ -70,7 +70,15 @@ export const terminalData = {
     chapter_17_1 : {
         line_1: `Router(config-if)# ip directed-broadcast`,
         line_2: `% IP directed broadcast enabled on interface GigabitEthernet0/1`,
+    },
+    chapter_17_2 : {
+        line_1: ``
+    },
+    chapter_18_1 : {
+        line_1: `Router(config-if)# ip proxy-arp`,
+        line_2: `% Proxy ARP enabled on interface`,
+        line_3: `GigabitEthernet0/1`,
     }
-}
+ }
 
 export default terminalData;

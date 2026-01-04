@@ -27,6 +27,7 @@ const GameScreen = () => {
           dispatch({type: 'RESET_COMPLETED'});
           dispatch({type: 'HIDE', id: 'submit-animation'});
           dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
+          dispatch({type: 'CLEAR_GLOBAL_WAITS'});
         }}
       />
       
