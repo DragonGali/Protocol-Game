@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import '../Styles/Manual.css';
-import ManualText from './ManualText';
 import { useGameState, hasCompleted } from './GameState';
+
+import '../Styles/Manual.css';
+
+import ManualText from './ManualText.jsx';
+import NameSearch from './NameSearch.jsx'
 
 const Manual = ({ onClose }) => {
   const { state, dispatch } = useGameState();
@@ -71,6 +74,9 @@ const Manual = ({ onClose }) => {
           chapter={hasCompleted(state, 'update_manual') ? selectedChapter : (state.flags.currentChapter + (state.flags.currentChapter === 1 ? 0 : -1))  } 
           onFinish={() => setFinishedReading(true)}
         />
+      )}
+      {selectedCategory === 'name' && (
+        <NameSearch/>
       )}
     </div>
   );
