@@ -39,6 +39,9 @@ const DialogueManager = ({
     if (wait.completedAny) {
       return wait.completedAny.some(cond => checkCondition(cond));
     }
+    else if(wait.completedAll) {
+      return wait.completedAll.every(cond => checkCondition(cond));
+    }
     return checkCondition(wait);
   };
 

@@ -2205,7 +2205,8 @@ export const dialogueData =  {
       next: "dialogue_2",
       onEnter: [{type: 'SET_FLAG', key: 'mistake_18_1', value: 'terminal'},
                 {type: 'SET_FLAG', key: 'mistake_18_1_command', value: 'ip proxy-arp'}
-      ]
+      ],
+      globalWait: {id: 'stamp_mistake_18', from: 'dialogue_4', to: 'dialogue_5', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
     "dialogue_2" : {
       text: `נטפל בזה עם Proxy ARP. תריץ את הפקודה ותסדר את זה.`,
@@ -2222,13 +2223,194 @@ export const dialogueData =  {
       text: `[טוב, בואו נתחיל]`,
       name: "אני",
       next: "dialogue_5",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'mistake_18_1'}
     },
     "dialogue_5" : {
       text: `טוב, זה מה שרציתי לראות. יעיל, מסודר, בלי שטויות.`,
       emotion: "happy",
-      next: "dialogue_6"
+      next: "dialogue_6",
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_6" : {
+      text: `...`,
+      emotion: "sad",
+      next: "dialogue_7",
+      onEnter: [{type: 'HIDE', id: 'submit-button'}, {type: 'SHOW', id: 'submit-animation'}],
+    },
+    "dialogue_7" : {
+      text: ` מאיה אמרה לי שאתה זה שעזר לה להשתפר בפרוטוקולים. כשהיא תעתה, אתה הסברת לה מה צריך לעשות.`,
+      next: "dialogue_8"
+    },
+    "dialogue_8" : {
+      text: `תודה לך`,
+      emotion: "happy",
+      next: null
+    },
+    "dialogue_mistake_1_1" : {
+      text: `השורה הזאתי שגויה`,
+      name: "אני",
+      next: "dialogue_mistake_1_2",
+      noPrev: true,
+    },
+    "dialogue_mistake_1_2" : {
+      text: `מה? העם משהוא קרה?`,
+      emotion: "angry",
+      noPrev: true,
+      next: "dialogue_mistake_1_3"
+    },
+    "dialogue_mistake_1_3" : {
+      text: `אה... סליחה טעות שלי, השורה הזאתי בסדר גמור.`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      noPrev: true
+    }
+  },
+  "chapter_19" : {
+    "dialogue_1" : {
+      text: `שלום, יום עמוס היה היום, כן?`,
+      character: "daniel",
+      emotion: "happy",
+      next: "dialogue_2",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_19', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_19_code', value: '5'},
+        {type: 'SET_FLAG', key: 'mistake_19_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_19_1_command', value: 'ip redirects'},
+        {type: 'SET_FLAG', key: 'mistake_19_2', value: 'port'},
+        {type: 'SET_FLAG', key: 'mistake_19_3', value: 'header'}
+      ],
+      globalWait: {id: 'stamping something', from: 'dialogue_4', to: 'dialogue_6', destination: 'dialogue_found_1_1', condition: {flag: 'stampedElement'}}
+    },
+    "dialogue_2" : {
+      text: `כל הכבוד עד כאן, עשית עבודה מצוינת. אבל עכשיו מגיעה המשימה האמיתית`,
+      emotion: "neutral",
+      next: "dialogue_3",
+      globalWait: {id: 'network check', from: 'dialogue_4', to: 'dialogue_6', destination: 'dialogue_6', condition: {completed: 'networkChecked'}}
+    },
+    "dialogue_3" : {
+      text: `הכנתי מכתב מסובך במיוחד עם שלוש טעויות שונות תצטרך להשתמש בכל הכלים שלמדת לתקן את הכל.`,
+      next: "dialogue_4"
+    },
+    "dialogue_4" : {
+      text: `בהצלחה!`,
+      emotion: "happy",
+      next: "dialogue_exit",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_found_1_1" : {
+      next: (state) => state.flags.stampedElement === 'port' ? "dialogue_found_1_2" : state.flags.stampedElement === 'header' ? "dialogue_found_2_1" : "dialogue_mistake_2_1",
+      noPrev: true,
+      text: `מצאתי משהוא`,
+      emotion: "neutral"
+    },
+    "dialogue_found_1_2" : {
+      text: ` הפורט הזה לא מתאים ל HTTP.`,
+      name: "אני",
+      noPrev: true,
+      next: "dialogue_found_1_3"
+    },
+    "dialogue_found_1_3" : {
+      text: `אם כן, איזה פורט מתאים ל-פרוטוקול HTTP`,
+      next: "dialogue_found_1_4",
+      noPrev: true
+    },
+    "dialogue_found_1_4" : {
+      type: 'question',
+      noPrev: true,
+      answers: [110, 67, 34, 80],
+      next: (state) => state.flags.selectedAnswer === 80 ? 'dialogue_found_1_5' : 'dialogue_mistake_1_1',
+      waitFor: {flag: 'selectedAnswer'}
+    },
+    "dialogue_found_1_5" : {
+      text: 'נכון, מאוד!',
+      emotion: "happy",
+      noPrev: true,
+      next: "dialogue_5",
+      onEnter: [{type: 'CORRECT_MISTAKE', id: 'mistake_19_2', correction: 80}]
+    },
+    "dialogue_found_2_1" : {
+      text: `חסר HEADER במכתב הזה.`,
+      name: "אני",
+      next: "dialogue_found_2_2",
+      noPrev: true
+    },
+    "dialogue_found_2_2" : {
+      text: `זה נכון, אני אתקן את זה`,
+      emotion: "happy",
+      next: "dialogue_5",
+      noPrev: true,
+      onEnter: [{type: 'CORRECT_MISTAKE', id: 'mistake_19_3', correction: '------HEADER------'}]
+    },
+    "dialogue_5" : {
+      text: (state) => `נשאר למצוא עוד ${!state.completed.has('mistake_19_1') + !state.completed.has('mistake_19_2') + !state.completed.has('mistake_19_3')} שגיאות`,
+      emotion: "neutral",
+      next: "dialogue_7",
+      waitFor: {completedAll: [{completed:'mistake_19_1'}, {completed: 'mistake_19_2'}, {completed: 'mistake_19_3'}]},
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: {id: 'stamping something', from: 'dialogue_5', to: 'dialogue_6', destination: 'dialogue_found_1_1', condition: {flag: 'stampedElement'}},
+    },
+    "dialogue_6" : {//for checking the network(I didn't name this with "found", cause I needed to use globalWit here)
+      text: `אה, נראה שמצאתה שגיאת תקשורת. שלחתי לך מידע במדריך שתוכל לפתור אותה.`,
+      emotion: "neutral",
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}],
+      next: "nothing",
+      waitFor: {completed: 'nothing'}, //heh,
+      noPrev: true,
+      globalWait: {id: 'terminal_command_entered', from: 'dialogue_6', to: 'dialogue_8', destination: 'dialogue_5', condition: {completed: 'mistake_19_1'}}
+    },
+    "dialogue_7" : {
+      text: `מצויין מצאתה את כל השגיאות, אתה יכול לשלוח את המכתב עכשיו.`,
+      emotion: "happy",
+      next: "dialogue_8",
+      onEnter: [{type: 'SHOW', id: 'submit-button'}],
+      waitFor: {completed: 'submit'}
+    },
+    "dialogue_8" : {
+      text: `זה הכל להיום, תודה שאבדתה במשרד הדואר הפרוטוקולים.`,
+      emotion: "neutral",
+      next: "dialogue_9",
+      onEnter: [
+        {type: 'HIDE', id: 'submit-button'},
+        {type: 'SHOW', id: 'submit-animation'}
+      ]
+    },
+    "dialogue_9" : {
+      text: `עם תרצה לבוא לעבוד פה שוב תוכל לעשות את זה דרך מסך הבית.`,
+      next: "dialogue_10"
+    },
+    "dialogue_10" : {
+      text: `נתראה!`,
+      emotion: "happy",
+      next: null
+    },
+    //for selcting the wrong port in the question
+    "dialogue_mistake_1_1" : {
+      text: "לא, זאת היא טעות",
+      emotion: "sad",
+      next: "dialogue_mistake_1_2"
+    },
+    "dialogue_mistake_1_2" : {
+      text: "אתה יכול להשתמש במדריך שלך בשביל לחפס אינפורמצייה על פרוטוקולים קודמים.",
+      emotion: "neutral",
+      next: "dialogue_found_1_3"
+    },
+    //for stamping a wrong line
+    "dialogue_mistake_2_1" : {
+      text: `השורה הזאתי שגויה`,
+      name: "אני",
+      next: "dialogue_mistake_2_2",
+      noPrev: true
+    },
+    "dialogue_mistake_2_2" : {
+      text: `נסה שוב`,
+      emotion: "sad",
+      noPrev: true,
+      next: (state) => state.prevDialogue
     }
   }
  }  

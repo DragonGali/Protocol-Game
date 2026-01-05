@@ -373,6 +373,26 @@ export const manualData = {
                     "line_2" : `<span style='color:var(--blue)'>ip proxy-arp</span>`,
                 }
             }
+        },
+        "chapter_19" : {
+            title: `ICMP Redirects`,
+            pages: {
+                "page_1" : {
+                    "line_1" : `נתב Cisco ישלח הודעת ICMP Redirect כאשר הוא מזהה שמכשיר משתמש בנתיב לא אופטימלי כדי להגיע ליעד. ההודעה מאפשרת למכשיר ללמוד נתיב טוב יותר.`,
+                    "line_2" : `הנתב ישלח הודעת ICMP Redirect כאשר מתקיימים שלושה תנאים:`,
+                    "line_3" : `1. הפאקט נכנס ויוצא דרך אותו ממשק שהגיע.`
+                },
+                "page_2" : {
+                    "line_1" : `2. כתובת ה-IP של המכשיר השולח וכתובת ה-next hop של הנתב נמצאות באותה תת-רשת (subnet).`,
+                    "line_2" : `3. הנתב מוגדר כך שהוא יכול לשלוח ICMP Redirects (מופעל כברירת מחדל).`,
+                    "line_3" : `כאשר התנאים מתקיימים, הנתב יעביר את הפאקט ליעד, אך גם ישלח הודעת ICMP Redirect למכשיר השולח, שתאמר לו:`
+                },
+                "page_3" : {
+                    "line_1" : `"בפעם הבאה, שלח את הפאקטים ישירות ל-next hop הנכון."`,
+                    "line_3" : `פקודה כדי לשלוח הודעות אלו: <span style='color:var(--blue)'>ip redirects</span>`,
+                    "line_4" : `פקודה לביטול: <span style='color:var(--blue)'>no ip redirects</span>`
+                }
+            }
         }
 }
 };

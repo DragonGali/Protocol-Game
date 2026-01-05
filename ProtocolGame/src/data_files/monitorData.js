@@ -175,11 +175,24 @@ export const monitorData = {
         imgLink: './Monitor/pop_ups/nutCookies.png'
     },
     "chapter_18" : {
+        text: `מאיה,שמעתי שאת מתקדמת יפה עם הפרוטוקולים. תמשיכי ללמוד ולשאול שאלות – זה מה שהופך טכנאי לטוב באמת. תודה על העבודה שאת עושה. <br><br> ואני אשמח להקשיב לרעיונות שלך מול הקפה הזה זמצאת.`,
         customerName: "שמעון",
         protocol: "DHCP",
         sourceAddress: "192.168.20.10",
         destinationAddress: "192.168.50.10",
-        port: 67
+        port: 67,
+        link: null
+    },
+    "chapter_19" : {
+        text: `שלום שחקן, רציתי לומר לך שהעבודה שלך עד עכשיו מרשימה מאוד.<br><br>בגלל שזאתי ההודעה האחרונה להיום יש לי משהוא מיוחד בשבילך:`,
+        customerName: "דניאל",
+        protocol: "HTTP",
+        sourceAddress: "192.168.20.10",
+        destinationAddress: "192.168.50.10",
+        port: 67,
+        header: "------",
+        link: 'gift.svg [32 mgb]',
+        imgLink: './Monitor/pop_ups/hat.png'
     }
 }
 

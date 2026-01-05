@@ -78,7 +78,11 @@ export const terminalData = {
         line_1: `Router(config-if)# ip proxy-arp`,
         line_2: `% Proxy ARP enabled on interface`,
         line_3: `GigabitEthernet0/1`,
+    },
+    chapter_19_1 : {
+        line_1: `% ICMP redirects enabled on`,
+        line_2: `interface GigabitEthernet0/1`
     }
- }
+}
 
 export default terminalData;

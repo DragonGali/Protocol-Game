@@ -54,9 +54,12 @@ const TypewriterText = ({
 
   const [typedSegments, setTypedSegments] = useState([]);
   const [canAdvance, setCanAdvance] = useState(false);
-  const { dispatch } = useGameState();
+  const { state, dispatch } = useGameState();
 
   useEffect(() => {
+
+    if(typeof text === 'function') text = text(state);
+
     const parsed = parseTextWithSpans(text);
     setTypedSegments([]);
     setCanAdvance(false);
