@@ -8,13 +8,13 @@ import {manualData} from '../data_files/ManualData.js'
     Name Search
     -----------
 
-    This component let's the player search note's(protocols') in the manual
+    This component let's the player search entries(protocols') in the manual
     by name from all the chapters that they have already unlocked.
 
     The searching is done with a letter filter, they press on a letter
-    on the screen and it presents them all the note title's that start
+    on the screen and it presents them all the entry title's that start
     with that letter, clicking on them brings them to the manualText of
-    that note.
+    that entry.
 
 
 */
