@@ -18,7 +18,7 @@ const Manual = ({ onClose }) => {
   const chapterCompleted = hasCompleted(state, `read_manual_ch${selectedChapter}`);
 
   const closeProcedure = () => {
-    if (finishedReading && selectedChapter === state.flags.currentChapter) {
+    if (finishedReading && selectedChapter == state.flags.currentChapter) {
       // Dispatch the completion
       dispatch({ 
         type: 'MARK_COMPLETED', 
@@ -35,6 +35,7 @@ const Manual = ({ onClose }) => {
     if (shouldClose && chapterCompleted) {
       onClose();
     }
+
   }, [chapterCompleted, shouldClose]);
 
   const hasNewContent = !hasCompleted(state, `read_manual_ch${selectedChapter}`) && hasCompleted(state, `update_manual`);
@@ -50,13 +51,13 @@ const Manual = ({ onClose }) => {
       <div className='select-bar'>
         <div 
           className={`select-bar-item ${hasNewContent ? 'new' : ''} clickable ${selectedCategory === 'new' ? 'selected' : ''}`} 
-          onClick={() => setSelectedCategory('new')}
+          onClick={() => {setSelectedCategory('new'); setSelectedChapter(state.flags.currentChapter)}}
         >
           {hasNewContent && <span style={{ color: "var(--red)" }}>!</span>}חדש
         </div>
         <div 
           className={`select-bar-item clickable ${selectedCategory === 'name' ? 'selected' : ''}`} 
-          onClick={() => setSelectedCategory('name')}
+          onClick={() => {setSelectedCategory('name'); setSelectedChapter(null)}}
         >
           שם
         </div>
@@ -76,7 +77,15 @@ const Manual = ({ onClose }) => {
         />
       )}
       {selectedCategory === 'name' && (
-        <NameSearch/>
+        <div>
+        {!selectedChapter && <NameSearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('new')}}}/>}
+        {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
+          <ManualText 
+            chapter={selectedChapter}
+            onFinish={() => {}}
+        />
+      )}
+      </div>
       )}
     </div>
   );

@@ -14,11 +14,11 @@ const initialState = {
   prevDialogue: null,
   
   // GENERIC tracking
-  completed: new Set(["update_manual"]),// Things player has done
+  completed: new Set(),// Things player has done
   unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network", "terminal"]),// Things player can use
   visible: new Set(),// Things player can see
   flags: {// indicators and such
-    currentChapter: 19,
+    currentChapter: 8,
     link_state: false
   },
   globalWaits: []             

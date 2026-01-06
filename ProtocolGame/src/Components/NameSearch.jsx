@@ -19,28 +19,41 @@ import {manualData} from '../data_files/ManualData.js'
 
 */
 
-const NameSearch = () => {
+const NameSearch = ({redirect}) => {
     const { state, dispatch } = useGameState();
-    const [letters, setLetters] = useState()
+    const [letters, setLetters] = useState([]);
+    const [selectedLetter, setSelectedLetter] = useState();
 
     useEffect(() => {
         let letterDict = []
 
         Object.keys(manualData.Chapters).forEach(key => {
-            if (key.split('_')[1] <= state.flags.currentChapter) {
+            if (key.split('_')[1] <= state.flags.currentChapter - !hasCompleted(state, 'update_manual')) {
                 const title = manualData.Chapters[key]['title']
-                letterDict[title[0]] = {title: title}
-                console.log(letterDict)
+                if(title) {
+                    letterDict[title[0]] = {...letterDict[title[0]], [title] : {chapter: key}}
+                }
             }
         });
-    }, [state.flags.currentChapter])
+
+        setLetters(letterDict);
+    }, [state.flags.currentChapter, hasCompleted(state, 'update_manual')])
 
 
     return (
         <div className='NameSearch'>
             <p className='title'>חיפוש בעזרת שם:</p>
             <div className='letters'>
-                {}
+                {/*displaying all the entry title letters*/}
+                {Object.keys(letters).map(letter => (
+                    <p key={letter} className='letter clickable' onClick={() => (setSelectedLetter(letter))}>{letter}</p>
+                ))}
+            </div>
+            <div className='search-results'>
+                {/*displaying all the entry titles*/}
+                {selectedLetter && Object.keys(letters[selectedLetter]).map(title => (
+                    <p key={title} className='entry-title clickable' onClick={() => {redirect(letters[selectedLetter][title].chapter.split('_')[1]); setSelectedLetter(null)}}>{title}</p>
+                ))}
             </div>
         </div>
     );

@@ -14,3 +14,47 @@
     right: 1%;
 }
 
+.NameSearch .letters {
+    position: absolute;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    right: 2%;
+    width: 90%;
+    height: 40%;
+    top: 20%;
+    gap: 10%;
+}
+
+.NameSearch .letter {
+    font-size: var(--font-gargentuan);
+    color: var(--white);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.NameSearch .letter:hover {
+    color: var(--blue);
+    transform: rotate(5deg) scale(1.15);
+}
+
+.NameSearch .search-results {
+    position: absolute;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    right: 0%;
+    width: 90%;
+    height: 30%;
+    top: 60%;
+    gap: 10%;
+}
+
+.NameSearch .entry-title {
+    font-size: var(--font-regular);
+    transition: all 0.3s ease;
+}
+
+.NameSearch .entry-title:hover {
+    color: var(--blue);
+    transform: translateY(-5px);
+}
+
