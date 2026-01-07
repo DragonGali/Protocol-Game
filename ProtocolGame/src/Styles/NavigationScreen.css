@@ -1,0 +1,19 @@
+.NavigationScreen {
+    background-color: var(--black);
+    width: 100%;
+    height: 100%;
+}
+
+.NavigationScreen .title {
+    position: absolute;
+    width: 25%;
+    height: 9%;
+    right: 37%;
+    top: 5%;
+    background-color: var(--white);
+}
+
+.NavigationScreen .title p {
+    text-align: center;
+    font-size: var(--font-gargentuan);
+}

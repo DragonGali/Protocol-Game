@@ -41,6 +41,7 @@ function App() {
 
   //close's the game
   const handleQuit = () => {
+    //Maybe write a message to make sure if the player really wants to close the game.
     window.close();
   }
 

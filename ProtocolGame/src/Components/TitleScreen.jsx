@@ -10,7 +10,7 @@ const TitleScreen = ({ onStartGame }) => {
 
   return (
     <div className="TitleScreen" onClick={handleClick}>
-      <p> לחצו על כל כפתור בשביל להתחיל</p>
+      <p> לחצו על המסך בשביל להתחיל</p>
     </div>
   );
 };

@@ -1,16 +1,18 @@
 .PauseScreen {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--black);
     position: fixed;
+    z-index: 9999;
+    top: 0;
 }
 
 .PauseScreen .options {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-flow: column;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 20%;
     gap: 7%;
 }

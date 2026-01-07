@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../Styles/PauseScreen.css';
 import { useGameState, hasCompleted } from './GameState';
+
+import NavigationScreen from './NavigationScreen.jsx';
 
 /* 
     Pause Screen
@@ -14,15 +16,17 @@ import { useGameState, hasCompleted } from './GameState';
 */
 
 const PauseScreen = ({restart, quit}) => {
-    const { state, dispatch } = useGameState();
+    const { state } = useGameState();
+    const [openNavigation, setOpenNavigation] = useState(false);
 
     return (
         <div className='PauseScreen'>
-            <div className='options'>
+            {!openNavigation && <div className='options'>
                 <div className='option clickable' id='new-game' onClick={() => {restart();}}><p>משחק חדש</p></div>
-                <div className={`option ${!hasCompleted(state, 'finsihed_game') ? 'disabled' : 'clickable'}`} id='choose-chapter'><p>בחירת פרק</p></div>
+                <div className={`option ${/*!hasCompleted(state, 'finsihed_game') ? 'disabled' :*/ 'clickable'}`} id='choose-chapter' onClick={() => {setOpenNavigation(true);}}><p>בחירת פרק</p></div>
                 <div className='option clickable' id='exit' onClick={() => {quit();}}><p>יציאה</p></div>
-            </div>
+            </div>}
+            {openNavigation && <NavigationScreen></NavigationScreen>}
         </div>
     );
 }
