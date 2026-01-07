@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import {chapterData} from '../data_files/chapterData.js'
 
 const GameStateContext = createContext();
 
@@ -15,10 +16,10 @@ const initialState = {
   
   // GENERIC tracking
   completed: new Set(),// Things player has done
-  unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "network", "terminal"]),// Things player can use
+  unlocked: new Set(),// Things player can use
   visible: new Set(),// Things player can see
   flags: {// indicators and such
-    currentChapter: 8,
+    currentChapter: 0,
     link_state: false
   },
   globalWaits: []             
@@ -47,21 +48,21 @@ function gameStateReducer(state, action) {
       };
 
     case 'CORRECT_MISTAKE': //For correcting mistakes
-    const mistakeData = state.flags[action.id];
-    const currentLocation = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
+      const mistakeData = state.flags[action.id];
+      const currentLocation = typeof mistakeData === 'object' ? mistakeData.location : mistakeData;
     
-    return {
-      ...state,
-      flags: {
-        ...state.flags,
-        [action.id]: {
-          location: currentLocation,
-          correction: action.correction,
-          timestamp: Date.now()
-        }
-      },
-      completed: new Set([...state.completed, action.id])
-    };
+      return {
+        ...state,
+        flags: {
+          ...state.flags,
+          [action.id]: {
+            location: currentLocation,
+            correction: action.correction,
+            timestamp: Date.now()
+          }
+        },
+        completed: new Set([...state.completed, action.id])
+      };
 
     case 'UNLOCK':
       return {
@@ -129,6 +130,20 @@ function gameStateReducer(state, action) {
         ...state,
         globalWaits: []
     };
+
+    case 'CHAPTER_SELECT':
+      const chapter = chapterData[`chapter_${action.value}`];
+      console.log(chapter);
+      if (!chapter) {
+        return state; // Chapter doesn't exist
+      }
+      return {
+        ...state,
+        flags: chapter.flags || state.flags, // Use existing state as fallback
+        completed: chapter.completed || state.completed,
+        unlocked: chapter.unlocked || state.unlocked,
+        dialogueType: chapter.dialogueType || state.dialogueType,
+    }
       
     default:
       return state;

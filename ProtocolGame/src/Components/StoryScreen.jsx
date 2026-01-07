@@ -1,10 +1,14 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import DialogueManager from './DialogeManager.jsx';
 import { useGameState } from './GameState.jsx';
 import "../Styles/StoryScreen.css"
 
 const StoryScreen = ({ onContinue }) => {
   const { state, dispatch } = useGameState();
+
+  useEffect(() => {
+    dispatch({type: 'CHAPTER_SELECT', value: 0})
+  }, []);
 
   const handleStoryComplete = () => {
     // Navigate to game when story is complete, and update currentChapter

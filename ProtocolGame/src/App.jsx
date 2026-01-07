@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 import TitleScreen from "./Components/TitleScreen.jsx";
@@ -16,20 +16,45 @@ const pages = {
 };
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(pages.game);
+  const [currentPage, setCurrentPage] = useState(pages.title);
+  const [isPaused, setIsPaused] = useState(false);
+  const [chapterSelect, setChapterSelect] = useState(null);
 
   // Page components mapping
   const pageComponents = {
     [pages.title]: <TitleScreen onStartGame={() => setCurrentPage(pages.story)} />,
     [pages.story]: <StoryScreen onContinue={() => setCurrentPage(pages.game)} />,
-    [pages.game]: <GameScreen className="game-screen"/>,
+    [pages.game]: <GameScreen className="game-screen" chapterSelect={chapterSelect}/>,
   };
+
+  //Function that open's the pause screen if the player presse's Enter or Escape on the keypad
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') {
+        setIsPaused(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  //close's the game
+  const handleQuit = () => {
+    window.close();
+  }
+
+  const handleRestart = () => {
+    setIsPaused(false);
+    setChapterSelect(0);
+    setCurrentPage(pages.title);
+  }
 
   return (
     <GameStateProvider>
       <div className="App">
-        {/* {pageComponents[currentPage]} */}
-      <PauseScreen></PauseScreen>
+      {pageComponents[currentPage]}
+      {isPaused && <PauseScreen quit={() => {handleQuit()}} restart={() => {handleRestart()}}></PauseScreen>}
       </div>
     </GameStateProvider>
   );

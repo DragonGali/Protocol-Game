@@ -8,9 +8,26 @@ import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.j
 
 import dialogueData from '../data_files/dialogueData.js';
 
-const GameScreen = () => {
+const GameScreen = ({chapterSelect}) => {
   const { state, dispatch } = useGameState();
   const [isManualOpen, setManualOpen] = useState(false);
+
+  useEffect (() => {
+    if(chapterSelect) {
+      closingProcedure();
+      dispatch({type: 'CHAPTER_SELECT', value: chapterSelect});
+      chapterSelect = null;
+    }
+  }, [chapterSelect]);
+
+  const closingProcedure = () => {
+    dispatch({type: 'RESET_FLAGS'});
+    dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
+    dispatch({type: 'RESET_COMPLETED'});
+    dispatch({type: 'HIDE', id: 'submit-animation'});
+    dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
+    dispatch({type: 'CLEAR_GLOBAL_WAITS'});
+  }
   
   // Check if manual has new unread content
   const hasNewManualContent = !hasCompleted(state, `read_manual_ch${state.flags.currentChapter}`) && hasCompleted(state, 'update_manual');
@@ -21,14 +38,7 @@ const GameScreen = () => {
       <TextBox 
         dialogueType="characters"
         startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[0] }
-        onComplete={() => {
-          dispatch({type: 'RESET_FLAGS'});
-          dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
-          dispatch({type: 'RESET_COMPLETED'});
-          dispatch({type: 'HIDE', id: 'submit-animation'});
-          dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
-          dispatch({type: 'CLEAR_GLOBAL_WAITS'});
-        }}
+        onComplete={() => { closingProcedure();}}
       />
       
       {/* User Manual Icon */}

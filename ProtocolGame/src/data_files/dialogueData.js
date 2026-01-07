@@ -7,13 +7,13 @@ export const dialogueData =  {
         "story_1": {
         text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
         next: "story_2",
-        textColor: "var(--orange)",
+        name: "אני"
       },
       "story_2": {
         text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
         next: null, // End of story
         onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
-        textColor: "var(--orange)",
+        name: "אני"
       }
     }
   },
@@ -497,7 +497,7 @@ export const dialogueData =  {
       speed: 1000
     },
     "dialogue_7" : {
-      text: `[כנראה שאני אצטרך להסתדר בעצמי] `,
+      text: `[כנראה שאני אצטרך להסתדר בעצמי]`,
       name: "אני",
       next: "dialogue_8",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}, { type: 'MARK_COMPLETED', id: 'update_mail'}],
