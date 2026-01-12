@@ -22,6 +22,13 @@ const NavigationScreen = ({selectChapter}) => {
             <div className='title'>
                 <p>תבחרו פרק</p>
             </div>
+            <div className='navigation-circles'>
+                <div className='navigation-circle edge-chapter-circle'>
+                    <p>מסך פתיחה</p>
+                </div>
+                
+
+            </div>
         </div>
     );
 }

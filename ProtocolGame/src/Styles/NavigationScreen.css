@@ -7,13 +7,49 @@
 .NavigationScreen .title {
     position: absolute;
     width: 25%;
-    height: 9%;
+    height: 10%;
     right: 37%;
     top: 5%;
-    background-color: var(--white);
+    background: url('/NavigationScreen/title_box.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 .NavigationScreen .title p {
     text-align: center;
     font-size: var(--font-gargentuan);
+}
+
+.NavigationScreen .navigation-circles {
+    display: flex;
+    flex-flow: row wrap;
+    position: absolute;
+    top: 22%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+    background: url('./NavigationScreen/connection_lines_zig_zag.png');
+    background-size: 100% 100%;
+    background-repeat: none;
+}
+
+
+.NavigationScreen .navigation-circle {
+    text-align: center;
+    width: 8%;
+    aspect-ratio: 1/1;
+    position: absolute;
+    top: -8.7%;
+}
+
+.NavigationScreen .navigation-circle p {
+    padding-top: 38%;
+    font-size: var(--font-small);
+
+}
+
+.NavigationScreen .edge-chapter-circle {
+    background: url('/NavigationScreen/edge_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
