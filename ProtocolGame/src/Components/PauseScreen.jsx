@@ -15,9 +15,23 @@ import NavigationScreen from './NavigationScreen.jsx';
 
 */
 
-const PauseScreen = ({restart, quit}) => {
-    const { state } = useGameState();
+const PauseScreen = ({restart, quit, selectChapter}) => {
+    const { state, dispatch } = useGameState();
     const [openNavigation, setOpenNavigation] = useState(false);
+
+    const handleSelectChapter = (chapter) => {
+        closingProcedure();
+        dispatch({type: 'CHAPTER_SELECT', value: chapter});
+        selectChapter(chapter);
+    }
+
+    const closingProcedure = () => {
+        dispatch({type: 'RESET_FLAGS'});
+        dispatch({type: 'RESET_COMPLETED'});
+        dispatch({type: 'HIDE', id: 'submit-animation'});
+        dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
+        dispatch({type: 'CLEAR_GLOBAL_WAITS'});
+  }
 
     return (
         <div className='PauseScreen'>
@@ -26,7 +40,7 @@ const PauseScreen = ({restart, quit}) => {
                 <div className={`option ${/*!hasCompleted(state, 'finsihed_game') ? 'disabled' :*/ 'clickable'}`} id='choose-chapter' onClick={() => {setOpenNavigation(true);}}><p>בחירת פרק</p></div>
                 <div className='option clickable' id='exit' onClick={() => {quit();}}><p>יציאה</p></div>
             </div>}
-            {openNavigation && <NavigationScreen></NavigationScreen>}
+            {openNavigation && <NavigationScreen selectChapter={(chapter) => {handleSelectChapter(chapter);}}></NavigationScreen>}
         </div>
     );
 }

@@ -23,7 +23,7 @@ const StoryScreen = ({ onContinue }) => {
       <div className='dialogue-manager'>
         <DialogueManager
           dialogueType="story"
-          startDialogueId="story_1"
+          startDialogueId="dialogue_1"
           onComplete={handleStoryComplete}
           triangleColor='var(--orange)'
           triangleSize='1.5vw'

@@ -24,32 +24,57 @@
     display: flex;
     flex-flow: row wrap;
     position: absolute;
-    top: 22%;
+    top: 23%;
     left: 10%;
     width: 80%;
-    height: 70%;
+    height: 60%;
     background: url('./NavigationScreen/connection_lines_zig_zag.png');
-    background-size: 100% 100%;
-    background-repeat: none;
+    background-size: 90% 85%;
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    gap: 2.2rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-around;
 }
-
 
 .NavigationScreen .navigation-circle {
     text-align: center;
-    width: 8%;
-    aspect-ratio: 1/1;
-    position: absolute;
-    top: -8.7%;
+    width: 9vw;
+    height: 9vw;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
 }
 
-.NavigationScreen .navigation-circle p {
-    padding-top: 38%;
-    font-size: var(--font-small);
 
+.NavigationScreen .navigation-circle:hover {
+    transform: scale(1.15);
+}
+
+
+.NavigationScreen .navigation-circle p {
+    font-size: var(--font-regular);
+    position: relative;
+    z-index: 1;
 }
 
 .NavigationScreen .edge-chapter-circle {
     background: url('/NavigationScreen/edge_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .regular-chapter-circle {
+    background: url('/NavigationScreen/regular_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .selected-chapter-circle {
+    background: url('/NavigationScreen/selected_chapter_circle.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import '../Styles/NavigationScreen.css';
 import { useGameState, hasCompleted } from './GameState';
 
+import {chapterData} from "../data_files/chapterData.js"
+
 /*
     NavigationScreen
     ----------------
@@ -15,7 +17,7 @@ import { useGameState, hasCompleted } from './GameState';
 */
 
 const NavigationScreen = ({selectChapter}) => {
-    const { state } = useGameState()
+    const { state, dispatch } = useGameState()
 
     return (
         <div className='NavigationScreen'>
@@ -24,9 +26,13 @@ const NavigationScreen = ({selectChapter}) => {
             </div>
             <div className='navigation-circles'>
                 <div className='navigation-circle edge-chapter-circle'>
-                    <p>מסך פתיחה</p>
+                    <p>מסך ראשי</p>{/*maybe make this the REAL chapter 0*/}
                 </div>
-                
+                {Object.entries(chapterData).map(([Key, value]) => (
+                    <div onClick={() => {selectChapter(value.flags.currentChapter)}}className={`navigation-circle clickable ${state.flags.currentChapter == value.flags.currentChapter ? 'selected-chapter-circle': value.flags.currentChapter === 19 ? 'edge-chapter-circle' : 'regular-chapter-circle'}`}>
+                        <p>{value.title}</p>
+                    </div>
+                ))}
 
             </div>
         </div>

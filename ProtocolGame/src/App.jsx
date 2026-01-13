@@ -51,11 +51,22 @@ function App() {
     setCurrentPage(pages.title);
   }
 
+  const handleChapterSelect = (chapter) => {
+    if (chapter == 0) {
+      setCurrentPage(pages.story)
+    }
+    else {
+      setCurrentPage(pages.game);
+    }
+    setChapterSelect(chapter);
+  }
+
+
   return (
     <GameStateProvider>
       <div className="App">
       {pageComponents[currentPage]}
-      {isPaused && <PauseScreen quit={() => {handleQuit()}} restart={() => {handleRestart()}}></PauseScreen>}
+      {isPaused && <PauseScreen quit={() => {handleQuit()}} restart={() => {handleRestart()}} selectChapter={(chapter) => {handleChapterSelect(chapter)}}></PauseScreen>}
       </div>
     </GameStateProvider>
   );

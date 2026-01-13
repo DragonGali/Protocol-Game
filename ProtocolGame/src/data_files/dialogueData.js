@@ -4,17 +4,17 @@ export const dialogueData =  {
   // Story dialogues
   story: {
     "chapter_0" : {
-        "story_1": {
-        text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
-        next: "story_2",
-        name: "אני"
-      },
-      "story_2": {
-        text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
-        next: null, // End of story
-        onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
-        name: "אני"
-      }
+        "dialogue_1": {
+          text: "היום זה היום הראשון שלי במרכז הדואר האלקטרוני",
+          next: "dialogue_2",
+          name: "אני"
+        },
+        "dialogue_2": {
+          text: "אני לא ממש יודע למה לצפות, אבל אני אעשה כמיטב יכולתי.",
+          next: null, // End of story
+          onEnter: [{action: "MARK_COMPLETED", id:"story_complete"}],
+          name: "אני"
+        }
     }
   },
 

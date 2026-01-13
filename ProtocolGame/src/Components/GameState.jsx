@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import {chapterData} from '../data_files/chapterData.js'
 
+import {dialogueData} from "../data_files/dialogueData.js"
+
 const GameStateContext = createContext();
 
 const initialState = {
@@ -143,6 +145,9 @@ function gameStateReducer(state, action) {
         completed: chapter.completed || state.completed,
         unlocked: chapter.unlocked || state.unlocked,
         dialogueType: chapter.dialogueType || state.dialogueType,
+        currentDialogue: "dialogue_1",
+        currentCharacter: chapter.character || null,
+        isTalking: false
     }
       
     default:
