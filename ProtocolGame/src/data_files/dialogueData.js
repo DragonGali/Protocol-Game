@@ -224,14 +224,20 @@ export const dialogueData =  {
       next: "dialogue_5",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'update_manual'},
-        { type: 'MARK_COMPLETED', id: 'update_mail'}
-      ]
+      ],
+      waitFor: {completed: 'read_manual_ch2'}
     },
     "dialogue_5": {
-      text: "בטח אני כבר אסתכל.",
+      text: "אני מוכן לעבור על המכתב, תשלחי אותו עליי",
       name: "אני",
+      next: "dialogue_6"
+    },
+    "dialogue_6" : {
+      text: "הנא, בבקשה.",
+      emotion: 'happy',
       next: (state) => state.flags?.stampedElement === 'port' ? 'dialogue_correct_1' : 'dialogue_mistake_1_1',
-      waitFor: { flag: 'stampedElement' }
+      waitFor: { flag: 'stampedElement' },
+      onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}]
     },
     "dialogue_correct_1": {
       text: "נראה שהפורט שציינת בהודעה לא מתאים לפרוטוקול FTP.",
@@ -248,14 +254,14 @@ export const dialogueData =  {
     "dialogue_question_1": {
       type: "question",
       answers: [30, 81, 55, 21],
-      next: (state) => state.flags?.selectedAnswer === 21 ? 'dialogue_6' : 'dialogue_question_mistake_1_1',
+      next: (state) => state.flags?.selectedAnswer === 21 ? 'dialogue_7' : 'dialogue_question_mistake_1_1',
       waitFor: { flag: 'selectedAnswer' }
     },
 
-    "dialogue_6": {
+    "dialogue_7": {
       text: "תודה, אני כבר אתקן את השורה הזאת.",
       emotion: "happy",
-      next: "dialogue_7",
+      next: "dialogue_8",
       onEnter: [
         {type: 'CORRECT_MISTAKE', id: 'mistake_2', correction: 21},
         {type: 'SHOW', id: 'submit-button'}
@@ -263,7 +269,7 @@ export const dialogueData =  {
       waitFor: { completed: 'submit'}
     },
 
-    "dialogue_7": {
+    "dialogue_8": {
       text: "תודה רבה, אני בטוח אחזור שוב :)",
       emotion: "happy",
       onEnter: [

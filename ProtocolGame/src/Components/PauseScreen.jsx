@@ -21,8 +21,13 @@ const PauseScreen = ({restart, quit, selectChapter}) => {
 
     const handleSelectChapter = (chapter) => {
         closingProcedure();
-        dispatch({type: 'CHAPTER_SELECT', value: chapter});
-        selectChapter(chapter);
+        if (chapter === 'title') {
+            restart();
+        }
+        else {
+            dispatch({type: 'CHAPTER_SELECT', value: chapter});
+            selectChapter(chapter);
+        }
     }
 
     const closingProcedure = () => {

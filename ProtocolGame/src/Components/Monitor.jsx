@@ -19,6 +19,8 @@ function Monitor() {
   const [playingButtonAnimation, setPlayingButtonAnimation] = useState();
   const [toolInUse, setToolInUse] = useState();
 
+  const [gifCache] = useState(Math.random());
+
   // Mailing icon image logic
   const getMailingIconSrc = () => {
     return `/Monitor/mailingIcon${openMail === null ? '.png' : openMail ? 'Open.gif' : 'Close.gif'}`;
@@ -69,7 +71,8 @@ function Monitor() {
       className={`Monitor ${isVisible(state, 'monitor_showcase') ? 'showcase' : ''} ${isVisible(state, 'submit-animation') ? 'submit-animation' : ''}`}
       style={{
         pointerEvents: state.monitorUnlocked ? 'auto' : 'none',
-        display: isUnlocked(state, 'monitor') ? 'block' : 'none'
+        display: isUnlocked(state, 'monitor') ? 'block' : 'none',
+        backgroundImage: isVisible(state, 'submit-animation') ? `url("/Monitor/submit-animation.gif?cache=${gifCache}")` : 'url("/Monitor/MonitorBackground.png")',
       }}
     >
       <div className="monitor-container">

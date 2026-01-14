@@ -1,4 +1,8 @@
 export const chapterData = {
+    chapter_title : {
+        flags: {currentChapter: "title"},
+        title: "מסך ראשי"
+    },
     chapter_0 : {
         dialogueType: 'story',
         flags: {currentChapter: 0},
@@ -86,7 +90,6 @@ export const chapterData = {
         flags: {currentChapter: 14},
         title: 'פרוטוקולי שירות',
         character: "mel"
-
     },
     chapter_15 : {
         unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),

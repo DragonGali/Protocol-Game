@@ -11,7 +11,7 @@ const initialState = {
   dialogueType: null,
   currentCharacter: null,
   currentEmotion: null,
-  isTalking: false,
+  isTalking: true,
 
   //for globalWait
   prevDialogue: null,
@@ -147,7 +147,7 @@ function gameStateReducer(state, action) {
         dialogueType: chapter.dialogueType || state.dialogueType,
         currentDialogue: "dialogue_1",
         currentCharacter: chapter.character || null,
-        isTalking: false
+        isTalking: true
     }
       
     default:

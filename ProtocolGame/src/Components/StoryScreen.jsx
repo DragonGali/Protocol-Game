@@ -12,9 +12,7 @@ const StoryScreen = ({ onContinue }) => {
 
   const handleStoryComplete = () => {
     // Navigate to game when story is complete, and update currentChapter
-    dispatch({ type: 'SET_FLAG', key: 'currentChapter', value: 1 });
-    dispatch({ type: 'SET_FLAG', key: 'currentPage', value: 'game' });
-
+    dispatch({ type: 'CHAPTER_SELECT', value: 1 });
     onContinue();
   };
 
