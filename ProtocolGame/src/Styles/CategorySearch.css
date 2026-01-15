@@ -1,0 +1,15 @@
+.CategorySearch {
+    position: absolute;
+    width: 93.5%;
+    height: 91%;
+    top: 8%;
+    right: 3%;
+}
+
+.CategorySearch .title {
+    position: absolute;
+    font-size: var(--font-title-large);
+    direction: rtl;
+    top: 5%;
+    right: 1%;
+}

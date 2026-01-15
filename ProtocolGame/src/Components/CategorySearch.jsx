@@ -18,3 +18,18 @@ import {manualData} from '../data_files/ManualData.js'
 
 */
 
+const CategorySearch = ({redirect}) => {
+    const { state, disatch } = useGameState();
+
+    return (
+        <div className='CategorySearch'>
+            <p className='title'>חיפוש בעזרת כטגוריה: </p>
+            {Object.values(manualData.Chapters).forEach(value => {
+                console.log(value['category']);
+            })}
+        </div>
+    );
+}
+
+export default CategorySearch;
+

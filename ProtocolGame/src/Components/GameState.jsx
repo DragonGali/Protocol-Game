@@ -98,7 +98,10 @@ function gameStateReducer(state, action) {
       return { ...state, completed: new Set() };
 
     case 'RESET_FLAGS':
-      return { ...state, flags: {} };
+    return { 
+      ...state, 
+      flags: { currentChapter: state.flags.currentChapter } // Preserve currentChapter
+    };
 
     case 'ADD_GLOBAL_WAIT': {
       const wait = action.wait;

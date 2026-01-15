@@ -2,6 +2,7 @@ export const manualData = {
     Chapters: {
         "chapter_1": {
             title: "מבוא - מהוא פרוטוקול?",
+            category: "הדרכה",
             pages: {
                 "page_1": {
                     "line_1": "פרוטוקול תקשורת הוא אוסף של חוקים. הוא קובע איך שולחים ומקבלים הודעות במערכות תקשורת.",
@@ -28,6 +29,7 @@ export const manualData = {
         },
         "chapter_2": {
             title: "FTP-File Transfer Protocol",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1": {
                     "line_1" : "* פרוטוקול תקשורת משכבת ה יישום, מבוסס TCP להעברת קבצים בין מחשבים בעלי מערכות הפעלה שאינן זהות בהכרח.",
@@ -42,6 +44,7 @@ export const manualData = {
         },
         "chapter_3": {
             title: "TFTP - Trivial File Transfer Protocol",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `ל TFTP יש את אותה מטרה כמו FTP רק שTFTP עובד עם UDP, ולכן הקובץ שיעבור לא יהיה בהכרח אמין.אין בתהליך הזה התחברות, ולכן גם אין שום אבטחה.`,
@@ -64,6 +67,7 @@ export const manualData = {
         },
         "chapter_5" : {
             title: "HTML - Hypertext Transfer Protocol",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `* פרוטוקול תקשורת מבוסס על <span style='color:var(--red)'>TCP</span> שנועד להעברת שפי HTML ואובייקטים שהם מכילים(כמו תמונות, סרטוני פלאש וכו’) ברשת האינטרנט.`,
@@ -79,6 +83,7 @@ export const manualData = {
         },
         "chapter_6" : {
             title: "HTTPS - Hypertext Transfer Protocol Secure",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `HTTPS הוא פרוטוקול זהה ל HTTP רק שתעבורת המידע באמצעות הפרוטוקול היא מוצפנת באמצעות הצפנת SSL.`,
@@ -93,6 +98,7 @@ export const manualData = {
         },
         "chapter_8" : {
             title: 'Telnet',
+            category: "Configuration",
             pages: {
                 "page_1" : {
                     "line_1" : `פרוטוקול TELNET משמש בעיקר משתמשים המעוניינים להתחבר באמצעות שורת הפקודה למחשבים/רכיבים ברשת.`,
@@ -106,6 +112,7 @@ export const manualData = {
         },
         "chapter_9" : {
             title: `SSL - Secure Socket Layer`,
+            category: "Presentation/Security Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `פרוטוקול תקשורת לרשתות מחשבים המאפשר תקשורת מאובטחת ומוצפנת בין שני יישומים מתקשרים.`,
@@ -130,6 +137,7 @@ export const manualData = {
         },
         "chapter_10" : {
             title: "SSH - Secure Shell",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `SHH הוא פרוטוקול דומה לפרוטוקול TELNET רק שהפרוטוקול עובד בצורה מאובטחת.`,
@@ -148,6 +156,7 @@ export const manualData = {
         },
         "chapter_11" : {
             title: `DNS - Domain Name Service`,
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `DNS הוא פרוטוקול המאפשר למפות שמות תחום (Domain Names) לכתובות נומריות IP, ובכך שהוא בעל יכולת גישה לבסיס נתונים ועל פיו למפות לפי הדרישות.`,
@@ -161,6 +170,7 @@ export const manualData = {
         },
         "chapter_12" : {
             title: "DHCP - Dynamic Host Configuration Protocol",
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `DHCP הוא פרוטוקול תקשורת המשמש להקצאה דינאמית של כתובות IP למחשבים ברשת מקומית (LAN).`,
@@ -188,6 +198,7 @@ export const manualData = {
         },
         "chapter_13" : {
             title: `SNMP - Simple Network Management Protocol`,
+            category: "Application Layer Protocol",
             pages: {
                 "page_1" : {
                     "line_1" : `רוטוקול SNMP משמש לניהול ובקרה מרחוק של רכיבי רשת כמו נתבים, מדפסות, שרתים ועוד. בפרוטוקול יש שני צדדים:`,
@@ -222,6 +233,7 @@ export const manualData = {
         },
        "chapter_14" : {
             title: 'פרוטוקולי שירות',
+            category: "Troubleshooting",
             pages: {
                 "page_1" : {
                 "line_1" : `פרוטוקולי שירות הם פרוטוקולים שנועדו לסייע לטכנאים ולמנהלי רשתות לנהל, לנטר ולפתור בעיות ברשת.`,
@@ -289,6 +301,7 @@ export const manualData = {
         },
         "chapter_15" : {
             title: 'דרכים נוספים לאיתור בעיות',
+            category: "Troubleshooting",
             pages: {
                 "page_1" : {
                     "line_1" : `מלבד שימוש בפרוטוקולי השירות Terminal Monitor ו-Debug, קיימות פקודות נוספות שבעזרתן ניתן לנטר את תעבורת הרשת ואת מצב הרכיבים.`,
@@ -316,6 +329,7 @@ export const manualData = {
         },
         "chapter_16" : {
             title: "IP Helper Adress",
+            category: "Configuration",
             pages: {
                 "page_1" : {
                     "line_1" : `כאשר משתמש שולח בקשת DHCP, ההודעה נשלחת כ-Broadcast (BC). הודעות ברודקאסט מגיעות רק לרכיבים באותה רשת מקומית (LAN), ולכן אם אין שרת DHCP באותה רשת – הנתב יתעלם מהבקשה.`,
@@ -337,6 +351,7 @@ export const manualData = {
         },
         "chapter_17" : {
             title: "IP Directed Broadcast",
+            category: "Configuration",
             pages: {
                 "page_1" : {
                     "line_1" : `פקודת <span style='color:var(--blue)'>ip directed broadcast</span> מאפשרת לשלוח הודעות אל אזור ה-Broadcast של רשת מרוחקת.`,
@@ -352,6 +367,7 @@ export const manualData = {
         },
         "chapter_18" : {
             title: `Proxy ARP`,
+            category: "Configuration",
             pages: {
                 "page_1" : {
                     "line_1" : `כאשר מכשיר ברשת רוצה לתקשר עם מכשיר שנמצא ברשת אחרת, הוא ישלח את ההודעה לנתב.`,
@@ -376,6 +392,7 @@ export const manualData = {
         },
         "chapter_19" : {
             title: `ICMP Redirects`,
+            category: "Configuration",
             pages: {
                 "page_1" : {
                     "line_1" : `נתב Cisco ישלח הודעת ICMP Redirect כאשר הוא מזהה שמכשיר משתמש בנתיב לא אופטימלי כדי להגיע ליעד. ההודעה מאפשרת למכשיר ללמוד נתיב טוב יותר.`,

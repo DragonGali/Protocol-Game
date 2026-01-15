@@ -5,6 +5,7 @@ import '../Styles/Manual.css';
 
 import ManualText from './ManualText.jsx';
 import NameSearch from './NameSearch.jsx'
+import CategorySearch from './CategorySearch.jsx'
 
 const Manual = ({ onClose }) => {
   const { state, dispatch } = useGameState();
@@ -84,8 +85,19 @@ const Manual = ({ onClose }) => {
             chapter={selectedChapter}
             onFinish={() => {}}
         />
+        )}
+        </div>
       )}
-      </div>
+      {selectedCategory === 'category' && (
+        <div>
+        {!selectedChapter && <CategorySearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('category')}}}/>}
+        {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
+          <ManualText 
+            chapter={selectedChapter}
+            onFinish={() => {}}
+        />
+        )}
+        </div>
       )}
     </div>
   );

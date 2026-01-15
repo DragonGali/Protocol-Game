@@ -37,7 +37,9 @@ function App() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
+    
   }, []);
+  
 
   //close's the game
   const handleQuit = () => {
