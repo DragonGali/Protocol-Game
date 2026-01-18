@@ -64,7 +64,7 @@ const Manual = ({ onClose }) => {
         </div>
         <div 
           className={`select-bar-item clickable ${selectedCategory === 'category' ? 'selected' : ''}`} 
-          onClick={() => setSelectedCategory('category')}
+          onClick={() => {setSelectedCategory('category'); setSelectedChapter(null)}}
         >
           קטגוריה
         </div>
@@ -79,24 +79,24 @@ const Manual = ({ onClose }) => {
       )}
       {selectedCategory === 'name' && (
         <div>
-        {!selectedChapter && <NameSearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('new')}}}/>}
-        {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
-          <ManualText 
-            chapter={selectedChapter}
-            onFinish={() => {}}
-        />
-        )}
+          {!selectedChapter && <NameSearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('new')}}}/>}
+          {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
+            <ManualText 
+              chapter={selectedChapter}
+              onFinish={() => {}}
+            />
+          )}
         </div>
       )}
       {selectedCategory === 'category' && (
         <div>
-        {!selectedChapter && <CategorySearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('category')}}}/>}
-        {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
-          <ManualText 
-            chapter={selectedChapter}
-            onFinish={() => {}}
-        />
-        )}
+          {!selectedChapter && <CategorySearch redirect={(chapter) => {setSelectedChapter(chapter); if(chapter == state.flags.currentChapter) {setSelectedCategory('new')}}}/>}
+          {selectedChapter && selectedChapter != state.flags.currentChapter &&  ( 
+            <ManualText 
+              chapter={selectedChapter}
+              onFinish={() => {}}
+            />
+          )}
         </div>
       )}
     </div>

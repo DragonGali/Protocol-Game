@@ -4,32 +4,43 @@ import { useGameState, hasCompleted } from './GameState';
 import '../Styles/CategorySearch.css';
 import {manualData} from '../data_files/ManualData.js'
 
-/*
-
-    Category Search
-    ---------------
-
-    This component let's the player search entries(protocols') in the manual
-    by they're categories (eg. network oriented) from all the chapters that they have already unlocked.
-
-    The categories are decided in this jsx file with a dict, and all the items are filtered.
-    When the user selects a category, all the entries relating to thsi category are shown, and selcting it 
-    redirects the player to that entry
-
-*/
-
 const CategorySearch = ({redirect}) => {
-    const { state, disatch } = useGameState();
+    const { state, dispatch } = useGameState();
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState();
+
+    useEffect(() => {
+        let categoryDict = [];
+
+        Object.keys(manualData.Chapters).forEach(key => {
+            if (key.split('_')[1] <= state.flags.currentChapter - !hasCompleted(state, 'update_manual')) {
+                const category = manualData.Chapters[key].category;
+                const title = manualData.Chapters[key].title;
+                
+                if (category && title) {
+                    categoryDict[category] = {...categoryDict[category], [title]: {chapter: key}};
+                }
+            }
+        });
+
+        setCategories(categoryDict);
+    }, [state.flags.currentChapter, hasCompleted(state, 'update_manual')])
 
     return (
         <div className='CategorySearch'>
             <p className='title'>חיפוש בעזרת כטגוריה: </p>
-            {Object.values(manualData.Chapters).forEach(value => {
-                console.log(value['category']);
-            })}
+            <div className='categories'>
+                {Object.keys(categories).map(category => (
+                    <p key={category} className='category clickable' onClick={() => setSelectedCategory(category)}>{category}</p>
+                ))}
+            </div>
+            <div className='search-results'>
+                {selectedCategory && Object.keys(categories[selectedCategory]).map(title => (
+                    <p key={title} className='entry-title clickable' onClick={() => {redirect(categories[selectedCategory][title].chapter.split('_')[1]); setSelectedCategory(null)}}>{title}</p>
+                ))}
+            </div>
         </div>
     );
 }
 
 export default CategorySearch;
-

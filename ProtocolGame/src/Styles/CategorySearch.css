@@ -13,3 +13,47 @@
     top: 5%;
     right: 1%;
 }
+
+.CategorySearch .categories {
+    position: absolute;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    right: 2%;
+    width: 90%;
+    height: 40%;
+    top: 20%;
+    gap: 10%;
+}
+
+.CategorySearch .category {
+    font-size: var(--font-title-large);
+    color: var(--white);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.CategorySearch .category:hover {
+    color: var(--blue);
+    transform: rotate(3deg) scale(1.1);
+}
+
+.CategorySearch .search-results {
+    position: absolute;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    right: 0%;
+    width: 90%;
+    height: 30%;
+    top: 60%;
+    gap: 10%;
+}
+
+.CategorySearch .entry-title {
+    font-size: var(--font-regular);
+    transition: all 0.3s ease;
+}
+
+.CategorySearch .entry-title:hover {
+    color: var(--blue);
+    transform: translateY(-5px);
+}
