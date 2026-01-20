@@ -3,6 +3,7 @@ import '../Styles/PauseScreen.css';
 import { useGameState, hasCompleted } from './GameState';
 
 import NavigationScreen from './NavigationScreen.jsx';
+import Credits from './Credits.jsx';
 
 /* 
     Pause Screen
@@ -18,6 +19,7 @@ import NavigationScreen from './NavigationScreen.jsx';
 const PauseScreen = ({restart, quit, selectChapter}) => {
     const { state, dispatch } = useGameState();
     const [openNavigation, setOpenNavigation] = useState(false);
+    const [openCredits, setOpenCredits] = useState(false);
 
     const handleSelectChapter = (chapter) => {
         closingProcedure();
@@ -40,12 +42,14 @@ const PauseScreen = ({restart, quit, selectChapter}) => {
 
     return (
         <div className='PauseScreen'>
-            {!openNavigation && <div className='options'>
+            {!openNavigation && !openCredits && <div className='options'>
                 <div className='option clickable' id='new-game' onClick={() => {restart();}}><p>משחק חדש</p></div>
                 <div className={`option ${/*!hasCompleted(state, 'finsihed_game') ? 'disabled' :*/ 'clickable'}`} id='choose-chapter' onClick={() => {setOpenNavigation(true);}}><p>בחירת פרק</p></div>
+                <div className='option clickable' id='credits' onClick={() => {setOpenCredits(true);}}><p>קרדיטים</p></div>
                 <div className='option clickable' id='exit' onClick={() => {quit();}}><p>יציאה</p></div>
             </div>}
             {openNavigation && <NavigationScreen selectChapter={(chapter) => {handleSelectChapter(chapter);}}></NavigationScreen>}
+            {openCredits && <Credits onClose={() => {setOpenCredits(false);}}></Credits>}
         </div>
     );
 }
