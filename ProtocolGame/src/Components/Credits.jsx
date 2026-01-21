@@ -6,52 +6,60 @@ const Credits = ({ onClose }) => {
       <main className="creditsMain">
         <div className="creditsScroll">
           {/* intro section */}
+
           <section className="creditsSection">
-            <p>a film by <span><b>Tom Gormican</b></span></p>
+            <img className='creditsImage' src='./TitleScreen/title screen.png'/>
+            <p>משחק פותח על ידי <span style={{ color: 'var(--yellow)' }}>גלי קרצר</span></p>
           </section>
 
-          {/* cast */}
+          {/* עיצוב */}
           <article style={{ marginBottom: '5em' }}>
-            <h2>Cast</h2>
+            <h2>עיצוב</h2>
             <dl>
-              <dt>Zac Efron</dt><dd>Jason</dd>
-              <dt>Miles Teller</dt><dd>Daniel</dd>
-              <dt>Michael B. Jordan</dt><dd>Mikey</dd>
-              <dt>Imogen Poots</dt><dd>Ellie</dd>
-              <dt>Mackenzie Davis</dt><dd>Chelsea</dd>
-              <dt>Jessica Lucas</dt><dd>Vera</dd>
+              <dt>תכנון עיצובי</dt><dd>Millanote</dd>
+              <dt>תיק מסכים</dt><dd>Figma</dd>
+              <dt>איורים</dt><dd>pixilart</dd>
+              <dt>עריכת תמונות</dt><dd>Remove.bg, Microsoft Paint</dd>
+              <dt>אנימצייה</dt><dd>Ezgif</dd>
+              <dt></dt>
             </dl>
+            <img className='creditsImage' id='maya-shimon' src='./Credits/Maya and Shimon.png'/>
           </article>
 
-          {/* credits list */}
+          {/* טכנות */}
           <article className="creditsList">
-            <h2>Credits</h2>
-
-            {/* Repeat groups of dl as needed */}
+            <h2>טכנות</h2>
             <dl>
-              <dt>Production Coordinator</dt><dd>Gina Roche</dd>
-              <dt>Second 2nd Assistant Director</dt><dd>Mary Michel D'onofrio</dd>
-              <dt>Additional Unit Production Manager</dt><dd>Devorah Devries</dd>
-              <dt>Additional 2nd Assistant Directors</dt><dd>Scott Friendman<br/>Jason Hightower</dd>
-              <dt>Production Accountant</dt><dd>Sarah Lane</dd>
-              <dt>1st Assistant Accountant</dt><dd>Paul Bischot</dd>
-              {/* …more credit items… */}
+                <dt>שפת המשחק</dt><dd>JavaScript (React)</dd>
+                <dt>ספריות</dt><dd>React, React DOM</dd>
+                <dt>כלי פיתוח</dt><dd>Visual Studio Code, Git</dd>
             </dl>
+            <img className='creditsImage' id='mel-liyor' src='./Credits/Mel and Liyor.png'/>
+          </article>
 
-            {/* Add more <dl> groups as in the original if needed */}
+          {/* השראות */}
+          <article className="creditsList">
+            <h2>השראות</h2>
+            <dl>
+                <p>VA-11 Hall-A</p>
+                <p>Ace Attorney</p>
+                <p>משחקי נרטיב ומערכות דיאלוג</p>
+              <img className='creditsImage' id='daniel-granny' src='./Credits/Daniel and Granny.png'/>
+            </dl>
           </article>
 
           {/* end text */}
           <section className="creditsSection">
-            <h3>The End.</h3>
+            <h3 style={{ color: 'var(--yellow)' }}>הסוף</h3>
+            <p>תודה ששיחקתה!</p>
           </section>
         </div>
       </main>
 
       {/* Optional close button */}
       {onClose && (
-        <button className="creditsClose" onClick={onClose}>
-          Close
+        <button className="creditsClose clickable" onClick={onClose}>
+          חזרה
         </button>
       )}
     </div>
