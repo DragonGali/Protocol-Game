@@ -6,6 +6,7 @@ import StoryScreen from "./Components/StoryScreen.jsx";
 import { GameStateProvider } from "./Components/GameState.jsx";
 import GameScreen from './Components/GameScreen.jsx';
 import PauseScreen from './Components/PauseScreen.jsx'
+import Credits from './Components/Credits.jsx';
 
 // Dictionary of all pages
 const pages = {
@@ -24,7 +25,8 @@ function App() {
   const pageComponents = {
     [pages.title]: <TitleScreen onStartGame={() => setCurrentPage(pages.story)} />,
     [pages.story]: <StoryScreen onContinue={() => setCurrentPage(pages.game)} />,
-    [pages.game]: <GameScreen className="game-screen" chapterSelect={chapterSelect}/>,
+    [pages.game]: <GameScreen className="game-screen" chapterSelect={chapterSelect} onFinish={() => setCurrentPage(pages.credits)} />,
+    [pages.credits]: <Credits onClose={() => setCurrentPage(pages.title)}/>,
   };
 
   //Function that open's the pause screen if the player presse's Enter or Escape on the keypad

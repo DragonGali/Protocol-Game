@@ -42,7 +42,7 @@
   --font-medium: clamp(5px, 1.7vw, 50px);
   --font-gargentuan: clamp(15px, 4vw, 200px);
 
-  --cursor-default: url("./Cursors/Test.png"), auto;
+  --cursor-default: url("./Cursors/Default.png"), auto;
   --cursor-pointer: url("./Cursors/Pointer.png"), auto;
   --cursor-grab: url("./Cursors/Grab.png"), auto;
   --cursor-open: url("./Cursors/Open.png"), auto;

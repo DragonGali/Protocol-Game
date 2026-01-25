@@ -44,79 +44,79 @@ export const chapterData = {
         character: "granny"
     },
     chapter_7 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 7},
         title: 'הקדמה 3',
         character: "daniel"
     },
     chapter_8 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 8},
         title: 'Telnet',
         character: "shimon"
     },
     chapter_9 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 9},
         title: 'SSL',
         character: "maya"
     },
     chapter_10 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 10},
         title: 'SSH',
         character: "mel"
     },
     chapter_11 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 11},
         title: 'DNS',
         character: "liyor"
     },
     chapter_12 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 12},
         title: 'DHCP',
         character: "granny"
     },
     chapter_13 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 13},
         title: 'SNMP',
         character: "shimon"
     },
     chapter_14 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 14},
         title: 'פרוטוקולי שירות',
         character: "mel"
     },
     chapter_15 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 15},
         title: 'איתור בעיות',
         character: "maya"
     },
     chapter_16 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 16},
         title: 'IP Helper Adress',
         character: "liyor"
     },
     chapter_17 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 17},
         title: "IP Directed Broadcast",
         character: "granny"
     },
     chapter_18 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 18},
         title: 'Proxy ARP',
         character: "shimon"
     },
     chapter_19 : {
-        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network"]),
+        unlocked: new Set(["manual", "monitor", "mail_list", "stamp", "help-icon", "network", "terminal"]),
         flags: {currentChapter: 19},
         title: 'ICMP Redirects',
         character: "daniel"

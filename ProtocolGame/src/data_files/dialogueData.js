@@ -400,7 +400,8 @@ export const dialogueData =  {
         {type: 'MARK_COMPLETED', id: 'read_manual_ch4'},
         {type: 'SET_FLAG', key: 'mistake_4', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_4_code', value: 200 }
-      ]
+      ],
+      globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_8', destination: 'dialogue_special_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: "התקנתי כלי חדש למוניטור העבודה שלך. תוכל להשתמש בו כאשר תפתח מכתב חדש. ",
@@ -411,6 +412,7 @@ export const dialogueData =  {
     "dialogue_3" : {
       text: "הכנסתי לך מכתב בתיבת הדואר שתתנסה בו. תפתח אותו",
       next: "dialogue_4",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: { completed: "opened_letter" }
     },
@@ -418,6 +420,7 @@ export const dialogueData =  {
     "dialogue_4" : {
       text: "הכלי החדש שנשתמש בוא הוא כלי בקרת התקשורת, הוא נראה כמו סימן אנטננה. ",
       next: "dialogue_5",
+      emotion: "neutral",
       onEnter: [
         {type: 'SET_FLAG', key: 'aquired_item', value: 'network'},
         {type: 'UNLOCK', id: 'network'},
@@ -427,6 +430,7 @@ export const dialogueData =  {
     "dialogue_5" : {
       text: "תלחץ על הסימן שלו",
       next: "dialogue_6",
+      emption: "neutral",
       onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: null}],
       waitFor: { completed: "networkChecked"}
     },
@@ -434,16 +438,19 @@ export const dialogueData =  {
     "dialogue_6" : {
       text: "ההודעה עברה בהצלחה, אבל זה לא יקרה ככה תמיד. ",
       next: "dialogue_7",
+      emotion: "neutral",
     },
 
     "dialogue_7" : {
       text: "מעכשיו, אתה תצתרך לא רק לראות שהחבילה כתובה בלי שגיות אבל גם שהיא מחוברת.",
       next: "dialogue_8",
+      emotion: "neutral",
     },
 
     "dialogue_8" : {
       text: "תשים לב להודעות שקשורות לפרוטוקול TCP, אלו משתמשים בקומוניקציות בינייהם, וחייב לבדוק אותם.",
       next: "dialogue_exit",
+      emotion: "neutral",
       onEnter: [
         {type: 'SHOW', id: 'submit-button'}
       ],
@@ -458,6 +465,20 @@ export const dialogueData =  {
         {type: 'HIDE', id: 'submit-button'},
         {type: 'SHOW', id: 'submit-animation'}
       ],
+    },
+
+    "dialogue_special_1" : {
+      text: 'הא הא, אני רואה שאתה אוהב להשתמש בכלי החותמת.',
+      emotion: "happy",
+      next: "dialogue_special_2",
+      noPrev: true,
+    },
+    "dialogue_special_2" : {
+      text: 'זה רק שיעור על כלי התקשורת, אז אין באמת צורך - אבל תמשיך לשחק איתו עולי תמצא משהוא מעניין.',
+      emotion: "neutral",
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      next: (state) =>  state.prevDialogue,
+      noPrev: true
     }
   },
 
@@ -471,7 +492,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_5', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_5_code', value: 500 }
-      ]
+      ],
+      globalWait: { id: 'mel_stamp_comment', from: 'dialogue_7', to: 'dialogue_16', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: "סליחה העם אמרת משהוא?",
@@ -506,6 +528,7 @@ export const dialogueData =  {
       text: `[כנראה שאני אצטרך להסתדר בעצמי]`,
       name: "אני",
       next: "dialogue_8",
+      emotion: "shy",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_manual'}, { type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: { completed: "networkChecked"}
     },
@@ -517,11 +540,12 @@ export const dialogueData =  {
     "dialogue_9" : {
       text: `זה חמש מאות. כלומר, הבקשה נשלחה כמו שצריך, אבל משהו השתבש בתוך השרת. אולי סקריפט שבור, בעיה בזיכרון, או שה-backend פשוט לא יודע איך להתמודד`,
       next: "dialogue_10",
-      speed: 40,
+      emotion: "confident",
     },
     "dialogue_10" : {
       text: `עם זה... זו לא אשמתך - השרת פשוט קרס.`,
       next: "dialogue_11",
+      emotion: "confident"
     },
     "dialogue_11" : {
       text: `...מרשים, כמה גרוע זה נכשל.`,
@@ -531,6 +555,7 @@ export const dialogueData =  {
     "dialogue_12" : {
       text: `וואו, את מבינה כל כך הרבה בפרוטוקולים.`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_13",
     },
     "dialogue_13" : {
@@ -541,6 +566,7 @@ export const dialogueData =  {
     "dialogue_14" : {
       text: `עם השרת לא מגיב עולי תוכלי להשתמש בכתובת של שרת אחר?`,
       name: "אני",
+      emotion: "shy",
       next: "dialogue_15",
     },
     "dialogue_15" : {
@@ -554,6 +580,7 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_5_stamp', value: 'src-address'}
       ],
       next: "dialogue_17",
+      emotion: "confident",
       waitFor: {flag: 'stampedElement'},
       next: (state) => state.flags?.stampedElement === 'src-address' ? 'dialogue_17' : 'dialogue_mistake_1_1',
     },
@@ -601,17 +628,20 @@ export const dialogueData =  {
       emotion: "neutral",
       name: "אני",
       next: "dialogue_mistake_1_2",
+      noPrev: true
     },
     "dialogue_mistake_1_2" : {
       text: `...לא`,
       emotion: "shy",
-      next: "dialogue_mistake_1_3"
+      next: "dialogue_mistake_1_3",
+      noPrev: true
     },
     "dialogue_mistake_1_3" : {
       text: `[היא אפילו לא מסתכלת עליי.]`,
       name: "אני",
-      next: "dialogue_16",
-      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+      next: (state) =>  state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      noPrev: true
     }
 
   },

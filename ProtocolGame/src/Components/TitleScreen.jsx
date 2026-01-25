@@ -9,7 +9,7 @@ const TitleScreen = ({ onStartGame }) => {
   };
 
   return (
-    <div className="TitleScreen" onClick={handleClick}>
+    <div className="TitleScreen clickable" onClick={handleClick}>
       <p> לחצו על המסך בשביל להתחיל</p>
     </div>
   );

@@ -8,7 +8,7 @@ import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.j
 
 import dialogueData from '../data_files/dialogueData.js';
 
-const GameScreen = ({chapterSelect}) => {
+const GameScreen = ({chapterSelect, onFinish}) => {
   const { state, dispatch } = useGameState();
   const [isManualOpen, setManualOpen] = useState(false);
 
@@ -38,7 +38,7 @@ const GameScreen = ({chapterSelect}) => {
       <TextBox 
         dialogueType="characters"
         startDialogueId={ Object.keys(dialogueData.characters[`chapter_${state.flags.currentChapter}`])[0] }
-        onComplete={() => { closingProcedure();}}
+        onComplete={() => { closingProcedure(); if(state.flags.currentChapter >= 19) { onFinish(); } }}
       />
       
       {/* User Manual Icon */}

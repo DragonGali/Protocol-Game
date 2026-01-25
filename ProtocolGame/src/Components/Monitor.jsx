@@ -19,7 +19,7 @@ function Monitor() {
   const [playingButtonAnimation, setPlayingButtonAnimation] = useState();
   const [toolInUse, setToolInUse] = useState();
 
-  const [gifCache] = useState(Math.random());
+  const [gifCache, setGifCache] = useState(Math.random());
 
   // Mailing icon image logic
   const getMailingIconSrc = () => {
@@ -50,6 +50,7 @@ function Monitor() {
 
   // Add stamp-active class to body when stamp is active, to show the stamp cursor.
   useEffect(() => {
+
     if (isVisible(state, 'using_stamp')) {
       document.body.classList.add('stamp-active');
     } else {
@@ -59,12 +60,17 @@ function Monitor() {
     if (isVisible(state, 'submit-animation')) {
       setOpenMail(false);
       setOpenLetter(false);
+      setToolInUse(null);
     }
 
     return () => {
       document.body.classList.remove('stamp-active');
     };
   }, [state]);
+
+  useEffect(() => {
+    setGifCache(Math.random());
+  }, [isVisible(state, 'submit-animation')]);
 
   return (
     <div

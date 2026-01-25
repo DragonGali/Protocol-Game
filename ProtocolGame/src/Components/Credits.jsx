@@ -56,12 +56,9 @@ const Credits = ({ onClose }) => {
         </div>
       </main>
 
-      {/* Optional close button */}
-      {onClose && (
-        <button className="creditsClose clickable" onClick={onClose}>
-          חזרה
-        </button>
-      )}
+      <button className="creditsClose clickable" onClick={onClose}>
+        חזרה
+      </button>
     </div>
   );
 };
