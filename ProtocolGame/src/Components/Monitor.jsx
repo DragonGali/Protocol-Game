@@ -15,7 +15,7 @@ function Monitor() {
   const [openLetter, setOpenLetter] = useState(false);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [popUpParams, setPopUpParams] = useState(null);
-  const [stampedElements, setStampedElements] = useState([]);
+  const [deactivateTools, setDeactivateTools] = useState(state.flags['mistake_6'] && !hasCompleted(state, 'mistake_6'));
   const [playingButtonAnimation, setPlayingButtonAnimation] = useState();
   const [toolInUse, setToolInUse] = useState();
 
@@ -39,13 +39,16 @@ function Monitor() {
     }
   };
 
-  const handleStampClick = () => {
+  const handleStampClick = (e) => {
+    e.stopPropagation();
     setOpenLetter(true);
+    setToolInUse('stamp');
     dispatch({ type: 'SHOW', id: 'using_stamp' });
   };
 
   const deactivateStamp = () => {
     dispatch({type: 'HIDE', id: 'using_stamp'});
+    setToolInUse(null);
   };
 
   // Add stamp-active class to body when stamp is active, to show the stamp cursor.
@@ -65,6 +68,24 @@ function Monitor() {
 
     return () => {
       document.body.classList.remove('stamp-active');
+    };
+  }, [state]);
+
+  //Deactivation of the stamp tool when clcking on the screen and not selecting something.
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      if (toolInUse !== 'stamp') return;
+      console.log("check");
+      deactivateStamp();
+    };
+
+    // Attach listener when stamp is active
+    if (toolInUse === 'stamp') {
+      document.addEventListener("click", handleGlobalClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleGlobalClick);
     };
   }, [state]);
 
