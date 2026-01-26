@@ -869,7 +869,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_7_1', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_7_1_command', value: 'LIST'}
-      ]
+      ],
+      globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_11', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2": {
       text: `התקנתי לך עוד כלי חדש שתצטרך להשתמש בו.`,
@@ -881,16 +882,19 @@ export const dialogueData =  {
       text: `תפתח את המכתב ששלחתי לך בשביל להתנסות בו.`,
       next: "dialogue_4",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
-      waitFor: { completed: "opened_letter"}
+      waitFor: { completed: "opened_letter"},
+      emotion: "neutral",
     },
     "dialogue_4": {
       text: `היום אנחנו עובדים עם פרוטוקול <span style='color:var(--red)'>POP3</span>, שמיועד למשוך הודעות דוא״ל מהשרת אל המחשב המקומי.`,
       next: "dialogue_5",
+      emotion: "neutral",
     },
     "dialogue_5" : {
       text: `אתה רואה את האייקון החדש שנראה כמו מסך שחור? זה כלי הטרמינל שלך. לחץ עליו.`,
       character: "daniel",
       next: "dialogue_6",
+      emotion: "neutral",
       onEnter: [
         {type: 'SET_FLAG', key: 'aquired_item', value: 'terminal'},
         {type: 'UNLOCK', id: 'terminal'}
@@ -900,22 +904,26 @@ export const dialogueData =  {
     "dialogue_6" : {
       text: `הכלי הזה מבצע פקודות, ומוסיף את המידע החדש למכתב, אבל רק עם הפקודות נכתבו נכון.`,
       next: "dialogue_7",
+      emotion: "neutral",
       onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: null}]
     },
 
     "dialogue_7" : {
       text: `הפקודה שאני רוצה שתשתמש בה עכשיו היא: <span style='color:var(--orange)'>LIST</span>.`,
       next: "dialogue_8",
+      emotion: "neutral",
     },
 
     "dialogue_8" : {
       text: `פקודת <span style='color:var(--orange)'>LIST</span> משמשת לקבלת רשימה של כל ההודעות שבתיבת הדואר. היא מחזירה לכל הודעה את מספרה ואת הגודל שלה, בלי להראות את התוכן.`,
       next: "dialogue_9",
+      emotion: "neutral",
     },
 
     "dialogue_9" : {
       text: `תנסה לרשום <span style='color:var(--orange)'>LIST</span> בטרמינל בשביל להפעיל אותה`,
       next: "dialogue_10",
+      emotion: "neutral",
       waitFor: {completed: 'mistake_7_1'}
     },
     "dialogue_10" : {
@@ -944,7 +952,22 @@ export const dialogueData =  {
       emotion: "happy",
       next: null,
       onEnter: [{type: 'HIDE', id: 'submit-animation'}]
+    },
+    "dialogue_mistake_1_1" : {
+      text: `העם משהוא לא בסדר?`,
+      emotion: "sad",
+      noPrev: true,
+      next: "dialogue_mistake_1_2"
+    },
+    "dialogue_mistake_1_2" : {
+      text: `לא לא...אני רק בודק דברים`,
+      name: "אני",
+      next: (state) =>  state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      noPrev: true,
+      globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_11', destination: "dialogue_mistake_1_1", condition: {flag: 'stampedElement'}  }
     }
+
   },
   "chapter_8" : {
       "dialogue_1" : {
@@ -956,7 +979,8 @@ export const dialogueData =  {
           {type: 'SET_FLAG', key: 'mistake_8_1', value: 'terminal'},
           {type: 'SET_FLAG', key: 'mistake_8_1_command', value: 'st'},
           {type: 'SET_FLAG', key: 'mistake_8_1_stamp', value: 'port'}
-        ]
+        ],
+        globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_3', to: 'dialogue_7', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
       },
       "dialogue_2" : {
         text: `אני צריך שתבצע פקודת בדיקת סטטוס המערכת.`,
@@ -1042,17 +1066,21 @@ export const dialogueData =  {
         text: `יש שגיאה בשורה הזאתי.`,
         emotion: "neutral",
         name: "אני",
-        next: 'dialogue_mistake_1_2'
+        next: 'dialogue_mistake_1_2',
+        noPrev: true
       },
       'dialogue_mistake_1_2' : {
         text: `אין פה שום שגיאות, על תבזבז את הזמן שלי.`,
         emotion: "angry",
-        next: 'dialogue_mistake_1_3'
+        next: 'dialogue_mistake_1_3',
+        noPrev: true
       },
       "dialogue_mistake_1_3" : {
         text: `...אני מצטער.`,
-        next: 'dialogue_7',
-        onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+        next: (state) => state.prevDialogue,
+        onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+        globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_3', to: 'dialogue_7', destination: "dialogue_mistake_1_1", condition: {flag: 'stampedElement'}  },
+        noPrev: true
       },
       "dialogue_mistake_2" : {
         text: `[לא?! מה אני בכלל חושב, זה לא יכול להיות המספר הזה!]`,
@@ -1069,7 +1097,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_9', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_9_code', value: 525 }
-      ]
+      ],
+      globalWait: { id: 'maya_stamp_comment', from: 'dialogue_8', to: 'dialogue_16', destination: 'dialogue_mistake_3_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `אתה בטח עדיין מתאושש משמעון, נכון? הוא שונא לבוא לכאן`,      emotion: "neutral",
@@ -1105,12 +1134,14 @@ export const dialogueData =  {
       text: `[מעניין, אז יכולים להיווצר שגיאות בחיבור אפילו עם הנתונים נכונים, טוב אני אתחיל לעבור על המכתב]`,
       name: "אני",
       next: "dialogue_9",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'networkChecked'}
     },
     "dialogue_9" : {
       text: `נראה שיש בעיה, עם השרת המכתב לא נשלח.`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_10",
     },
     "dialogue_10" : {
@@ -1126,6 +1157,7 @@ export const dialogueData =  {
     "dialogue_12" : {
       text: `רגע, זה ממש לא אשמתך. החיבור נכשל בגלל שגיאת <span style='color:var(--blue)'>Handshake</span> ,לא בגלל שכתבת משהו לא נכון.`,
       name: "אני",
+      emotion: "sad",
       next: "dialogue_13"
     },
     "dialogue_13" : {
@@ -1137,12 +1169,14 @@ export const dialogueData =  {
       type: 'question',
       answers: ['כתובת מקור', 'כתובת יעד', 'פורט', 'פרוטוקול'],
       next: (state) => state.flags?.selectedAnswer === 'כתובת מקור' ? 'dialogue_15' : 'dialogue_mistake_1_1',
-      waitFor: {flag: 'selectedAnswer'}
+      waitFor: {flag: 'selectedAnswer'},
+      emotion: "confused"
     },
     "dialogue_15" : {
       text: `צריך לעדכן את קובץ ההגדרות, להחליף את כתובת ה-IP לכתובת החלופית ולשמור. זה מאלץ את השרת לבצע שוב את ה-Handshake כראוי.`,
       name: 'אני',
-      next: "dialogue_16"
+      next: "dialogue_16",
+      emotion: "neutral"
     },
     "dialogue_16" : {
       text: `עם אתה אומר שזה יכול לעזור...יש לי עוד כתובת שאני יכולה להשתמש בה.`,
@@ -1153,6 +1187,7 @@ export const dialogueData =  {
       text: `תוכל לסמן לי את כתובת המקור בשביל שאני אשנה אותה?`,
       next: (state) => state.flags.stampedElement === 'src-address' ? "dialogue_18" : "dialogue_mistake_2_1",
       waitFor: {flag: "stampedElement"},
+      emotion: "neutral",
       onEnter: [{type: 'SET_FLAG', key: 'mistake_9_stamp', value: 'src-address'}]
     },
     "dialogue_18" : {
@@ -1209,6 +1244,27 @@ export const dialogueData =  {
       name: "אני",
       next: "dialogue_17",
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}]
+    },
+    "dialogue_mistake_3_1" : {
+      text: `יש שגיאה בשורה הזאתי.`,
+      emotion: "neutral",
+      noPrev: true,
+      name: "אני",
+      next: 'dialogue_mistake_3_2'
+    },
+    "dialogue_mistake_3_2" : {
+      text: `אתה בטוח?`,
+      emotion: "sad",
+      noPrev: true,
+      next: 'dialogue_mistake_3_3'
+    },
+    "dialogue_mistake_3_3" : {
+      text: `...לא, עשיתי טעות סליחה`,
+      name: "אני",
+      noPrev: true,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: { id: 'maya_stamp_comment', from: 'dialogue_8', to: 'dialogue_16', destination: "dialogue_mistake_3_1", condition: {flag: 'stampedElement'}  },
+      next: (state) => state.prevDialogue,
     }
   },
 
