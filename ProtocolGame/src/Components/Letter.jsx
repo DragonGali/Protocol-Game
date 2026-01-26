@@ -106,6 +106,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
     setHasCompletedTerminalMistake(mistakeValue === 'terminal' ? hasCompleted(state, mistakeKey) : true);
   }, [state.completed, state.flags]);
 
+
   // Get corrected values
   const displayPort = getDisplayValue('port', data.port, port.mistakeKey);
   const displayLink = getDisplayValue('link', data.link, link.mistakeKey);

@@ -1284,7 +1284,8 @@ export const dialogueData =  {
       text: `...בבקשה רק...אל תקרא את המכתב`,
       emotion: "neutral",
       speed: 120,
-      next: "dialogue_3"
+      next: "dialogue_3",
+      globalWait: {id: 'mel_stamp_comment', from: 'dialogue_5', to: 'dialogue_8', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_3" : {
       text: `[זה רק הופר אותי ליותר מעוניין]`,
@@ -1303,7 +1304,8 @@ export const dialogueData =  {
       name: "אני",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {visible: 'using_terminal'},
-      next: "dialogue_6"
+      next: "dialogue_6",
+      emotion: "neutral"
     },
     "dialogue_6" : {
       text: `אתה צריך להתחבר בשביל לבצע את השליחה, הנה הקוד שלי.`,
@@ -1313,6 +1315,7 @@ export const dialogueData =  {
     "dialogue_7" : {
       text: `שם המשתמש שלי הוא “mel”, והכתובת שלי היא: “10.0.0.1”.`,
       next: "dialogue_8",
+      emotion: "confident",
       waitFor: {completed: 'mistake_10_1'}
     },
     "dialogue_8" : {
@@ -1354,6 +1357,28 @@ export const dialogueData =  {
       next: "dialogue_9",
       waitFor: {completed: 'submit'}
     },
+    "dialogue_mistake_1_1" : {
+      text: `יש שגיאה בשורה הזאתי.`,
+      emotion: "neutral",
+      name: "אני",
+      next: "dialogue_mistake_1_2",
+      noPrev: true
+    },
+    "dialogue_mistake_1_2" : {
+      text: '...לא',
+      emotion: "shy",
+      speed: 100,
+      next: "dialogue_mistake_1_3",
+      noPrev: true
+    },
+    "dialogue_mistake_1_3" : {
+      text: `[כנראה שסימנתי משהוא לא נכון...]`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: { id: 'mel_stamp_comment', from: 'dialogue_5', to: 'dialogue_8', destination: "dialogue_mistake_1_1", condition: {flag: 'stampedElement'}  },
+      noPrev: true
+    }
   },
   "chapter_11" : {
     "dialogue_1" : {
@@ -1501,7 +1526,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_12_1', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_12_1_command', value: 'ipconfig /renew'}
-      ]
+      ],
+      globalWait: { id: 'granny_stamp_comment', from: 'dialogue_7', to: 'dialogue_9', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `אבל לכתוב כל כתובת בנפרד זה כזה כאב ראש. אתה יכול למצוא דרך לטפל בזה בשבילי?`,
@@ -1533,17 +1559,20 @@ export const dialogueData =  {
     "dialogue_7" : {
       text: `יש לי רעיון מה לעשות, את יכולה לשלוח לי את המכתב`,
       name: "אני",
-      next: "dialogue_8"
+      next: "dialogue_8",
+      emotion: "neutral"
     },
     "dialogue_8" : {
       text: `כן, אין צורך לזרז אותי, יש לי הרבה זמן`,
       next: "dialogue_9",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'mistake_12_1'}
     },
     "dialogue_9" : {
       text: `[צריך לעשות עוד משהוא]`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_10",
       waitFor: {completed: 'networkChecked'}
     },
@@ -1564,6 +1593,39 @@ export const dialogueData =  {
       text: `תודה רבה, יקירי! עכשיו כל אחד יקבל עוגיות חמות ישר מהתנור.`,
       emotion: "happy",
       next: null
+    },
+    "dialogue_mistake_1_1" : {
+      text: `יש שגיאה בשורה הזאתי.`,
+      emotion: "neutral",
+      noPrev: true,
+      name: "אני",
+      next: "dialogue_mistake_1_2"
+    },
+    "dialogue_mistake_1_2" : {
+      text: `מה אמרתה?`,
+      noPrev: true,
+      emotion: "grumpy",
+      next: "dialogue_mistake_1_3"
+    },
+    "dialogue_mistake_1_3" : {
+      text: `משהוא לא בסדר במכתב!`,
+      name: "אני",
+      noPrev: true,
+      next: 'dialogue_mistake_1_4',
+    },
+    "dialogue_mistake_1_4" : {
+      text: 'מה? יש מטרייה במרטף?',
+      emotion: "grumpy",
+      noPrev: true,
+      next: "dialogue_mistake_1_5"
+    },
+    "dialogue_mistake_1_5" : {
+      text: 'לא משנה...',
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: { id: 'granny_stamp_comment', from: 'dialogue_8', to: 'dialogue_9', destination: "dialogue_mistake_1_1", condition: {flag: 'stampedElement'}  },
+      noPrev: true
     }
     
   },
@@ -1574,8 +1636,8 @@ export const dialogueData =  {
       next: "dialogue_2",
       character: "shimon",
       onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_1_13', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_1_13_command', value: 'snmpget'}
+        {type: 'SET_FLAG', key: 'mistake_13_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_13_1_command', value: 'snmpget'}
       ]
     },
     "dialogue_2" : {
@@ -1620,7 +1682,7 @@ export const dialogueData =  {
       name: "אני",
       next: "dialogue_10",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
-      waitFor: {completed: 'mistake_1_13'}
+      waitFor: {completed: 'mistake_13_1'}
     },
     "dialogue_10" : {
       text: `[שמעון ביקש ממני לבדוק שהכל תקין, בואו נראה עם יש פה עוד בעיות]`,

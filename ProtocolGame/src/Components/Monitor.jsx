@@ -90,6 +90,12 @@ function Monitor() {
   }, [state]);
 
   useEffect(() => {
+    // Close Letter and Mail when Chapter Changes
+    setOpenLetter(false);
+    setOpenMail(false);
+  }, [state.flags.currentChapter]);
+
+  useEffect(() => {
     setGifCache(Math.random());
   }, [isVisible(state, 'submit-animation')]);
 
