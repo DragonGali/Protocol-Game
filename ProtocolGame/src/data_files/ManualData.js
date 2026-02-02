@@ -1,7 +1,7 @@
 export const manualData = {
     Chapters: {
         "chapter_1": {
-            title: "מבוא - מהוא פרוטוקול?",
+            title: "מבוא - מה הוא פרוטוקול?",
             category: "הדרכה",
             pages: {
                 "page_1": {

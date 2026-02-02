@@ -9,6 +9,7 @@ export const chapterData = {
         title: 'סיפור'
     },
     chapter_1 : {
+        unlocked: new Set([]),
         flags: {currentChapter: 1},
         title: '1 הקדמה',
         character: "daniel",

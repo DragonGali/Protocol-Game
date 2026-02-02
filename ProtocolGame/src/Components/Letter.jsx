@@ -181,7 +181,7 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
         className={srcAddress.getClassNames('src-adress')}
         onClick={handleStampClick(srcAddress.handleStamp)}
       >
-        <p>מאית: {displaySourceAddress}</p>
+        <p>מאת: {displaySourceAddress}</p>
       </div>
 
       {/* Destination Address */}

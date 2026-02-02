@@ -157,17 +157,17 @@ export const dialogueData =  {
         {type: 'SHOW', id: 'submit-animation'},
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ]
-    },
+    },//Ill have this Icon become the Settings Icon Instead
+    // "dialogue_22": {
+    //   text: "אם תיתקל בקושי, תוכל ללחוץ על סמל העזרה, בשביל לקבל רמז.",
+    //   next: "dialogue_23",
+    //   onEnter: [
+    //     {type: 'UNLOCK', id: 'help-icon'},
+    //     {type: 'SHOW', id: 'help-icon-showcase'},
+    //     {type: 'HIDE', id: 'submit-animation'}
+    //   ]
+    // },
     "dialogue_22": {
-      text: "אם תיתקל בקושי, תוכל ללחוץ על סמל העזרה, בשביל לקבל רמז.",
-      next: "dialogue_23",
-      onEnter: [
-        {type: 'UNLOCK', id: 'help-icon'},
-        {type: 'SHOW', id: 'help-icon-showcase'},
-        {type: 'HIDE', id: 'submit-animation'}
-      ]
-    },
-    "dialogue_23": {
       text: "בהצלחה!",
       emotion: 'happy',
       next: null,
@@ -652,16 +652,16 @@ export const dialogueData =  {
       character: "granny",
       emotion: "happy",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_6', value: 'letter'},
-        {type: 'SET_FLAG', key: 'letter_state', value: 'crappy'}
-      ]
     },
     "dialogue_2" : {
       text: `בטח! באיזה פרוטוקול את רוצה להשתמש?`,
       emotion: "neutral",
       name: "אני",
       next: "dialogue_3",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_6', value: 'letter'},
+        {type: 'SET_FLAG', key: 'letter_state', value: 'crappy'}
+      ]
     },
     "dialogue_3" : {
       text: `פרו-מה? אני רק רוצה שהן יגיעו חמות ולא פרוצות כמו בפעם הקודמת!`,      character: "granny",
@@ -671,6 +671,7 @@ export const dialogueData =  {
     "dialogue_4" : {
       text: `[נראה שהמדריך שלי התעדכן, עולי היא משתמשת בפרוטוקול ההוא]`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_5",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'update_manual'},
@@ -1638,7 +1639,8 @@ export const dialogueData =  {
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_13_1', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_13_1_command', value: 'snmpget'}
-      ]
+      ],
+      globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_8', to: 'dialogue_11', destination: 'dialogue_special_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `אם אני אהיה כנה? כל פעם שהיא שולחת משהו, יש בעיות, אז החלטתי לבדוק בעצמי.`,
@@ -1681,19 +1683,22 @@ export const dialogueData =  {
       text: `[טוב, לעבודה]`,
       name: "אני",
       next: "dialogue_10",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'mistake_13_1'}
     },
     "dialogue_10" : {
       text: `[שמעון ביקש ממני לבדוק שהכל תקין, בואו נראה עם יש פה עוד בעיות]`,
       name: "אני",
-      next: (state) => state.flags.stampedElement ? 'dialogue_special_1' : 'dialogue_11',
+      emotion: "neutral",
+      next: 'dialogue_11',
       onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
-      waitFor: {completedAny: [{completed: 'networkChecked'}, {flag: 'stampedElement'}]}
+      waitFor: {completed: 'networkChecked'}
     },
     "dialogue_11" : {
       text: `[הכל מסודר כמו שצריך. נראה שמאיה באמת השקיעה כדי לוודא שאין טעויות.]`,
       name: "אני",
+      emotion: "neutral",
       next: "dialogue_12"
     },
     "dialogue_12" : {
@@ -1725,23 +1730,30 @@ export const dialogueData =  {
     "dialogue_special_1" : {
       text: `השורה הזאתי שגויה.`,
       name: "אני",
-      next: "dialogue_special_2"
+      next: "dialogue_special_2",
+      emotion: "neutral",
+      noPrev: true,
     },
     "dialogue_special_2" : {
       text: ` כמו שציפיתי...נו, מה בדיוק שגוי בשורה?`,
       emotion: "happy",
       next: "dialogue_special_3",
+      noPrev: true,
     },
     "dialogue_special_3" : {
       text: `אה... סליחה טעות שלי, השורה הזאתי בסדר גמור.`,
       name: "אני",
-      next: "dialogue_special_4"
+      next: "dialogue_special_4",
+      noPrev: true,
     },
     "dialogue_special_4" : {
       text: `[על מה אני חושב בכלל?! אני אביא צרות למאיה בגלל זה]`,
       name: "אני",
       emotion: "sad",
-      next: "dialogue_10"
+      next: (state) => state.prevDialogue,
+      noPrev: true,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_9', to: 'dialogue_11', destination: "dialogue_special_1", condition: {flag: 'stampedElement'}  },
     }
   },
   "chapter_14" : {
@@ -1972,8 +1984,9 @@ export const dialogueData =  {
       emotion: "happy",
       next: "dialogue_2",
       onEnter: [{type: 'SET_FLAG', key: 'mistake_15_1', value: 'terminal'},
-                {type: 'SET_FLAG', key: 'mistake_15_1_command', value: 'traceroute'}
-      ]
+                {type: 'SET_FLAG', key: 'mistake_15_1_command', value: 'traceroute 203.0.113.25'}
+      ],
+      globalWait: {id: 'maya_stamp_comment', from: 'dialogue_11', to: 'dialogue_14', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `יש לי תקשורת איטית עם שרת מסוים. הוא עדיין מגיב, אבל הכל מרגיש איטי.`,
@@ -2032,11 +2045,13 @@ export const dialogueData =  {
     "dialogue_12" : {
       text: `בשביל להריץ אותה צריך לרשום:\n "<span style="color: var(--blue)">[כתובת יעד IP]</span> traceroute" בתוך הורמינל.`,
       next: "dialogue_13",
+      emotion: "neutral",
       onEnter: [{type: 'MARK_COMPLETED', id: 'update_mail'}],
       waitFor: {completed: 'mistake_15_1'}
     },
     "dialogue_13" : {
       text: `כן אני רואה את הבעיה.`,
+      emotion: "neutral",
       name: "אני",
       next: "dialogue_14",
       emotion: "confused",
@@ -2062,7 +2077,15 @@ export const dialogueData =  {
       name: "אני",
       next: "dialogue_9",
       emotion: "confused",
-    }
+    },
+    "dialogue_mistake_2_1" : {
+      text: `[זה לא רלוונטי עכשיו]`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: {id: 'maya_stamp_comment', from: 'dialogue_11', to: 'dialogue_14', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'} },
+      noPrev: true,
+    },
   },
   "chapter_16" : {
     "dialogue_1" : {
@@ -2074,7 +2097,7 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_16', value: 'network'},
         {type: 'SET_FLAG', key: 'mistake_16_code', value: '103'},
         {type: 'SET_FLAG', key: 'mistake_16_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_16_1_command', value: 'ip helper-adress 172.20.45.9'}
+        {type: 'SET_FLAG', key: 'mistake_16_1_command', value: 'ip helper-address 172.20.45.9'}
       ],
       globalWait: {id: 'stamp_mistake', from: 'dialogue_5', to: 'dialogue_12', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
@@ -2564,7 +2587,9 @@ export const dialogueData =  {
       text: `נסה שוב`,
       emotion: "sad",
       noPrev: true,
-      next: (state) => state.prevDialogue
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: {id: 'stamping something', from: 'dialogue_4', to: 'dialogue_6', destination: 'dialogue_found_1_1', condition: {flag: 'stampedElement'}}
     }
   }
  }  
