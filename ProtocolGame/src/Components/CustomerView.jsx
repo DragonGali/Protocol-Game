@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react';
 import '../Styles/CustomerView.css';
 import { useGameState } from './GameState.jsx';
 
+/* 
+
+  Customer View Component
+  -----------------------
+
+  This component manages the character sprite, its emotions and talking animations.
+  Originally I was going to have an animation of the character entering and exiting the room
+  but first of all thatd take too long to animate and second it looked kinda bad (i'm not a good animator),
+  so instead iv'e made this fade in animation...well it's okay I guess a little bit wierd though, but hey! maybe you could fix it.
+
+
+*/
+
 function CustomerView() {
   const { state } = useGameState();
   const [isAnimating, setIsAnimating] = useState(false);

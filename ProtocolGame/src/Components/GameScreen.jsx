@@ -8,11 +8,22 @@ import { useGameState, isVisible, isUnlocked, hasCompleted } from './GameState.j
 
 import dialogueData from '../data_files/dialogueData.js';
 
-const GameScreen = ({chapterSelect, onFinish}) => {
+
+/*
+
+  Game Screen Component
+  ---------------------
+
+  This component represents the main game screen where the player interacts with customers,
+  manages tasks, and accesses the monitor and user manual. It handles chapter progression, manual access, and the Monitor.
+
+*/
+
+const GameScreen = ({chapterSelect, onFinish, pauseScreen}) => {
   const { state, dispatch } = useGameState();
   const [isManualOpen, setManualOpen] = useState(false);
 
-  useEffect (() => {
+  useEffect (() => {// For Handling Chapter Selection from the Pause Menu
     if(chapterSelect) {
       closingProcedure();
       dispatch({type: 'CHAPTER_SELECT', value: chapterSelect});
@@ -20,7 +31,7 @@ const GameScreen = ({chapterSelect, onFinish}) => {
     }
   }, [chapterSelect]);
 
-  const closingProcedure = () => {
+  const closingProcedure = () => {// Resetting everything before going to the next chapter
     dispatch({type: 'RESET_FLAGS'});
     dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
     dispatch({type: 'RESET_COMPLETED'});
@@ -59,7 +70,7 @@ const GameScreen = ({chapterSelect, onFinish}) => {
 
       {isManualOpen && <Manual onClose={() => setManualOpen(false)} />}
 
-      <Monitor className="Monitor"/>
+      <Monitor className="Monitor" pauseScreen={() => {pauseScreen();}}/>
 
       {isVisible(state, 'manual_command_table') && <div className='manual-command-table'><img src='./General/close-button.png' className='close-button clickable' onClick={() => {dispatch({type: 'HIDE', id: 'manual_command_table'})}}/></div>}
     </div>

@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import "../Styles/TypeWriter.css";
 import { useGameState } from "./GameState";
 
+/*
+
+    TypewriterText Component
+    ------------------------
+
+    This component render's all the text from dialogueData.
+    It needs to regulate the speed of the text, and display the triangle when it's finsihed
+    and the player can proceed. The text here can also have multiple colors in it, and that was hard because
+    I can't use innerHTML because it types the text letter by letter, so I had to make a parser for <span> tags.
+
+*/
+
 const getColorFilter = (color) => {
   const colorMap = {
     "var(--orange)":
@@ -81,7 +93,7 @@ const TypewriterText = ({
 
         setCanAdvance(true);
 
-        if (onTypingComplete) onTypingComplete();   // CALL NEW HOOK HERE
+        if (onTypingComplete) onTypingComplete();
 
         return;
       }

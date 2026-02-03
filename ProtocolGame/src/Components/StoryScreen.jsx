@@ -3,6 +3,15 @@ import DialogueManager from './DialogeManager.jsx';
 import { useGameState } from './GameState.jsx';
 import "../Styles/StoryScreen.css"
 
+/* 
+
+    StoryScreen Component
+    ---------------------
+
+    Story slide before the game starts. Should have made this longer.
+
+*/
+
 const StoryScreen = ({ onContinue }) => {
   const { state, dispatch } = useGameState();
 

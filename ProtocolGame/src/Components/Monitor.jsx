@@ -9,7 +9,7 @@ import NetworkWindow from './NetworkWindow.jsx';
 import GrandmaLetterEditor from './GrandmaLetterEditor.jsx';
 import Terminal from './Terminal.jsx';
 
-function Monitor() {
+function Monitor({pauseScreen}) {
   const { state, dispatch } = useGameState();
   const [openMail, setOpenMail] = useState(null);
   const [openLetter, setOpenLetter] = useState(false);
@@ -109,9 +109,9 @@ function Monitor() {
       }}
     >
       <div className="monitor-container">
-        {isUnlocked(state, 'help-icon') && (
-          <div className="help-container">
-            <img src="/Monitor/help-icon.png" className={`help-icon clickable ${isVisible(state, 'help-icon-showcase') ? 'showcase' : ''}`}/>
+        {isUnlocked(state, 'settings-icon') && (
+          <div className="settings-container" onClick={() => {pauseScreen();}}>
+            <img src="/Monitor/Settings Icon.png" className={`settings-icon clickable ${isVisible(state, 'settings-icon-showcase') ? 'showcase' : ''}`}/>
           </div>
         )}
 

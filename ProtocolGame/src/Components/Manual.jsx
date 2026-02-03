@@ -7,6 +7,18 @@ import ManualText from './ManualText.jsx';
 import NameSearch from './NameSearch.jsx'
 import CategorySearch from './CategorySearch.jsx'
 
+/*
+
+  Manual Component
+  ----------------
+
+  Heavily inpired by Vall-A-Hall-11's manual for baverages.
+  I spent a lot of time on the loading animation and it looks awesome!
+  I really love this manual, everything just works, you put in the text from manualData and
+  it renders it very well.
+
+*/
+
 const Manual = ({ onClose }) => {
   const { state, dispatch } = useGameState();
   

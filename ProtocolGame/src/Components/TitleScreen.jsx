@@ -2,6 +2,14 @@ import React from 'react';
 
 import "../Styles/TitleScreen.css"
 
+/*
+    TitleScreen Component
+    --------------------
+
+    Cool background.
+
+*/
+
 const TitleScreen = ({ onStartGame }) => {
   const handleClick = () => {
     document.querySelector(".TitleScreen").classList.add("fade-out");

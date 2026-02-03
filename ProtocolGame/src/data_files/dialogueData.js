@@ -157,23 +157,23 @@ export const dialogueData =  {
         {type: 'SHOW', id: 'submit-animation'},
         {type: 'SET_FLAG', key: 'stampedElement', value: null}
       ]
-    },//Ill have this Icon become the Settings Icon Instead
-    // "dialogue_22": {
-    //   text: "אם תיתקל בקושי, תוכל ללחוץ על סמל העזרה, בשביל לקבל רמז.",
-    //   next: "dialogue_23",
-    //   onEnter: [
-    //     {type: 'UNLOCK', id: 'help-icon'},
-    //     {type: 'SHOW', id: 'help-icon-showcase'},
-    //     {type: 'HIDE', id: 'submit-animation'}
-    //   ]
-    // },
+    },
     "dialogue_22": {
+      text: "אם תרצה לעצור את העבודה בכל שלב, תוכל ללחוץ על סימן הגדרות או ללחוץ על מקש המקלדת - <span style='color:var(--red)'>[Escape]</span>",
+      next: "dialogue_23",
+      onEnter: [
+        {type: 'UNLOCK', id: 'settings-icon'},
+        {type: 'SHOW', id: 'settings-icon-showcase'},
+        {type: 'HIDE', id: 'submit-animation'}
+      ]
+    },
+    "dialogue_23": {
       text: "בהצלחה!",
       emotion: 'happy',
       next: null,
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'chapter_1'},
-        {type: 'HIDE', id: 'help-icon-showcase'}
+        {type: 'HIDE', id: 'settings-icon-showcase'}
       ]
     },
 
@@ -218,7 +218,7 @@ export const dialogueData =  {
       next: "dialogue_4"
     },
     "dialogue_4": {
-      text: '["FTP-מה...? רגע — לא להילחץ. פשוט צריך להסתכל במדריך שלי."]',
+      text: '["FTP-מה...? רגע - לא להילחץ. פשוט צריך להסתכל במדריך שלי."]',
       name: "אני",
       character: "maya",
       next: "dialogue_5",

@@ -4,6 +4,16 @@ import { useGameState, hasCompleted } from './GameState';
 import '../Styles/CategorySearch.css';
 import {manualData} from '../data_files/ManualData.js'
 
+/* 
+
+    Category Search Component
+    -------------------------
+
+    Just like the NameSearch Component, this component allows you to search for manual entries,
+    that you have already unlocked but this time with categories.
+
+*/
+
 const CategorySearch = ({redirect}) => {
     const { state, dispatch } = useGameState();
     const [categories, setCategories] = useState([]);

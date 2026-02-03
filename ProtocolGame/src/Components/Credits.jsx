@@ -1,5 +1,16 @@
 import '../Styles/Credits.css';
 
+
+/*
+
+  Credits Component
+  -----------------
+
+  Just a simple credits scroll, that I made based on a codepen, I found online.
+  Also as you can tell, I drew all the pictures myself (heh).
+
+*/
+
 const Credits = ({ onClose }) => {
   return (
     <div className="Credits">

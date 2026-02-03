@@ -4,6 +4,18 @@ import "../styles/NetworkWindow.css";
 import monitorData from '../data_files/monitorData';
 import { useGameState } from "./GameState.jsx"
 
+/*
+
+  NetworkWindow Component
+  -----------------------
+
+  This component is like when a movie has no way to progress a plot so it show an external
+  sign or something. So here there is no "problem", really it just shows you some number
+  and then you're like: "wait, what the hell is code 500", and then the game explains oh that's
+  yada yada yada but i'm not aan expert i'm not sure if those codes are real or not, you should check that.
+
+*/
+
 const NetworkWindow = ({title, onClose}) => {
   const { state, dispatch } = useGameState();
   const currentChapter = state.flags.currentChapter;

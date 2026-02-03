@@ -5,6 +5,21 @@ import { characterConfig } from '../data_files/characterConfig.js';
 import TypeWriter from './TypeWriter.jsx';
 import Question from './Question.jsx';
 
+
+/*
+  Dialogue Manager Component
+  --------------------------
+
+  This component manages the flow of dialogues in the game, handling dialogue progression,
+  conditions for advancement, global waits, and rendering of dialogue text.
+
+  The actual text is rendered using the TypeWriter component, and questions are handled with the Question component.
+  This combonent is used to track all the dialogues and events that happen in the game, since this game
+  has a huge amount of dialogue and its logic is complicated.
+
+
+*/
+
 const DialogueManager = ({
   dialogueType,
   startDialogueId,
@@ -13,7 +28,7 @@ const DialogueManager = ({
   triangleSize = "1.5vw",
   triangleMargin = "0 1vw 0 0",
   textSize = "var(--font-regular)",
-  defaultSpeed = 10 //40
+  defaultSpeed = 10 //40 (The original spped is 40, but if you're debugging you can change it to something less)
 }) => {
 
   const { state, dispatch } = useGameState();

@@ -92,15 +92,19 @@
   animation: button-slide-down 1s ease-in-out forwards;
 }
 
-.Monitor .help-container {
+.Monitor .settings-container {
   position: absolute;
   top: 2%;
   right: 2%;
 }
 
-.Monitor .help-icon {
-  width: 4vw;
-  height: 8vh;
+.Monitor .settings-icon {
+  width: 5vw;
+  height: 10vh;
+}
+
+.Monitor .settings-icon:hover {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
 .Monitor .aquired-item {

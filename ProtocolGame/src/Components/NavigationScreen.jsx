@@ -9,10 +9,9 @@ import {chapterData} from "../data_files/chapterData.js"
     ----------------
 
     This screen is used to switch between chapter's when the
-    game is paused. The screen is only availible when the user has already
-    finished the game at least once.
-
-    //maybe make it all the avilible chapter's instead?
+    game is paused. This is always availible from the Pause Menu.
+    If youd like you can make only the chapters the player has already completed acessible,
+    but for now all chapters are acessible for testing purposes.
 
 */
 

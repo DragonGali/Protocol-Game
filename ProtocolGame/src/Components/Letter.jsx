@@ -4,6 +4,26 @@ import monitorData from "../data_files/monitorData";
 import { useStampable } from "../hooks/useStampable.jsx";
 import { useGameState, isVisible, hasCompleted } from "./GameState.jsx"
 
+
+/* 
+
+    Letter Component
+    ----------------
+
+    This component represents the letter that the player receives in each chapter.
+    It is very messy, so I'm sorry in advance... (who am I kidding no one is reading this, who would learn react in this tiny base ither than me...)
+
+    The letter can be opened and closed, also it can be stamped so this Component hadles it's interactions with the stamp tool.
+    When the player hover's the stamp over a line it is red, when he clicks it is selected and an event ususally plays,
+    if it doesnt it means that iv'e forgotten to add a globalWait somewhere.
+
+    Once the event is over from dialogueData, and the player has indeed stamped the right element a dispatch
+    to fix the mistake will be sent and data from MonitorData will be used to update the selecte line, but it will
+    remain green, until you switch to the next chapter.
+
+    Just relised theres one letter missing from this Component...can't have it feel lonely(z)
+*/
+
 const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   const { state, dispatch } = useGameState();
   const [openLetter, setOpenLetter] = useState(false);

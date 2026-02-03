@@ -4,6 +4,23 @@ import { useStampable } from '../hooks/useStampable.jsx';
 import monitorData from '../data_files/monitorData';
 import '../Styles/GrandmaLetterEditor.css';
 
+/*
+
+    GrandmaLetterEditor Component
+    ----------------------------
+
+    This was kinda a bad idea, since it was used only once. I tend to get
+    carried away when Im making projects cause I want to add a bunch of fun stuff in there and not have anything be
+    the same but it kinda makes me work less on the last parts cause im very tired by then.
+
+    Anyway this component allows the player to edit the letter from grandma in chapter 6.
+    The player can stamp the crappy letter to make a new one, and then fill it from scratch.
+
+    The component supports showcasing each field when the player is editing it, by highlighting it and adding a cursor.
+    The text for each field is only shown if the player has completed the corresponding fixing task.
+
+*/
+
 const GrandmaLetterEditor = ({ onClose, openPopUp, onElementStamp }) => {
   const { state, dispatch } = useGameState();
   const [openLetter, setOpenLetter] = useState(false);

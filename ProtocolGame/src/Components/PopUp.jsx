@@ -2,6 +2,14 @@ import React from 'react';
 import useDragger from "../hooks/useDragger";
 import "../styles/PopUp.css";
 
+/*
+  PopUp Component
+  ----------------
+
+  tiny draggable window.
+
+*/
+
 const PopUp = ({title, onClose, imgLink }) => {
   useDragger("PopUp");
 

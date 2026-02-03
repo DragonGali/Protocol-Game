@@ -3,6 +3,14 @@ import DialogueManager from './DialogeManager';
 import '../Styles/TextBox.css';
 import {dialogueData} from '../data_files/dialogueData.js';
 
+/*
+    TextBox Component
+    -----------------
+
+    Just calls DialogueManager.
+
+*/
+
 function TextBox({ dialogueType, startDialogueId, onComplete}) {
   return (
     <div className="TextBox">

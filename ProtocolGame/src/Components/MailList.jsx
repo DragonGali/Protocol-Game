@@ -4,6 +4,19 @@ import useDragger from "../hooks/useDragger";
 import monitorData from '../data_files/monitorData.js'
 import { useGameState, isUnlocked, isVisible, hasCompleted } from './GameState.jsx';
 
+/*
+
+  MailList Component
+  ------------------
+
+  This component displays a list of mail items for the player to select from.
+  It shows mail items from chapter 1 up to the current chapter, depending on whether
+  the player has completed the 'update_mail' task.
+
+  I also ended up making the scroll bar simpler then iv'e originally wanted, but I still like it.
+
+*/
+
 const MailList = ({ onClose, onLetterSelect }) => {
   useDragger("MailList");
   const { state } = useGameState();

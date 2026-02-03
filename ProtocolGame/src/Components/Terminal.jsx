@@ -4,6 +4,20 @@ import "../styles/Terminal.css";
 import terminalData from '../data_files/terminalData.js';
 import { useGameState } from "./GameState.jsx";
 
+/*
+
+  Terminal Component
+  ------------------
+
+  Oh boy, this tool is great, and I was just gonna make it a fax machine (haha).
+  This is very simple the player enter's a command and if theres a mistake with the command
+  it completes the mistake to progress the dialogue and also displays the output from the command.
+
+  There is a slight problem with this component, one of the commands it a little bit long and it goes to the next line and that looks bad...
+  I'm planning to do a horizontal scroll bar for that but I f I dont finish it you know what to do.
+
+*/
+
 const Terminal = ({ onClose }) => {
   const { state, dispatch } = useGameState();
   const currentChapter = state.flags.currentChapter;

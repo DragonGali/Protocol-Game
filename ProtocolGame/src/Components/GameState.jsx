@@ -3,6 +3,21 @@ import {chapterData} from '../data_files/chapterData.js'
 
 import {dialogueData} from "../data_files/dialogueData.js"
 
+
+/*
+
+  Game State
+  ----------
+
+
+  This module manages the global game state using React's Context API and useReducer hook.
+  It tracks dialogue progression, completed tasks, unlocked features, visible elements, flags, and global waits.
+
+  The game state is modified through dispatched actions, allowing components to respond to changes in state.
+
+
+*/
+
 const GameStateContext = createContext();
 
 const initialState = {
@@ -12,9 +27,6 @@ const initialState = {
   currentCharacter: null,
   currentEmotion: null,
   isTalking: true,
-
-  //for globalWait
-  prevDialogue: null,
   
   // GENERIC tracking
   completed: new Set(),// Things player has done
@@ -24,6 +36,9 @@ const initialState = {
     currentChapter: 0,
     link_state: false
   },
+
+  //for globalWait
+  prevDialogue: null,
   globalWaits: []             
 };
 
@@ -178,7 +193,7 @@ export const useGameState = () => {
   return context;
 };
 
-// Helper functions
+// Helper functions(not actually necessary)
 export const hasCompleted = (state, id) => state.completed.has(id);
 export const isUnlocked = (state, id) => state.unlocked.has(id);
 export const isVisible = (state, id) => state.visible.has(id);
