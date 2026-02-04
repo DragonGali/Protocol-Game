@@ -19,7 +19,7 @@ const Credits = ({ onClose }) => {
           {/* intro section */}
 
           <section className="creditsSection">
-            <img className='creditsImage' src='./TitleScreen/title screen.png'/>
+            <img className='creditsImage' src='/TitleScreen/title screen.png'/>
             <p>משחק פותח על ידי <span style={{ color: 'var(--yellow)' }}>גלי קרצר</span></p>
           </section>
 
@@ -34,7 +34,7 @@ const Credits = ({ onClose }) => {
               <dt>אנימצייה</dt><dd>Ezgif</dd>
               <dt></dt>
             </dl>
-            <img className='creditsImage' id='maya-shimon' src='./Credits/Maya and Shimon.png'/>
+            <img className='creditsImage' id='maya-shimon' src='/Credits/Maya and Shimon.png'/>
           </article>
 
           {/* טכנות */}
@@ -45,7 +45,7 @@ const Credits = ({ onClose }) => {
                 <dt>ספריות</dt><dd>React, React DOM</dd>
                 <dt>כלי פיתוח</dt><dd>Visual Studio Code, Git</dd>
             </dl>
-            <img className='creditsImage' id='mel-liyor' src='./Credits/Mel and Liyor.png'/>
+            <img className='creditsImage' id='mel-liyor' src='/Credits/Mel and Liyor.png'/>
           </article>
 
           {/* השראות */}
@@ -55,7 +55,7 @@ const Credits = ({ onClose }) => {
                 <p>VA-11 Hall-A</p>
                 <p>Ace Attorney</p>
                 <p>משחקי נרטיב ומערכות דיאלוג</p>
-              <img className='creditsImage' id='daniel-granny' src='./Credits/Daniel and Granny.png'/>
+              <img className='creditsImage' id='daniel-granny' src='/Credits/Daniel and Granny.png'/>
             </dl>
           </article>
 

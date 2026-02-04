@@ -74,7 +74,7 @@ const ManualText = ({chapter, onFinish}) => {
 
       <div className="arrows-container">
         <img
-          src="/Manual/arrow.png"
+          src={`/Manual/arrow.png`}
           className={`arrow left clickable ${
             currentPage === Object.keys(selectedChapter.pages).length ? 'disabled' : ''
           }`}

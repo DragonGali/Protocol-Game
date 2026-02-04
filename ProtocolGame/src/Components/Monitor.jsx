@@ -105,7 +105,7 @@ function Monitor({pauseScreen}) {
       style={{
         pointerEvents: state.monitorUnlocked ? 'auto' : 'none',
         display: isUnlocked(state, 'monitor') ? 'block' : 'none',
-        backgroundImage: isVisible(state, 'submit-animation') ? `url("/Monitor/submit-animation.gif?cache=${gifCache}")` : 'url("/Monitor/MonitorBackground.png")',
+        backgroundImage: isVisible(state, 'submit-animation') ? `url("./Monitor/submit-animation.gif?cache=${gifCache}")` : `url("./Monitor/MonitorBackground.png")`,
       }}
     >
       <div className="monitor-container">
@@ -125,7 +125,7 @@ function Monitor({pauseScreen}) {
           />
           {!hasCompleted(state, 'clicked_mail_icon') && hasCompleted(state, 'update_mail') && (
             <img
-              src="./General/NewSymbol.png"
+              src="/General/NewSymbol.png"
               className="new-symbol"
               alt="New mail indicator"
             />
@@ -172,14 +172,14 @@ function Monitor({pauseScreen}) {
             {!isVisible(state, 'using_stamp') ? (
               <img
                 className="stamp-icon clickable"
-                src="./Monitor/tools/stamp.png"
+                src="/Monitor/tools/stamp.png"
                 alt="Stamp tool"
                 onClick={handleStampClick}
               />
             ) : (
               <img
                 className="stamp-frame"
-                src="./Monitor/tools/stamp_frame.png"
+                src="/Monitor/tools/stamp_frame.png"
                 alt="Stamp frame"
               />
             )}
@@ -188,7 +188,7 @@ function Monitor({pauseScreen}) {
 
         {isUnlocked(state, 'network') && openLetter && 
               <img
-                src="./Monitor/tools/networkIcon.png"
+                src="/Monitor/tools/networkIcon.png"
                 className='network-icon clickable'
                 onClick={() => {
                   dispatch({type: 'SHOW', id: 'using_network'})
@@ -203,7 +203,7 @@ function Monitor({pauseScreen}) {
 
         {isUnlocked(state, 'terminal') && openLetter && 
               <img
-                src="./Monitor/tools/terminalIcon.png"
+                src="/Monitor/tools/terminalIcon.png"
                 className='terminal-icon clickable'
                 onClick={() => {
                   dispatch({type: 'SHOW', id: 'using_terminal'})
@@ -217,7 +217,7 @@ function Monitor({pauseScreen}) {
         }
 
 
-        {isVisible(state, 'submit-button') && <img className='submit-button clickable' src={`./Monitor/submit-button${playingButtonAnimation ? '.gif' : '.png'}`}
+        {isVisible(state, 'submit-button') && <img className='submit-button clickable' src={`/Monitor/submit-button${playingButtonAnimation ? '.gif' : '.png'}`}
         onClick={() => {setPlayingButtonAnimation(true); setTimeout(() => {
           setPlayingButtonAnimation(false);
           dispatch({type: "MARK_COMPLETED", id: "submit"})

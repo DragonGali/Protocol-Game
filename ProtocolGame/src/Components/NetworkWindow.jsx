@@ -86,7 +86,7 @@ const NetworkWindow = ({title, onClose}) => {
       <div 
         className='main-body'
         style={{
-          backgroundImage: `url("/Monitor/network-animation.gif?cache=${gifCache}")`,
+          backgroundImage: `url("./Monitor/network-animation.gif?cache=${gifCache}")`,
           backgroundSize: '100% 100%'
         }}
       >

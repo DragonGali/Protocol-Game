@@ -29,7 +29,7 @@ function CustomerView() {
   return (
     <div className="CustomerView">
         <img 
-          src={`/Customer/${state.currentCharacter}/${state.currentEmotion}_${state.isTalking ? 'talking' : 'idle'}.gif`}
+          src={`./Customer/${state.currentCharacter}/${state.currentEmotion}_${state.isTalking ? 'talking' : 'idle'}.gif`}
           className={`character-sprite ${isAnimating ? 'entering' : ''}`}
           alt="Character"
         />

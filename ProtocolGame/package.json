@@ -26,18 +26,13 @@
     "productName": "Protocol Game",
     "files": [
       "dist/**/*",
-      "electron/**/*",
-      "public/**/*"
+      "electron/**/*"
     ],
     "directories": {
       "output": "C:/Users/magshimim/Desktop/ProtocolGameBuild"
     }
   },
-  "extraResources": [
-    {
-      "from": "public/",
-      "to": "resources/public",
-      "filter": ["**/*"]
-    }
+  "asarUnpack": [
+    "dist/public/**/*"
   ]
 }

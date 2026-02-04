@@ -28,7 +28,7 @@
     left: 10%;
     width: 80%;
     height: 60%;
-    background: url('./NavigationScreen/connection_lines_zig_zag.png');
+    background: url('/NavigationScreen/connection_lines_zig_zag.png');
     background-size: 90% 85%;
     background-repeat: no-repeat;
     background-position: center 100%;

@@ -36,6 +36,7 @@ const GameScreen = ({chapterSelect, onFinish, pauseScreen}) => {
     dispatch({type: 'SET_FLAG', key: 'currentChapter', value: state.flags.currentChapter + 1});
     dispatch({type: 'RESET_COMPLETED'});
     dispatch({type: 'HIDE', id: 'submit-animation'});
+    dispatch({type: 'HIDE', id: 'submit-button'});//Ill soon make a hide all dispatch
     dispatch({type: 'SET_FLAG', key: 'stampedElement', value: null});
     dispatch({type: 'CLEAR_GLOBAL_WAITS'});
   }
@@ -72,7 +73,7 @@ const GameScreen = ({chapterSelect, onFinish, pauseScreen}) => {
 
       <Monitor className="Monitor" pauseScreen={() => {pauseScreen();}}/>
 
-      {isVisible(state, 'manual_command_table') && <div className='manual-command-table'><img src='./General/close-button.png' className='close-button clickable' onClick={() => {dispatch({type: 'HIDE', id: 'manual_command_table'})}}/></div>}
+      {isVisible(state, 'manual_command_table') && <div className='manual-command-table'><img src='/General/close-button.png' className='close-button clickable' onClick={() => {dispatch({type: 'HIDE', id: 'manual_command_table'})}}/></div>}
     </div>
   );
 }
