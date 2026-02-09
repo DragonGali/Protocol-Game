@@ -1387,10 +1387,6 @@ export const dialogueData =  {
       character: "liyor",
       emotion: "happy",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_11', value: 'network'},
-        {type: 'SET_FLAG', key: 'mistake_11_code', value: '100'}
-      ]
     },
     "dialogue_2" : {
       text: `בשביל לשלוח מכתב?`,
@@ -1401,7 +1397,11 @@ export const dialogueData =  {
     "dialogue_3" : {
       text: `בשביל לשחק <span style='color:var(--green)'>VineCraft</span>, ברור!`,
       emotion: "neutral",
-      next: "dialogue_4"
+      next: "dialogue_4",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_11', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_11_code', value: '100'}
+      ]
     },
     "dialogue_4" : {
       text: `אתה מתכוון Minecraft, נכון?`,
