@@ -1,14 +1,13 @@
 .Question {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 3vh;
+    left: 0.5vw;
     right: 0;
     bottom: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0.5rem;
-    padding: 1rem;
+    grid-template-columns: repeat(2, 23.2vw);
+    grid-template-rows: repeat(2, 9vh);
+    gap: 0.5vw;
 }
 
 .Question .question-answer {
