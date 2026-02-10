@@ -4,10 +4,10 @@
     height: 100%;
 }
 
+
 .NavigationScreen .title {
     position: absolute;
     width: 25%;
-    height: 10%;
     right: 37%;
     top: 5%;
     background: url('/NavigationScreen/title_box.png');
@@ -21,44 +21,35 @@
 }
 
 .NavigationScreen .navigation-circles {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
     position: absolute;
     top: 23%;
     left: 10%;
     width: 80%;
-    height: 60%;
+    aspect-ratio: 10 / 1;
+    /* width: 80%;
+    height: 60%; */
+    grid-template-columns: repeat(7, auto);
+    gap: 12px;
+    justify-content: center;
     background: url('/NavigationScreen/connection_lines_zig_zag.png');
     background-size: 90% 85%;
-    background-repeat: no-repeat;
     background-position: center 100%;
-    gap: 2.2rem 2rem;
-    justify-content: space-between;
+    gap: 10% 3%;
     align-items: center;
-    align-content: space-around;
+    justify-content: center;
+    background-repeat: no-repeat;
+
 }
 
 .NavigationScreen .navigation-circle {
     text-align: center;
-    width: 9vw;
-    height: 9vw;
     position: relative;
     align-items: center;
     justify-content: center;
     display: flex;
-    cursor: pointer;
-}
-
-
-.NavigationScreen .navigation-circle:hover {
-    transform: scale(1.15);
-}
-
-
-.NavigationScreen .navigation-circle p {
-    font-size: var(--font-regular);
-    position: relative;
-    z-index: 1;
+    width: 9vw;
+    aspect-ratio: 1 / 1;
 }
 
 .NavigationScreen .edge-chapter-circle {
@@ -77,4 +68,15 @@
     background: url('/NavigationScreen/selected_chapter_circle.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+.NavigationScreen .navigation-circle:hover {
+    transform: scale(1.15);
+}
+
+
+.NavigationScreen .navigation-circle p {
+    font-size: var(--font-regular);
+    position: relative;
+    z-index: 1;
 }

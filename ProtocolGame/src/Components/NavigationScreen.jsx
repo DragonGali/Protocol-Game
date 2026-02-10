@@ -18,6 +18,8 @@ import {chapterData} from "../data_files/chapterData.js"
 const NavigationScreen = ({selectChapter}) => {
     const { state, dispatch } = useGameState()
 
+    let counter = 0;
+
     return (
         <div className='NavigationScreen'>
             <div className='title'>
