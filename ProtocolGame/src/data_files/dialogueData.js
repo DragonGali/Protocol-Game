@@ -26,14 +26,14 @@ export const dialogueData =  {
         next: "dialogue_2",
         emotion: "happy",
         character: "daniel",
-        onEnter: [
-          {type: 'SET_FLAG', key: 'mistake_1_1', value: 'footer'}
-        ]
     },
       "dialogue_2": {
         text: "קוראים לי דניאל, ואני יהיה האוזר שלך היום, אני אלמד אותך בכל מה שאתה צריך בשביל להתחיל לעבוד פה.",
         next: "dialogue_3",
         emotion: "neutral",
+        onEnter: [
+          {type: 'SET_FLAG', key: 'mistake_1_1', value: 'footer'}
+        ]
       },
       "dialogue_3": {
         text: "גם לי נעים מאוד להכיר.",
@@ -204,14 +204,14 @@ export const dialogueData =  {
       emotion: "happy",
       character: "maya",
       next: "dialogue_2",
-      onEnter: [
-        { type: 'SET_FLAG', key: 'mistake_2', value: 'port' },
-      ]
     },
     "dialogue_2": {
       text: "הבוס שלי ביקש שאשלח כמה קבצים, אבל המערכת המאובטחת שאנחנו בדרך כלל משתמשים בה מתנהגת מוזר כל הבוקר.",
       emotion: "neutral",
-      next: "dialogue_3"
+      next: "dialogue_3",
+      onEnter: [
+        { type: 'SET_FLAG', key: 'mistake_2', value: 'port' },
+      ]
     },
     "dialogue_3": {
       text: "נאלצתי לעבור ל-FTP כדי להשלים את העבודה, העם תוכל לבדוק שהכל תקין?",
@@ -319,16 +319,16 @@ export const dialogueData =  {
         emotion: "happy",
         character: "liyor",
         next: "dialogue_2",
-        onEnter: [
-          {type: 'SET_FLAG', key: 'mistake_3a', value: 'link'},
-          {type: 'SET_FLAG', key: 'mistake_3b', value: 'imgLink'}
-        ]
     },
     "dialogue_2": {
       text: "בסדר, אני רק צריך לבדוק שהכל תקין.",
       emotion: "neutral",
       name: "אני",
-      next: "dialogue_3"
+      next: "dialogue_3",
+      onEnter: [
+          {type: 'SET_FLAG', key: 'mistake_3a', value: 'link'},
+          {type: 'SET_FLAG', key: 'mistake_3b', value: 'imgLink'}
+        ]
     },
     "dialogue_3": {
       text: "[נשמע שהוא לא מבין הרבה בפרוטוקולים, כדאי לי לקרוא על הפרוטוקול שהוא משתמש.]",
@@ -396,18 +396,18 @@ export const dialogueData =  {
       emotion: "happy",
       character: "daniel",
       next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: "התקנתי כלי חדש למוניטור העבודה שלך. תוכל להשתמש בו כאשר תפתח מכתב חדש. ",
+      emotion: "neutral",
+      next: "dialogue_3",
       onEnter: [
         {type: 'MARK_COMPLETED', id: 'read_manual_ch4'},
         {type: 'SET_FLAG', key: 'mistake_4', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_4_code', value: 200 }
       ],
       globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_8', destination: 'dialogue_special_1', condition: {flag: 'stampedElement'} }
-    },
-    "dialogue_2" : {
-      text: "התקנתי כלי חדש למוניטור העבודה שלך. תוכל להשתמש בו כאשר תפתח מכתב חדש. ",
-      emotion: "neutral",
-      next: "dialogue_3",
-    },
+      },
 
     "dialogue_3" : {
       text: "הכנסתי לך מכתב בתיבת הדואר שתתנסה בו. תפתח אותו",
@@ -489,16 +489,16 @@ export const dialogueData =  {
       character: "mel",
       next: "dialogue_2",
       speed: 1000,
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_5', value: 'network'},
-        { type: 'SET_FLAG', key: 'mistake_5_code', value: 500 }
-      ],
-      globalWait: { id: 'mel_stamp_comment', from: 'dialogue_7', to: 'dialogue_16', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: "סליחה העם אמרת משהוא?",
       name: "אני",
       next: "dialogue_3",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_5', value: 'network'},
+        { type: 'SET_FLAG', key: 'mistake_5_code', value: 500 }
+      ],
+      globalWait: { id: 'mel_stamp_comment', from: 'dialogue_7', to: 'dialogue_16', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_3" : {
       text: "...",
@@ -867,17 +867,17 @@ export const dialogueData =  {
       emotion: "happy",
       character: "daniel",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_7_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_7_1_command', value: 'LIST'}
-      ],
-      globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_11', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2": {
       text: `התקנתי לך עוד כלי חדש שתצטרך להשתמש בו.`,
       emotion: "neutral",
       name: "דניאל",
       next: "dialogue_3",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_7_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_7_1_command', value: 'LIST'}
+      ],
+      globalWait: { id: 'daniel_stamp_comment', from: 'dialogue_3', to: 'dialogue_11', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_3": {
       text: `תפתח את המכתב ששלחתי לך בשביל להתנסות בו.`,
@@ -922,7 +922,7 @@ export const dialogueData =  {
     },
 
     "dialogue_9" : {
-      text: `תנסה לרשום <span style='color:var(--orange)'>LIST</span> בטרמינל בשביל להפעיל אותה`,
+      text: `תנסה לרשום <span style='color:var(--orange)'>LIST</span> ואחר כך ללחוץ על המקש <span style='color:var(--red)'>ENTER</span> בטרמינל בשביל להפעיל אותה`,
       next: "dialogue_10",
       emotion: "neutral",
       waitFor: {completed: 'mistake_7_1'}
@@ -976,16 +976,16 @@ export const dialogueData =  {
         emotion: "neutral",
         character: "shimon",
         next: "dialogue_2",
+      },
+      "dialogue_2" : {
+        text: `אני צריך שתבצע פקודת בדיקת סטטוס המערכת.`,
+        next: "dialogue_3",
         onEnter: [
           {type: 'SET_FLAG', key: 'mistake_8_1', value: 'terminal'},
           {type: 'SET_FLAG', key: 'mistake_8_1_command', value: 'st'},
           {type: 'SET_FLAG', key: 'mistake_8_1_stamp', value: 'port'}
         ],
         globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_3', to: 'dialogue_7', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
-      },
-      "dialogue_2" : {
-        text: `אני צריך שתבצע פקודת בדיקת סטטוס המערכת.`,
-        next: "dialogue_3",
       },
       "dialogue_3" : {
         text: `ותבדוק שאין שום שגיות...זה כבר קרה לפני.`,
@@ -1085,6 +1085,7 @@ export const dialogueData =  {
       },
       "dialogue_mistake_2" : {
         text: `[לא?! מה אני בכלל חושב, זה לא יכול להיות המספר הזה!]`,
+        name: "אני",
         next: 'dialogue_11',
         onEnter: [{type: 'SET_FLAG', key: 'selectedAnswer', value: null}]
       }
@@ -1095,15 +1096,15 @@ export const dialogueData =  {
       character: "maya",
       emotion: "happy",
       next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: `אתה בטח עדיין מתאושש משמעון, נכון? הוא שונא לבוא לכאן`,      emotion: "neutral",
+      next: "dialogue_3",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_9', value: 'network'},
         { type: 'SET_FLAG', key: 'mistake_9_code', value: 525 }
       ],
       globalWait: { id: 'maya_stamp_comment', from: 'dialogue_8', to: 'dialogue_16', destination: 'dialogue_mistake_3_1', condition: {flag: 'stampedElement'} }
-    },
-    "dialogue_2" : {
-      text: `אתה בטח עדיין מתאושש משמעון, נכון? הוא שונא לבוא לכאן`,      emotion: "neutral",
-      next: "dialogue_3",
     },
     "dialogue_3" : {
       text: `הוא הגיע בפעם הקודמת רק כי פישלתי במכתב.`,
@@ -1275,11 +1276,6 @@ export const dialogueData =  {
       character: "mel",
       emotion: "shy",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_10_1', value: 'terminal'},
-        {type: `SET_FLAG`, key: 'mistake_10_1_command', value: 'ssh mel@10.0.0.1'}
-      ],
-      globalWait: {id: 'shy_letter', from: 'dialogue_8', to: 'dialogue_9', condition: {flag: 'letter_state'}, destination: "dialogue_special_1"}
     },
     "dialogue_2" : {
       text: `...בבקשה רק...אל תקרא את המכתב`,
@@ -1291,7 +1287,12 @@ export const dialogueData =  {
     "dialogue_3" : {
       text: `[זה רק הופר אותי ליותר מעוניין]`,
       name: "אני",
-      next: "dialogue_4"
+      next: "dialogue_4",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_10_1', value: 'terminal'},
+        {type: `SET_FLAG`, key: 'mistake_10_1_command', value: 'ssh mel@10.0.0.1'}
+      ],
+      globalWait: {id: 'shy_letter', from: 'dialogue_8', to: 'dialogue_9', condition: {flag: 'letter_state'}, destination: "dialogue_special_1"}
     },
     "dialogue_4" : {
       text: `[טוב בוא נקרא מה כתוב במדריך שלי]`,
@@ -1349,9 +1350,12 @@ export const dialogueData =  {
       text: `[מזה? היא שחכה משהוא פה?]`,
       name: "אני",
       textColor: "var(--grey-1)",
-      onEnter: [{type: 'SET_FLAG', key: 'aquired_item', value: 'mel_bag'}]
+      onEnter: [
+        {type: 'SET_FLAG', key: 'aquired_item', value: 'mel_bag'},
+        {type: 'HIDE', id: 'submit-animation'}
+      ]
     },
-    "dialogue_special_1" : {//make this one of the events that can trigger anywhere
+    "dialogue_special_1" : {
       text: `...`,
       speed: 1000,
       emotion: "emberassed",
@@ -1392,7 +1396,8 @@ export const dialogueData =  {
       text: `בשביל לשלוח מכתב?`,
       name: "אני",
       next: "dialogue_3",
-      onEnter: [{type: 'SET_FLAG', key: 'aquired-item', value: null}]
+      onEnter: [{type: 'SET_FLAG', key: 'aquired-item', value: null}],
+      globalWait: {id: 'liron_stamp_comment', from: 'dialogue_7', to: 'dialogue_10', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'}}
     },
     "dialogue_3" : {
       text: `בשביל לשחק <span style='color:var(--green)'>VineCraft</span>, ברור!`,
@@ -1444,7 +1449,7 @@ export const dialogueData =  {
       next: "dialogue_11"
     },
     "dialogue_11" : {
-      text: `[אני צריך לסמן משהוא עם החותמש אבל מה בדיוק?...]`,
+      text: `[אני צריך לסמן משהוא עם החותמת אבל מה בדיוק?...]`,
       name: "אני",
       next: (state) => state.flags.stampedElement === 'dest-address' ? "dialogue_12" : 'dialogue_mistake_1_1',
       onEnter: [
@@ -1481,7 +1486,8 @@ export const dialogueData =  {
         {type: 'CORRECT_MISTAKE', id: 'mistake_11_stamp', correction: 'vinecraft.com'},
         {type: 'SET_FLAG', key: 'mistake_11_code', value: 200},
         {type: 'SHOW', id: 'submit-button'}
-      ]
+      ],
+      waitFor: {completed: 'submit'}
     },
     "dialogue_17" : {
       text: `תודה על העזרה, אה ו-`,
@@ -1516,6 +1522,14 @@ export const dialogueData =  {
       text: `[מה לגבי החלק הזה? לא! אני מפספס משהוא פה, כדאי לי לקרוא את המדריך שלי שוב.]`,
       name: "אני",
       next: "dialogue_11"
+    },
+    "dialogue_mistake_2_1" : {
+      noPrev: true,
+      text: `[אבל אני עדיין לא בטוח עם אני צריך לסמן משהוא...]`,
+      name: "אני",
+      next: (state) => state.prevDialogue,
+      onEnter: [{type: 'SET_FLAG', key: 'stampedElement', value: null}],
+      globalWait: {id: 'liron_stamp_comment', from: 'dialogue_7', to: 'dialogue_10', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'}}
     }
   },
   "chapter_12" : {
@@ -1524,16 +1538,16 @@ export const dialogueData =  {
       character: "granny",
       emotion: "happy",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_12_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_12_1_command', value: 'ipconfig /renew'}
-      ],
-      globalWait: { id: 'granny_stamp_comment', from: 'dialogue_7', to: 'dialogue_9', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `אבל לכתוב כל כתובת בנפרד זה כזה כאב ראש. אתה יכול למצוא דרך לטפל בזה בשבילי?`,
       emotion: "neutral",
       next: "dialogue_3",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_12_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_12_1_command', value: 'ipconfig /renew'}
+      ],
+      globalWait: { id: 'granny_stamp_comment', from: 'dialogue_7', to: 'dialogue_9', destination: 'dialogue_mistake_1_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_3" : {
       text: `כן, אני אבדוק מה אפשר לעשות.`,
@@ -1636,16 +1650,16 @@ export const dialogueData =  {
       emotion: "neutral",
       next: "dialogue_2",
       character: "shimon",
+    },
+    "dialogue_2" : {
+      text: `אם אני אהיה כנה? כל פעם שהיא שולחת משהו, יש בעיות, אז החלטתי לבדוק בעצמי.`,
+      emotion: "angry",
+      next: "dialogue_3",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_13_1', value: 'terminal'},
         {type: 'SET_FLAG', key: 'mistake_13_1_command', value: 'snmpget'}
       ],
       globalWait: { id: 'shimon_stamp_comment', from: 'dialogue_8', to: 'dialogue_11', destination: 'dialogue_special_1', condition: {flag: 'stampedElement'} }
-    },
-    "dialogue_2" : {
-      text: `אם אני אהיה כנה? כל פעם שהיא שולחת משהו, יש בעיות, אז החלטתי לבדוק בעצמי.`,
-      emotion: "angry",
-      next: "dialogue_3"
     },
     "dialogue_3" : {
       text: `המכתב הזה משתמש בפרוטוקול <span style='color:var(--red)'>SNMP</span>. אני צריך שתריץ את הפקודה הנכונה ותבדוק שבכל תקין.`,
@@ -1763,12 +1777,6 @@ export const dialogueData =  {
       emotion: "shy",
       character: "mel",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_14_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_14_1_command', value: 'terminal monitor'},
-        {type: 'SET_FLAG', key: 'mistake_14_stamp', value: 'header'}
-      ],
-      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_21', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
     },
     "dialogue_2" : {
       text: `אה.. אני יודעת. משהוא בחוץ אמר לי... תודה ששמרת עליו.`,
@@ -1779,6 +1787,12 @@ export const dialogueData =  {
       text: `כיוון שכבר הגעתי... רציתי לשלוח את זה, אבל... זה מכתב מיוחד. חייבים לוודא שהמערכת תקינה לפני ששולחים אותו, אחרת הוא לא יגיע ליעד.`,
       emotion: 'neutral',
       next: 'dialogue_4',
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_14_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_14_1_command', value: 'terminal monitor'},
+        {type: 'SET_FLAG', key: 'mistake_14_stamp', value: 'header'}
+      ],
+      globalWait: {id: 'personal_photo', from: 'dialogue_16', to: 'dialogue_21', condition: {flag: 'link_state'}, destination: 'dialogue_special_1'}
     },
     "dialogue_4" : {
       text: `[מכתב מיוחד...נשמע מעניין]`,
@@ -1983,15 +1997,15 @@ export const dialogueData =  {
       character: "maya",
       emotion: "happy",
       next: "dialogue_2",
-      onEnter: [{type: 'SET_FLAG', key: 'mistake_15_1', value: 'terminal'},
-                {type: 'SET_FLAG', key: 'mistake_15_1_command', value: 'traceroute 203.0.113.25'}
-      ],
-      globalWait: {id: 'maya_stamp_comment', from: 'dialogue_11', to: 'dialogue_14', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_2" : {
       text: `יש לי תקשורת איטית עם שרת מסוים. הוא עדיין מגיב, אבל הכל מרגיש איטי.`,
       emotion: "neutral",
-      next: "dialogue_3"
+      next: "dialogue_3",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_15_1', value: 'terminal'},
+                {type: 'SET_FLAG', key: 'mistake_15_1_command', value: 'traceroute 203.0.113.25'}
+      ],
+      globalWait: {id: 'maya_stamp_comment', from: 'dialogue_11', to: 'dialogue_14', destination: 'dialogue_mistake_2_1', condition: {flag: 'stampedElement'} }
     },
     "dialogue_3" : {
       text: `הבוס שלי בקש ממני להשתמש בפקודת איתור בעיות, אבל...`,
@@ -2093,6 +2107,11 @@ export const dialogueData =  {
       character: "liyor",
       emotion: "happy",
       next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: `תגיד, קניתי ראוטר חדש בשביל הסניף הזה, אבל נראה שאין אינטרנט. המחשב פה כאילו מנסה להתחבר... אבל כלום. אתה יכול לבדוק לי את זה?`,
+      emotion: "neutral",
+      next: "dialogue_3",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_16', value: 'network'},
         {type: 'SET_FLAG', key: 'mistake_16_code', value: '103'},
@@ -2100,11 +2119,6 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_16_1_command', value: 'ip helper-address 172.20.45.9'}
       ],
       globalWait: {id: 'stamp_mistake', from: 'dialogue_5', to: 'dialogue_12', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
-    },
-    "dialogue_2" : {
-      text: `תגיד, קניתי ראוטר חדש בשביל הסניף הזה, אבל נראה שאין אינטרנט. המחשב פה כאילו מנסה להתחבר... אבל כלום. אתה יכול לבדוק לי את זה?`,
-      emotion: "neutral",
-      next: "dialogue_3",
     },
     "dialogue_3" : {
       text: `כן בטח, נשמע פשוט.`,
@@ -2234,6 +2248,11 @@ export const dialogueData =  {
       emotion: "happy",
       character: "granny",
       next: "dialogue_2",
+    },
+    "dialogue_2" : {
+      text: `הרגע אפיתי עגלה חדשה של העוגיות המפתיעות המיוחדות שלי! הן מיועדות לנכדים שלי בשכונה הרחוקה ההיא.`,
+      emotion: "neutral",
+      next: "dialogue_3",
       onEnter: [
         {type: 'SET_FLAG', key: 'mistake_17', value: 'network'},
         {type: 'SET_FLAG', key: 'mistake_17_code', value: '302'},
@@ -2243,11 +2262,6 @@ export const dialogueData =  {
         {type: 'SET_FLAG', key: 'mistake_17_2_command', value: 'no ip directed broadcast'}
       ],
       globalWait: {id: 'stamp mistake', from: 'dialogue_5', to: 'dialogue_15', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
-    },
-    "dialogue_2" : {
-      text: `הרגע אפיתי עגלה חדשה של העוגיות המפתיעות המיוחדות שלי! הן מיועדות לנכדים שלי בשכונה הרחוקה ההיא.`,
-      emotion: "neutral",
-      next: "dialogue_3"
     },
     "dialogue_3" : {
       text: `חכם מצידי, לא? אבל משום מה, אף אחד לא קיבל כלום. אתה יכול לבדוק מה השתבש?`,
@@ -2380,14 +2394,14 @@ export const dialogueData =  {
       character: "shimon",
       emotion: "neutral",
       next: "dialogue_2",
-      onEnter: [{type: 'SET_FLAG', key: 'mistake_18_1', value: 'terminal'},
-                {type: 'SET_FLAG', key: 'mistake_18_1_command', value: 'ip proxy-arp'}
-      ],
-      globalWait: {id: 'stamp_mistake_18', from: 'dialogue_4', to: 'dialogue_5', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
     "dialogue_2" : {
       text: `נטפל בזה עם Proxy ARP. תריץ את הפקודה ותסדר את זה.`,
       next: "dialogue_3",
+      onEnter: [{type: 'SET_FLAG', key: 'mistake_18_1', value: 'terminal'},
+                {type: 'SET_FLAG', key: 'mistake_18_1_command', value: 'ip proxy-arp'}
+      ],
+      globalWait: {id: 'stamp_mistake_18', from: 'dialogue_4', to: 'dialogue_5', condition: {flag: 'stampedElement'}, destination: 'dialogue_mistake_1_1'}
     },
     "dialogue_3" : {
       text: `אל תדאג יש לי כבר הרבה ניסיון עם להריץ פקודות.`,
@@ -2452,15 +2466,6 @@ export const dialogueData =  {
       character: "daniel",
       emotion: "happy",
       next: "dialogue_2",
-      onEnter: [
-        {type: 'SET_FLAG', key: 'mistake_19', value: 'network'},
-        {type: 'SET_FLAG', key: 'mistake_19_code', value: '5'},
-        {type: 'SET_FLAG', key: 'mistake_19_1', value: 'terminal'},
-        {type: 'SET_FLAG', key: 'mistake_19_1_command', value: 'ip redirects'},
-        {type: 'SET_FLAG', key: 'mistake_19_2', value: 'port'},
-        {type: 'SET_FLAG', key: 'mistake_19_3', value: 'header'}
-      ],
-      globalWait: {id: 'stamping something', from: 'dialogue_4', to: 'dialogue_6', destination: 'dialogue_found_1_1', condition: {flag: 'stampedElement'}}
     },
     "dialogue_2" : {
       text: `כל הכבוד עד כאן, עשית עבודה מצוינת. אבל עכשיו מגיעה המשימה האמיתית`,
@@ -2470,7 +2475,16 @@ export const dialogueData =  {
     },
     "dialogue_3" : {
       text: `הכנתי מכתב מסובך במיוחד עם שלוש טעויות שונות תצטרך להשתמש בכל הכלים שלמדת לתקן את הכל.`,
-      next: "dialogue_4"
+      next: "dialogue_4",
+      onEnter: [
+        {type: 'SET_FLAG', key: 'mistake_19', value: 'network'},
+        {type: 'SET_FLAG', key: 'mistake_19_code', value: '5'},
+        {type: 'SET_FLAG', key: 'mistake_19_1', value: 'terminal'},
+        {type: 'SET_FLAG', key: 'mistake_19_1_command', value: 'ip redirects'},
+        {type: 'SET_FLAG', key: 'mistake_19_2', value: 'port'},
+        {type: 'SET_FLAG', key: 'mistake_19_3', value: 'header'}
+      ],
+      globalWait: {id: 'stamping something', from: 'dialogue_4', to: 'dialogue_6', destination: 'dialogue_found_1_1', condition: {flag: 'stampedElement'}}
     },
     "dialogue_4" : {
       text: `בהצלחה!`,

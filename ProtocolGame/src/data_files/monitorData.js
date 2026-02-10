@@ -127,7 +127,7 @@ export const monitorData = {
         destinationAddress: '192.168.0.23',
         port: 161,
         link: null,
-        commandWaitingText: ``,
+        commandWaitingText: `מחכה לפקודה...`,
         text: `<span style='color:var(--grey-3);direction:rtl;text-align:right;display:block'>שם ההתקן: Switch-23<br>סטטוס: פעיל (UP)<br>ממשקים: 12 פעילים, 0 לא פעילים עומס מעבד 15%: <br> תעבורת רשת: 220MB נשלח, 180MB התקבל <br> גרסת קונפיגורציה: עדכנית, אין שינויים בהמתנה</span>`
     },
     'chapter_14' : {

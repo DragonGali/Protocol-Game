@@ -39,6 +39,8 @@
     align-items: center;
     justify-content: center;
     background-repeat: no-repeat;
+    grid-auto-flow: row dense;
+
 
 }
 
@@ -80,3 +82,11 @@
     position: relative;
     z-index: 1;
 }
+
+.NavigationScreen .navigation-circle:nth-child(14n + 8)  { grid-column: 7; }
+.NavigationScreen .navigation-circle:nth-child(14n + 9)  { grid-column: 6; }
+.NavigationScreen .navigation-circle:nth-child(14n + 10) { grid-column: 5; }
+.NavigationScreen .navigation-circle:nth-child(14n + 11) { grid-column: 4; }
+.NavigationScreen .navigation-circle:nth-child(14n + 12) { grid-column: 3; }
+.NavigationScreen .navigation-circle:nth-child(14n + 13) { grid-column: 2; }
+.NavigationScreen .navigation-circle:nth-child(14n + 14) { grid-column: 1; }

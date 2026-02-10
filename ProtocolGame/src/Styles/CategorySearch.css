@@ -1,6 +1,6 @@
 .CategorySearch {
     position: absolute;
-    width: 93.5%;
+    width: 95%;
     height: 91%;
     top: 8%;
     right: 3%;
@@ -19,10 +19,10 @@
     display: flex;
     flex-flow: row-reverse wrap;
     right: 2%;
-    width: 90%;
+    width: 100%;
     height: 40%;
-    top: 20%;
-    gap: 10%;
+    top: 15%;
+    gap: 5%;
 }
 
 .CategorySearch .category {
@@ -42,14 +42,14 @@
     display: flex;
     flex-flow: row-reverse wrap;
     right: 0%;
-    width: 90%;
+    width: 100%;
     height: 30%;
     top: 60%;
-    gap: 10%;
+    gap: 5%;
 }
 
 .CategorySearch .entry-title {
-    font-size: var(--font-regular);
+    font-size: var(--font-small);
     transition: all 0.3s ease;
 }
 

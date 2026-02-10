@@ -121,9 +121,9 @@ const Letter = ({ onClose, openPopUp, onElementStamp }) => {
   };
 
   useEffect(() => {
-    const mistakeKey = `mistake_${state.flags.currentChapter}`;
+    const mistakeKey = `mistake_${state.flags.currentChapter}_1`;
     const mistakeValue = state.flags[mistakeKey];
-    setHasCompletedTerminalMistake(mistakeValue === 'terminal' ? hasCompleted(state, mistakeKey) : true);
+    setHasCompletedTerminalMistake(mistakeValue === 'terminal' ? (hasCompleted(state, mistakeKey) || !data.commandWaitingText) : true);
   }, [state.completed, state.flags]);
 
 
