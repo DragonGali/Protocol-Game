@@ -1,0 +1,92 @@
+.NavigationScreen {
+    background-color: var(--black);
+    width: 100%;
+    height: 100%;
+}
+
+
+.NavigationScreen .title {
+    position: absolute;
+    width: 25%;
+    right: 37%;
+    top: 5%;
+    background: url('/NavigationScreen/title_box.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .title p {
+    text-align: center;
+    font-size: var(--font-gargentuan);
+}
+
+.NavigationScreen .navigation-circles {
+    display: grid;
+    position: absolute;
+    top: 23%;
+    left: 10%;
+    width: 80%;
+    aspect-ratio: 10 / 1;
+    /* width: 80%;
+    height: 60%; */
+    grid-template-columns: repeat(7, auto);
+    gap: 12px;
+    justify-content: center;
+    background: url('/NavigationScreen/connection_lines_zig_zag.png');
+    background-size: 90% 85%;
+    background-position: center 100%;
+    gap: 10% 3%;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    grid-auto-flow: row dense;
+
+
+}
+
+.NavigationScreen .navigation-circle {
+    text-align: center;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 9vw;
+    aspect-ratio: 1 / 1;
+}
+
+.NavigationScreen .edge-chapter-circle {
+    background: url('/NavigationScreen/edge_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .regular-chapter-circle {
+    background: url('/NavigationScreen/regular_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .selected-chapter-circle {
+    background: url('/NavigationScreen/selected_chapter_circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.NavigationScreen .navigation-circle:hover {
+    transform: scale(1.15);
+}
+
+
+.NavigationScreen .navigation-circle p {
+    font-size: var(--font-regular);
+    position: relative;
+    z-index: 1;
+}
+
+.NavigationScreen .navigation-circle:nth-child(14n + 8)  { grid-column: 7; }
+.NavigationScreen .navigation-circle:nth-child(14n + 9)  { grid-column: 6; }
+.NavigationScreen .navigation-circle:nth-child(14n + 10) { grid-column: 5; }
+.NavigationScreen .navigation-circle:nth-child(14n + 11) { grid-column: 4; }
+.NavigationScreen .navigation-circle:nth-child(14n + 12) { grid-column: 3; }
+.NavigationScreen .navigation-circle:nth-child(14n + 13) { grid-column: 2; }
+.NavigationScreen .navigation-circle:nth-child(14n + 14) { grid-column: 1; }

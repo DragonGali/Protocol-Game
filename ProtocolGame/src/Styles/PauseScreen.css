@@ -1,0 +1,73 @@
+.PauseScreen {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--black);
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+}
+
+.PauseScreen .options {
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    width: 100vw;
+    height: 100vh;
+    top: 12%;
+    gap: 7%;
+}
+
+.PauseScreen .option {
+    width: 100%;
+    height: 15%;
+    color: white;
+    text-align: center;
+    font-size: var(--font-gargentuan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    overflow: none;
+    transition: 0.2s;
+}
+
+.PauseScreen .option p {
+    padding: 4vh;
+}
+
+.PauseScreen .option:hover {
+    color: #255784;
+    background: var(--blue);
+    box-shadow:
+        0 0 10px var(--blue),
+        0 0 40px var(--blue),
+        0 0 80px var(--blue);
+    transition-delay: 0.1s;
+}
+
+.PauseScreen #exit {
+    color: var(--red);
+}
+
+.PauseScreen .option#exit:hover {
+    color: #f09e9e;
+    background: var(--red);
+    box-shadow:
+        0 0 10px var(--red),
+        0 0 40px var(--red),
+        0 0 80px var(--red);
+    transition-delay: 0.1s;
+}
+
+.PauseScreen .disabled {
+    color: var(--grey-3);
+}
+
+.PauseScreen .disabled:hover {
+    color: var(--grey-3);
+    background: var(--black);
+    box-shadow:
+        0 0 10px var(--black),
+        0 0 40px var(--black),
+        0 0 80px var(--black);
+    transition-delay: 0.1s;
+}

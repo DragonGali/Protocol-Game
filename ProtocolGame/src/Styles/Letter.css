@@ -1,0 +1,186 @@
+.Letter {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 33vw;
+    position: fixed;
+}
+
+.Letter.closed {
+    background-image: url("/Monitor/letter_closed.png");
+    height: 38vh;
+    margin-top: 35vh;
+    margin-left: 6.5vw;
+    box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.Letter.open {
+    background-image: url("/Monitor/letter_open.png");
+    height: 65vh;
+    margin-top: 8.5vh;
+    margin-left: 6.5vw;
+    filter: drop-shadow(-0.5em 0.5em 0 rgba(0,0,0,0.2));
+}
+
+.Letter .protocol {
+    color: var(--text);
+    position: absolute;
+    top: 15%;
+    left: 8.1%;
+    text-align: center;
+    user-select: none;
+    width: 7vw;
+    height: 6vh;
+}
+
+.open .protocol {
+    display: none;
+}
+
+.src-adress {
+    font-size: var(--font-regular);
+    position: absolute;
+    bottom: 25%;
+    right: 8%;
+}
+
+.open .src-adress {
+    bottom: 7%;
+    right: 8.5%;
+}
+
+
+.dest-adress {
+    font-size: var(--font-regular);
+    position: absolute;
+    bottom: 13%;
+    right: 8%;
+}
+
+.open .dest-adress {
+    bottom: 13.5%;
+    right: 8.5%;
+}
+
+.port {
+    font-size: var(--font-regular);
+    position: absolute;
+    left: 8%;
+    bottom: 13%;
+}
+
+.open .port {
+    left: 9%;
+    bottom: 7%;
+}
+
+.letter-text-container {
+  width: 85%;
+  height: 75%;
+  left: 7.5%;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  direction: rtl;
+  justify-content: space-between; /* Distribute space between items */
+}
+
+.Letter .header {
+  font-size: var(--font-title-large);
+  text-align: center;
+}
+
+.Letter .footer {
+  font-size: var(--font-title-large);
+  text-align: center;
+}
+
+.Letter .letter-text {
+  font-size: var(--font-small);
+  margin-bottom: 0.5rem; /* Add gap below text */
+
+  /* Fix long unbroken strings and prevent overflow */
+  white-space: normal;
+  overflow-wrap: anywhere;      /* modern browsers */
+  word-break: break-word;       /* fallback */
+  hyphens: auto;
+
+  /* keep text inside the letter and allow scrolling if needed */
+  max-height: calc(75% - 4rem);
+}
+
+.Letter .link {
+  font-size: var(--font-small);
+  direction: ltr;
+}
+
+.Letter .link .clickable {
+    color: var(--red);
+}
+
+.Letter .link .clickable:hover {
+    color: var(--pink);
+}
+
+
+.Letter .header,
+.Letter .footer,
+.Letter .letter-text,
+.Letter .link {
+  position: relative;
+  text-align: center;
+  color: var(--text);
+  width: 100%;
+}
+
+
+.Letter .stamped,
+.Letter .stamp-active:hover {
+    background-color: red;
+}
+
+
+/* Completed mistake styling - green color */
+.stampable-element.completed-mistake {
+  background-color: var(--green);
+}
+
+.spam-popup {
+  position: fixed;
+  width: 15vw;
+  height: fit-content;
+  box-shadow: -0.5em 0.5em 0 0 rgba(0, 0, 0, 0.2);
+  background-color: var(--black);
+  border: 2px solid var(--green);
+  z-index: 999;
+  animation: popSpawn 0.1s ease-out;
+}
+
+.spam-popup-header {
+  width: 100%;
+  aspect-ratio: 10 / 1;
+  background-color: var(--green);
+  font-size: var(--font-small);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.spam-popup img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes popSpawn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

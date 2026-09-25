@@ -1,0 +1,100 @@
+:root {
+
+  /* The color palette I chose for this project, some of these may not be used */
+  --white: #F2F0E5;
+  --grey-1: #B8B5B9;
+  --grey-2: #868188;
+  --grey-3: #646365;
+  --dark-grey: #45444F;
+  --black: #212123;
+  --purple-1: #3A3858;
+  --purple-2: #352B42;
+  --purple-3: #43436A;
+  --purple-4: #6A536E;
+  --purple-5: #4B4158;
+  --purple-6: #5F556A;
+  --purple-pink: #CF8ACB;
+  --bad: #7B7243;
+  --dry-earth: #B2B47E;
+  --borde: #80493A;
+  --brown: #A77B5B;
+  --red: #B45252;
+  --pink: #EDC8C4;
+  --skin: #E5CEB4;
+  --orange: #D3A068;
+  --yellow: #EDE19E;
+  --avocado: #C2D368;
+  --green: #8AB060;
+  --grass: #567B79;
+  --dark-green: #4E584A;
+  --blue: #4B80CA;
+  --light-blue: #68C2D3;
+  --light-blue: #68C2D3;
+  --cyan: #A2DCC7;
+
+  font-family: "basis33";
+  background-color: var(--black);
+
+  --font-regular: clamp(5px, 2vw, 50px);
+  --font-title-large: clamp(5px, 2.5vw, 100px);
+  --font-small: clamp(3px, 1.5vw, 50px);
+  --font-largest: clamp(10px, 3vw, 150px);
+  --font-medium: clamp(5px, 1.7vw, 50px);
+  --font-gargentuan: clamp(15px, 4vw, 200px);
+
+  --cursor-default: url("/Cursors/Default.png"), auto;
+  --cursor-pointer: url("/Cursors/Pointer.png"), auto;
+  --cursor-grab: url("/Cursors/Grab.png"), auto;
+  --cursor-open: url("/Cursors/Open.png"), auto;
+  --cursor-close: url("/Cursors/Close.png"), auto;
+  --cursor-stamp: url("/Cursors/Stamp.png"), auto;
+
+  cursor: var(--cursor-default);
+  user-select: none;
+}
+
+.clickable {
+  cursor: var(--cursor-pointer);
+  pointer-events: all;
+}
+
+.Draggable {
+  cursor: var(--cursor-grab);
+  pointer-events: all;
+  user-select: none;
+  position: absolute;
+}
+
+.openable {
+  cursor: var(--cursor-open);
+  pointer-events: all;
+}
+
+.closable {
+  cursor: var(--cursor-close);
+  pointer-events: all;
+}
+
+.stamp-active {
+  cursor: var(--cursor-stamp);
+  pointer-events: all;
+}
+
+
+@font-face {
+  font-family: "basis33";
+  src: url("../Fonts/basis33.ttf");
+}
+
+/*Text is from right to left because its hebrew*/
+p {
+  direction: rtl;
+  user-select: none;
+  font-family: "basis33";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+

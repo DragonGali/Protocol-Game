@@ -1,0 +1,26 @@
+.continue-triangle {
+  animation: bobble 1.5s infinite;
+  display: inline;
+  vertical-align: middle;
+}
+
+@keyframes bobble {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.7vh);
+  }
+}
+
+.typewriter-text {
+    text-align: right;       /* align multiple lines to the right */
+    direction: rtl;          /* important for Hebrew text */
+    max-width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.typewriter-text p {
+    margin: 0;
+}

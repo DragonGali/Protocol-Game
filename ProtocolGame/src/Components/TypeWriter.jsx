@@ -1,0 +1,182 @@
+import React, { useState, useEffect } from "react";
+import "../Styles/TypeWriter.css";
+import { useGameState } from "./GameState";
+
+/*
+
+    TypewriterText Component
+    ------------------------
+
+    This component render's all the text from dialogueData.
+    It needs to regulate the speed of the text, and display the triangle when it's finsihed
+    and the player can proceed. The text here can also have multiple colors in it, and that was hard because
+    I can't use innerHTML because it types the text letter by letter, so I had to make a parser for <span> tags.
+
+*/
+
+const getColorFilter = (color) => {
+  const colorMap = {
+    "var(--orange)":
+      "invert(73%) sepia(53%) saturate(464%) hue-rotate(359deg) brightness(92%) contrast(89%)",
+    "var(--white)":
+      "invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)",
+  };
+  return colorMap[color] || colorMap["var(--white)"];
+};
+
+// Span parser for colored text
+const parseTextWithSpans = (text) => {
+  const regex = /<span style=['"]color:([^'"]+)['"]>(.*?)<\/span>/g;
+  let match;
+  let lastIndex = 0;
+  const segments = [];
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({ text: text.slice(lastIndex, match.index), color: null });
+    }
+    segments.push({ text: match[2], color: match[1] });
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    segments.push({ text: text.slice(lastIndex), color: null });
+  }
+
+  return segments;
+};
+
+const TypewriterText = ({
+  text,
+  onComplete,
+  onTypingComplete,
+  speed = 60,
+  delayAfterComplete = 1000,
+  textColor,
+  triangleColor,
+  triangleSize,
+  triangleMargin,
+  textSize,
+  fontSize,
+  name,
+  nameColor,
+  showTriangle = true,
+  autoAdvance = false,
+}) => {
+
+  const [typedSegments, setTypedSegments] = useState([]);
+  const [canAdvance, setCanAdvance] = useState(false);
+  const { state, dispatch } = useGameState();
+
+  useEffect(() => {
+
+    if(typeof text === 'function') text = text(state);
+
+    const parsed = parseTextWithSpans(text);
+    setTypedSegments([]);
+    setCanAdvance(false);
+
+    if (name && name !== "אני")
+      dispatch({ type: "SET_TALKING", value: true });
+
+    let segIndex = 0;
+    let charIndex = 0;
+    const output = parsed.map((s) => ({ ...s, shown: "" }));
+    let isCancelled = false;
+
+    const typeNext = () => {
+      if (isCancelled) return;
+
+      if (segIndex >= parsed.length) {
+        if (name && name !== "אני")
+          dispatch({ type: "SET_TALKING", value: false });
+
+        setCanAdvance(true);
+
+        if (onTypingComplete) onTypingComplete();
+
+        return;
+      }
+
+      const current = parsed[segIndex];
+
+      if (charIndex < current.text.length) {
+        output[segIndex].shown += current.text[charIndex];
+        setTypedSegments([...output]);
+        charIndex++;
+        setTimeout(typeNext, speed);
+      } else {
+        segIndex++;
+        charIndex = 0;
+        setTimeout(typeNext, speed);
+      }
+    };
+
+    typeNext();
+
+    return () => {
+      isCancelled = true;
+      if (name && name !== "אני")
+        dispatch({ type: "SET_TALKING", value: false });
+    };
+  }, [text, speed, name]);
+
+  // AUTO ADVANCE only after typing finished AND allowed
+  useEffect(() => {
+    if (!canAdvance || !autoAdvance || !onComplete) return;
+
+    const timer = setTimeout(() => {
+      onComplete();
+    }, delayAfterComplete);
+
+    return () => clearTimeout(timer);
+  }, [canAdvance, autoAdvance, onComplete, delayAfterComplete]);
+
+  const handleClick = () => {
+    if (canAdvance && onComplete) onComplete();
+  };
+
+  return (
+    <div className="typewriter-container" onClick={handleClick}>
+      <div
+        className={`typewriter-text ${canAdvance && showTriangle ? "clickable" : ""}`}
+        style={{ color: textColor, fontSize: fontSize || textSize }}
+      >
+        <p>
+          {name && (
+            <span style={{ color: nameColor, fontSize: textSize }}>
+              {name}:
+            </span>
+          )}{" "}
+          {typedSegments.map((part, i) => (
+            <span key={i} style={part.color ? { color: part.color } : {}}>
+              {part.shown.split('\n').map((line, j) => (
+                <React.Fragment key={j}>
+                  {line}
+                  {j < part.shown.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </span>
+          ))}
+
+          {canAdvance && showTriangle && (
+            <img
+              src="./General/triangle-indicator.svg"
+              alt="Continue"
+              className="continue-triangle"
+              style={{
+                filter: `brightness(0) saturate(100%) ${getColorFilter(
+                  triangleColor
+                )}`,
+                width: triangleSize,
+                margin: triangleMargin,
+              }}
+            />
+          )}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default TypewriterText;

@@ -1,0 +1,105 @@
+.Credits {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--black);
+  overflow: hidden;
+}
+
+.creditsMain {
+  position: relative;
+  width: 100%;
+  padding-top: 42%;
+  margin: auto;
+  white-space: nowrap;
+  color: var(--white);
+}
+
+.creditsScroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  animation: scroll 45s linear infinite;
+}
+
+@keyframes scroll {
+  0% { opacity: 0; transform: translateY(0); }
+  2% { opacity: 1; transform: translateY(0); }
+  95% { opacity: 1; transform: translateY(-100%); }
+  100% { opacity: 0; transform: translateY(-100%); }
+}
+
+.creditsSection {
+  position: relative;
+  padding-top: 30%;
+  padding-bottom: 10%;
+  font-size: var(--font-title-large);
+}
+
+.creditsImage {
+  transform: translateX(34%);
+  width: 60%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.creditsSection:last-child {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  font-size: var(--font-title-large);
+}
+
+.Credits dl {
+  font-size: var(--font-regular);
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.Credits dt, .Credits dd {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.Credits dt { text-align: right; padding-right: 10px; }
+.Credits dd {
+  padding-left: 10px;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+.Credits h2 {
+  font-size: var(--font-title-large);
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.Credits h3 {
+  font-size: var(--font-title-small);
+  text-align: center;
+}
+
+.Credits p {
+  text-align: center;
+}
+
+.Credits span {
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.Credits .creditsClose {
+  position: absolute;
+  font-family: "basis33";
+  font-size: var(--font-regular);
+  top: 1rem;
+  right: 1rem;
+  background: var(--yellow);
+  border: none;
+  padding: 0.3em 0.6em;
+}
+
